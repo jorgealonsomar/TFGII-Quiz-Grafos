@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <quiz>
+	 <question type="category">
+	 <category>
+	 <text>Estructura de datos</text>
+ </category>
+ </question> <question type="multichoice"> 
+	 <name> 
+	 <text>Pregunta pila.  Semilla=428819401</text>
+</name> 
+<questiontext format="html">
+	 <text>
+	  <![CDATA[<p> Sobre una pila se realizan entremezcladas operaciones de apilar y desapilar. Los valores que se apilan son las letras de la A a la  E en ese orden. Al desapilar se imprime el valor.
+¿Cuál de las siguientes secuencias podrá darse mediante este proceso?
+</p>]]></text>
+</questiontext><generalfeedback format="moodle_auto_format">
+	   <text></text>
+   </generalfeedback>
+  <defaultgrade>1.0000000</defaultgrade>
+   <penalty>0.3333333</penalty>
+ <hidden>0</hidden>
+   <single>false</single>
+ <shuffleanswers>true</shuffleanswers>
+  <answernumbering>abc</answernumbering>
+ <correctfeedback format="moodle_auto_format">
+	  <text></text>
+   </correctfeedback>
+ <partiallycorrectfeedback format="moodle_auto_format">
+	 <text></text> 
+ </partiallycorrectfeedback>
+  <incorrectfeedback format="moodle_auto_format">
+	 <text></text>
+  </incorrectfeedback>
+<answer fraction="-100 " format="moodle_auto_format">
+	<text>E D A B C </text>
+<feedback format="moodle_auto_format">
+	  <text> LA SECUENCIA QUE REALIZA ES: 	Se introduce la letra A	Se introduce la letra B	Se introduce la letra C	Se introduce la letra D	Se introduce la letra E	Se extrae la letra E	Se extrae la letra D	Se extrae la letra C	Se extrae la letra B	Se extrae la letra A	</text>
+  </feedback>
+ </answer>
+<answer fraction="-100 " format="moodle_auto_format">
+	<text>D B A C E </text>
+<feedback format="moodle_auto_format">
+	  <text> LA SECUENCIA QUE REALIZA ES: 	Se introduce la letra A	Se introduce la letra B	Se introduce la letra C	Se introduce la letra D	Se extrae la letra D	Se extrae la letra C	Se extrae la letra B	Se extrae la letra A	Se introduce la letra E	Se extrae la letra E	</text>
+  </feedback>
+ </answer>
+<answer fraction="100" format="moodle_auto_format"><text>B A C E D </text>
+<feedback format="moodle_auto_format">
+	  <text> LA SECUENCIA QUE REALIZA ES: 	Se introduce A.	Se introduce B.	Se extrae B.	Se extrae A.	Se introduce C.	Se extrae C.	Se introduce D.	Se introduce E.	Se extrae E.	Se extrae D.	</text>
+  </feedback>
+ </answer>
+ 
+ </question>
+ <question type="multichoice"> 
+	 <name> 
+	 <text>Pregunta pila.  Semilla=446752730</text>
+</name> 
+<questiontext format="html">
+	 <text>
+	  <![CDATA[<p> Sobre una pila se realizan entremezcladas operaciones de apilar y desapilar. Los valores que se apilan son las letras de la A a la  E en ese orden. Al desapilar se imprime el valor.
+¿Cuál de las siguientes secuencias podrá darse mediante este proceso?
+</p>]]></text>
+</questiontext><generalfeedback format="moodle_auto_format">
+	   <text></text>
+   </generalfeedback>
+  <defaultgrade>1.0000000</defaultgrade>
+   <penalty>0.3333333</penalty>
+ <hidden>0</hidden>
+   <single>false</single>
+ <shuffleanswers>true</shuffleanswers>
+  <answernumbering>abc</answernumbering>
+ <correctfeedback format="moodle_auto_format">
+	  <text></text>
+   </correctfeedback>
+ <partiallycorrectfeedback format="moodle_auto_format">
+	 <text></text> 
+ </partiallycorrectfeedback>
+  <incorrectfeedback format="moodle_auto_format">
+	 <text></text>
+  </incorrectfeedback>
+<answer fraction="50.0" format="moodle_auto_format">
+	<text>B A E D C </text>
+<feedback format="moodle_auto_format">
+	  <text> LA SECUENCIA QUE REALIZA ES: 	Se introduce A.	Se introduce B.	Se extrae B.	Se extrae A.	Se introduce C.	Se introduce D.	Se introduce E.	Se extrae E.	Se extrae D.	Se extrae C.	</text>
+  </feedback>
+ </answer>
+<answer fraction="-50.0" format="moodle_auto_format">
+	<text>D B C A E </text>
+<feedback format="moodle_auto_format">
+	  <text> LA SECUENCIA QUE REALIZA ES: 	Se introduce la letra A	Se introduce la letra B	Se introduce la letra C	Se introduce la letra D	Se extrae la letra D	Se extrae la letra C	Se extrae la letra B	Se extrae la letra A	Se introduce la letra E	Se extrae la letra E	</text>
+  </feedback>
+ </answer>
+<answer fraction="50.0" format="moodle_auto_format">
+	<text>A E D C B </text>
+<feedback format="moodle_auto_format">
+	  <text> LA SECUENCIA QUE REALIZA ES: 	Se introduce A.	Se extrae A.	Se introduce B.	Se introduce C.	Se introduce D.	Se introduce E.	Se extrae E.	Se extrae D.	Se extrae C.	Se extrae B.	</text>
+  </feedback>
+ </answer>
+ 
+ </question>
+ <question type="multichoice"> 
+	 <name> 
+	 <text>Pregunta pila.  Semilla=469391357</text>
+</name> 
+<questiontext format="html">
+	 <text>
+	  <![CDATA[<p> Sobre una pila se realizan entremezcladas operaciones de apilar y desapilar. Los valores que se apilan son las letras de la A a la  E en ese orden. Al desapilar se imprime el valor.
+¿Cuál de las siguientes secuencias podrá darse mediante este proceso?
+</p>]]></text>
+</questiontext><generalfeedback format="moodle_auto_format">
+	   <text></text>
+   </generalfeedback>
+  <defaultgrade>1.0000000</defaultgrade>
+   <penalty>0.3333333</penalty>
+ <hidden>0</hidden>
+   <single>false</single>
+ <shuffleanswers>true</shuffleanswers>
+  <answernumbering>abc</answernumbering>
+ <correctfeedback format="moodle_auto_format">
+	  <text></text>
+   </correctfeedback>
+ <partiallycorrectfeedback format="moodle_auto_format">
+	 <text></text> 
+ </partiallycorrectfeedback>
+  <incorrectfeedback format="moodle_auto_format">
+	 <text></text>
+  </incorrectfeedback>
+<answer fraction="100" format="moodle_auto_format"><text>C E D B A </text>
+<feedback format="moodle_auto_format">
+	  <text> LA SECUENCIA QUE REALIZA ES: 	Se introduce A.	Se introduce B.	Se introduce C.	Se extrae C.	Se introduce D.	Se introduce E.	Se extrae E.	Se extrae D.	Se extrae B.	Se extrae A.	</text>
+  </feedback>
+ </answer>
+<answer fraction="-100 " format="moodle_auto_format">
+	<text>E B A D C </text>
+<feedback format="moodle_auto_format">
+	  <text> LA SECUENCIA QUE REALIZA ES: 	Se introduce la letra A	Se introduce la letra B	Se introduce la letra C	Se introduce la letra D	Se introduce la letra E	Se extrae la letra E	Se extrae la letra D	Se extrae la letra C	Se extrae la letra B	Se extrae la letra A	</text>
+  </feedback>
+ </answer>
+<answer fraction="-100 " format="moodle_auto_format">
+	<text>A E B D C </text>
+<feedback format="moodle_auto_format">
+	  <text> LA SECUENCIA QUE REALIZA ES: 	Se introduce la letra A	Se extrae la letra A	Se introduce la letra B	Se introduce la letra C	Se introduce la letra D	Se introduce la letra E	Se extrae la letra E	Se extrae la letra D	Se extrae la letra C	Se extrae la letra B	</text>
+  </feedback>
+ </answer>
+ 
+ </question>
+ <question type="multichoice"> 
+	 <name> 
+	 <text>Pregunta pila.  Semilla=466294215</text>
+</name> 
+<questiontext format="html">
+	 <text>
+	  <![CDATA[<p> Sobre una pila se realizan entremezcladas operaciones de apilar y desapilar. Los valores que se apilan son las letras de la A a la  E en ese orden. Al desapilar se imprime el valor.
+¿Cuál de las siguientes secuencias podrá darse mediante este proceso?
+</p>]]></text>
+</questiontext><generalfeedback format="moodle_auto_format">
+	   <text></text>
+   </generalfeedback>
+  <defaultgrade>1.0000000</defaultgrade>
+   <penalty>0.3333333</penalty>
+ <hidden>0</hidden>
+   <single>false</single>
+ <shuffleanswers>true</shuffleanswers>
+  <answernumbering>abc</answernumbering>
+ <correctfeedback format="moodle_auto_format">
+	  <text></text>
+   </correctfeedback>
+ <partiallycorrectfeedback format="moodle_auto_format">
+	 <text></text> 
+ </partiallycorrectfeedback>
+  <incorrectfeedback format="moodle_auto_format">
+	 <text></text>
+  </incorrectfeedback>
+<answer fraction="50.0" format="moodle_auto_format">
+	<text>B A C E D </text>
+<feedback format="moodle_auto_format">
+	  <text> LA SECUENCIA QUE REALIZA ES: 	Se introduce A.	Se introduce B.	Se extrae B.	Se extrae A.	Se introduce C.	Se extrae C.	Se introduce D.	Se introduce E.	Se extrae E.	Se extrae D.	</text>
+  </feedback>
+ </answer>
+<answer fraction="50.0" format="moodle_auto_format">
+	<text>D C B A E </text>
+<feedback format="moodle_auto_format">
+	  <text> LA SECUENCIA QUE REALIZA ES: 	Se introduce A.	Se introduce B.	Se introduce C.	Se introduce D.	Se extrae D.	Se extrae C.	Se extrae B.	Se extrae A.	Se introduce E.	Se extrae E.	</text>
+  </feedback>
+ </answer>
+<answer fraction="-50.0" format="moodle_auto_format">
+	<text>A D B C E </text>
+<feedback format="moodle_auto_format">
+	  <text> LA SECUENCIA QUE REALIZA ES: 	Se introduce la letra A	Se extrae la letra A	Se introduce la letra B	Se introduce la letra C	Se introduce la letra D	Se extrae la letra D	Se extrae la letra C	Se extrae la letra B	Se introduce la letra E	Se extrae la letra E	</text>
+  </feedback>
+ </answer>
+ 
+ </question>
+</quiz>

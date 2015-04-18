@@ -1,0 +1,22 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE map
+PUBLIC "-//Sun Microsystems Inc.//DTD JavaHelp Map Version 2.0//EN"
+"http://java.sun.com/products/javahelp/map_2_0.dtd">
+<map version="1.0">
+   <mapID target="aplicacion" url="html/main.html" />
+   <mapID target="primera_ventana" url="html/primera.html" />
+   <mapID target="ventana_principal_archivo" url="html/principalarchivo.html" />
+   <mapID target="ventana_principal_edicion" url="html/principaledicion.html" />
+   <mapID target="ventana_generar" url="html/principalgenerar.html" />
+   <mapID target="ventana_generar_monticulos" url="html/principalmonticulos.html" />
+   <mapID target="ventana_generar_pilas" url="html/principalpilas.html" />
+   <mapID target="ventana_generar_tabla" url="html/principaltabla.html" />
+   <mapID target="ventana_generar_insercion" url="html/principalinsercion.html" />
+   <mapID target="ventana_generar_seleccion" url="html/principalseleccion.html" />
+   <mapID target="ventana_generar_arbol" url="html/principalarboles.html" />
+   <mapID target="ventana_recuperar" url="html/principalrecuperar.html" />
+   <mapID target="ventana_juntar" url="html/principaljuntar.html" />
+   <mapID target="ventana_principal_idioma" url="html/principalidioma.html" />
+   <mapID target="ventana_principal_ayuda" url="html/principalayuda.html" />
+   <mapID target="ventana_principal" url="html/principal.html" />
+</map>

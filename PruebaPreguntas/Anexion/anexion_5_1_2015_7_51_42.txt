@@ -1,0 +1,40 @@
+::Pregunta eliminar montículo.  Semilla=148604311::
+Proporcione la secuencia de 4 claves (separándolas mediante UN espacio) resultante después de realizar  1 operaciones de extraer el máximo  sobre el siguiente montículo (de máximos): Z X I P N {
+  =%100%X P I N }
+
+::Pregunta pila.  Semilla=428819401::
+Sobre una pila se realizan entremezcladas operaciones de apilar y desapilar. Los valores que se apilan son las letras de la A a la  E en ese orden. Al desapilar se imprime el valor.
+¿Cuál de las siguientes secuencias podrá darse mediante este proceso?
+{
+~%-100% E D A B C   #LA SECUENCIA QUE REALIZA ES: 	Se introduce la letra A	Se introduce la letra B	Se introduce la letra C	Se introduce la letra D	Se introduce la letra E	Se extrae la letra E	Se extrae la letra D	Se extrae la letra C	Se extrae la letra B	Se extrae la letra A	
+~%-100% D B A C E   #LA SECUENCIA QUE REALIZA ES: 	Se introduce la letra A	Se introduce la letra B	Se introduce la letra C	Se introduce la letra D	Se extrae la letra D	Se extrae la letra C	Se extrae la letra B	Se extrae la letra A	Se introduce la letra E	Se extrae la letra E	
+~%100% B A C E D   #LA SECUENCIA QUE REALIZA ES: 	Se introduce A.	Se introduce B.	Se extrae B.	Se extrae A.	Se introduce C.	Se extrae C.	Se introduce D.	Se introduce E.	Se extrae E.	Se extrae D.	
+}
+
+::Pregunta pila.  Semilla=446752730::
+Sobre una pila se realizan entremezcladas operaciones de apilar y desapilar. Los valores que se apilan son las letras de la A a la  E en ese orden. Al desapilar se imprime el valor.
+¿Cuál de las siguientes secuencias podrá darse mediante este proceso?
+{
+~%50.0% B A E D C   #LA SECUENCIA QUE REALIZA ES: 	Se introduce A.	Se introduce B.	Se extrae B.	Se extrae A.	Se introduce C.	Se introduce D.	Se introduce E.	Se extrae E.	Se extrae D.	Se extrae C.	
+~%-50.0% D B C A E   #LA SECUENCIA QUE REALIZA ES: 	Se introduce la letra A	Se introduce la letra B	Se introduce la letra C	Se introduce la letra D	Se extrae la letra D	Se extrae la letra C	Se extrae la letra B	Se extrae la letra A	Se introduce la letra E	Se extrae la letra E	
+~%50.0% A E D C B   #LA SECUENCIA QUE REALIZA ES: 	Se introduce A.	Se extrae A.	Se introduce B.	Se introduce C.	Se introduce D.	Se introduce E.	Se extrae E.	Se extrae D.	Se extrae C.	Se extrae B.	
+}
+
+::Pregunta pila.  Semilla=469391357::
+Sobre una pila se realizan entremezcladas operaciones de apilar y desapilar. Los valores que se apilan son las letras de la A a la  E en ese orden. Al desapilar se imprime el valor.
+¿Cuál de las siguientes secuencias podrá darse mediante este proceso?
+{
+~%100% C E D B A   #LA SECUENCIA QUE REALIZA ES: 	Se introduce A.	Se introduce B.	Se introduce C.	Se extrae C.	Se introduce D.	Se introduce E.	Se extrae E.	Se extrae D.	Se extrae B.	Se extrae A.	
+~%-100% E B A D C   #LA SECUENCIA QUE REALIZA ES: 	Se introduce la letra A	Se introduce la letra B	Se introduce la letra C	Se introduce la letra D	Se introduce la letra E	Se extrae la letra E	Se extrae la letra D	Se extrae la letra C	Se extrae la letra B	Se extrae la letra A	
+~%-100% A E B D C   #LA SECUENCIA QUE REALIZA ES: 	Se introduce la letra A	Se extrae la letra A	Se introduce la letra B	Se introduce la letra C	Se introduce la letra D	Se introduce la letra E	Se extrae la letra E	Se extrae la letra D	Se extrae la letra C	Se extrae la letra B	
+}
+
+::Pregunta pila.  Semilla=466294215::
+Sobre una pila se realizan entremezcladas operaciones de apilar y desapilar. Los valores que se apilan son las letras de la A a la  E en ese orden. Al desapilar se imprime el valor.
+¿Cuál de las siguientes secuencias podrá darse mediante este proceso?
+{
+~%50.0% B A C E D   #LA SECUENCIA QUE REALIZA ES: 	Se introduce A.	Se introduce B.	Se extrae B.	Se extrae A.	Se introduce C.	Se extrae C.	Se introduce D.	Se introduce E.	Se extrae E.	Se extrae D.	
+~%50.0% D C B A E   #LA SECUENCIA QUE REALIZA ES: 	Se introduce A.	Se introduce B.	Se introduce C.	Se introduce D.	Se extrae D.	Se extrae C.	Se extrae B.	Se extrae A.	Se introduce E.	Se extrae E.	
+~%-50.0% A D B C E   #LA SECUENCIA QUE REALIZA ES: 	Se introduce la letra A	Se extrae la letra A	Se introduce la letra B	Se introduce la letra C	Se introduce la letra D	Se extrae la letra D	Se extrae la letra C	Se extrae la letra B	Se introduce la letra E	Se extrae la letra E	
+}
+

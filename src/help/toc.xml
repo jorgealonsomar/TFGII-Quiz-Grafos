@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<toc version="1.0"> <!--  categoryclosedimage="FolderClosed" categoryopenimage="FolderOpened"  
+topicimage="ItemIco"-->
+        <tocitem text="Ayuda Generador de Preguntas"    target="aplicacion">
+            <tocitem text="Primera Ventana"    target="primera_ventana"/>
+			<tocitem text="Ventana Principal"    target="ventana_principal">
+				<tocitem text="Archivo"    target="ventana_principal_archivo"/>
+				<tocitem text="Edicion"    target="ventana_principal_edicion">
+						<tocitem text="Generar Preguntas"    target="ventana_generar">
+							<tocitem text=" Monticulos"    target="ventana_generar_monticulos"/>
+							<tocitem text="Pilas"    target="ventana_generar_pilas"/>
+							<tocitem text="Tabla Hash"    target="ventana_generar_tabla"/>
+							<tocitem text="Inserción directa"    target="ventana_generar_insercion"/>
+							<tocitem text="Seleccion directa"    target="ventana_generar_seleccion"/>
+							<tocitem text="Arboles Binarios de busqueda"    target="ventana_generar_arbol"/>
+						</tocitem>
+						<tocitem text="Recuperar preguntas"    target="ventana_recuperar"/>
+						<tocitem text="Juntar preguntas"    target="ventana_juntar"/>
+				</tocitem>
+				<tocitem text="Idioma"    target="ventana_principal_idioma"/>
+				<tocitem text="Ayuda"    target="ventana_principal_ayuda"/>
+			</tocitem>
+        </tocitem>
+</toc>
