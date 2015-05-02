@@ -1,4 +1,0 @@
-::Pregunta eliminar montículo.  Semilla=148604311::
-Proporcione la secuencia de 4 claves (separándolas mediante UN espacio) resultante después de realizar  1 operaciones de extraer el máximo  sobre el siguiente montículo (de máximos): Z X I P N {
-  =%100%X P I N }
-
