@@ -101,11 +101,6 @@ public abstract class PestanaDePregunta extends JPanel {
 	}
 	
 	
-	public void imprimirEnElAreaDePreguntas(String cadena){
-		areaPreguntas.setText(areaPreguntas.getText() + cadena);
-	}
-	
-	
 	/** Reescribe los textos tras cambiar la configuración del idioma */
 	public void reaccionarACambioDeIdioma(Idioma nuevoIdioma){
 		idioma = nuevoIdioma;
@@ -131,7 +126,6 @@ public abstract class PestanaDePregunta extends JPanel {
 		add(selectorNumNodos);
 		
 		add(txtPorcentajeArcos, BorderLayout.CENTER);
-		selectorNumNodos.setToolTipText("[0% ~ 100%]");
 		selectorPorcentajeArcos.setPaintTicks(true);
 		selectorPorcentajeArcos.setPaintLabels(true);
 		selectorPorcentajeArcos.setMajorTickSpacing(20);
@@ -167,28 +161,32 @@ public abstract class PestanaDePregunta extends JPanel {
 			
 			Pregunta pregunta = generarPregunta();
 			
-			//Si el directorio seleccionado existe
-			if (directorio.exists()) {
+			//Por numPreguntas veces:
+			for(int i = 0; i < getNumPreguntas(); i++){
+			
+				//Si el directorio seleccionado existe
+				if (directorio.exists()) {
 				
-				//Por numPreguntas veces:
-				for(int i = 0; i < getNumPreguntas(); i++){
+			
 					String rutaArchivo = rutaDirectorio + separador + getNombreArchivo() + GestorIO.construirCadenaFecha() + ".txt";
 					
 					//Imprimir la pregunta en el archivo especificado
-					GestorIO.escribirPreguntaEnArchivo(new File(rutaArchivo), pregunta, idioma);
+					GestorIO.escribirEnArchivo(new File(rutaArchivo), pregunta.getTextoPregunta(idioma));
+				
+				//Imprimir la pregunta por el área de preguntas
+				areaPreguntas.addTexto(pregunta.getTextoPregunta(idioma));
+				
+				} else if (rutaDirectorio.equals("")) {
+					//Imprimir la pregunta por el área de preguntas
+					areaPreguntas.addTexto(pregunta.getTextoPregunta(idioma));
+				} else {
+					JOptionPane.showMessageDialog(null, Texto.errorDirectorioNoExiste().getString(idioma),
+							"Error", JOptionPane.WARNING_MESSAGE);
 				}
-				
-				//Imprimir la pregunta por el área de preguntas
-				areaPreguntas.imprimirPregunta(pregunta, idioma);
-				
-			} else if (rutaDirectorio.equals("")) {
-				//Imprimir la pregunta por el área de preguntas
-				areaPreguntas.imprimirPregunta(pregunta, idioma);
-			} else {
-				JOptionPane.showMessageDialog(null, Texto.errorDirectorioNoExiste().getString(idioma),
-						"Error", JOptionPane.WARNING_MESSAGE);
 			}
+			
 		}
 		
 	}
+	
 }

@@ -10,7 +10,7 @@ public abstract class Grafo {
 	private Integer nNodos;
 	
 	/** Matriz de adyacencia del grafo */
-	protected Integer[][] matrizDeAdyacencia;
+	private Integer[][] matrizDeAdyacencia;
 	
 
 	/** Constructor de la clase */
@@ -28,8 +28,6 @@ public abstract class Grafo {
 //		construirArcosConcretos();
 		construirArcosMinimos();
 		construirArcosExtra(porcentajeDeArcos);
-		
-		System.out.println("[Grafo]\n" + toString() + "\n");
 	}
 	
 	
@@ -189,6 +187,11 @@ public abstract class Grafo {
 	}
 	
 	
+	public Integer[][] getMatrizDeAdyacencia(){
+		return matrizDeAdyacencia;
+	}
+	
+	
 	@Override
 	public String toString(){
 		String cadena = "  ";
@@ -209,6 +212,17 @@ public abstract class Grafo {
 	
 	public static char convertirIndiceEnLetra(int indice){
 		return (char) (indice + 65);
+	}
+	
+	
+	@Override
+	public boolean equals(Object o){
+		if(this.getClass().equals(o.getClass())
+				&& this.toString().equals(o.toString()) ){
+			return true;
+		} else {
+			return false;
+		}
 	}
 	
 	

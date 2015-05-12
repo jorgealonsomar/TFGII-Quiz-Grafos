@@ -17,17 +17,17 @@ public class GrafoNoDirigido extends Grafo {
 	 * @param valorArco	Valor que tendrá el arco. */
 	@Override
 	protected void addArco(Integer nodo1, Integer nodo2, int valorArco) {
-		matrizDeAdyacencia[nodo1][nodo2] = valorArco;
-		matrizDeAdyacencia[nodo2][nodo1] = valorArco;
+		getMatrizDeAdyacencia()[nodo1][nodo2] = valorArco;
+		getMatrizDeAdyacencia()[nodo2][nodo1] = valorArco;
 	}
 	
 	
 	protected void construirArcosExtra(Double porcentajeDeArcos){
 		//Almacenar en una lista los arcos no existentes
 		ArrayList<Arco> arcosNoExistentes = new ArrayList<Arco>();
-		for(int i = 0; i < matrizDeAdyacencia.length; i++){
+		for(int i = 0; i < getMatrizDeAdyacencia().length; i++){
 			for(int j = 0; j < i; j++){
-				if(matrizDeAdyacencia[i][j].equals(0)){
+				if(getMatrizDeAdyacencia()[i][j].equals(0)){
 					arcosNoExistentes.add(new Arco(i, j));
 				}
 			}

@@ -10,8 +10,8 @@ import util.Texto;
 public class BarraMenu extends JMenuBar{
 	
 	private Idioma idioma;
-	final JMenu menuArchivo;
-	final JMenu menuAyuda;
+	private final JMenu menuArchivo;
+	private final JMenu menuAyuda;
 	
 	
 	/** Constructor de la clase */

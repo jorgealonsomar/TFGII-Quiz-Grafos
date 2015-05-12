@@ -7,8 +7,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Calendar;
 
-import modelo.pregunta.Pregunta;
-
 public class GestorIO {
 	
 	public static void makeDirectorio(File directorio) {
@@ -28,19 +26,6 @@ public class GestorIO {
 			System.out.println("[GestorIO] Escribiendo en el arcivo " + archivo);
 			
 		} catch (IOException e) { };
-	}
-	
-	
-	public static void escribirPreguntaEnArchivo(File archivo, Pregunta pregunta, Idioma idioma){
-		escribirEnArchivo(archivo, "--------------------------------------------------------------");
-		escribirEnArchivo(archivo, pregunta.getTitulo(idioma));
-		escribirEnArchivo(archivo, "\n\n");
-		escribirEnArchivo(archivo, pregunta.getEnunciado(idioma));
-		escribirEnArchivo(archivo, "\n\n");
-		escribirEnArchivo(archivo, pregunta.getGrafo().toString());
-		escribirEnArchivo(archivo, "\n\n");
-		escribirEnArchivo(archivo, pregunta.getParteAResponder(idioma));
-		escribirEnArchivo(archivo, "\n\n\n");
 	}
 	
 	

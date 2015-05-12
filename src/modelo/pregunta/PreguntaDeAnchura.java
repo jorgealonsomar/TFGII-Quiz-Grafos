@@ -3,6 +3,7 @@ package modelo.pregunta;
 import java.util.ArrayList;
 
 import modelo.Grafo;
+import modelo.Semilla;
 import util.Texto;
 
 public class PreguntaDeAnchura extends Pregunta {
@@ -76,5 +77,11 @@ public class PreguntaDeAnchura extends Pregunta {
 			if(i < recorridoEnAnchura.size()-1){ respuestaCorrecta.concatenar(Texto.coma()); }
 		}
 		respuestaCorrecta.concatenar(Texto.cerrarCorchete());;
+	}
+
+
+	@Override
+	protected void generarSemilla(boolean grafoDirigido) {
+		super.generarSemillaEnFuncionDelTipoDePregunta(Semilla.recorridoEnAnchura, grafoDirigido);
 	}
 }

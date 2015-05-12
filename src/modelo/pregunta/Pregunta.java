@@ -3,6 +3,7 @@ package modelo.pregunta;
 import modelo.Grafo;
 import modelo.GrafoDirigido;
 import modelo.GrafoNoDirigido;
+import modelo.Semilla;
 import util.Idioma;
 import util.Texto;
 
@@ -15,7 +16,7 @@ public abstract class Pregunta {
 	protected Texto parteAResponder;
 	protected Texto respuestaCorrecta;
 	
-	private String semilla = "?????";
+	private Semilla semilla;
 	
 	/** Constructor de la clase.
 	 * (Patrón de diseño Recipe) */
@@ -26,6 +27,8 @@ public abstract class Pregunta {
 		construirEnunciado();
 		construirParteAResponder();
 		construirRespuestaCorrecta();
+		
+		generarSemilla(grafoDirigido);
 	}
 	
 	
@@ -50,6 +53,13 @@ public abstract class Pregunta {
 	protected abstract void construirRespuestaCorrecta();
 	
 	
+	protected abstract void generarSemilla(boolean grafoDirigido);
+	
+	
+	protected void generarSemillaEnFuncionDelTipoDePregunta(Integer tipoDePregunta, boolean grafoDirigido){
+		semilla = new Semilla(tipoDePregunta, grafo.getNNodos(), grafoDirigido, grafo.getMatrizDeAdyacencia());
+	}
+	
 	public Grafo getGrafo(){
 		return this.grafo;
 	}
@@ -73,5 +83,24 @@ public abstract class Pregunta {
 	public String getRespuestaCorrecta(Idioma idioma){
 		return respuestaCorrecta.getString(idioma);
 	}
-
+	
+	
+	public String getCodigoSemilla(){
+		return semilla.toString();
+	}
+	
+	
+	public String getTextoPregunta(Idioma idioma){
+		String textoPregunta = "";
+		textoPregunta += "--------------------------------------------------------------";
+		textoPregunta += "\n" + getTitulo(idioma);
+		textoPregunta += "\n\n" + getEnunciado(idioma);
+		textoPregunta += "\n\n" + getGrafo().toString();
+		textoPregunta += "\n" + "(semilla: " + getCodigoSemilla() + ")";
+		textoPregunta += "\n\n" + getParteAResponder(idioma);
+		textoPregunta += "\n\n" + getRespuestaCorrecta(idioma);
+		textoPregunta += "\n\n\n";
+		
+		return textoPregunta;
+	}
 }

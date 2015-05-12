@@ -3,13 +3,14 @@ package modelo.pregunta;
 import java.util.ArrayList;
 
 import modelo.Grafo;
+import modelo.Semilla;
 import util.Texto;
-
 
 public class PreguntaDeProfundidad extends Pregunta {
 	
 	private ArrayList<Integer> recorridoEnProfundidad;
 
+	
 	/** Constructor de la clase */
 	public PreguntaDeProfundidad(Integer nNodos, Double porcentajeDeArcos, boolean grafoDirigido) {
 		super(nNodos, porcentajeDeArcos, grafoDirigido);
@@ -73,6 +74,12 @@ public class PreguntaDeProfundidad extends Pregunta {
 			if(i < recorridoEnProfundidad.size()-1){ respuestaCorrecta.concatenar(Texto.coma()); }
 		}
 		respuestaCorrecta.concatenar(Texto.cerrarCorchete());;
+	}
+
+
+	@Override
+	protected void generarSemilla(boolean grafoDirigido) {
+		super.generarSemillaEnFuncionDelTipoDePregunta(Semilla.recorridoEnProfunidad, grafoDirigido);
 	}
 
 }

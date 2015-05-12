@@ -1,5 +1,7 @@
 package modelo.pregunta;
 
+import modelo.Semilla;
+
 public class PreguntaTopologica extends Pregunta {
 
 	/** Constructor de la clase */
@@ -29,6 +31,11 @@ public class PreguntaTopologica extends Pregunta {
 	protected void construirRespuestaCorrecta() {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	protected void generarSemilla(boolean grafoDirigido) {
+		super.generarSemillaEnFuncionDelTipoDePregunta(Semilla.clasificacionTopologica, grafoDirigido);
 	}
 
 }

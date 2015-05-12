@@ -24,7 +24,7 @@ public class GrafoDirigido extends Grafo {
 //			matrizDeAdyacencia[nodo2][nodo1] = valorArco;
 //		}
 		
-		matrizDeAdyacencia[nodo1][nodo2] = valorArco;
+		getMatrizDeAdyacencia()[nodo1][nodo2] = valorArco;
 	}
 	
 	
@@ -32,9 +32,9 @@ public class GrafoDirigido extends Grafo {
 		
 		//Almacenar en una lista los arcos no existentes
 		ArrayList<Arco> arcosNoExistentes = new ArrayList<Arco>();
-		for(int i = 0; i < matrizDeAdyacencia.length; i++){
-			for(int j = 0; j < matrizDeAdyacencia[i].length; j++){
-				if(matrizDeAdyacencia[i][j].equals(0)){
+		for(int i = 0; i < getMatrizDeAdyacencia().length; i++){
+			for(int j = 0; j < getMatrizDeAdyacencia()[i].length; j++){
+				if(getMatrizDeAdyacencia()[i][j].equals(0)){
 					arcosNoExistentes.add(new Arco(i, j));
 				}
 			}

@@ -1,5 +1,7 @@
 package modelo.pregunta;
 
+import modelo.Semilla;
+
 public class PreguntaDePrim extends Pregunta {
 
 	/** Constructor de la clase */
@@ -29,6 +31,11 @@ public class PreguntaDePrim extends Pregunta {
 	protected void construirRespuestaCorrecta() {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	protected void generarSemilla(boolean grafoDirigido) {
+		super.generarSemillaEnFuncionDelTipoDePregunta(Semilla.algoritmoDePrim, grafoDirigido);
 	}
 
 }
