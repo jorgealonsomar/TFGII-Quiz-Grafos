@@ -17,10 +17,14 @@ public class PreguntaDeProfundidad extends Pregunta {
 	}
 	
 	
+	public PreguntaDeProfundidad(Semilla semilla){
+		super(semilla);
+	}
+	
+	
 	@Override
-	protected void generarGrafo(Integer nNodos, Double porcentajeDeArcos, boolean grafoDirigido){
-		super.generarGrafo(nNodos, porcentajeDeArcos, grafoDirigido);
-		recorridoEnProfundidad = getGrafo().recorrerEnProfundidad(0);
+	protected void aplicarAlgoritmo() {
+		recorridoEnProfundidad = getGrafo().recorrerEnProfundidad(0);	
 	}
 	
 
@@ -80,6 +84,12 @@ public class PreguntaDeProfundidad extends Pregunta {
 	@Override
 	protected void generarSemilla(boolean grafoDirigido) {
 		super.generarSemillaEnFuncionDelTipoDePregunta(Semilla.recorridoEnProfunidad, grafoDirigido);
+	}
+
+
+	@Override
+	public Texto getNombreDeArchivo() {
+		return Texto.nombreArchivoPregProfundidad();
 	}
 
 }

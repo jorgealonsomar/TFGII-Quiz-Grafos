@@ -65,6 +65,24 @@ public class Texto {
 	}
 	
 	
+	/** Texto de la opción Salir del menú Archivo */
+	public static Texto menuArchivo_Salir(){
+		return new Texto("Salir", "Exit");
+	}
+	
+	
+	/** Texto de la opción Importar Semilla del menú Archivo */
+	public static Texto menuArchivo_ImportarSemilla(){
+		return new Texto("Importar Semilla", "Import Seed");
+	}
+	
+	
+	/** Texto de la opción Importar Semilla del menú Archivo */
+	public static Texto introduzcaSemilla(){
+		return new Texto("Introduzca la semilla: ", "Insert the seed: ");
+	}
+	
+	
 	/** Texto del menú Ayuda */
 	public static Texto menuAyuda(){
 		return new Texto("Ayuda", "Help");
@@ -179,6 +197,13 @@ public class Texto {
 	 * en un directorio que no existe */
 	public static Texto errorDirectorioNoExiste(){
 		return new Texto("El directorio seleccionado no existe.", "The selected directory does not exist.");
+	}
+	
+	
+	/** Texto del mensaje de error que salta al intentar generar las preguntas
+	 * en un directorio que no existe */
+	public static Texto errorSemillaIncorrecta(){
+		return new Texto("La semilla introducida no es válida.", "The provided seed is not valid.");
 	}
 	
 	

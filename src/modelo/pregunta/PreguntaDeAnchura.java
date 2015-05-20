@@ -17,10 +17,14 @@ public class PreguntaDeAnchura extends Pregunta {
 	}
 	
 	
+	public PreguntaDeAnchura(Semilla semilla){
+		super(semilla);
+	}
+	
+	
 	@Override
-	protected void generarGrafo(Integer nNodos, Double porcentajeDeArcos, boolean grafoDirigido){
-		super.generarGrafo(nNodos, porcentajeDeArcos, grafoDirigido);
-		recorridoEnAnchura = getGrafo().recorrerEnAnchura(0);
+	protected void aplicarAlgoritmo() {
+		recorridoEnAnchura = getGrafo().recorrerEnAnchura(0);		
 	}
 	
 	
@@ -83,5 +87,11 @@ public class PreguntaDeAnchura extends Pregunta {
 	@Override
 	protected void generarSemilla(boolean grafoDirigido) {
 		super.generarSemillaEnFuncionDelTipoDePregunta(Semilla.recorridoEnAnchura, grafoDirigido);
+	}
+
+
+	@Override
+	public Texto getNombreDeArchivo() {
+		return Texto.nombreArchivoPregAnchura();
 	}
 }

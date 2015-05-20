@@ -1,7 +1,9 @@
 package test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 import modelo.Semilla;
+import modelo.SemillaException;
 
 import org.junit.Test;
 
@@ -23,7 +25,7 @@ public class SemillaTest {
 		assertEquals(semilla.getNNodos(), (Integer)3);
 		
 		//El grafo no debe ser dirigido
-		assertEquals(semilla.getByteDirigido(), false);
+		assertEquals(semilla.esDirigido(), false);
 		
 		//La matriz de adyacencia debe ser {{0,1,1}{1,0,1}{1,1,0}}
 		assertEquals(semilla.getMatrizDeAdyacencia()[0][0], (Integer)0);
@@ -47,33 +49,60 @@ public class SemillaTest {
 		String codigoSemilla = "030003013006008";
 		
 		//Recuperar la semilla a partir de su código
-		Semilla semilla = new Semilla(codigoSemilla);
+		try{
+			Semilla semilla = new Semilla(codigoSemilla);
 		
-		assertEquals(semilla.getTipoPregunta(), Semilla.recorridoEnProfunidad);
-		assertEquals(semilla.getNNodos(), (Integer)4);
-		assertEquals(semilla.getByteDirigido(), false);
+			assertEquals(semilla.getTipoPregunta(), Semilla.recorridoEnProfunidad);
+			assertEquals(semilla.getNNodos(), (Integer)4);
+			assertEquals(semilla.esDirigido(), false);
+			
+			//La matriz de adyacencia debe ser {{0,0,1,1}{1,1,0,1}{0,1,1,0}{1,0,0,0}}
+			assertEquals(semilla.getMatrizDeAdyacencia()[0][0], (Integer)0);
+			assertEquals(semilla.getMatrizDeAdyacencia()[0][1], (Integer)0);
+			assertEquals(semilla.getMatrizDeAdyacencia()[0][2], (Integer)1);
+			assertEquals(semilla.getMatrizDeAdyacencia()[0][3], (Integer)1);
+			
+			assertEquals(semilla.getMatrizDeAdyacencia()[1][0], (Integer)1);
+			assertEquals(semilla.getMatrizDeAdyacencia()[1][1], (Integer)1);
+			assertEquals(semilla.getMatrizDeAdyacencia()[1][2], (Integer)0);
+			assertEquals(semilla.getMatrizDeAdyacencia()[1][3], (Integer)1);
+	
+			assertEquals(semilla.getMatrizDeAdyacencia()[2][0], (Integer)0);
+			assertEquals(semilla.getMatrizDeAdyacencia()[2][1], (Integer)1);
+			assertEquals(semilla.getMatrizDeAdyacencia()[2][2], (Integer)1);
+			assertEquals(semilla.getMatrizDeAdyacencia()[2][3], (Integer)0);
+			
+			assertEquals(semilla.getMatrizDeAdyacencia()[3][0], (Integer)1);
+			assertEquals(semilla.getMatrizDeAdyacencia()[3][1], (Integer)0);
+			assertEquals(semilla.getMatrizDeAdyacencia()[3][2], (Integer)0);
+			assertEquals(semilla.getMatrizDeAdyacencia()[3][3], (Integer)0);
 		
-		//La matriz de adyacencia debe ser {{0,0,1,1}{1,1,0,1}{0,1,1,0}{1,0,0,0}}
-		assertEquals(semilla.getMatrizDeAdyacencia()[0][0], (Integer)0);
-		assertEquals(semilla.getMatrizDeAdyacencia()[0][1], (Integer)0);
-		assertEquals(semilla.getMatrizDeAdyacencia()[0][2], (Integer)1);
-		assertEquals(semilla.getMatrizDeAdyacencia()[0][3], (Integer)1);
+		} catch (SemillaException e){
+			fail(e.getMensajeDelError());
+		}
+	}
 		
-		assertEquals(semilla.getMatrizDeAdyacencia()[1][0], (Integer)1);
-		assertEquals(semilla.getMatrizDeAdyacencia()[1][1], (Integer)1);
-		assertEquals(semilla.getMatrizDeAdyacencia()[1][2], (Integer)0);
-		assertEquals(semilla.getMatrizDeAdyacencia()[1][3], (Integer)1);
-
-		assertEquals(semilla.getMatrizDeAdyacencia()[2][0], (Integer)0);
-		assertEquals(semilla.getMatrizDeAdyacencia()[2][1], (Integer)1);
-		assertEquals(semilla.getMatrizDeAdyacencia()[2][2], (Integer)1);
-		assertEquals(semilla.getMatrizDeAdyacencia()[2][3], (Integer)0);
 		
-		assertEquals(semilla.getMatrizDeAdyacencia()[3][0], (Integer)1);
-		assertEquals(semilla.getMatrizDeAdyacencia()[3][1], (Integer)0);
-		assertEquals(semilla.getMatrizDeAdyacencia()[3][2], (Integer)0);
-		assertEquals(semilla.getMatrizDeAdyacencia()[3][3], (Integer)0);
-		
+	@Test
+	public void recuperarSemillaErronea() {
+			//Valor de la pos. 0 (correspondiente al Tipo de Pregunta) demasiado alto
+			try{
+				new Semilla("730003013006008");
+				fail("Debió saltar una excepción.");
+			} catch (SemillaException e){ }
+			
+			//El valor de la pos. 1, correspondiente al valorNNodos no es necesario probarlo,
+			//pues su rango es [0~9] por lo que cualquier valor entero será correcto
+			
+			//El valor de la pos. 2, correspondiente al booleano que indica si es dirigido, no
+			//es necesario probarlo, pues el programa simplemente entiende como positivo cualquier
+			//valor distinto de cero
+			
+			//Longitud de la cadena incorrecta
+			try {
+				new Semilla("55");
+				fail("Debió saltar una excepción.");
+			} catch (SemillaException e) { }
 	}
 
 }

@@ -1,6 +1,7 @@
 package modelo.pregunta;
 
 import modelo.Semilla;
+import util.Texto;
 
 public class PreguntaDePrim extends Pregunta {
 
@@ -8,6 +9,18 @@ public class PreguntaDePrim extends Pregunta {
 	public PreguntaDePrim(Integer nNodos, Double porcentajeDeArcos, boolean grafoDirigido) {
 		super(nNodos, porcentajeDeArcos, grafoDirigido);
 	}
+	
+	
+	public PreguntaDePrim(Semilla semilla){
+		super(semilla);
+	}
+	
+	
+	@Override
+	protected void aplicarAlgoritmo() {
+		//TODO	
+	}
+	
 
 	@Override
 	protected void construirTitulo() {
@@ -36,6 +49,12 @@ public class PreguntaDePrim extends Pregunta {
 	@Override
 	protected void generarSemilla(boolean grafoDirigido) {
 		super.generarSemillaEnFuncionDelTipoDePregunta(Semilla.algoritmoDePrim, grafoDirigido);
+	}
+
+
+	@Override
+	public Texto getNombreDeArchivo() {
+		return Texto.nombreArchivoPregPrim();
 	}
 
 }

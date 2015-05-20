@@ -1,26 +1,23 @@
 package interfaz.pestanaDePregunta;
 
 import interfaz.AreaPreguntas;
+import interfaz.FramePrincipal;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSlider;
 import javax.swing.JSpinner;
 import javax.swing.JTabbedPane;
-import javax.swing.JTextField;
 import javax.swing.SpinnerNumberModel;
 
 import modelo.pregunta.Pregunta;
-import util.GestorIO;
 import util.Idioma;
 import util.Texto;
 
@@ -31,10 +28,8 @@ public abstract class PestanaDePregunta extends JPanel {
 	
 	protected Idioma idioma = Idioma.ESP;
 	
-	/** Referencia al çarea del frame donde se mostrarán las preguntas que se vayan generando */
-	private AreaPreguntas areaPreguntas;
-	
-	private JTextField ventanaTextoDirectorio;
+	/** Frame que contiene el gui del programa */
+	private FramePrincipal frame;
 	
 	private JLabel txtNumPreguntas = new JLabel(Texto.textoNumPreguntas().esp());
 	private final int MIN_PREGUNTAS = 1;
@@ -55,10 +50,9 @@ public abstract class PestanaDePregunta extends JPanel {
 	private JButton botonGenerarPregunta = new JButton(Texto.botonGenerarPregunta().esp());
 	
 	public PestanaDePregunta(JTabbedPane panelTabulado, Texto nombreDeLaPestana, int teclaMnemotecnica,
-			AreaPreguntas areaPreguntas, JTextField ventanaTextoDirectorio) {
+			AreaPreguntas areaPreguntas, FramePrincipal frame) {
 		this.nombreDeLaPestana = nombreDeLaPestana;
-		this.areaPreguntas = areaPreguntas;
-		this.ventanaTextoDirectorio = ventanaTextoDirectorio;
+		this.frame = frame;
 		
 		panelTabulado.addTab(getNombreDeLaPestana(Idioma.ESP), null, this, getNombreDeLaPestana(Idioma.ESP));
 		panelTabulado.setMnemonicAt(panelTabulado.getTabCount()-1, teclaMnemotecnica);
@@ -147,42 +141,16 @@ public abstract class PestanaDePregunta extends JPanel {
 	protected abstract Pregunta generarPregunta();
 	
 	
-	protected abstract String getNombreArchivo();
-	
-	
 	
 	private class GenerarPreguntaListener implements ActionListener {
 		
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
-			String separador = System.getProperty("file.separator");
-			String rutaDirectorio = ventanaTextoDirectorio.getText();
-			File directorio = new File(rutaDirectorio);
-			
 			Pregunta pregunta = generarPregunta();
 			
 			//Por numPreguntas veces:
 			for(int i = 0; i < getNumPreguntas(); i++){
-			
-				//Si el directorio seleccionado existe
-				if (directorio.exists()) {
-				
-			
-					String rutaArchivo = rutaDirectorio + separador + getNombreArchivo() + GestorIO.construirCadenaFecha() + ".txt";
-					
-					//Imprimir la pregunta en el archivo especificado
-					GestorIO.escribirEnArchivo(new File(rutaArchivo), pregunta.getTextoPregunta(idioma));
-				
-				//Imprimir la pregunta por el área de preguntas
-				areaPreguntas.addTexto(pregunta.getTextoPregunta(idioma));
-				
-				} else if (rutaDirectorio.equals("")) {
-					//Imprimir la pregunta por el área de preguntas
-					areaPreguntas.addTexto(pregunta.getTextoPregunta(idioma));
-				} else {
-					JOptionPane.showMessageDialog(null, Texto.errorDirectorioNoExiste().getString(idioma),
-							"Error", JOptionPane.WARNING_MESSAGE);
-				}
+				frame.imprimePregunta(pregunta);
 			}
 			
 		}

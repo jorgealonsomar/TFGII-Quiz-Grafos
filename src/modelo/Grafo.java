@@ -13,7 +13,8 @@ public abstract class Grafo {
 	private Integer[][] matrizDeAdyacencia;
 	
 
-	/** Constructor de la clase */
+	/** Constructor de la clase.
+	 * Construye un nuevo grafo al azar a partir de los parámetros fijados. */
 	public Grafo(Integer nNodos, Double porcentajeDeArcos) {
 		this.setNNodos(nNodos);
 		
@@ -25,9 +26,17 @@ public abstract class Grafo {
 			}
 		}
 
-//		construirArcosConcretos();
+//		construirArcosConcretos(); //TODO borrar
 		construirArcosMinimos();
 		construirArcosExtra(porcentajeDeArcos);
+	}
+	
+	
+	/** Constructor de la clase.
+	 * Crea el grafo a partir de una matriz de adyacencia dada. */
+	public Grafo(Integer[][] matrizDeAdyacencia) {
+		this.matrizDeAdyacencia = matrizDeAdyacencia;
+		this.nNodos = matrizDeAdyacencia.length;
 	}
 	
 	

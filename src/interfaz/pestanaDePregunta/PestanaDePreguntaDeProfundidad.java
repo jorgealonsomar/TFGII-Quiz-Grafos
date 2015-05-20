@@ -1,9 +1,9 @@
 package interfaz.pestanaDePregunta;
 
 import interfaz.AreaPreguntas;
+import interfaz.FramePrincipal;
 
 import javax.swing.JTabbedPane;
-import javax.swing.JTextField;
 
 import modelo.pregunta.Pregunta;
 import modelo.pregunta.PreguntaDeProfundidad;
@@ -13,8 +13,8 @@ import util.Texto;
 public class PestanaDePreguntaDeProfundidad extends PestanaDePregunta {
 
 	public PestanaDePreguntaDeProfundidad(JTabbedPane panelTabulado, Texto nombreDeLaPestana,
-			int teclaMnemotecnica, AreaPreguntas areaPreguntas, JTextField ventanaTextoDirectorio) {
-		super(panelTabulado, nombreDeLaPestana, teclaMnemotecnica, areaPreguntas, ventanaTextoDirectorio);
+			int teclaMnemotecnica, AreaPreguntas areaPreguntas, FramePrincipal frame) {
+		super(panelTabulado, nombreDeLaPestana, teclaMnemotecnica, areaPreguntas, frame);
 	}
 	
 	
@@ -22,13 +22,5 @@ public class PestanaDePreguntaDeProfundidad extends PestanaDePregunta {
 	protected Pregunta generarPregunta(){
 		return new PreguntaDeProfundidad(getNumNodos(), getPorcentajeArcos(), isDirigido());
 	}
-
-
-	@Override
-	protected String getNombreArchivo() {
-		return Texto.nombreArchivoPregProfundidad().getString(idioma);
-	}
-	
-
 
 }

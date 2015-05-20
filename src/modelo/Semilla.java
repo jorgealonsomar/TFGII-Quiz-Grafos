@@ -31,51 +31,64 @@ public class Semilla {
 	
 	
 	/** Constructor. Recupera una vieja semilla a partir de su código */
-	public Semilla(String codigo){
-		
-		//El primer carácter corresponde al tipo de pregunta
-		this.tipoPregunta = Integer.parseInt(codigo.substring(0, 1));
-		
-		//El segundo carácter corresponde al valorNNodos (al número de nodos del grafo - 1) 
-		this.valorNNodos = Integer.parseInt(codigo.substring(1, 2));
-		
-		//El tercer carácter indica si el grafo es o no dirigido
-		if(codigo.substring(2, 3).equals("0")){
-			this.esDirigido = false;
-		} else {
-			this.esDirigido = true;
-		}
-		
-		//Los caracteres restantes corresponden a los valores de la matriz de adyacencia
-		
-		//Inicializar la matriz de adyacencia
-		matrizDeAdyacencia = new Integer[valorNNodos+1][valorNNodos+1];
-		for(int i = 0; i < (valorNNodos+1); i++){
+	public Semilla(String codigo) throws SemillaException {
+		try{
 			
-		}
+			Integer valorAux;
 			
+			//Primer carácter. Corresponde al tipo de pregunta
+			valorAux = Integer.parseInt(codigo.substring(0, 1));
 			
-		//Por cada fila de la matriz de adyacencia:
-		int f = 0;
-		for(int i = 3; i < codigo.length(); i = i+3){
-			System.out.println("[Semilla] i = " + i);
-			Integer valorEntero = Integer.parseInt(codigo.substring(i, i+3));
-			String cadenaBinaria = Integer.toBinaryString(valorEntero);
-			
-			//Se asegura que el valor de cadenaBinaria hasta que tenga una cantidad nNodos de dígitos
-			while(cadenaBinaria.length() < (valorNNodos+1)){
-				cadenaBinaria = "0" + cadenaBinaria;
+			if(0 <= valorAux && valorAux <= 5){
+				this.tipoPregunta = valorAux;
+			} else {
+				throw new SemillaException("El valor del primer carácter de la semilla debe estar entre en 0 y el 5");
 			}
 			
-			System.out.println("[Semilla] cadenaBinaria.length() = " + cadenaBinaria.length());
-			for(int c = 0; c < matrizDeAdyacencia[f].length; c++){
-				System.out.println("[Semilla] c = " + c);
-				matrizDeAdyacencia[f][c] = Integer.parseInt(cadenaBinaria.substring(c, c+1));
+			
+			//Segundo carácter. Corresponde al valorNNodos (al número de nodos del grafo - 1) 
+			this.valorNNodos = Integer.parseInt(codigo.substring(1, 2));
+			//(cualquier valor será válido, ya que puede tomar como valor un número del 0 al 9)
+			
+			
+			//El tercer carácter indica si el grafo es o no dirigido
+			if(codigo.substring(2, 3).equals("0")){
+				this.esDirigido = false;
+			} else {
+				this.esDirigido = true;
 			}
 			
-			f++;
+			//Los caracteres restantes corresponden a los valores de la matriz de adyacencia
+			
+			//Inicializar la matriz de adyacencia
+			matrizDeAdyacencia = new Integer[getNNodos()][getNNodos()];
+			for(int i = 0; i < matrizDeAdyacencia.length; i++){
+				for(int j = 0; j < matrizDeAdyacencia[i].length; j++){
+					matrizDeAdyacencia[i][j] = 0;
+				}
+			}
+				
+			//Por cada fila de la matriz de adyacencia:
+			int f = 0;
+			for(int i = 3; i < codigo.length(); i = i+3){
+				Integer valorEntero = Integer.parseInt(codigo.substring(i, i+3));
+				String cadenaBinaria = Integer.toBinaryString(valorEntero);
+				
+				//Se asegura que el valor de cadenaBinaria hasta que tenga una cantidad nNodos de dígitos
+				while(cadenaBinaria.length() < (valorNNodos+1)){
+					cadenaBinaria = "0" + cadenaBinaria;
+				}
+				
+				for(int c = 0; c < matrizDeAdyacencia[f].length; c++){
+					matrizDeAdyacencia[f][c] = Integer.parseInt(cadenaBinaria.substring(c, c+1));
+				}
+				
+				f++;
+			}
+			
+		}catch(Exception excepcion){
+			throw new SemillaException("El formato del código usado para generar la semilla es erróneo.");
 		}
-		
 	}
 	
 	
@@ -130,7 +143,7 @@ public class Semilla {
 	}
 	
 	
-	public boolean getByteDirigido(){
+	public boolean esDirigido(){
 		return esDirigido;
 	}
 	

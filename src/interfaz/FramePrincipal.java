@@ -22,13 +22,16 @@ import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
 
+import modelo.pregunta.Pregunta;
 import sistema.Parametros;
 import sistema.Ruta;
+import util.GestorIO;
 import util.Idioma;
 import util.Texto;
 
@@ -89,6 +92,35 @@ public class FramePrincipal extends JFrame {
 	}
 	
 	
+	/** Imprime una pregunta por el Área de Preguntas. La imprime también a archivo. */
+	public void imprimePregunta(Pregunta pregunta){
+		String textoPregunta = pregunta.getTextoPregunta(parametros.getIdioma());
+		String nombreArchivo = pregunta.getNombreDeArchivo().getString(parametros.getIdioma());
+		
+		String separador = System.getProperty("file.separator");
+		String rutaDirectorio = ventanaTextoDirectorio.getText();
+		File directorio = new File(rutaDirectorio);
+		
+		//Si el directorio seleccionado existe
+		if (directorio.exists()) {
+			String rutaArchivo = rutaDirectorio + separador + nombreArchivo + GestorIO.construirCadenaFecha() + ".txt";
+			
+			//Imprimir la pregunta en el archivo especificado
+			GestorIO.escribirEnArchivo(new File(rutaArchivo), textoPregunta);
+		
+			//Imprimir la pregunta por el área de preguntas
+			areaPreguntas.addTexto(textoPregunta);
+		
+		} else if (rutaDirectorio.equals("")) {
+			//Imprimir la pregunta por el área de preguntas
+			areaPreguntas.addTexto(textoPregunta);
+		} else {
+			JOptionPane.showMessageDialog(null, Texto.errorDirectorioNoExiste().getString(parametros.getIdioma()),
+					"Error", JOptionPane.WARNING_MESSAGE);
+		}
+	}
+	
+	
 	/** Construye el jPanel correspondiente a este frame */
 	private void construirPanelDeLaVentana() {
 		panelDeLaVentana = new JPanel();
@@ -102,7 +134,7 @@ public class FramePrincipal extends JFrame {
 	
 	/** Construye la barra del menú superior */
 	private void construirBarraMenu(){
-		barraMenu = new BarraMenu(parametros.getIdioma());
+		barraMenu = new BarraMenu(this, parametros.getIdioma());
 		panelDeLaVentana.add(barraMenu, BorderLayout.PAGE_START);
 	}
 	
@@ -132,12 +164,12 @@ public class FramePrincipal extends JFrame {
 		panelDeLaVentana.add(panelTabulado, BorderLayout.CENTER);
 		
 		//Construir las pestañas, que se añaden al panel tabulado:
-		new PestanaDePreguntaDeProfundidad(panelTabulado, Texto.recorridoEnProfundidad(), KeyEvent.VK_E, areaPreguntas, ventanaTextoDirectorio);
-		new PestanaDePreguntaDeAnchura(panelTabulado, Texto.recorridoEnAnchura(), KeyEvent.VK_A, areaPreguntas, ventanaTextoDirectorio);
-		new PestanaDePreguntaTopologica(panelTabulado, Texto.clasificacionTopologica(), KeyEvent.VK_T, areaPreguntas, ventanaTextoDirectorio);
-		new PestanaDePreguntaDeDijkstra(panelTabulado, Texto.algoritmoDeDijkstra(), KeyEvent.VK_D, areaPreguntas, ventanaTextoDirectorio);
-		new PestanaDePreguntaDePrim(panelTabulado, Texto.algoritmoDePrim(), KeyEvent.VK_P, areaPreguntas, ventanaTextoDirectorio);
-		new PestanaDePreguntaDeKruskal(panelTabulado, Texto.algoritmoDeKruskal(), KeyEvent.VK_K, areaPreguntas, ventanaTextoDirectorio);
+		new PestanaDePreguntaDeProfundidad(panelTabulado, Texto.recorridoEnProfundidad(), KeyEvent.VK_E, areaPreguntas, this);
+		new PestanaDePreguntaDeAnchura(panelTabulado, Texto.recorridoEnAnchura(), KeyEvent.VK_A, areaPreguntas, this);
+		new PestanaDePreguntaTopologica(panelTabulado, Texto.clasificacionTopologica(), KeyEvent.VK_T, areaPreguntas, this);
+		new PestanaDePreguntaDeDijkstra(panelTabulado, Texto.algoritmoDeDijkstra(), KeyEvent.VK_D, areaPreguntas, this);
+		new PestanaDePreguntaDePrim(panelTabulado, Texto.algoritmoDePrim(), KeyEvent.VK_P, areaPreguntas, this);
+		new PestanaDePreguntaDeKruskal(panelTabulado, Texto.algoritmoDeKruskal(), KeyEvent.VK_K, areaPreguntas, this);
 	}
 	
 	
@@ -172,7 +204,7 @@ public class FramePrincipal extends JFrame {
 		Idioma nuevoIdioma = parametros.getIdioma();
 		
 		//Barra Menú
-		barraMenu.reescribirTextos();
+		barraMenu.reescribirTextos(nuevoIdioma);
 		
 		//Imagen de elección de idioma
 		if(nuevoIdioma == Idioma.ESP){

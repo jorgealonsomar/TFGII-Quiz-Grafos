@@ -10,6 +10,11 @@ public class GrafoNoDirigido extends Grafo {
 	}
 	
 	
+	public GrafoNoDirigido(Integer[][] matrizDeAdyacencia) {
+		super(matrizDeAdyacencia);
+	}
+	
+	
 	/** Añade un nuevo arco no dirigido a la matriz de adyacencia.
 	 * 
 	 * @param nodo1	Nodo a un extremo del arco.

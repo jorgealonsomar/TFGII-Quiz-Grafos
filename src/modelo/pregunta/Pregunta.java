@@ -19,26 +19,50 @@ public abstract class Pregunta {
 	private Semilla semilla;
 	
 	/** Constructor de la clase.
-	 * (Patrón de diseño Recipe) */
-	public Pregunta(Integer nNodos, Double porcentajeDeArcos, boolean grafoDirigido){
-		generarGrafo(nNodos, porcentajeDeArcos, grafoDirigido);
+	 * Crea una nueva pregunta con un grafo aleatorio creado a partir de los parámetros fijados. */
+	public Pregunta(Integer nNodos, Double porcentajeDeArcos, boolean esDirigido){
+		generarGrafo(nNodos, porcentajeDeArcos, esDirigido);
+		
+		construirPregunta(esDirigido);
+	}
+	
+	
+	/** Constructor de la clase. 
+	 * Recupera una pregunta a partir de una semilla */
+	public Pregunta(Semilla semilla){
+		if(semilla.esDirigido()){
+			grafo = new GrafoDirigido(semilla.getMatrizDeAdyacencia());
+		} else {
+			grafo = new GrafoNoDirigido(semilla.getMatrizDeAdyacencia());
+		}
+		
+		construirPregunta(semilla.esDirigido());
+	}
+	
+	
+	 /** (Patrón de diseño Recipe) */
+	private void construirPregunta(boolean esDirigido){
+		aplicarAlgoritmo();
 		
 		construirTitulo();
 		construirEnunciado();
 		construirParteAResponder();
 		construirRespuestaCorrecta();
 		
-		generarSemilla(grafoDirigido);
+		generarSemilla(esDirigido);
 	}
 	
 	
-	protected void generarGrafo(Integer nNodos, Double porcentajeDeArcos, boolean grafoDirigido){
+	private void generarGrafo(Integer nNodos, Double porcentajeDeArcos, boolean grafoDirigido){
 		if(grafoDirigido){
 			grafo = new GrafoDirigido(nNodos, porcentajeDeArcos);
 		} else {
 			grafo = new GrafoNoDirigido(nNodos, porcentajeDeArcos);
 		}
 	}
+	
+	
+	protected abstract void aplicarAlgoritmo();
 	
 	
 	protected abstract void construirTitulo();
@@ -59,6 +83,10 @@ public abstract class Pregunta {
 	protected void generarSemillaEnFuncionDelTipoDePregunta(Integer tipoDePregunta, boolean grafoDirigido){
 		semilla = new Semilla(tipoDePregunta, grafo.getNNodos(), grafoDirigido, grafo.getMatrizDeAdyacencia());
 	}
+	
+	
+	public abstract Texto getNombreDeArchivo();
+	
 	
 	public Grafo getGrafo(){
 		return this.grafo;

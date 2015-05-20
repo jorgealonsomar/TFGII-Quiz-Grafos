@@ -10,6 +10,11 @@ public class GrafoDirigido extends Grafo {
 	}
 	
 	
+	public GrafoDirigido(Integer[][] matrizDeAdyacencia) {
+		super(matrizDeAdyacencia);
+	}
+	
+	
 	/** Añade un nuevo arco a la matriz de adyacencia.
 //	 * El sentido del arco se decide de forma aleatoria.
 	 * 
