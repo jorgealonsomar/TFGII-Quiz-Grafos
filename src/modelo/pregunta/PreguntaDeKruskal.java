@@ -1,6 +1,6 @@
 package modelo.pregunta;
 
-import modelo.Semilla;
+import modelo.Consigna;
 import util.Texto;
 
 public class PreguntaDeKruskal extends Pregunta {
@@ -11,7 +11,7 @@ public class PreguntaDeKruskal extends Pregunta {
 	}
 	
 	
-	public PreguntaDeKruskal(Semilla semilla){
+	public PreguntaDeKruskal(Consigna semilla){
 		super(semilla);
 	}	
 	
@@ -47,8 +47,8 @@ public class PreguntaDeKruskal extends Pregunta {
 	}
 
 	@Override
-	protected void generarSemilla(boolean grafoDirigido) {
-		super.generarSemillaEnFuncionDelTipoDePregunta(Semilla.algoritmoDeKruskal, grafoDirigido);
+	protected void generarConsigna(boolean grafoDirigido) {
+		super.generarConsignaEnFuncionDelTipoDePregunta(Consigna.algoritmoDeKruskal, grafoDirigido);
 	}
 
 

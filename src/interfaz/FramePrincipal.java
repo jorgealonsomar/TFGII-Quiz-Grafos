@@ -95,6 +95,7 @@ public class FramePrincipal extends JFrame {
 	/** Imprime una pregunta por el Área de Preguntas. La imprime también a archivo. */
 	public void imprimePregunta(Pregunta pregunta){
 		String textoPregunta = pregunta.getTextoPregunta(parametros.getIdioma());
+		String textoPreguntaXml = pregunta.getTextoPreguntaXml(parametros.getIdioma());
 		String nombreArchivo = pregunta.getNombreDeArchivo().getString(parametros.getIdioma());
 		
 		String separador = System.getProperty("file.separator");
@@ -103,10 +104,10 @@ public class FramePrincipal extends JFrame {
 		
 		//Si el directorio seleccionado existe
 		if (directorio.exists()) {
-			String rutaArchivo = rutaDirectorio + separador + nombreArchivo + GestorIO.construirCadenaFecha() + ".txt";
+			String rutaArchivo = rutaDirectorio + separador + nombreArchivo + GestorIO.construirCadenaFecha() + ".xml";
 			
 			//Imprimir la pregunta en el archivo especificado
-			GestorIO.escribirEnArchivo(new File(rutaArchivo), textoPregunta);
+			GestorIO.escribirEnArchivo(new File(rutaArchivo), textoPreguntaXml);
 		
 			//Imprimir la pregunta por el área de preguntas
 			areaPreguntas.addTexto(textoPregunta);

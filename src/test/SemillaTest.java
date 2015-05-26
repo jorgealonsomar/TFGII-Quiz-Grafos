@@ -2,8 +2,8 @@ package test;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
-import modelo.Semilla;
-import modelo.SemillaException;
+import modelo.Consigna;
+import modelo.ConsignaException;
 
 import org.junit.Test;
 
@@ -16,7 +16,7 @@ public class SemillaTest {
 		Integer[][] matrizDeAdyacencia = new Integer[][]{new Integer[]{0,1,1}, new Integer[]{1,0,1}, new Integer[]{1,1,0}};
 		
 		//Crear nueva semilla
-		Semilla semilla = new Semilla(Semilla.recorridoEnProfunidad, nNodos, esDirigido, matrizDeAdyacencia);
+		Consigna semilla = new Consigna(Consigna.recorridoEnProfunidad, nNodos, esDirigido, matrizDeAdyacencia);
 		
 		//El tipo de pregunta debe ser 0
 		assertEquals(semilla.getTipoPregunta(), (Integer)0);
@@ -50,9 +50,9 @@ public class SemillaTest {
 		
 		//Recuperar la semilla a partir de su código
 		try{
-			Semilla semilla = new Semilla(codigoSemilla);
+			Consigna semilla = new Consigna(codigoSemilla);
 		
-			assertEquals(semilla.getTipoPregunta(), Semilla.recorridoEnProfunidad);
+			assertEquals(semilla.getTipoPregunta(), Consigna.recorridoEnProfunidad);
 			assertEquals(semilla.getNNodos(), (Integer)4);
 			assertEquals(semilla.esDirigido(), false);
 			
@@ -77,7 +77,7 @@ public class SemillaTest {
 			assertEquals(semilla.getMatrizDeAdyacencia()[3][2], (Integer)0);
 			assertEquals(semilla.getMatrizDeAdyacencia()[3][3], (Integer)0);
 		
-		} catch (SemillaException e){
+		} catch (ConsignaException e){
 			fail(e.getMensajeDelError());
 		}
 	}
@@ -87,9 +87,9 @@ public class SemillaTest {
 	public void recuperarSemillaErronea() {
 			//Valor de la pos. 0 (correspondiente al Tipo de Pregunta) demasiado alto
 			try{
-				new Semilla("730003013006008");
+				new Consigna("730003013006008");
 				fail("Debió saltar una excepción.");
-			} catch (SemillaException e){ }
+			} catch (ConsignaException e){ }
 			
 			//El valor de la pos. 1, correspondiente al valorNNodos no es necesario probarlo,
 			//pues su rango es [0~9] por lo que cualquier valor entero será correcto
@@ -100,9 +100,9 @@ public class SemillaTest {
 			
 			//Longitud de la cadena incorrecta
 			try {
-				new Semilla("55");
+				new Consigna("55");
 				fail("Debió saltar una excepción.");
-			} catch (SemillaException e) { }
+			} catch (ConsignaException e) { }
 	}
 
 }

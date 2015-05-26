@@ -53,6 +53,25 @@ public class Texto {
 	}
 	
 	
+	public static String adaptarCaracteresAXml(String cadena){
+		cadena = cadena.replace("á", "&aacute");
+		cadena = cadena.replace("é", "&eacute");
+		cadena = cadena.replace("í", "&iacute");
+		cadena = cadena.replace("ó", "&oacute");
+		cadena = cadena.replace("ú", "&uacute");
+		
+		cadena = cadena.replace("Á", "&Aacute");
+		cadena = cadena.replace("É", "&Eacute");
+		cadena = cadena.replace("Í", "&Iacute");
+		cadena = cadena.replace("Ó", "&Oacute");
+		cadena = cadena.replace("Ú", "&Uacute");
+		
+		cadena = cadena.replace("ñ", "&ntilde");
+		cadena = cadena.replace("Ñ", "&Ñtilde");
+		
+		return cadena;
+	}
+	
 	
 	// -------------------------------------------------------------------------
 	// Interfaz:
@@ -71,15 +90,15 @@ public class Texto {
 	}
 	
 	
-	/** Texto de la opción Importar Semilla del menú Archivo */
-	public static Texto menuArchivo_ImportarSemilla(){
-		return new Texto("Importar Semilla", "Import Seed");
+	/** Texto de la opción Importar Consigna del menú Archivo */
+	public static Texto menuArchivo_ImportarConsigna(){
+		return new Texto("Importar Consigna", "Import Password");
 	}
 	
 	
-	/** Texto de la opción Importar Semilla del menú Archivo */
-	public static Texto introduzcaSemilla(){
-		return new Texto("Introduzca la semilla: ", "Insert the seed: ");
+	/** Texto de la opción Importar Consigna del menú Archivo */
+	public static Texto introduzcaConsigna(){
+		return new Texto("Introduzca la consigna: ", "Insert the password: ");
 	}
 	
 	
@@ -202,8 +221,8 @@ public class Texto {
 	
 	/** Texto del mensaje de error que salta al intentar generar las preguntas
 	 * en un directorio que no existe */
-	public static Texto errorSemillaIncorrecta(){
-		return new Texto("La semilla introducida no es válida.", "The provided seed is not valid.");
+	public static Texto errorConsignaIncorrecta(){
+		return new Texto("La consigna introducida no es válida.", "The provided password is not valid.");
 	}
 	
 	
@@ -319,7 +338,7 @@ public class Texto {
 	
 	/** Nombre de archivo correspondiente a preguntas de profunidad */
 	public static Texto nombreArchivoPregProfundidad(){
-		return new Texto("preguntaAnchura", "dfsQuestion.");
+		return new Texto("preguntaProfundidad", "dfsQuestion.");
 	}
 	
 	

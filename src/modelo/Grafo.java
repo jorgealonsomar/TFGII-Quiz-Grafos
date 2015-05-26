@@ -203,14 +203,28 @@ public abstract class Grafo {
 	
 	@Override
 	public String toString(){
-		String cadena = "  ";
-		
+		return toStringTabulado(0, false);
+	}
+	
+	
+	public String toStringTabulado(int numTabulaciones, boolean incluirEtiquetasXml){
+		String cadena = "";
+
+		for(int t = 0; t < numTabulaciones; t++){
+			cadena += "\t";
+		}
+		cadena += "  ";
 		for(int i = 0; i < matrizDeAdyacencia.length; i++){
 			cadena += (convertirIndiceEnLetra(i) + " ");
 		}
 		
 		for(int i = 0; i < matrizDeAdyacencia.length; i++){
-			cadena += ("\n" + convertirIndiceEnLetra(i) + " ");
+			cadena += "\n";
+			for(int t = 0; t < numTabulaciones; t++){
+				cadena += "\t";
+			}
+			if (incluirEtiquetasXml) cadena += "</p>";
+			cadena += (convertirIndiceEnLetra(i) + " ");
 			for(int j = 0; j < matrizDeAdyacencia[i].length; j++){
 				cadena += (matrizDeAdyacencia[i][j] + " ");
 			}

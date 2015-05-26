@@ -1,6 +1,6 @@
 package modelo.pregunta;
 
-import modelo.Semilla;
+import modelo.Consigna;
 import util.Texto;
 
 public class PreguntaDePrim extends Pregunta {
@@ -11,7 +11,7 @@ public class PreguntaDePrim extends Pregunta {
 	}
 	
 	
-	public PreguntaDePrim(Semilla semilla){
+	public PreguntaDePrim(Consigna semilla){
 		super(semilla);
 	}
 	
@@ -47,8 +47,8 @@ public class PreguntaDePrim extends Pregunta {
 	}
 
 	@Override
-	protected void generarSemilla(boolean grafoDirigido) {
-		super.generarSemillaEnFuncionDelTipoDePregunta(Semilla.algoritmoDePrim, grafoDirigido);
+	protected void generarConsigna(boolean grafoDirigido) {
+		super.generarConsignaEnFuncionDelTipoDePregunta(Consigna.algoritmoDePrim, grafoDirigido);
 	}
 
 

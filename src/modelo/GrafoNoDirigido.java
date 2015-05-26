@@ -44,7 +44,7 @@ public class GrafoNoDirigido extends Grafo {
 	
 	@Override
 	public String toString(){
-		return (super.toString() + "\n(grafo no dirigido)");
+		return (super.toString() + "\n(undirected graph)");
 	}
 	
 	

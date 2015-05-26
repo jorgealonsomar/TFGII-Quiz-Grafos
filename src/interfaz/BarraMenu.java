@@ -8,8 +8,8 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 
-import modelo.Semilla;
-import modelo.SemillaException;
+import modelo.Consigna;
+import modelo.ConsignaException;
 import modelo.pregunta.Pregunta;
 import modelo.pregunta.PreguntaDeAnchura;
 import modelo.pregunta.PreguntaDeDijkstra;
@@ -26,7 +26,7 @@ public class BarraMenu extends JMenuBar{
 	private FramePrincipal frame;
 	
 	private final JMenu menuArchivo;
-	private JMenuItem opcionImportarSemilla;
+	private JMenuItem opcionImportarConsigna;
 	private JMenuItem opcionSalir;
 	
 	private final JMenu menuAyuda;
@@ -43,9 +43,9 @@ public class BarraMenu extends JMenuBar{
 		menuArchivo = new JMenu();
 		add(menuArchivo);
 
-		opcionImportarSemilla = new JMenuItem();
-		opcionImportarSemilla.addActionListener(new ImportarSemillaListener());
-		menuArchivo.add(opcionImportarSemilla);
+		opcionImportarConsigna = new JMenuItem();
+		opcionImportarConsigna.addActionListener(new ImportarConsignaListener());
+		menuArchivo.add(opcionImportarConsigna);
 		
 		opcionSalir = new JMenuItem();
 		opcionSalir.addActionListener(new SalirListener());
@@ -64,7 +64,7 @@ public class BarraMenu extends JMenuBar{
 		idioma = nuevoIdioma;
 		
 		menuArchivo.setText(Texto.menuArchivo().getString(nuevoIdioma));
-		opcionImportarSemilla.setText(Texto.menuArchivo_ImportarSemilla().getString(nuevoIdioma));
+		opcionImportarConsigna.setText(Texto.menuArchivo_ImportarConsigna().getString(nuevoIdioma));
 		opcionSalir.setText(Texto.menuArchivo_Salir().getString(nuevoIdioma));
 		
 		menuAyuda.setText(Texto.menuAyuda().getString(nuevoIdioma));
@@ -81,39 +81,39 @@ public class BarraMenu extends JMenuBar{
 	
 	
 	
-	private class ImportarSemillaListener implements ActionListener {
+	private class ImportarConsignaListener implements ActionListener {
 		
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			
-			String codigoSemilla = JOptionPane.showInputDialog(frame, Texto.introduzcaSemilla()
-					.getString(idioma), Texto.menuArchivo_ImportarSemilla().getString(idioma),
+			String codigoConsigna = JOptionPane.showInputDialog(frame, Texto.introduzcaConsigna()
+					.getString(idioma), Texto.menuArchivo_ImportarConsigna().getString(idioma),
 					JOptionPane.PLAIN_MESSAGE);
 			
 			try {
 				
-				//Recuperar la semilla a partir de su código
-				Semilla semilla = new Semilla(codigoSemilla);
+				//Recuperar la consigna a partir de su código
+				Consigna consigna = new Consigna(codigoConsigna);
 				
 				Pregunta pregunta = null;
-				if (semilla.getTipoPregunta() == Semilla.recorridoEnProfunidad){
-					pregunta = new PreguntaDeProfundidad(semilla);
-				} else if (semilla.getTipoPregunta() == Semilla.recorridoEnAnchura){
-					pregunta = new PreguntaDeAnchura(semilla);
-				} else if (semilla.getTipoPregunta() == Semilla.clasificacionTopologica){
-					pregunta = new PreguntaTopologica(semilla);
-				} else if (semilla.getTipoPregunta() == Semilla.algoritmoDeDijkstra){
-					pregunta = new PreguntaDeDijkstra(semilla);
-				} else if (semilla.getTipoPregunta() == Semilla.algoritmoDeKruskal){
-					pregunta = new PreguntaDeKruskal(semilla);
-				} else if (semilla.getTipoPregunta() == Semilla.algoritmoDePrim){
-					pregunta = new PreguntaDePrim(semilla);
+				if (consigna.getTipoPregunta() == Consigna.recorridoEnProfunidad){
+					pregunta = new PreguntaDeProfundidad(consigna);
+				} else if (consigna.getTipoPregunta() == Consigna.recorridoEnAnchura){
+					pregunta = new PreguntaDeAnchura(consigna);
+				} else if (consigna.getTipoPregunta() == Consigna.clasificacionTopologica){
+					pregunta = new PreguntaTopologica(consigna);
+				} else if (consigna.getTipoPregunta() == Consigna.algoritmoDeDijkstra){
+					pregunta = new PreguntaDeDijkstra(consigna);
+				} else if (consigna.getTipoPregunta() == Consigna.algoritmoDeKruskal){
+					pregunta = new PreguntaDeKruskal(consigna);
+				} else if (consigna.getTipoPregunta() == Consigna.algoritmoDePrim){
+					pregunta = new PreguntaDePrim(consigna);
 				}
 				
 				frame.imprimePregunta(pregunta);
 				
-			} catch(SemillaException excepcion){
-				JOptionPane.showMessageDialog(null, Texto.errorSemillaIncorrecta().getString(idioma),
+			} catch(ConsignaException excepcion){
+				JOptionPane.showMessageDialog(null, Texto.errorConsignaIncorrecta().getString(idioma),
 						"Error", JOptionPane.WARNING_MESSAGE);
 			}
 

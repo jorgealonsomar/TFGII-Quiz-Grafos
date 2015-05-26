@@ -1,9 +1,9 @@
 package modelo.pregunta;
 
+import modelo.Consigna;
 import modelo.Grafo;
 import modelo.GrafoDirigido;
 import modelo.GrafoNoDirigido;
-import modelo.Semilla;
 import util.Idioma;
 import util.Texto;
 
@@ -16,7 +16,7 @@ public abstract class Pregunta {
 	protected Texto parteAResponder;
 	protected Texto respuestaCorrecta;
 	
-	private Semilla semilla;
+	private Consigna consigna;
 	
 	/** Constructor de la clase.
 	 * Crea una nueva pregunta con un grafo aleatorio creado a partir de los parámetros fijados. */
@@ -28,15 +28,15 @@ public abstract class Pregunta {
 	
 	
 	/** Constructor de la clase. 
-	 * Recupera una pregunta a partir de una semilla */
-	public Pregunta(Semilla semilla){
-		if(semilla.esDirigido()){
-			grafo = new GrafoDirigido(semilla.getMatrizDeAdyacencia());
+	 * Recupera una pregunta a partir de una consigna */
+	public Pregunta(Consigna consigna){
+		if(consigna.esDirigido()){
+			grafo = new GrafoDirigido(consigna.getMatrizDeAdyacencia());
 		} else {
-			grafo = new GrafoNoDirigido(semilla.getMatrizDeAdyacencia());
+			grafo = new GrafoNoDirigido(consigna.getMatrizDeAdyacencia());
 		}
 		
-		construirPregunta(semilla.esDirigido());
+		construirPregunta(consigna.esDirigido());
 	}
 	
 	
@@ -49,7 +49,7 @@ public abstract class Pregunta {
 		construirParteAResponder();
 		construirRespuestaCorrecta();
 		
-		generarSemilla(esDirigido);
+		generarConsigna(esDirigido);
 	}
 	
 	
@@ -77,11 +77,11 @@ public abstract class Pregunta {
 	protected abstract void construirRespuestaCorrecta();
 	
 	
-	protected abstract void generarSemilla(boolean grafoDirigido);
+	protected abstract void generarConsigna(boolean grafoDirigido);
 	
 	
-	protected void generarSemillaEnFuncionDelTipoDePregunta(Integer tipoDePregunta, boolean grafoDirigido){
-		semilla = new Semilla(tipoDePregunta, grafo.getNNodos(), grafoDirigido, grafo.getMatrizDeAdyacencia());
+	protected void generarConsignaEnFuncionDelTipoDePregunta(Integer tipoDePregunta, boolean grafoDirigido){
+		consigna = new Consigna(tipoDePregunta, grafo.getNNodos(), grafoDirigido, grafo.getMatrizDeAdyacencia());
 	}
 	
 	
@@ -113,8 +113,8 @@ public abstract class Pregunta {
 	}
 	
 	
-	public String getCodigoSemilla(){
-		return semilla.toString();
+	public String getCodigoConsigna(){
+		return consigna.toString();
 	}
 	
 	
@@ -124,11 +124,42 @@ public abstract class Pregunta {
 		textoPregunta += "\n" + getTitulo(idioma);
 		textoPregunta += "\n\n" + getEnunciado(idioma);
 		textoPregunta += "\n\n" + getGrafo().toString();
-		textoPregunta += "\n" + "(semilla: " + getCodigoSemilla() + ")";
+		if (idioma == Idioma.ESP) {
+			textoPregunta += "\n" + "(consigna: ";
+		} else {
+			textoPregunta += "\n" + "(password: ";
+		}
+		textoPregunta += getCodigoConsigna() + ")";
 		textoPregunta += "\n\n" + getParteAResponder(idioma);
 		textoPregunta += "\n\n" + getRespuestaCorrecta(idioma);
 		textoPregunta += "\n\n\n";
 		
 		return textoPregunta;
 	}
+	
+	
+	public String getTextoPreguntaXml(Idioma idioma){
+		String textoPregunta = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>";
+		textoPregunta += "\n<quiz>";		
+		textoPregunta += "\n\t<question type=\"cloze\">";
+		textoPregunta += "\n\t\t<name><text>" + getTitulo(idioma) + "</text>";
+		textoPregunta += "\n\t\t</name>";
+		textoPregunta += "\n\t\t<questiontext>";
+		textoPregunta += "\n\t\t\t<text><![CDATA[";
+		textoPregunta += "\n\t\t\t" + Texto.adaptarCaracteresAXml(getEnunciado(idioma));
+		textoPregunta += "\n</p>" + getGrafo().toStringTabulado(3, true);
+		textoPregunta += "\n</p>\t\t\t" + "(consigna: " + Texto.adaptarCaracteresAXml(getCodigoConsigna()) + ")";
+		textoPregunta += "\n</p>\t\t\t" + Texto.adaptarCaracteresAXml(getParteAResponder(idioma));
+		textoPregunta += "\n\t\t\t]]></text>";
+		textoPregunta += "\n\t\t</questiontext>";
+		textoPregunta += "\n\t\t\t<generalfeedback>";
+		textoPregunta += "\n\t\t\t<text></text>";
+		textoPregunta += "\n\t\t</generalfeedback>";
+		textoPregunta += "\n\t\t<shuffleanswers>0</shuffleanswers>";
+		textoPregunta += "\n\t</question>";
+		textoPregunta += "\n</quiz>";
+				
+		return textoPregunta;
+	}
+	
 }

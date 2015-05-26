@@ -1,6 +1,6 @@
 package modelo.pregunta;
 
-import modelo.Semilla;
+import modelo.Consigna;
 import util.Texto;
 
 public class PreguntaTopologica extends Pregunta {
@@ -11,7 +11,7 @@ public class PreguntaTopologica extends Pregunta {
 	}
 	
 	
-	public PreguntaTopologica(Semilla semilla){
+	public PreguntaTopologica(Consigna semilla){
 		super(semilla);
 	}	
 	
@@ -47,8 +47,8 @@ public class PreguntaTopologica extends Pregunta {
 	}
 
 	@Override
-	protected void generarSemilla(boolean grafoDirigido) {
-		super.generarSemillaEnFuncionDelTipoDePregunta(Semilla.clasificacionTopologica, grafoDirigido);
+	protected void generarConsigna(boolean grafoDirigido) {
+		super.generarConsignaEnFuncionDelTipoDePregunta(Consigna.clasificacionTopologica, grafoDirigido);
 	}
 
 

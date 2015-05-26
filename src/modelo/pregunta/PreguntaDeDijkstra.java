@@ -1,6 +1,6 @@
 package modelo.pregunta;
 
-import modelo.Semilla;
+import modelo.Consigna;
 import util.Texto;
 
 public class PreguntaDeDijkstra extends Pregunta {
@@ -11,7 +11,7 @@ public class PreguntaDeDijkstra extends Pregunta {
 	}
 	
 	
-	public PreguntaDeDijkstra(Semilla semilla){
+	public PreguntaDeDijkstra(Consigna semilla){
 		super(semilla);
 	}
 	
@@ -47,8 +47,8 @@ public class PreguntaDeDijkstra extends Pregunta {
 	}
 
 	@Override
-	protected void generarSemilla(boolean grafoDirigido) {
-		super.generarSemillaEnFuncionDelTipoDePregunta(Semilla.algoritmoDeDijkstra, grafoDirigido);
+	protected void generarConsigna(boolean grafoDirigido) {
+		super.generarConsignaEnFuncionDelTipoDePregunta(Consigna.algoritmoDeDijkstra, grafoDirigido);
 	}
 
 

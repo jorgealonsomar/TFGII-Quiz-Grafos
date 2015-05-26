@@ -1,6 +1,6 @@
 package modelo;
 
-public class Semilla {
+public class Consigna {
 	
 	private Integer tipoPregunta;
 	
@@ -22,7 +22,7 @@ public class Semilla {
 	
 	
 	/** Constructor. Construye una nueva semilla */
-	public Semilla(Integer tipoPregunta, Integer nNodos, boolean esDirigido, Integer[][] matrizDeAdyacencia){
+	public Consigna(Integer tipoPregunta, Integer nNodos, boolean esDirigido, Integer[][] matrizDeAdyacencia){
 		this.tipoPregunta = tipoPregunta;
 		this.valorNNodos = nNodos-1;
 		this.esDirigido = esDirigido;
@@ -31,7 +31,7 @@ public class Semilla {
 	
 	
 	/** Constructor. Recupera una vieja semilla a partir de su código */
-	public Semilla(String codigo) throws SemillaException {
+	public Consigna(String codigo) throws ConsignaException {
 		try{
 			
 			Integer valorAux;
@@ -42,7 +42,7 @@ public class Semilla {
 			if(0 <= valorAux && valorAux <= 5){
 				this.tipoPregunta = valorAux;
 			} else {
-				throw new SemillaException("El valor del primer carácter de la semilla debe estar entre en 0 y el 5");
+				throw new ConsignaException("El valor del primer carácter de la semilla debe estar entre en 0 y el 5");
 			}
 			
 			
@@ -87,7 +87,7 @@ public class Semilla {
 			}
 			
 		}catch(Exception excepcion){
-			throw new SemillaException("El formato del código usado para generar la semilla es erróneo.");
+			throw new ConsignaException("El formato del código usado para generar la semilla es erróneo.");
 		}
 	}
 	

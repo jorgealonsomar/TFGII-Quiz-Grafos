@@ -51,7 +51,7 @@ public class GrafoDirigido extends Grafo {
 	
 	@Override
 	public String toString(){
-		return (super.toString() + "\n(grafo dirigido)");
+		return (super.toString() + "\n(directed graph)");
 	}
 	
 }

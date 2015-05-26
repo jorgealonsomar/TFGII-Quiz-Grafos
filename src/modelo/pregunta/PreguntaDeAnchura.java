@@ -3,7 +3,7 @@ package modelo.pregunta;
 import java.util.ArrayList;
 
 import modelo.Grafo;
-import modelo.Semilla;
+import modelo.Consigna;
 import util.Texto;
 
 public class PreguntaDeAnchura extends Pregunta {
@@ -17,7 +17,7 @@ public class PreguntaDeAnchura extends Pregunta {
 	}
 	
 	
-	public PreguntaDeAnchura(Semilla semilla){
+	public PreguntaDeAnchura(Consigna semilla){
 		super(semilla);
 	}
 	
@@ -85,8 +85,8 @@ public class PreguntaDeAnchura extends Pregunta {
 
 
 	@Override
-	protected void generarSemilla(boolean grafoDirigido) {
-		super.generarSemillaEnFuncionDelTipoDePregunta(Semilla.recorridoEnAnchura, grafoDirigido);
+	protected void generarConsigna(boolean grafoDirigido) {
+		super.generarConsignaEnFuncionDelTipoDePregunta(Consigna.recorridoEnAnchura, grafoDirigido);
 	}
 
 
