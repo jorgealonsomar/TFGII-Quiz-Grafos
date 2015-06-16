@@ -1,7 +1,8 @@
 package modelo.pregunta;
 
-import modelo.Consigna;
-import util.Texto;
+import modelo.Semilla;
+import texto.Texto;
+import texto.Textos_Archivos;
 
 public class PreguntaDeDijkstra extends Pregunta {
 
@@ -11,7 +12,7 @@ public class PreguntaDeDijkstra extends Pregunta {
 	}
 	
 	
-	public PreguntaDeDijkstra(Consigna semilla){
+	public PreguntaDeDijkstra(Semilla semilla){
 		super(semilla);
 	}
 	
@@ -47,14 +48,14 @@ public class PreguntaDeDijkstra extends Pregunta {
 	}
 
 	@Override
-	protected void generarConsigna(boolean grafoDirigido) {
-		super.generarConsignaEnFuncionDelTipoDePregunta(Consigna.algoritmoDeDijkstra, grafoDirigido);
+	protected void generarSemilla(boolean grafoDirigido) {
+		super.generarConsignaEnFuncionDelTipoDePregunta(Semilla.algoritmoDeDijkstra, grafoDirigido);
 	}
 
 
 	@Override
 	public Texto getNombreDeArchivo() {
-		return Texto.nombreArchivoPregDijkstra();
+		return Textos_Archivos.nombreArchivoPregDijkstra();
 	}
 
 }

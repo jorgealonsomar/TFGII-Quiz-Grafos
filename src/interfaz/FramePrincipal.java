@@ -28,121 +28,173 @@ import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
 
+import modelo.Semilla;
+import modelo.ConsignaException;
 import modelo.pregunta.Pregunta;
+import modelo.pregunta.PreguntaDeAnchura;
+import modelo.pregunta.PreguntaDeDijkstra;
+import modelo.pregunta.PreguntaDeKruskal;
+import modelo.pregunta.PreguntaDePrim;
+import modelo.pregunta.PreguntaDeProfundidad;
+import modelo.pregunta.PreguntaTopologica;
 import sistema.Parametros;
 import sistema.Ruta;
+import texto.Textos_BarraMenu;
+import texto.Textos_Interfaz;
 import util.GestorIO;
 import util.Idioma;
-import util.Texto;
 
 @SuppressWarnings("serial")
 public class FramePrincipal extends JFrame {
-	
+
 	/** Panel correspondiente a este frame */
 	private JPanel panelDeLaVentana;
-	
-	/** Par·metros que est· empleando el programa */
+
+	/** Par√°metros que est√° empleando el programa */
 	private Parametros parametros;
-	
-	/** Barra del men˙ superior */
+
+	/** Barra del men√∫ superior */
 	private BarraMenu barraMenu;
-	
-	/** Panel que emplea pestaÒas para separar los distintos tipos de preguntas */
+
+	/** Panel que emplea pesta√±as para separar los distintos tipos de preguntas */
 	private JTabbedPane panelTabulado;
-	
-	/** BotÛn de selecciÛn de idioma */
+
+	/** Bot√≥n de selecci√≥n de idioma */
 	private JLabel imgIdioma;
 	
-	/** BotÛn de selecciÛn del directorio donde se guardar·n las preguntas que se
-	 * generen */
+	/**
+	 * Bot√≥n de selecci√≥n del directorio donde se guardar√°n las preguntas que se
+	 * generen
+	 */
 	private JButton botonElegirDirectorio;
-	
-	/** Ventana de texto con nombre del directorio donde se guardar·n las preguntas
-	 * que se generen */
+
+	/**
+	 * Ventana de texto con nombre del directorio donde se guardar√°n las
+	 * preguntas que se generen
+	 */
 	private JTextField ventanaTextoDirectorio;
-	
-	/** ¡rea donde se ir·n mostrando las preguntas generadas */
+
+	/** √Årea donde se ir√°n mostrando las preguntas generadas */
 	private AreaPreguntas areaPreguntas;
-	
+
 	/** Anchura del frame */
 	private final int ANCHO = 1200;
-	
+
 	/** Altura del frame */
 	private final int ALTO = 800;
-	
-	
+
 	/** Constructor de la clase */
-	public FramePrincipal(Parametros parametros){
+	public FramePrincipal(Parametros parametros) {
 		this.parametros = parametros;
-		
+
 		setTitle("TFGII Generador de preguntas de Algoritmia");
 		setBounds(0, 0, ANCHO, ALTO);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLocationRelativeTo(null);
 		setVisible(true);
-		
+
 		construirPanelDeLaVentana();
 		construirBarraMenu();
 		construirAreaPreguntas();
 		construirSelectorDeDirectorio();
 		construirPanelTabulado();
 		construirBotonIdioma();
-		
+
 		presentarTrasCambioDeIdioma();
 	}
-	
-	
-	/** Imprime una pregunta por el ¡rea de Preguntas. La imprime tambiÈn a archivo. */
-	public void imprimePregunta(Pregunta pregunta){
-		String textoPregunta = pregunta.getTextoPregunta(parametros.getIdioma());
+
+	/**
+	 * Imprime una pregunta por el √°rea de Preguntas. La imprime tambi√©n a
+	 * archivo.
+	 */
+	public void imprimePregunta(Pregunta pregunta) {
+		String textoPregunta = pregunta.getTextoPreguntaParaMostrarPorPantalla(parametros.getIdioma());
 		String textoPreguntaXml = pregunta.getTextoPreguntaXml(parametros.getIdioma());
 		String nombreArchivo = pregunta.getNombreDeArchivo().getString(parametros.getIdioma());
-		
+
 		String separador = System.getProperty("file.separator");
 		String rutaDirectorio = ventanaTextoDirectorio.getText();
 		File directorio = new File(rutaDirectorio);
-		
-		//Si el directorio seleccionado existe
+
+		// Si el directorio seleccionado existe
 		if (directorio.exists()) {
-			String rutaArchivo = rutaDirectorio + separador + nombreArchivo + GestorIO.construirCadenaFecha() + ".xml";
-			
-			//Imprimir la pregunta en el archivo especificado
+			String rutaArchivo = rutaDirectorio + separador + nombreArchivo
+					+ GestorIO.construirCadenaFecha() + ".xml";
+
+			// Imprimir la pregunta en el archivo especificado
 			GestorIO.escribirEnArchivo(new File(rutaArchivo), textoPreguntaXml);
-		
-			//Imprimir la pregunta por el ·rea de preguntas
+
+			// Imprimir la pregunta por el √°rea de preguntas
 			areaPreguntas.addTexto(textoPregunta);
-		
+
 		} else if (rutaDirectorio.equals("")) {
-			//Imprimir la pregunta por el ·rea de preguntas
+			// Imprimir la pregunta por el √°rea de preguntas
 			areaPreguntas.addTexto(textoPregunta);
 		} else {
-			JOptionPane.showMessageDialog(null, Texto.errorDirectorioNoExiste().getString(parametros.getIdioma()),
-					"Error", JOptionPane.WARNING_MESSAGE);
+			JOptionPane.showMessageDialog(null, Textos_Interfaz.errorDirectorioNoExiste()
+					.getString(parametros.getIdioma()), "Error", JOptionPane.WARNING_MESSAGE);
 		}
 	}
 	
 	
+	/** */
+	public void importarSemilla() {
+		String codigoConsigna = JOptionPane.showInputDialog(this,
+				Textos_BarraMenu.introduzcaSemilla().getString(parametros.getIdioma()),
+				Textos_BarraMenu.menuArchivo_ImportarSemilla().getString(parametros.getIdioma()),
+				JOptionPane.PLAIN_MESSAGE);
+
+		try {
+			// Recuperar la consigna a partir de su c√≥digo
+			Semilla consigna = new Semilla(codigoConsigna);
+
+			Pregunta pregunta = null;
+			if (consigna.getTipoPregunta() == Semilla.recorridoEnProfunidad) {
+				pregunta = new PreguntaDeProfundidad(consigna);
+			} else if (consigna.getTipoPregunta() == Semilla.recorridoEnAnchura) {
+				pregunta = new PreguntaDeAnchura(consigna);
+			} else if (consigna.getTipoPregunta() == Semilla.clasificacionTopologica) {
+				pregunta = new PreguntaTopologica(consigna);
+			} else if (consigna.getTipoPregunta() == Semilla.algoritmoDeDijkstra) {
+				pregunta = new PreguntaDeDijkstra(consigna);
+			} else if (consigna.getTipoPregunta() == Semilla.algoritmoDeKruskal) {
+				pregunta = new PreguntaDeKruskal(consigna);
+			} else if (consigna.getTipoPregunta() == Semilla.algoritmoDePrim) {
+				pregunta = new PreguntaDePrim(consigna);
+			}
+
+			imprimePregunta(pregunta);
+		} catch (ConsignaException excepcion) {
+			JOptionPane.showMessageDialog(null,
+					Textos_Interfaz.errorSemillaIncorrecta().getString(parametros.getIdioma()), "Error",
+					JOptionPane.WARNING_MESSAGE);
+		}
+	}
+	
+
 	/** Construye el jPanel correspondiente a este frame */
 	private void construirPanelDeLaVentana() {
 		panelDeLaVentana = new JPanel();
-		panelDeLaVentana.setBounds(0, 0, ANCHO-50, ALTO-50);
+		panelDeLaVentana.setBounds(0, 0, ANCHO - 50, ALTO - 50);
 		panelDeLaVentana.setBackground(Color.GRAY);
 		panelDeLaVentana.setVisible(true);
 		panelDeLaVentana.setLayout(new BorderLayout());
 		add(panelDeLaVentana);
 	}
 	
-	
-	/** Construye la barra del men˙ superior */
-	private void construirBarraMenu(){
+
+	/** Construye la barra del men√∫ superior */
+	private void construirBarraMenu() {
 		barraMenu = new BarraMenu(this, parametros.getIdioma());
 		panelDeLaVentana.add(barraMenu, BorderLayout.PAGE_START);
 	}
 	
 	
-	/** Construye el panel inferior correspondiente a la selecciÛn del directorio
-	 *  donde se guardar·n las preguntas que se creen */
-	private void construirSelectorDeDirectorio(){
+	/**
+	 * Construye el panel inferior correspondiente a la selecci√≥n del directorio
+	 * donde se guardar√°n las preguntas que se creen
+	 */
+	private void construirSelectorDeDirectorio() {
 		JPanel panelSelectorDeDirectorio = new JPanel();
 		panelSelectorDeDirectorio.setBounds(0, 0, ANCHO, ALTO);
 		panelSelectorDeDirectorio.setBackground(Color.GRAY);
@@ -154,28 +206,35 @@ public class FramePrincipal extends JFrame {
 		botonElegirDirectorio = new JButton("");
 		botonElegirDirectorio.addActionListener(new ElegirDirectorioListener());
 		panelSelectorDeDirectorio.add(botonElegirDirectorio, BorderLayout.LINE_START);
-		
+
 		ventanaTextoDirectorio = new JTextField("");
 		panelSelectorDeDirectorio.add(ventanaTextoDirectorio, BorderLayout.CENTER);
 	}
 	
-	/** Construye la barra del men˙ superior */
-	private void construirPanelTabulado(){
+
+	/** Construye la barra del men√∫ superior */
+	private void construirPanelTabulado() {
 		panelTabulado = new JTabbedPane();
 		panelDeLaVentana.add(panelTabulado, BorderLayout.CENTER);
-		
-		//Construir las pestaÒas, que se aÒaden al panel tabulado:
-		new PestanaDePreguntaDeProfundidad(panelTabulado, Texto.recorridoEnProfundidad(), KeyEvent.VK_E, areaPreguntas, this);
-		new PestanaDePreguntaDeAnchura(panelTabulado, Texto.recorridoEnAnchura(), KeyEvent.VK_A, areaPreguntas, this);
-		new PestanaDePreguntaTopologica(panelTabulado, Texto.clasificacionTopologica(), KeyEvent.VK_T, areaPreguntas, this);
-		new PestanaDePreguntaDeDijkstra(panelTabulado, Texto.algoritmoDeDijkstra(), KeyEvent.VK_D, areaPreguntas, this);
-		new PestanaDePreguntaDePrim(panelTabulado, Texto.algoritmoDePrim(), KeyEvent.VK_P, areaPreguntas, this);
-		new PestanaDePreguntaDeKruskal(panelTabulado, Texto.algoritmoDeKruskal(), KeyEvent.VK_K, areaPreguntas, this);
+
+		// Construir las pesta√±as, que se a√±aden al panel tabulado:
+		new PestanaDePreguntaDeProfundidad(panelTabulado, Textos_Interfaz.recorridoEnProfundidad(),
+				KeyEvent.VK_E, areaPreguntas, this);
+		new PestanaDePreguntaDeAnchura(panelTabulado, Textos_Interfaz.recorridoEnAnchura(),
+				KeyEvent.VK_A, areaPreguntas, this);
+		new PestanaDePreguntaTopologica(panelTabulado, Textos_Interfaz.clasificacionTopologica(),
+				KeyEvent.VK_T, areaPreguntas, this);
+		new PestanaDePreguntaDeDijkstra(panelTabulado, Textos_Interfaz.algoritmoDeDijkstra(),
+				KeyEvent.VK_D, areaPreguntas, this);
+		new PestanaDePreguntaDePrim(panelTabulado, Textos_Interfaz.algoritmoDePrim(), KeyEvent.VK_P,
+				areaPreguntas, this);
+		new PestanaDePreguntaDeKruskal(panelTabulado, Textos_Interfaz.algoritmoDeKruskal(),
+				KeyEvent.VK_K, areaPreguntas, this);
 	}
 	
-	
-	/** Construye el ·rea donde se ir·n mostrando las preguntas generadas */
-	private void construirAreaPreguntas(){
+
+	/** Construye el √°rea donde se ir√°n mostrando las preguntas generadas */
+	private void construirAreaPreguntas() {
 		areaPreguntas = new AreaPreguntas();
 		areaPreguntas.setEditable(false);
 		areaPreguntas.setLineWrap(true);
@@ -183,62 +242,60 @@ public class FramePrincipal extends JFrame {
 		areaPreguntas.setSize(450, ALTO);
 		areaPreguntas.setText("");
 		panelDeLaVentana.add(areaPreguntas, BorderLayout.LINE_END);
-		
+
 		JScrollPane scrollMontiExtra = new JScrollPane(areaPreguntas);
 		scrollMontiExtra.setBounds(8, 18, 459, 261);
 		panelDeLaVentana.add(scrollMontiExtra, BorderLayout.LINE_END);
 	}
 	
-	
-	/** Construye la barra del men˙ superior */
-	private void construirBotonIdioma(){
+
+	/** Construye la barra del men√∫ superior */
+	private void construirBotonIdioma() {
 		imgIdioma = new JLabel();
 		imgIdioma.setIcon(new ImageIcon(getClass().getResource(Ruta.IMAGENES + "idiomaEsp.png")));
 		panelDeLaVentana.add(imgIdioma, BorderLayout.LINE_START);
-		
+
 		imgIdioma.addMouseListener(new CambiarIdiomaListener());
 	}
-	
-	
-	/** Reescribe los textos tras cambiar la configuraciÛn del idioma */
-	private void presentarTrasCambioDeIdioma(){
+
+	/** Reescribe los textos tras cambiar la configuraci√≥n del idioma */
+	private void presentarTrasCambioDeIdioma() {
 		Idioma nuevoIdioma = parametros.getIdioma();
-		
-		//Barra Men˙
+
+		// Barra Men√∫
 		barraMenu.reescribirTextos(nuevoIdioma);
-		
-		//Imagen de elecciÛn de idioma
-		if(nuevoIdioma == Idioma.ESP){
+
+		// Imagen de elecci√≥n de idioma
+		if (nuevoIdioma == Idioma.ESP) {
 			imgIdioma.setIcon(new ImageIcon(getClass().getResource(Ruta.IMAGENES + "idiomaEsp.png")));
-			
+
 		} else {
 			imgIdioma.setIcon(new ImageIcon(getClass().getResource(Ruta.IMAGENES + "idiomaEng.png")));
 		}
-		imgIdioma.setToolTipText(Texto.botonSeleccionDeIdioma().getString(nuevoIdioma));
-		
-		
-		//PestaÒas del panel tabulado
-		for(int i = 0; i < panelTabulado.getTabCount(); i++){
-			PestanaDePregunta pestanaActual = ((PestanaDePregunta)panelTabulado.getComponentAt(i));
-			
+		imgIdioma.setToolTipText(Textos_Interfaz.botonSeleccionDeIdioma().getString(nuevoIdioma));
+
+		// Pesta√±as del panel tabulado
+		for (int i = 0; i < panelTabulado.getTabCount(); i++) {
+			PestanaDePregunta pestanaActual = ((PestanaDePregunta) panelTabulado.getComponentAt(i));
+
 			panelTabulado.setTitleAt(i, pestanaActual.getNombreDeLaPestana(nuevoIdioma));
 			panelTabulado.setToolTipTextAt(i, pestanaActual.getNombreDeLaPestana(nuevoIdioma));
 			pestanaActual.reaccionarACambioDeIdioma(nuevoIdioma);
 		}
-		
-		//Panel de selecciÛn de directorio
-		botonElegirDirectorio.setText(Texto.botonElegirDirectorio().getString(nuevoIdioma));
-		botonElegirDirectorio.setToolTipText(Texto.tipTextElegirDirectorio().getString(nuevoIdioma));
-		ventanaTextoDirectorio.setToolTipText(Texto.tipTextElegirDirectorio().getString(nuevoIdioma));
-		
-		//¡rea de preguntas
-		areaPreguntas.setToolTipText(Texto.tipTextAreaPreguntas().getString(nuevoIdioma));
-		
+
+		// Panel de selecci√≥n de directorio
+		botonElegirDirectorio.setText(Textos_Interfaz.botonElegirDirectorio().getString(nuevoIdioma));
+		botonElegirDirectorio.setToolTipText(Textos_Interfaz.tipTextElegirDirectorio().getString(nuevoIdioma));
+		ventanaTextoDirectorio.setToolTipText(Textos_Interfaz.tipTextElegirDirectorio().getString(nuevoIdioma));
+
+		// √Årea de preguntas
+		areaPreguntas.setToolTipText(Textos_Interfaz.tipTextAreaPreguntas().getString(nuevoIdioma));
+
 		repaint();
 	}
 	
 	
-	
+
 	private class CambiarIdiomaListener extends MouseAdapter {
 
 		/** Cambia al siguiente idioma y repinta la ventana */
@@ -247,27 +304,29 @@ public class FramePrincipal extends JFrame {
 			parametros.switchIdioma();
 			presentarTrasCambioDeIdioma();
 		}
-		
+
 	}
-
-
-
+	
+	
+	
 	private class ElegirDirectorioListener implements ActionListener {
-	
-	/** Abre un selector de directorio.
-	 * Tras elegirlo, esa ruta se guarda en la ventana de texto de selecciÛn de directorio*/
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		JFileChooser selector = new JFileChooser();		
-    	selector.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-    	
-    	int eleccion = selector.showOpenDialog(null);
-    	if (eleccion == JFileChooser.APPROVE_OPTION) {		
-    		File archivo = selector.getSelectedFile();
-    		ventanaTextoDirectorio.setText(archivo.toString());
-    	}
+
+		/**
+		 * Abre un selector de directorio. Tras elegirlo, esa ruta se guarda en
+		 * la ventana de texto de selecci√≥n de directorio
+		 */
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			JFileChooser selector = new JFileChooser();
+			selector.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+
+			int eleccion = selector.showOpenDialog(null);
+			if (eleccion == JFileChooser.APPROVE_OPTION) {
+				File archivo = selector.getSelectedFile();
+				ventanaTextoDirectorio.setText(archivo.toString());
+			}
+		}
+
 	}
-	
-}
-	
+
 }

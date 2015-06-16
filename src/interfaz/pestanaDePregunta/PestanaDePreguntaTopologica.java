@@ -7,21 +7,22 @@ import javax.swing.JTabbedPane;
 
 import modelo.pregunta.Pregunta;
 import modelo.pregunta.PreguntaTopologica;
-import util.Texto;
+import texto.Texto;
 
 @SuppressWarnings("serial")
 public class PestanaDePreguntaTopologica extends PestanaDePregunta {
 
-	public PestanaDePreguntaTopologica(JTabbedPane panelTabulado, Texto nombreDeLaPestana,
-			int teclaMnemotecnica, AreaPreguntas areaPreguntas, FramePrincipal frame) {
+	public PestanaDePreguntaTopologica(JTabbedPane panelTabulado, Texto nombreDeLaPestana, int teclaMnemotecnica,
+			AreaPreguntas areaPreguntas, FramePrincipal frame) {
 		super(panelTabulado, nombreDeLaPestana, teclaMnemotecnica, areaPreguntas, frame);
-		// TODO Auto-generated constructor stub
+		
+		deshabilitarGrafoDirigido(true);
+		setParametrosSelectorPorcentajeArcos(5, 2, 1);
 	}
-	
-	
+
 	@Override
-	protected Pregunta generarPregunta(){
-		return new PreguntaTopologica(getNumNodos(), getPorcentajeArcos(), isDirigido());
+	protected Pregunta generarPregunta() {
+		return new PreguntaTopologica(getNumNodos(), getPorcentajeArcos());
 	}
 
 }

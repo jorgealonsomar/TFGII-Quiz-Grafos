@@ -1,6 +1,6 @@
 package modelo;
 
-public class Consigna {
+public class Semilla {
 	
 	private Integer tipoPregunta;
 	
@@ -11,8 +11,8 @@ public class Consigna {
 	public static final Integer algoritmoDePrim = 4;
 	public static final Integer algoritmoDeKruskal = 5;
 	
-	/** Valor correspondiente al número de nodos.
-	 * Se empieza a contar desde el 0, por lo que podrá tomar valores desde el 0 (1 nodo)
+	/** Valor correspondiente al nï¿½mero de nodos.
+	 * Se empieza a contar desde el 0, por lo que podrï¿½ tomar valores desde el 0 (1 nodo)
 	 * hasta el 9 (10 nodos) */
 	private Integer valorNNodos;
 	
@@ -22,7 +22,7 @@ public class Consigna {
 	
 	
 	/** Constructor. Construye una nueva semilla */
-	public Consigna(Integer tipoPregunta, Integer nNodos, boolean esDirigido, Integer[][] matrizDeAdyacencia){
+	public Semilla(Integer tipoPregunta, Integer nNodos, boolean esDirigido, Integer[][] matrizDeAdyacencia){
 		this.tipoPregunta = tipoPregunta;
 		this.valorNNodos = nNodos-1;
 		this.esDirigido = esDirigido;
@@ -30,28 +30,28 @@ public class Consigna {
 	}
 	
 	
-	/** Constructor. Recupera una vieja semilla a partir de su código */
-	public Consigna(String codigo) throws ConsignaException {
+	/** Constructor. Recupera una vieja semilla a partir de su cï¿½digo */
+	public Semilla(String codigo) throws ConsignaException {
 		try{
 			
 			Integer valorAux;
 			
-			//Primer carácter. Corresponde al tipo de pregunta
+			//Primer carï¿½cter. Corresponde al tipo de pregunta
 			valorAux = Integer.parseInt(codigo.substring(0, 1));
 			
 			if(0 <= valorAux && valorAux <= 5){
 				this.tipoPregunta = valorAux;
 			} else {
-				throw new ConsignaException("El valor del primer carácter de la semilla debe estar entre en 0 y el 5");
+				throw new ConsignaException("El valor del primer carï¿½cter de la semilla debe estar entre en 0 y el 5");
 			}
 			
 			
-			//Segundo carácter. Corresponde al valorNNodos (al número de nodos del grafo - 1) 
+			//Segundo carï¿½cter. Corresponde al valorNNodos (al nï¿½mero de nodos del grafo - 1) 
 			this.valorNNodos = Integer.parseInt(codigo.substring(1, 2));
-			//(cualquier valor será válido, ya que puede tomar como valor un número del 0 al 9)
+			//(cualquier valor serï¿½ vï¿½lido, ya que puede tomar como valor un nï¿½mero del 0 al 9)
 			
 			
-			//El tercer carácter indica si el grafo es o no dirigido
+			//El tercer carï¿½cter indica si el grafo es o no dirigido
 			if(codigo.substring(2, 3).equals("0")){
 				this.esDirigido = false;
 			} else {
@@ -74,7 +74,7 @@ public class Consigna {
 				Integer valorEntero = Integer.parseInt(codigo.substring(i, i+3));
 				String cadenaBinaria = Integer.toBinaryString(valorEntero);
 				
-				//Se asegura que el valor de cadenaBinaria hasta que tenga una cantidad nNodos de dígitos
+				//Se asegura que el valor de cadenaBinaria hasta que tenga una cantidad nNodos de dï¿½gitos
 				while(cadenaBinaria.length() < (valorNNodos+1)){
 					cadenaBinaria = "0" + cadenaBinaria;
 				}
@@ -87,13 +87,13 @@ public class Consigna {
 			}
 			
 		}catch(Exception excepcion){
-			throw new ConsignaException("El formato del código usado para generar la semilla es erróneo.");
+			throw new ConsignaException("El formato del cï¿½digo usado para generar la semilla es errï¿½neo.");
 		}
 	}
 	
 	
 	
-	/** Devuelve el código de correspondiente a la semilla */
+	/** Devuelve el cï¿½digo de correspondiente a la semilla */
 	@Override
 	public String toString(){
 		String cadena = "";
@@ -109,7 +109,7 @@ public class Consigna {
 		
 		//Por cada fila de la matriz de adyacencia:
 		for(int f = 0; f < matrizDeAdyacencia.length; f++){
-			//Se convierten los valores de esa fila en un número 
+			//Se convierten los valores de esa fila en un nï¿½mero 
 			
 			Integer valorFila = 0;
 			int exponente = matrizDeAdyacencia.length-1;
@@ -120,7 +120,7 @@ public class Consigna {
 				exponente--;
 			}
 			
-			//Se asegura que el valor de esta fila hasta que sea una cadena de 3 dígitos
+			//Se asegura que el valor de esta fila hasta que sea una cadena de 3 dï¿½gitos
 			String cadenaFila = valorFila.toString();
 			while(cadenaFila.length() < 3){
 				cadenaFila = "0" + cadenaFila;
@@ -137,7 +137,7 @@ public class Consigna {
 	}
 	
 	
-	/** Devuelve el número de nodos que tiene grafo asociado a esta semilla. */
+	/** Devuelve el nï¿½mero de nodos que tiene grafo asociado a esta semilla. */
 	public Integer getNNodos(){
 		return valorNNodos+1;
 	}

@@ -1,7 +1,8 @@
 package modelo.pregunta;
 
-import modelo.Consigna;
-import util.Texto;
+import modelo.Semilla;
+import texto.Texto;
+import texto.Textos_Archivos;
 
 public class PreguntaDeKruskal extends Pregunta {
 
@@ -11,7 +12,7 @@ public class PreguntaDeKruskal extends Pregunta {
 	}
 	
 	
-	public PreguntaDeKruskal(Consigna semilla){
+	public PreguntaDeKruskal(Semilla semilla){
 		super(semilla);
 	}	
 	
@@ -47,14 +48,14 @@ public class PreguntaDeKruskal extends Pregunta {
 	}
 
 	@Override
-	protected void generarConsigna(boolean grafoDirigido) {
-		super.generarConsignaEnFuncionDelTipoDePregunta(Consigna.algoritmoDeKruskal, grafoDirigido);
+	protected void generarSemilla(boolean grafoDirigido) {
+		super.generarConsignaEnFuncionDelTipoDePregunta(Semilla.algoritmoDeKruskal, grafoDirigido);
 	}
 
 
 	@Override
 	public Texto getNombreDeArchivo() {
-		return Texto.nombreArchivoPregKruskal();
+		return Textos_Archivos.nombreArchivoPregKruskal();
 	}
 
 }

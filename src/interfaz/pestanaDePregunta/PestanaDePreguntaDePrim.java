@@ -7,7 +7,7 @@ import javax.swing.JTabbedPane;
 
 import modelo.pregunta.Pregunta;
 import modelo.pregunta.PreguntaDePrim;
-import util.Texto;
+import texto.Texto;
 
 @SuppressWarnings("serial")
 public class PestanaDePreguntaDePrim extends PestanaDePregunta {

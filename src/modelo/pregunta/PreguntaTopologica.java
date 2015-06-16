@@ -1,60 +1,65 @@
 package modelo.pregunta;
 
-import modelo.Consigna;
-import util.Texto;
+import java.util.ArrayList;
+
+import modelo.Semilla;
+import texto.Texto;
+import texto.Textos_Archivos;
+import texto.Textos_Preguntas;
 
 public class PreguntaTopologica extends Pregunta {
 
+	private ArrayList<Integer> recorridoTopologico;
+	
 	/** Constructor de la clase */
-	public PreguntaTopologica(Integer nNodos, Double porcentajeDeArcos, boolean grafoDirigido) {
-		super(nNodos, porcentajeDeArcos, grafoDirigido);
+	public PreguntaTopologica(Integer nNodos, Double porcentajeDeArcos) {
+		super(nNodos, porcentajeDeArcos, true);
 	}
 	
 	
-	public PreguntaTopologica(Consigna semilla){
+	public PreguntaTopologica(Semilla semilla){
 		super(semilla);
 	}	
 	
 	
 	@Override
 	protected void aplicarAlgoritmo() {
-		//TODO	
+		recorridoTopologico = getGrafo().recorridoTopologico();
 	}
 	
 	
 	@Override
 	protected void construirTitulo() {
-		// TODO Auto-generated method stub
-		
+		titulo = Textos_Preguntas.tituloPregClasificacionTopologica();
 	}
+	
 
 	@Override
 	protected void construirEnunciado() {
-		// TODO Auto-generated method stub
-		
+		enunciado = Textos_Preguntas.enunciadoPregClasificacionTopologica();
 	}
-
+	
+	
 	@Override
 	protected void construirParteAResponder() {
-		// TODO Auto-generated method stub
-		
+		resultadoDeOrdenarElGrafo(recorridoTopologico);
 	}
 
 	@Override
 	protected void construirRespuestaCorrecta() {
-		// TODO Auto-generated method stub
-		
+		respuestaCorrecta(recorridoTopologico);
 	}
-
+	
+	
 	@Override
-	protected void generarConsigna(boolean grafoDirigido) {
-		super.generarConsignaEnFuncionDelTipoDePregunta(Consigna.clasificacionTopologica, grafoDirigido);
+	protected void generarSemilla(boolean grafoDirigido) {
+		super.generarConsignaEnFuncionDelTipoDePregunta(Semilla.clasificacionTopologica, grafoDirigido);
 	}
 
 
 	@Override
 	public Texto getNombreDeArchivo() {
-		return Texto.nombreArchivoPregTopologica();
+		return Textos_Archivos.nombreArchivoPregTopologica();
 	}
 
 }

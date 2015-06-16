@@ -1,60 +1,59 @@
 package modelo.pregunta;
 
-import modelo.Consigna;
-import util.Texto;
+import modelo.Semilla;
+import texto.Texto;
+import texto.Textos_Archivos;
 
 public class PreguntaDePrim extends Pregunta {
 
 	/** Constructor de la clase */
-	public PreguntaDePrim(Integer nNodos, Double porcentajeDeArcos, boolean grafoDirigido) {
+	public PreguntaDePrim(Integer nNodos, Double porcentajeDeArcos,
+			boolean grafoDirigido) {
 		super(nNodos, porcentajeDeArcos, grafoDirigido);
 	}
-	
-	
-	public PreguntaDePrim(Consigna semilla){
+
+	public PreguntaDePrim(Semilla semilla) {
 		super(semilla);
 	}
-	
-	
+
 	@Override
 	protected void aplicarAlgoritmo() {
-		//TODO	
+		// TODO
 	}
-	
 
 	@Override
 	protected void construirTitulo() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	protected void construirEnunciado() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	protected void construirParteAResponder() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	protected void construirRespuestaCorrecta() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
-	protected void generarConsigna(boolean grafoDirigido) {
-		super.generarConsignaEnFuncionDelTipoDePregunta(Consigna.algoritmoDePrim, grafoDirigido);
+	protected void generarSemilla(boolean grafoDirigido) {
+		super.generarConsignaEnFuncionDelTipoDePregunta(
+				Semilla.algoritmoDePrim, grafoDirigido);
 	}
-
 
 	@Override
 	public Texto getNombreDeArchivo() {
-		return Texto.nombreArchivoPregPrim();
+		return Textos_Archivos.nombreArchivoPregPrim();
 	}
 
 }

@@ -13,13 +13,12 @@ import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSlider;
-import javax.swing.JSpinner;
 import javax.swing.JTabbedPane;
-import javax.swing.SpinnerNumberModel;
 
 import modelo.pregunta.Pregunta;
+import texto.Texto;
+import texto.Textos_Interfaz;
 import util.Idioma;
-import util.Texto;
 
 @SuppressWarnings("serial")
 public abstract class PestanaDePregunta extends JPanel {
@@ -31,24 +30,28 @@ public abstract class PestanaDePregunta extends JPanel {
 	/** Frame que contiene el gui del programa */
 	private FramePrincipal frame;
 	
-	private JLabel txtNumPreguntas = new JLabel(Texto.textoNumPreguntas().esp());
+	private JLabel txtNumPreguntas = new JLabel(Textos_Interfaz.textoNumPreguntas().esp());
 	private final int MIN_PREGUNTAS = 1;
 	private final int MAX_PREGUNTAS = 15;
-	private JSpinner selectorNumPreguntas = new JSpinner(new SpinnerNumberModel(1, MIN_PREGUNTAS, MAX_PREGUNTAS, 1));
+	private JSlider selectorNumPreguntas = new JSlider(MIN_PREGUNTAS, MAX_PREGUNTAS, 1);
 	
-	private JLabel txtNumNodos = new JLabel(Texto.textoNumNodos().esp());
+	private JLabel txtNumNodos = new JLabel(Textos_Interfaz.textoNumNodos().esp());
 	private final int MIN_NODOS = 1;
 	private final int MAX_NODOS = 10;
-	private JSpinner selectorNumNodos = new JSpinner(new SpinnerNumberModel(5, MIN_NODOS, MAX_NODOS, 1));
+	private JSlider selectorNumNodos = new JSlider(MIN_NODOS, MAX_NODOS, 5);
 	
-	private JLabel txtPorcentajeArcos = new JLabel(Texto.textoPorcentajeArcos().esp());
+	private JLabel txtPorcentajeArcos = new JLabel(Textos_Interfaz.textoPorcentajeArcos().esp());
 	private JSlider selectorPorcentajeArcos = new JSlider(0, 100, 50);
 	
-	private JLabel txtGrafoDirigido = new JLabel(Texto.textoGrafoDirigido().esp());
+	private JLabel txtGrafoDirigido = new JLabel(Textos_Interfaz.textoGrafoDirigido().esp());
 	private JCheckBox checkBoxGrafoDirigido = new JCheckBox();
 	
-	private JButton botonGenerarPregunta = new JButton(Texto.botonGenerarPregunta().esp());
+	private JButton botonGenerarPregunta = new JButton(Textos_Interfaz.botonGenerarPregunta().esp());
+	/** Botón de importar semillas */
+	private JButton botonImportarSemilla = new JButton(Textos_Interfaz.botonImportarSemilla().esp());
 	
+	
+	/** Constructor */
 	public PestanaDePregunta(JTabbedPane panelTabulado, Texto nombreDeLaPestana, int teclaMnemotecnica,
 			AreaPreguntas areaPreguntas, FramePrincipal frame) {
 		this.nombreDeLaPestana = nombreDeLaPestana;
@@ -57,9 +60,9 @@ public abstract class PestanaDePregunta extends JPanel {
 		panelTabulado.addTab(getNombreDeLaPestana(Idioma.ESP), null, this, getNombreDeLaPestana(Idioma.ESP));
 		panelTabulado.setMnemonicAt(panelTabulado.getTabCount()-1, teclaMnemotecnica);
 		
-		a�adirSelectores();
+		añadirSelectores();
 		
-		a�adirBotonGenerarPregunta();
+		añadirBotones();
 		
 //		JLabel contenido = new JLabel(nombreDeLaPestana.getString(Idioma.ESP));
 //		contenido.setHorizontalAlignment(JLabel.CENTER);
@@ -67,6 +70,7 @@ public abstract class PestanaDePregunta extends JPanel {
 		
 		setLayout(new GridLayout(0, 2));
 	}
+	
 	
 	public String getNombreDeLaPestana(Idioma idioma){
 		return nombreDeLaPestana.getString(idioma);
@@ -90,33 +94,62 @@ public abstract class PestanaDePregunta extends JPanel {
 	}
 	
 	
+	public void setParametrosSelectorPorcentajeArcos(int maximo, int valorActual, int espaciado){
+		selectorPorcentajeArcos.setMaximum(maximo);
+		selectorPorcentajeArcos.setValue(valorActual);
+		selectorPorcentajeArcos.setMajorTickSpacing(espaciado);
+		selectorPorcentajeArcos.setMinorTickSpacing(espaciado);
+	}
+	
+	
+	public void deshabilitarGrafoDirigido(boolean dejarMarcado){
+		checkBoxGrafoDirigido.setSelected(true);
+		
+		txtGrafoDirigido.setEnabled(false);
+		checkBoxGrafoDirigido.setEnabled(false);
+	}
+	
+	
 	public boolean isDirigido(){
 		return checkBoxGrafoDirigido.isSelected();
 	}
 	
 	
-	/** Reescribe los textos tras cambiar la configuraci�n del idioma */
+	/** Reescribe los textos tras cambiar la configuración del idioma */
 	public void reaccionarACambioDeIdioma(Idioma nuevoIdioma){
 		idioma = nuevoIdioma;
 		
-		botonGenerarPregunta.setText(Texto.botonGenerarPregunta().getString(nuevoIdioma));
+		botonGenerarPregunta.setText(Textos_Interfaz.botonGenerarPregunta().getString(nuevoIdioma));
+		botonImportarSemilla.setText(Textos_Interfaz.botonImportarSemilla().getString(nuevoIdioma));
 		
-		txtNumPreguntas.setText(Texto.textoNumPreguntas().getString(nuevoIdioma));
-		txtNumNodos.setText(Texto.textoNumNodos().getString(nuevoIdioma));
+		txtNumPreguntas.setText(Textos_Interfaz.textoNumPreguntas().getString(nuevoIdioma));
+		selectorNumPreguntas.setToolTipText(Textos_Interfaz.tipTextNumPreguntas().getString(nuevoIdioma));
 		
-		txtPorcentajeArcos.setText(Texto.textoPorcentajeArcos().getString(nuevoIdioma));
-		txtPorcentajeArcos.setToolTipText(Texto.tipTextPorcentajeArcos().getString(nuevoIdioma));
-		selectorPorcentajeArcos.setToolTipText(Texto.tipTextPorcentajeArcos().getString(nuevoIdioma));
+		txtNumNodos.setText(Textos_Interfaz.textoNumNodos().getString(nuevoIdioma));
+		selectorNumNodos.setToolTipText(Textos_Interfaz.tipTextNumNodos().getString(nuevoIdioma));
+		
+		txtPorcentajeArcos.setText(Textos_Interfaz.textoPorcentajeArcos().getString(nuevoIdioma));
+		txtPorcentajeArcos.setToolTipText(Textos_Interfaz.tipTextPorcentajeArcos().getString(nuevoIdioma));
+		selectorPorcentajeArcos.setToolTipText(Textos_Interfaz.tipTextPorcentajeArcos().getString(nuevoIdioma));
+		
+		botonGenerarPregunta.setToolTipText(Textos_Interfaz.tipTextBotonGenerarPregunta().getString(nuevoIdioma));
+		botonImportarSemilla.setToolTipText(Textos_Interfaz.tipTextBotonImportarSemilla().getString(nuevoIdioma));
 	}
 
 	
-	private void a�adirSelectores(){
+	private void añadirSelectores(){
 		add(txtNumPreguntas, BorderLayout.CENTER);		
-		selectorNumPreguntas.setToolTipText("[" + MIN_PREGUNTAS + " ~ " + MAX_PREGUNTAS + "]");
+		selectorNumPreguntas.setPaintTicks(true);
+		selectorNumPreguntas.setPaintLabels(true);
+		selectorNumPreguntas.setMajorTickSpacing(1);
+		selectorNumPreguntas.setMinorTickSpacing(1);
 		add(selectorNumPreguntas);
 		
 		add(txtNumNodos, BorderLayout.CENTER);
-		selectorNumNodos.setToolTipText("[" + MIN_NODOS + " ~ " + MAX_NODOS + "]");
+		selectorNumNodos.setPaintTicks(true);
+		selectorNumNodos.setPaintLabels(true);
+		selectorNumNodos.setMajorTickSpacing(1);
+		selectorNumNodos.setMinorTickSpacing(1);
 		add(selectorNumNodos);
 		
 		add(txtPorcentajeArcos, BorderLayout.CENTER);
@@ -131,13 +164,16 @@ public abstract class PestanaDePregunta extends JPanel {
 	}
 	
 	
-	private void a�adirBotonGenerarPregunta() {
+	private void añadirBotones() {
 		botonGenerarPregunta.addActionListener(new GenerarPreguntaListener());
 		add(botonGenerarPregunta, BorderLayout.CENTER);
+		
+		botonImportarSemilla.addActionListener(new ImportarSemillaListener());
+		add(botonImportarSemilla, BorderLayout.CENTER);
 	}
 	
 	
-	/** M�todo que se llama al pulsar el bot�n de Generar Pregunta */
+	/** Método que se llama al pulsar el botón de Generar Pregunta */
 	protected abstract Pregunta generarPregunta();
 	
 	
@@ -152,9 +188,18 @@ public abstract class PestanaDePregunta extends JPanel {
 			for(int i = 0; i < getNumPreguntas(); i++){
 				frame.imprimePregunta(pregunta);
 			}
-			
 		}
 		
+	}
+	
+	
+	
+	private class ImportarSemillaListener implements ActionListener {
+		
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
+			frame.importarSemilla();
+		}
 	}
 	
 }
