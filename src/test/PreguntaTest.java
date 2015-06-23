@@ -1,12 +1,13 @@
 package test;
 
 import static org.junit.Assert.assertEquals;
-import modelo.GrafoDirigido;
 import modelo.pregunta.Pregunta;
 import modelo.pregunta.PreguntaDeAnchura;
+import modelo.pregunta.VisualizacionGrafo;
 
 import org.junit.Test;
 
+import texto.Textos_Preguntas;
 import util.Idioma;
 
 public class PreguntaTest {
@@ -17,20 +18,19 @@ public class PreguntaTest {
 		Double porcentajeDeArcos = 1.00;
 		boolean esDirigido = true;
 
-		Pregunta preguntaDeAnchura = new PreguntaDeAnchura(nNodos,
-				porcentajeDeArcos, esDirigido);
+		Pregunta preguntaDeAnchura = new PreguntaDeAnchura(nNodos, porcentajeDeArcos, esDirigido,
+				VisualizacionGrafo.MATRIZ_DE_ADYACENCIA);
 
-		assertEquals(preguntaDeAnchura.getGrafo(), new GrafoDirigido(nNodos,
-				porcentajeDeArcos));
+//		assertEquals(preguntaDeAnchura.getGrafo(), new GrafoDirigido(nNodos, porcentajeDeArcos, false));
 
 		assertEquals(preguntaDeAnchura.getTitulo(Idioma.ESP),
-				"Pregunta de Recorrido en Anchura");
+				Textos_Preguntas.tituloPregAnchura().getString(Idioma.ESP));
 		assertEquals(preguntaDeAnchura.getTitulo(Idioma.ENG),
-				"Breadth-First Search Question.");
+				Textos_Preguntas.tituloPregAnchura().getString(Idioma.ENG));
 
 		assertEquals(
 				preguntaDeAnchura.getEnunciado(Idioma.ESP),
-				"Partiendo de A, recorre el grafo en anchura. Los nodos se deben escoger en orden alfabético. ");
+				Textos_Preguntas.enunciadoPregAnchura().getString(Idioma.ESP));
 	}
 
 }

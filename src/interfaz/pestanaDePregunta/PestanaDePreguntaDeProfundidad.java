@@ -19,7 +19,7 @@ public class PestanaDePreguntaDeProfundidad extends PestanaDePregunta {
 
 	@Override
 	protected Pregunta generarPregunta() {
-		return new PreguntaDeProfundidad(getNumNodos(), getPorcentajeArcos(), isDirigido());
+		return new PreguntaDeProfundidad(getNumNodos(), getPorcentajeArcos(), isDirigido(), getVisualizacionGrafo());
 	}
 
 }

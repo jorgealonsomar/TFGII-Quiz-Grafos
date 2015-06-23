@@ -12,8 +12,9 @@ public class PreguntaDeAnchura extends Pregunta {
 	private ArrayList<Integer> recorridoEnAnchura;
 
 	/** Constructor de la clase */
-	public PreguntaDeAnchura(Integer nNodos, Double porcentajeDeArcos, boolean grafoDirigido) {
-		super(nNodos, porcentajeDeArcos, grafoDirigido);
+	public PreguntaDeAnchura(Integer nNodos, Double porcentajeDeArcos, boolean grafoDirigido,
+			VisualizacionGrafo visualizacionGrafo) {
+		super(nNodos, porcentajeDeArcos, grafoDirigido, false, visualizacionGrafo, 1);
 	}
 
 	
@@ -54,7 +55,7 @@ public class PreguntaDeAnchura extends Pregunta {
 	
 	@Override
 	protected void generarSemilla(boolean grafoDirigido) {
-		super.generarConsignaEnFuncionDelTipoDePregunta(
+		super.generarSemillaEnFuncionDelTipoDePregunta(
 				Semilla.recorridoEnAnchura, grafoDirigido);
 	}
 

@@ -21,7 +21,7 @@ public class PestanaDePreguntaDePrim extends PestanaDePregunta {
 	
 	@Override
 	protected Pregunta generarPregunta(){
-		return new PreguntaDePrim(getNumNodos(), getPorcentajeArcos(), isDirigido());
+		return new PreguntaDePrim(getNumNodos(), getPorcentajeArcos(), isDirigido(), getVisualizacionGrafo());
 	}
 
 }

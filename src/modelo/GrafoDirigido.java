@@ -1,37 +1,36 @@
 package modelo;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class GrafoDirigido extends Grafo {
 
-	public GrafoDirigido(Integer nNodos, Double porcentajeArcos) {
-		super(nNodos, porcentajeArcos);
+	public GrafoDirigido(Integer nNodos, Double porcentajeArcos, boolean esPonderado, Random randomGenerator) {
+		super(nNodos, porcentajeArcos, esPonderado, randomGenerator);
 	}
 
 	public GrafoDirigido(Integer[][] matrizDeAdyacencia) {
 		super(matrizDeAdyacencia);
 	}
 
-	/**
-	 * AÒade un nuevo arco a la matriz de adyacencia. // * El sentido del arco
-	 * se decide de forma aleatoria.
-	 * 
+	/** A√±ade un nuevo arco a la matriz de adyacencia. 
+	 * El sentido del arco se decide de forma aleatoria.
 	 * @param nodo1
 	 *            Nodo a un extremo del arco.
 	 * @param nodo2
 	 *            Nodo al otro extremo del arco.
 	 * @param valorArco
-	 *            Valor que tendr· el arco.
+	 *            Valor que tendr√° el arco.
 	 */
 	@Override
-	protected void addArco(Integer nodo1, Integer nodo2, int valorArco) {
+	protected void addArco(Integer nodo1, Integer nodo2) {
 		// if(new Random().nextBoolean()){
 		// matrizDeAdyacencia[nodo1][nodo2] = valorArco;
 		// } else {
 		// matrizDeAdyacencia[nodo2][nodo1] = valorArco;
 		// }
 
-		getMatrizDeAdyacencia()[nodo1][nodo2] = valorArco;
+		getMatrizDeAdyacencia()[nodo1][nodo2] = generarValorDeArco();
 	}
 
 	protected void construirArcosExtra(Double porcentajeDeArcos) {

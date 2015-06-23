@@ -22,8 +22,7 @@ public class PestanaDePreguntaDeKruskal extends PestanaDePregunta {
 
 	@Override
 	protected Pregunta generarPregunta() {
-		return new PreguntaDeKruskal(getNumNodos(), getPorcentajeArcos(),
-				isDirigido());
+		return new PreguntaDeKruskal(getNumNodos(), getPorcentajeArcos(), isDirigido(), getVisualizacionGrafo());
 	}
 
 }

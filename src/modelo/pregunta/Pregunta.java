@@ -1,6 +1,7 @@
 package modelo.pregunta;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import modelo.Grafo;
 import modelo.GrafoDirigido;
@@ -18,36 +19,48 @@ public abstract class Pregunta {
 	protected Texto enunciado;
 	protected Texto parteAResponder;
 	protected Texto respuestaCorrecta;
-
-	private Semilla consigna;
+	
+	private VisualizacionGrafo visualizacionGrafo;
+	private Integer tipoDePregunta;
+	
+	private Random randomGenerator;
+	
+	private Semilla semilla;
 
 	/**
 	 * Constructor de la clase. Crea una nueva pregunta con un grafo aleatorio
 	 * creado a partir de los parámetros fijados.
 	 */
-	public Pregunta(Integer nNodos, Double porcentajeDeArcos, boolean esDirigido) {
-		generarGrafo(nNodos, porcentajeDeArcos, esDirigido);
+	public Pregunta(Integer nNodos, Double porcentajeDeArcos, boolean esDirigido, boolean esPonderado,
+			VisualizacionGrafo visualizacionGrafo, Integer tipoPregunta) {
+		this.visualizacionGrafo = visualizacionGrafo;
+		this.tipoDePregunta = tipoPregunta;
+		
+		//TODO: Añadir semilla
+		randomGenerator = new Random();
+		
+		generarGrafo(nNodos, porcentajeDeArcos, esDirigido, esPonderado);
 
 		construirPregunta(esDirigido);
 	}
 
 	/**
-	 * Constructor de la clase. Recupera una pregunta a partir de una consigna
+	 * Constructor de la clase. Recupera una pregunta a partir de una semilla
 	 */
-	public Pregunta(Semilla consigna) {
-		if (consigna.esDirigido()) {
-			grafo = new GrafoDirigido(consigna.getMatrizDeAdyacencia());
+	public Pregunta(Semilla semilla) {
+		if (semilla.esDirigido()) {
+			grafo = new GrafoDirigido(semilla.getMatrizDeAdyacencia());
 		} else {
-			grafo = new GrafoNoDirigido(consigna.getMatrizDeAdyacencia());
+			grafo = new GrafoNoDirigido(semilla.getMatrizDeAdyacencia());
 		}
 
-		construirPregunta(consigna.esDirigido());
+		construirPregunta(semilla.esDirigido());
 	}
 
 	/** (Patrón de diseño Recipe) */
 	private void construirPregunta(boolean esDirigido) {
 		aplicarAlgoritmo();
-
+		
 		construirTitulo();
 		construirEnunciado();
 		construirParteAResponder();
@@ -57,12 +70,12 @@ public abstract class Pregunta {
 	}
 	
 
-	private void generarGrafo(Integer nNodos, Double porcentajeDeArcos,
-			boolean grafoDirigido) {
+	private void generarGrafo(Integer nNodos, Double porcentajeDeArcos, boolean grafoDirigido,
+			boolean esPonderado) {
 		if (grafoDirigido) {
-			grafo = new GrafoDirigido(nNodos, porcentajeDeArcos);
+			grafo = new GrafoDirigido(nNodos, porcentajeDeArcos, esPonderado, randomGenerator);
 		} else {
-			grafo = new GrafoNoDirigido(nNodos, porcentajeDeArcos);
+			grafo = new GrafoNoDirigido(nNodos, porcentajeDeArcos, esPonderado, randomGenerator);
 		}
 	}
 	
@@ -80,9 +93,9 @@ public abstract class Pregunta {
 	protected abstract void generarSemilla(boolean grafoDirigido);
 
 	
-	protected void generarConsignaEnFuncionDelTipoDePregunta(
+	protected void generarSemillaEnFuncionDelTipoDePregunta(
 			Integer tipoDePregunta, boolean grafoDirigido) {
-		consigna = new Semilla(tipoDePregunta, grafo.getNNodos(),
+		semilla = new Semilla(tipoDePregunta, grafo.getNNodos(),
 				grafoDirigido, grafo.getMatrizDeAdyacencia());
 	}
 
@@ -110,6 +123,16 @@ public abstract class Pregunta {
 	}
 	
 	
+	public Integer getTipoDePregunta(){
+		return tipoDePregunta;
+	}
+	
+	
+	public Integer getNextRandomInt(Integer bound){
+		return randomGenerator.nextInt(bound);
+	}
+	
+	
 	/** Código común de construirParteAResponder() para las preguntas de ordenacion */
 	protected void resultadoDeOrdenarElGrafo(ArrayList<Integer> recorrido){
 		parteAResponder = Textos_Preguntas.pregOrdenacion_ResultadoDeOrdenarGrafo();
@@ -127,12 +150,12 @@ public abstract class Pregunta {
 				}
 
 				if (nodoDelRecorrido.equals(nodoDelGrafo)) {
-					parteAResponder.concatenar(Textos_Preguntas.opcionMultichoiceCorrecta100());
+					parteAResponder.concatenar(Textos_Preguntas.opcionCorrecta100());
 					parteAResponder.concatenar(Textos_Preguntas.nombreDeNodo((Grafo
 							.convertirIndiceEnLetra(nodoDelGrafo))));
 					parteAResponder.concatenar(Textos_Preguntas.comentarioAcierto());
 				} else {
-					parteAResponder.concatenar(Textos_Preguntas.opcionMultichoiceQueResta100());
+					parteAResponder.concatenar(Textos_Preguntas.opcionQueResta100());
 					parteAResponder.concatenar(Textos_Preguntas.nombreDeNodo((Grafo
 							.convertirIndiceEnLetra(nodoDelGrafo))));
 					parteAResponder.concatenar(Textos_Preguntas.comentarioError());
@@ -149,7 +172,7 @@ public abstract class Pregunta {
 	
 	/** Código común de construirRespuestaCorrecta() para las preguntas de ordenacion */
 	protected void respuestaCorrecta(ArrayList<Integer> recorrido){
-		respuestaCorrecta = Textos_Preguntas.respuestaOrdenacion();
+		respuestaCorrecta = Textos_Preguntas.respuestaCorrectaEs();
 		for (int i = 0; i < recorrido.size(); i++) {
 			Integer nodoDelRecorrido = recorrido.get(i);
 			respuestaCorrecta.concatenar(Textos_Preguntas.nombreDeNodo((Grafo.convertirIndiceEnLetra(nodoDelRecorrido))));
@@ -167,7 +190,7 @@ public abstract class Pregunta {
 	
 
 	public String getCodigoSemilla() {
-		return consigna.toString();
+		return semilla.toString();
 	}
 
 	
@@ -176,11 +199,21 @@ public abstract class Pregunta {
 		textoPregunta += "--------------------------------------------------------------";
 		textoPregunta += "\n" + getTitulo(idioma);
 		textoPregunta += "\n\n" + getEnunciado(idioma);
-		textoPregunta += "\n\n" + getGrafo().toString();
+		switch(visualizacionGrafo){
+		case MATRIZ_DE_ADYACENCIA:
+			textoPregunta += "\n\n" + getGrafo().toTablaMatrizDeAdyacencia();	
+			break;
+		case LISTA_DE_ADYACENCIA:
+			textoPregunta += "\n\n" + getGrafo().toTablaListaDeAdyacencia();	
+			break;
+		case GRAFO_VISUAL:
+			textoPregunta += "\n\n" + getGrafo().toGrafoVisual();	
+			break;
+		}
 		if (idioma == Idioma.ESP) {
-			textoPregunta += "\n" + "(consigna: ";
+			textoPregunta += "\n" + "(semilla: ";
 		} else {
-			textoPregunta += "\n" + "(password: ";
+			textoPregunta += "\n" + "(seed: ";
 		}
 		textoPregunta += getCodigoSemilla() + ")";
 		textoPregunta += "\n\n" + getRespuestaCorrecta(idioma);
@@ -191,20 +224,25 @@ public abstract class Pregunta {
 	
 
 	public String getTextoPreguntaXml(Idioma idioma) {
-		String textoPregunta = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>";
-		textoPregunta += "\n<quiz>";
-		textoPregunta += "\n\t<question type=\"cloze\">";
+		String textoPregunta = "\n\t<question type=\"cloze\">";
 		textoPregunta += "\n\t\t<name><text>" + Texto.quitarCaracteresExtranos(getTitulo(idioma)) + "</text>";
 		textoPregunta += "\n\t\t</name>";
 		textoPregunta += "\n\t\t<questiontext>";
 		textoPregunta += "\n\t\t\t<text><![CDATA[";
-		textoPregunta += "\n\t\t\t"
-				+ Texto.adaptarCaracteresAXml(getEnunciado(idioma));
-		textoPregunta += "\n</p>" + getGrafo().toStringTabulado(3, true);
-		textoPregunta += "\n</p>\t\t\t" + "(consigna: "
-				+ Texto.adaptarCaracteresAXml(getCodigoSemilla()) + ")";
-		textoPregunta += "\n</p>\t\t\t"
-				+ Texto.adaptarCaracteresAXml(getParteAResponder(idioma));
+		textoPregunta += "\n\t\t\t" + Texto.adaptarCaracteresAXml(getEnunciado(idioma));
+		switch(visualizacionGrafo){
+		case MATRIZ_DE_ADYACENCIA:
+			textoPregunta += "\n</p>" + getGrafo().toTablaMatrizDeAdyacenciaHtml();
+			break;
+		case LISTA_DE_ADYACENCIA:
+			textoPregunta += "\n</p>" + getGrafo().toTablaListaDeAdyacenciaHtml();
+			break;
+		case GRAFO_VISUAL:
+			textoPregunta += "\n</p>" + getGrafo().toGrafoVisualHtml();
+			break;
+		}
+		textoPregunta += "\n</p>\t\t\t" + "(semilla: " + Texto.adaptarCaracteresAXml(getCodigoSemilla()) + ")";
+		textoPregunta += "\n</p>\t\t\t" + Texto.adaptarCaracteresAXml(getParteAResponder(idioma));
 		textoPregunta += "\n\t\t\t]]></text>";
 		textoPregunta += "\n\t\t</questiontext>";
 		textoPregunta += "\n\t\t\t<generalfeedback>";
@@ -212,7 +250,6 @@ public abstract class Pregunta {
 		textoPregunta += "\n\t\t</generalfeedback>";
 		textoPregunta += "\n\t\t<shuffleanswers>0</shuffleanswers>";
 		textoPregunta += "\n\t</question>";
-		textoPregunta += "\n</quiz>";
 
 		return textoPregunta;
 	}

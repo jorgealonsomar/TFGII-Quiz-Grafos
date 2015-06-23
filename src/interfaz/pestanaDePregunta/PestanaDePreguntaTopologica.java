@@ -22,7 +22,7 @@ public class PestanaDePreguntaTopologica extends PestanaDePregunta {
 
 	@Override
 	protected Pregunta generarPregunta() {
-		return new PreguntaTopologica(getNumNodos(), getPorcentajeArcos());
+		return new PreguntaTopologica(getNumNodos(), getPorcentajeArcos(), getVisualizacionGrafo());
 	}
 
 }

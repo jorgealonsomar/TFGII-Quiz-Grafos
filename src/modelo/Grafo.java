@@ -8,6 +8,11 @@ public abstract class Grafo {
 	/** Número de nodos que componen el grafo */
 	private Integer nNodos;
 	
+	/** Variable booleana que define si los arcos del grafo son o no poderados */
+	private boolean esPonderado;
+	
+	/** Generador de números aleatorios */
+	Random randomGenerator;
 	
 	/** Matriz de adyacencia del grafo */
 	private Integer[][] matrizDeAdyacencia;
@@ -17,9 +22,11 @@ public abstract class Grafo {
 	 * Constructor de la clase. Construye un nuevo grafo al azar a partir de los
 	 * parámetros fijados.
 	 */
-	public Grafo(Integer nNodos, Double porcentajeDeArcos) {
+	public Grafo(Integer nNodos, Double porcentajeDeArcos, boolean esPonderado, Random randomGenerator) {
 		this.setNNodos(nNodos);
-
+		this.esPonderado = esPonderado;
+		this.randomGenerator = randomGenerator;
+		
 		// Instanciar la matriz de adyacencia
 		matrizDeAdyacencia = new Integer[nNodos][nNodos];
 		for (int i = 0; i < matrizDeAdyacencia.length; i++) {
@@ -28,7 +35,6 @@ public abstract class Grafo {
 			}
 		}
 
-		// construirArcosConcretos(); //TODO borrar
 		construirArcosMinimos();
 		construirArcosExtra(porcentajeDeArcos);
 	}
@@ -45,7 +51,7 @@ public abstract class Grafo {
 	
 	
 	/**
-	 * Construye un �rbol de expansi�n m�nimo que recorra el grafo.
+	 * Construye un árbol de expansión mínimo que recorra el grafo.
 	 * 
 	 * Une un nodo visitado al azar con un nodo no visitado al azar (que queda
 	 * marcado como visitado), y repite este proceso hasta haber acabado con
@@ -71,12 +77,12 @@ public abstract class Grafo {
 			Integer nodoVisit = nodosVisitados.get(random
 					.nextInt(nodosVisitados.size()));
 
-			// Retiramos un nodo de los que a�n no han sido visitados
+			// Retiramos un nodo de los que aún no han sido visitados
 			Integer nodoNoVisit = nodosNoVisitados.remove(random
 					.nextInt(nodosNoVisitados.size()));
 
 			// Construimos un arco entre esos dos nodos
-			addArco(nodoVisit, nodoNoVisit, 1);
+			addArco(nodoVisit, nodoNoVisit);
 
 			// Marcamos ese segundo nodo como visitado
 			nodosVisitados.add(nodoNoVisit);
@@ -87,12 +93,12 @@ public abstract class Grafo {
 	@SuppressWarnings("unused")
 	private void construirArcosConcretos() {
 		// TODO (borrar antes de entregar)
-		addArco(0, 1, 1);
-		addArco(0, 2, 1);
-		addArco(1, 3, 1);
-		addArco(1, 4, 1);
-		addArco(2, 4, 1);
-		addArco(4, 3, 1);
+		addArco(0, 1);
+		addArco(0, 2);
+		addArco(1, 3);
+		addArco(1, 4);
+		addArco(2, 4);
+		addArco(4, 3);
 	}
 	
 	
@@ -112,8 +118,7 @@ public abstract class Grafo {
 					.nextInt(listaDeArcos.size()));
 
 			// Se añade al grafo ese arco
-			addArco(arcoAAnadir.getNodoOrigen(), arcoAAnadir.getNodoDestino(),
-					1);
+			addArco(arcoAAnadir.getNodoOrigen(), arcoAAnadir.getNodoDestino());
 		}
 	}
 	
@@ -128,7 +133,17 @@ public abstract class Grafo {
 	 * @param valorArco
 	 *            Valor que tendrá el arco.
 	 */
-	protected abstract void addArco(Integer nodo1, Integer nodo2, int valorArco);
+	protected abstract void addArco(Integer nodo1, Integer nodo2);
+	
+	
+	protected Integer generarValorDeArco(){
+		if(esPonderado){
+			//Genera un peso entero para el arco de entre 1 y 10
+			return randomGenerator.nextInt(10);			
+		} else {
+			return 1;
+		}
+	}
 	
 	
 	/**
@@ -245,6 +260,78 @@ public abstract class Grafo {
 	}
 	
 	
+	public ResultadosDijkstra algoritmoDeDijkstra(int nodoInicial) {
+		ResultadosDijkstra resultadosDijkstra = new ResultadosDijkstra(nNodos);
+		ArrayList<Boolean> nodosVisitados = new ArrayList<Boolean>(matrizDeAdyacencia.length);
+		for(int n = 0; n < nNodos; n++){
+			nodosVisitados.add(false);
+		}
+		
+		//Inicializar distancias
+		//Por cada nodo:
+		for(int n = 0; n < matrizDeAdyacencia.length; n++){
+			if(n == nodoInicial){
+				resultadosDijkstra.setDistanciaAlNodoOrigen(n, 0);
+			}
+		}
+		
+		
+		//Aplicar el algoritmo
+		
+		//Mientras queden nodos sin visitar
+		while(nodosVisitados.contains(false)){
+			//Encontrar el nodo con menor distAOrigen
+			Integer menorDistanciaAOrigenDeEntreLosNoVisitados = null;
+			Integer noVisitadoAMenorDistancia = null;
+			
+			for(int n = 0; n < matrizDeAdyacencia.length; n++){
+				if(nodosVisitados.get(n) == false){
+					if(menorDistanciaAOrigenDeEntreLosNoVisitados == null ||
+							resultadosDijkstra.getDistanciaAlNodoOrigen(n) < menorDistanciaAOrigenDeEntreLosNoVisitados){
+						menorDistanciaAOrigenDeEntreLosNoVisitados = resultadosDijkstra.getDistanciaAlNodoOrigen(n);
+						noVisitadoAMenorDistancia = n;
+					}
+				}
+			}
+			if(!noVisitadoAMenorDistancia.equals(nodoInicial)){
+				resultadosDijkstra.addOrdenDeSeleccion(noVisitadoAMenorDistancia);
+			}
+			Integer nodoActual = noVisitadoAMenorDistancia;
+
+			//Se marca como leído
+			nodosVisitados.set(nodoActual, true);
+			
+			ArrayList<Integer> nodosVecinos = new ArrayList<Integer>();
+			//Hallar los vecinos no visitados de ese nodo:
+			for(int v = 0; v < matrizDeAdyacencia[nodoActual].length; v++){
+				if(matrizDeAdyacencia[nodoActual][v] > 0						//(si son vecinos)
+						&& nodosVisitados.get(v).equals(false)){	//Si el nodo vecino no ha sido visitado
+					nodosVecinos.add(v);
+				}
+			}
+			
+			
+			for(Integer nodoVecino : nodosVecinos){
+				
+				//Visitar vecino
+				//Si (distAOrigen de n + distEntreAmbosNodos) < distAOrigen de v: 
+				if( (resultadosDijkstra.getDistanciaAlNodoOrigen(nodoActual) + matrizDeAdyacencia[nodoActual][nodoVecino])
+						< resultadosDijkstra.getDistanciaAlNodoOrigen(nodoVecino) ){
+					//distAOrigen de v := (distAOrigen de n + distEntreAmbosNodos)
+					resultadosDijkstra.setDistanciaAlNodoOrigen(nodoVecino,
+							(resultadosDijkstra.getDistanciaAlNodoOrigen(nodoActual) + matrizDeAdyacencia[nodoActual][nodoVecino]));
+					//nodoPrevio de v := n
+					resultadosDijkstra.setNodoPrevio(nodoVecino, nodoActual);
+				}
+					
+			}
+			
+		}
+		
+		return resultadosDijkstra;
+	}
+	
+	
 	private ArrayList<Integer> hallarNodosVecinos(int nodo) {
 		ArrayList<Integer> nodosVecinos = new ArrayList<Integer>();
 		for (int vecino_i = 0; vecino_i < nNodos; vecino_i++) {
@@ -289,34 +376,123 @@ public abstract class Grafo {
 
 	@Override
 	public String toString() {
-		return toStringTabulado(0, false);
+		return toTablaMatrizDeAdyacencia();
 	}
 	
 	
-	public String toStringTabulado(int numTabulaciones,
-			boolean incluirEtiquetasXml) {
+	public String toTablaMatrizDeAdyacencia(){
 		String cadena = "";
-
-		for (int t = 0; t < numTabulaciones; t++) {
-			cadena += "\t";
-		}
+		
+		//Fila de cabecera (letras)
 		cadena += "  ";
 		for (int i = 0; i < matrizDeAdyacencia.length; i++) {
 			cadena += (convertirIndiceEnLetra(i) + " ");
 		}
-
+		
+		//Resto de filas
 		for (int i = 0; i < matrizDeAdyacencia.length; i++) {
 			cadena += "\n";
-			for (int t = 0; t < numTabulaciones; t++) {
-				cadena += "\t";
-			}
-			if (incluirEtiquetasXml)
-				cadena += "</p>";
 			cadena += (convertirIndiceEnLetra(i) + " ");
 			for (int j = 0; j < matrizDeAdyacencia[i].length; j++) {
 				cadena += (matrizDeAdyacencia[i][j] + " ");
 			}
 		}
+		
+		return cadena;
+	}
+	
+	
+	
+	public String toTablaMatrizDeAdyacenciaHtml(){
+		String cadena = "";
+		cadena += "<table border=\"1\" style=\"width:100%\">";
+		
+		//Fila de cabecera (letras)
+		cadena += "\n\t<tr>";
+		cadena += "\n\t\t<td></td>";
+		for (int i = 0; i < matrizDeAdyacencia.length; i++) {
+			cadena += "\n\t\t<td>" + convertirIndiceEnLetra(i) + "</td>";
+		}
+		cadena += "\n\t</tr>";
+		
+		//Resto de filas
+		for (int i = 0; i < matrizDeAdyacencia.length; i++) {
+			cadena += "\n\t<tr>";
+			cadena += "\n\t\t<td>" + convertirIndiceEnLetra(i) + "</td>";
+			for (int j = 0; j < matrizDeAdyacencia[i].length; j++) {
+				cadena += "\n\t\t<td>" + matrizDeAdyacencia[i][j] + "</td>";
+			}
+			cadena += "\n\t</tr>";
+		}
+		cadena += "\n</table>";
+		
+		return cadena;
+	}
+	
+	
+	public String toTablaListaDeAdyacencia(){
+		String cadena = "";
+		
+		//Por cada fila de la matriz de adyacencia:
+		for (int f = 0; f < matrizDeAdyacencia.length; f++) {
+			if (f != 0) cadena += "\n";
+			cadena += (convertirIndiceEnLetra(f) + ": ");
+			
+			for(int c = 0; c < matrizDeAdyacencia[f].length; c++) {
+				if(matrizDeAdyacencia[f][c] > 0){
+					cadena += (convertirIndiceEnLetra(c));
+					if (esPonderado) cadena += (" (" + matrizDeAdyacencia[f][c] + ")");
+					cadena += ", ";
+				}
+			}
+			//Borrar los dos últimos caracteres (", ")
+			cadena = cadena.substring(0, cadena.length()-2);
+
+		}
+		return cadena;
+	}
+	
+	
+	public String toTablaListaDeAdyacenciaHtml(){
+		String cadena = "";
+		cadena += "<table border=\"1\" style=\"width:100%\">";
+		
+		//Por cada fila de la matriz de adyacencia:
+		for (int f = 0; f < matrizDeAdyacencia.length; f++) {
+			cadena += "\n\t<tr>";
+			cadena += "\n\t\t<td>" + convertirIndiceEnLetra(f) + "</td>";
+			
+			cadena += "\n\t\t<td>";
+			String cadenaAdyacentes = "";
+			for(int c = 0; c < matrizDeAdyacencia[f].length; c++) {
+				if(matrizDeAdyacencia[f][c] > 0){
+					cadenaAdyacentes += convertirIndiceEnLetra(c);
+					if (esPonderado) cadenaAdyacentes += (" (" + matrizDeAdyacencia[f][c] + ")");
+					cadenaAdyacentes += ", ";
+				}
+			}
+			//Borrar los dos últimos caracteres (", ")
+			cadenaAdyacentes = cadenaAdyacentes.substring(0, cadenaAdyacentes.length()-2);
+			cadena += cadenaAdyacentes + "</td>";
+			cadena += "\n\t</tr>";
+			
+		}
+		cadena += "\n</table>";
+		
+		return cadena;
+	}
+	
+	
+	public String toGrafoVisual(){
+		String cadena = "";
+		//TODO
+		return cadena;
+	}
+	
+	
+	public String toGrafoVisualHtml(){
+		String cadena = "";
+		//TODO
 		return cadena;
 	}
 	
@@ -335,5 +511,5 @@ public abstract class Grafo {
 			return false;
 		}
 	}
-
+	
 }

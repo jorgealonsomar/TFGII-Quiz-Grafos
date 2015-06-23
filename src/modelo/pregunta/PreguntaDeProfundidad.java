@@ -12,8 +12,9 @@ public class PreguntaDeProfundidad extends Pregunta {
 	private ArrayList<Integer> recorridoEnProfundidad;
 
 	/** Constructor de la clase */
-	public PreguntaDeProfundidad(Integer nNodos, Double porcentajeDeArcos, boolean grafoDirigido) {
-		super(nNodos, porcentajeDeArcos, grafoDirigido);
+	public PreguntaDeProfundidad(Integer nNodos, Double porcentajeDeArcos, boolean grafoDirigido,
+			VisualizacionGrafo visualizacionGrafo) {
+		super(nNodos, porcentajeDeArcos, grafoDirigido, false, visualizacionGrafo, 1);
 	}
 	
 
@@ -54,7 +55,7 @@ public class PreguntaDeProfundidad extends Pregunta {
 
 	@Override
 	protected void generarSemilla(boolean grafoDirigido) {
-		super.generarConsignaEnFuncionDelTipoDePregunta(Semilla.recorridoEnProfunidad, grafoDirigido);
+		super.generarSemillaEnFuncionDelTipoDePregunta(Semilla.recorridoEnProfunidad, grafoDirigido);
 	}
 	
 

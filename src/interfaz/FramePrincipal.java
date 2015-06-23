@@ -28,18 +28,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
 
-import modelo.Semilla;
-import modelo.ConsignaException;
-import modelo.pregunta.Pregunta;
-import modelo.pregunta.PreguntaDeAnchura;
-import modelo.pregunta.PreguntaDeDijkstra;
-import modelo.pregunta.PreguntaDeKruskal;
-import modelo.pregunta.PreguntaDePrim;
-import modelo.pregunta.PreguntaDeProfundidad;
-import modelo.pregunta.PreguntaTopologica;
 import sistema.Parametros;
 import sistema.Ruta;
-import texto.Textos_BarraMenu;
 import texto.Textos_Interfaz;
 import util.GestorIO;
 import util.Idioma;
@@ -107,11 +97,8 @@ public class FramePrincipal extends JFrame {
 	 * Imprime una pregunta por el área de Preguntas. La imprime también a
 	 * archivo.
 	 */
-	public void imprimePregunta(Pregunta pregunta) {
-		String textoPregunta = pregunta.getTextoPreguntaParaMostrarPorPantalla(parametros.getIdioma());
-		String textoPreguntaXml = pregunta.getTextoPreguntaXml(parametros.getIdioma());
-		String nombreArchivo = pregunta.getNombreDeArchivo().getString(parametros.getIdioma());
-
+	public void imprimePregunta(String textoPreguntaPorPantalla, String textoPreguntaXml,
+			String nombreArchivo) {
 		String separador = System.getProperty("file.separator");
 		String rutaDirectorio = ventanaTextoDirectorio.getText();
 		File directorio = new File(rutaDirectorio);
@@ -125,11 +112,11 @@ public class FramePrincipal extends JFrame {
 			GestorIO.escribirEnArchivo(new File(rutaArchivo), textoPreguntaXml);
 
 			// Imprimir la pregunta por el área de preguntas
-			areaPreguntas.addTexto(textoPregunta);
+			areaPreguntas.addTexto(textoPreguntaPorPantalla);
 
 		} else if (rutaDirectorio.equals("")) {
 			// Imprimir la pregunta por el área de preguntas
-			areaPreguntas.addTexto(textoPregunta);
+			areaPreguntas.addTexto(textoPreguntaPorPantalla);
 		} else {
 			JOptionPane.showMessageDialog(null, Textos_Interfaz.errorDirectorioNoExiste()
 					.getString(parametros.getIdioma()), "Error", JOptionPane.WARNING_MESSAGE);
@@ -139,36 +126,38 @@ public class FramePrincipal extends JFrame {
 	
 	/** */
 	public void importarSemilla() {
-		String codigoConsigna = JOptionPane.showInputDialog(this,
-				Textos_BarraMenu.introduzcaSemilla().getString(parametros.getIdioma()),
-				Textos_BarraMenu.menuArchivo_ImportarSemilla().getString(parametros.getIdioma()),
-				JOptionPane.PLAIN_MESSAGE);
-
-		try {
-			// Recuperar la consigna a partir de su código
-			Semilla consigna = new Semilla(codigoConsigna);
-
-			Pregunta pregunta = null;
-			if (consigna.getTipoPregunta() == Semilla.recorridoEnProfunidad) {
-				pregunta = new PreguntaDeProfundidad(consigna);
-			} else if (consigna.getTipoPregunta() == Semilla.recorridoEnAnchura) {
-				pregunta = new PreguntaDeAnchura(consigna);
-			} else if (consigna.getTipoPregunta() == Semilla.clasificacionTopologica) {
-				pregunta = new PreguntaTopologica(consigna);
-			} else if (consigna.getTipoPregunta() == Semilla.algoritmoDeDijkstra) {
-				pregunta = new PreguntaDeDijkstra(consigna);
-			} else if (consigna.getTipoPregunta() == Semilla.algoritmoDeKruskal) {
-				pregunta = new PreguntaDeKruskal(consigna);
-			} else if (consigna.getTipoPregunta() == Semilla.algoritmoDePrim) {
-				pregunta = new PreguntaDePrim(consigna);
-			}
-
-			imprimePregunta(pregunta);
-		} catch (ConsignaException excepcion) {
-			JOptionPane.showMessageDialog(null,
-					Textos_Interfaz.errorSemillaIncorrecta().getString(parametros.getIdioma()), "Error",
-					JOptionPane.WARNING_MESSAGE);
-		}
+		System.err.println("[FramePrincipal] Importar semilla pendiente de implementar bien");
+		
+//		String codigoConsigna = JOptionPane.showInputDialog(this,
+//				Textos_BarraMenu.introduzcaSemilla().getString(parametros.getIdioma()),
+//				Textos_BarraMenu.menuArchivo_ImportarSemilla().getString(parametros.getIdioma()),
+//				JOptionPane.PLAIN_MESSAGE);
+//
+//		try {
+//			// Recuperar la consigna a partir de su código
+//			Semilla consigna = new Semilla(codigoConsigna);
+//
+//			Pregunta pregunta = null;
+//			if (consigna.getTipoPregunta() == Semilla.recorridoEnProfunidad) {
+//				pregunta = new PreguntaDeProfundidad(consigna);
+//			} else if (consigna.getTipoPregunta() == Semilla.recorridoEnAnchura) {
+//				pregunta = new PreguntaDeAnchura(consigna);
+//			} else if (consigna.getTipoPregunta() == Semilla.clasificacionTopologica) {
+//				pregunta = new PreguntaTopologica(consigna);
+//			} else if (consigna.getTipoPregunta() == Semilla.algoritmoDeDijkstra) {
+//				pregunta = new PreguntaDeDijkstra(consigna);
+//			} else if (consigna.getTipoPregunta() == Semilla.algoritmoDeKruskal) {
+//				pregunta = new PreguntaDeKruskal(consigna);
+//			} else if (consigna.getTipoPregunta() == Semilla.algoritmoDePrim) {
+//				pregunta = new PreguntaDePrim(consigna);
+//			}
+//
+//			imprimePregunta(pregunta);
+//		} catch (ConsignaException excepcion) {
+//			JOptionPane.showMessageDialog(null,
+//					Textos_Interfaz.errorSemillaIncorrecta().getString(parametros.getIdioma()), "Error",
+//					JOptionPane.WARNING_MESSAGE);
+//		}
 	}
 	
 

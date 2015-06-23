@@ -7,15 +7,18 @@ import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSlider;
 import javax.swing.JTabbedPane;
 
 import modelo.pregunta.Pregunta;
+import modelo.pregunta.VisualizacionGrafo;
 import texto.Texto;
 import texto.Textos_Interfaz;
 import util.Idioma;
@@ -45,6 +48,12 @@ public abstract class PestanaDePregunta extends JPanel {
 	
 	private JLabel txtGrafoDirigido = new JLabel(Textos_Interfaz.textoGrafoDirigido().esp());
 	private JCheckBox checkBoxGrafoDirigido = new JCheckBox();
+	
+	private JLabel txtVisualizacionGrafo = new JLabel(Textos_Interfaz.textoVisualizacionGrafo().esp());
+	private JComboBoxVisualizacionGrafo comboBoxVisualizacionGrafo = new JComboBoxVisualizacionGrafo();
+	
+	private JLabel txtTipoPregunta = new JLabel(Textos_Interfaz.textoTipoDePregunta().esp());
+	private JComboBoxTextos comboBoxTipoPregunta = new JComboBoxTextos();
 	
 	private JButton botonGenerarPregunta = new JButton(Textos_Interfaz.botonGenerarPregunta().esp());
 	/** Botón de importar semillas */
@@ -94,11 +103,27 @@ public abstract class PestanaDePregunta extends JPanel {
 	}
 	
 	
+	public Integer getTipoDePregunta(){
+		return comboBoxTipoPregunta.getSelectedIndex();
+	}
+	
+	
 	public void setParametrosSelectorPorcentajeArcos(int maximo, int valorActual, int espaciado){
 		selectorPorcentajeArcos.setMaximum(maximo);
 		selectorPorcentajeArcos.setValue(valorActual);
 		selectorPorcentajeArcos.setMajorTickSpacing(espaciado);
 		selectorPorcentajeArcos.setMinorTickSpacing(espaciado);
+	}
+	
+	
+	public void setVisibleTipoPregunta(boolean flag){
+		txtTipoPregunta.setVisible(flag);
+		comboBoxTipoPregunta.setVisible(flag);
+	}
+	
+	
+	public void addTipoPregunta(Texto tipoPregunta){
+		comboBoxTipoPregunta.addTexto(tipoPregunta);
 	}
 	
 	
@@ -112,6 +137,11 @@ public abstract class PestanaDePregunta extends JPanel {
 	
 	public boolean isDirigido(){
 		return checkBoxGrafoDirigido.isSelected();
+	}
+	
+	
+	public VisualizacionGrafo getVisualizacionGrafo(){
+		return comboBoxVisualizacionGrafo.getClaseDeVisualizacion();
 	}
 	
 	
@@ -131,6 +161,14 @@ public abstract class PestanaDePregunta extends JPanel {
 		txtPorcentajeArcos.setText(Textos_Interfaz.textoPorcentajeArcos().getString(nuevoIdioma));
 		txtPorcentajeArcos.setToolTipText(Textos_Interfaz.tipTextPorcentajeArcos().getString(nuevoIdioma));
 		selectorPorcentajeArcos.setToolTipText(Textos_Interfaz.tipTextPorcentajeArcos().getString(nuevoIdioma));
+		
+		txtGrafoDirigido.setText(Textos_Interfaz.textoGrafoDirigido().getString(nuevoIdioma));
+		
+		txtVisualizacionGrafo.setText(Textos_Interfaz.textoVisualizacionGrafo().getString(nuevoIdioma));
+		comboBoxVisualizacionGrafo.actualizar(nuevoIdioma);
+		
+		txtTipoPregunta.setText(Textos_Interfaz.textoTipoDePregunta().getString(nuevoIdioma));
+		comboBoxTipoPregunta.actualizar(nuevoIdioma);
 		
 		botonGenerarPregunta.setToolTipText(Textos_Interfaz.tipTextBotonGenerarPregunta().getString(nuevoIdioma));
 		botonImportarSemilla.setToolTipText(Textos_Interfaz.tipTextBotonImportarSemilla().getString(nuevoIdioma));
@@ -161,6 +199,13 @@ public abstract class PestanaDePregunta extends JPanel {
 		
 		add(txtGrafoDirigido, BorderLayout.CENTER);
 		add(checkBoxGrafoDirigido);
+		
+		add(txtVisualizacionGrafo, BorderLayout.CENTER);
+		add(comboBoxVisualizacionGrafo);
+		
+		add(txtTipoPregunta, BorderLayout.CENTER);
+		add(comboBoxTipoPregunta);
+		setVisibleTipoPregunta(false);
 	}
 	
 	
@@ -182,12 +227,23 @@ public abstract class PestanaDePregunta extends JPanel {
 		
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
-			Pregunta pregunta = generarPregunta();
+			String textoPreguntaXml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>";
+			textoPreguntaXml += "\n<quiz>";
+			String textoPreguntaPorPantalla = "";
+			Pregunta pregunta = null;
 			
 			//Por numPreguntas veces:
 			for(int i = 0; i < getNumPreguntas(); i++){
-				frame.imprimePregunta(pregunta);
+				pregunta = generarPregunta();
+				
+				textoPreguntaPorPantalla += pregunta.getTextoPreguntaParaMostrarPorPantalla(idioma);
+				textoPreguntaXml += pregunta.getTextoPreguntaXml(idioma);
 			}
+			
+			textoPreguntaXml += "\n</quiz>";
+			String nombreArchivo = pregunta.getNombreDeArchivo().getString(idioma);
+			
+			frame.imprimePregunta(textoPreguntaPorPantalla, textoPreguntaXml, nombreArchivo);
 		}
 		
 	}
@@ -202,4 +258,43 @@ public abstract class PestanaDePregunta extends JPanel {
 		}
 	}
 	
+	
+	
+	private class JComboBoxTextos extends JComboBox<String> {
+		ArrayList<Texto> textos = new ArrayList<Texto>();
+		
+		public void addTexto(Texto nuevoTexto){
+			textos.add(nuevoTexto);
+		}
+		
+		public void actualizar(Idioma idioma){
+			removeAllItems();
+			for(Texto texto : textos){
+				addItem(texto.getString(idioma));
+			}
+		}
+	}
+	
+	
+	
+	private class JComboBoxVisualizacionGrafo extends JComboBoxTextos {
+		
+		/** Constructor de la clase */
+		public JComboBoxVisualizacionGrafo(){
+			addTexto(Textos_Interfaz.visualizacionMatrizAdyacencia());
+			addTexto(Textos_Interfaz.visualizacionListaAdyacencia());
+			addTexto(Textos_Interfaz.visualizacionGrafoVisual());
+		}
+
+		public VisualizacionGrafo getClaseDeVisualizacion(){
+			switch(getSelectedIndex()){
+			case 0:
+				return VisualizacionGrafo.MATRIZ_DE_ADYACENCIA;
+			case 1:
+				return VisualizacionGrafo.LISTA_DE_ADYACENCIA;
+			case 2: default:
+				return VisualizacionGrafo.GRAFO_VISUAL;
+			}
+		}
+	}
 }

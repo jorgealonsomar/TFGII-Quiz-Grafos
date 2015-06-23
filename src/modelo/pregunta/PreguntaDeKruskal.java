@@ -7,8 +7,9 @@ import texto.Textos_Archivos;
 public class PreguntaDeKruskal extends Pregunta {
 
 	/** Constructor de la clase */
-	public PreguntaDeKruskal(Integer nNodos, Double porcentajeDeArcos, boolean grafoDirigido) {
-		super(nNodos, porcentajeDeArcos, grafoDirigido);
+	public PreguntaDeKruskal(Integer nNodos, Double porcentajeDeArcos, boolean grafoDirigido,
+			VisualizacionGrafo visualizacionGrafo) {
+		super(nNodos, porcentajeDeArcos, grafoDirigido, true, visualizacionGrafo, 1);
 	}
 	
 	
@@ -49,7 +50,7 @@ public class PreguntaDeKruskal extends Pregunta {
 
 	@Override
 	protected void generarSemilla(boolean grafoDirigido) {
-		super.generarConsignaEnFuncionDelTipoDePregunta(Semilla.algoritmoDeKruskal, grafoDirigido);
+		super.generarSemillaEnFuncionDelTipoDePregunta(Semilla.algoritmoDeKruskal, grafoDirigido);
 	}
 
 

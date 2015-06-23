@@ -54,6 +54,12 @@ public class Texto {
 	}
 	
 	
+	@Override
+	public String toString(){
+		return "[Texto] " + esp();
+	}
+	
+	
 	public static String adaptarCaracteresAXml(String cadena){
 		cadena = cadena.replace("á", "&aacute");
 		cadena = cadena.replace("é", "&eacute");

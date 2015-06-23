@@ -12,8 +12,8 @@ public class PreguntaTopologica extends Pregunta {
 	private ArrayList<Integer> recorridoTopologico;
 	
 	/** Constructor de la clase */
-	public PreguntaTopologica(Integer nNodos, Double porcentajeDeArcos) {
-		super(nNodos, porcentajeDeArcos, true);
+	public PreguntaTopologica(Integer nNodos, Double porcentajeDeArcos, VisualizacionGrafo visualizacionGrafo) {
+		super(nNodos, porcentajeDeArcos, true, false, visualizacionGrafo, 1);
 	}
 	
 	
@@ -53,7 +53,7 @@ public class PreguntaTopologica extends Pregunta {
 	
 	@Override
 	protected void generarSemilla(boolean grafoDirigido) {
-		super.generarConsignaEnFuncionDelTipoDePregunta(Semilla.clasificacionTopologica, grafoDirigido);
+		super.generarSemillaEnFuncionDelTipoDePregunta(Semilla.clasificacionTopologica, grafoDirigido);
 	}
 
 

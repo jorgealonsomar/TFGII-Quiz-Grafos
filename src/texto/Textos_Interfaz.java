@@ -118,6 +118,36 @@ public class Textos_Interfaz {
 	}
 	
 	
+	/** Texto junto al selector del modo de visualización del grafo */
+	public static Texto textoVisualizacionGrafo() {
+		return new Texto("Modo de visualización del grafo: ", "Graph visualization mode: ");
+	}
+	
+	
+	/** Texto asociado a la visualización de los grafos en forma de matriz de adyacencia */
+	public static Texto visualizacionMatrizAdyacencia(){
+		return new Texto("Matriz de adyacencia", "Adjacency matrix");
+	}
+	
+	
+	/** Texto asociado a la visualización de los grafos en forma de lista de adyacencia */
+	public static Texto visualizacionListaAdyacencia(){
+		return new Texto("Lista de adyacencia", "Adjacency list");
+	}
+	
+	
+	/** Texto asociado a la visualización de los grafos en forma de grafo visual */
+	public static Texto visualizacionGrafoVisual(){
+		return new Texto("Grafo (visual)", "Graph (visual)");
+	}
+	
+	
+	/** Texto junto al selector del tipo de pregunta */
+	public static Texto textoTipoDePregunta() {
+		return new Texto("Tipo de pregunta: ", "Type of question: ");
+	}
+	
+	
 	/** Botón de Generar Pregunta existente en cada Pestaña de Pregunta */
 	public static Texto botonGenerarPregunta(){
 		return new Texto("Generar y exportar pregunta", "Generate & export question");
