@@ -1,14 +1,14 @@
 package modelo.pregunta;
 
-import modelo.Grafo;
+import modelo.grafo.Grafo;
 import texto.Texto;
 import texto.Textos_Preguntas;
 
 public class PreguntaDeDijkstra_DistanciasMasCortas extends PreguntaDeDijkstra {
 
 	public PreguntaDeDijkstra_DistanciasMasCortas(Integer nNodos, Double porcentajeDeArcos, boolean grafoDirigido,
-			VisualizacionGrafo visualizacionGrafo, Integer tipoPregunta) {
-		super(nNodos, porcentajeDeArcos, grafoDirigido, visualizacionGrafo, tipoPregunta);
+			VisualizacionGrafo visualizacionGrafo) {
+		super(nNodos, porcentajeDeArcos, grafoDirigido, visualizacionGrafo);
 	}
 	
 	
@@ -46,10 +46,11 @@ public class PreguntaDeDijkstra_DistanciasMasCortas extends PreguntaDeDijkstra {
 				textoDistancia = distancia.toString();
 			}
 			
-			respuestaCorrecta.concatenar(new Texto("\n"));
 			respuestaCorrecta.concatenar(Textos_Preguntas.distanciaDesdeElNodoA());
 			respuestaCorrecta.concatenar(Textos_Preguntas.nombreDeNodo((Grafo.convertirIndiceEnLetra(i))));
 			respuestaCorrecta.concatenar(new Texto(": " + textoDistancia + "."));
+			respuestaCorrecta.concatenar(new Texto("\n"));
+
 		}
 		
 	}

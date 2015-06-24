@@ -1,12 +1,15 @@
 package test;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
 
-import modelo.Grafo;
-import modelo.GrafoDirigido;
-import modelo.ResultadosDijkstra;
+import modelo.grafo.Grafo;
+import modelo.grafo.GrafoDirigido;
+import modelo.grafo.GrafoNoDirigido;
+import modelo.grafo.ListaDeArcos;
+import modelo.grafo.ResultadosDijkstra;
 
 import org.junit.Test;
 
@@ -39,10 +42,27 @@ public class GrafoTest {
 												{6, 0, 2, 0, 3},
 												{6, 0, 5, 3, 0}};
 	
+	private Integer[][] matrizDeAdyacencia5 ={	{0,  7,  0,  5,  0,  0,  0 },
+												{7,  0,  8,  9,  7,  0,  0 },
+												{0,  8,  0,  0,  5,  0,  0 },
+												{5,  9,  0,  0,  15, 6,  0 },
+												{0,  0,  5,  15, 0,  8,  9 },
+												{0,  0,  0,  6,  8,  0,  11},
+												{0,  0,  0,  0,  9,  11, 0 }};
+	
+	private Integer[][] matrizDeAdyacencia6 ={	{0, 5, 6, 4, 0, 0},
+												{5, 0, 1, 2, 0, 0},
+												{6, 1, 0, 2, 5, 3},
+												{4, 2, 2, 0, 0, 4},
+												{0, 0, 5, 0, 0, 4},
+												{0, 0, 3, 4, 4, 0}};
+	
 	private Grafo grafo1 = new GrafoDirigido(matrizDeAdyacencia1);
 	private Grafo grafo2 = new GrafoDirigido(matrizDeAdyacencia2);
 	private Grafo grafo3 = new GrafoDirigido(matrizDeAdyacencia3);
 	private Grafo grafo4 = new GrafoDirigido(matrizDeAdyacencia4);
+	private GrafoNoDirigido grafo5 = new GrafoNoDirigido(matrizDeAdyacencia5);
+	private GrafoNoDirigido grafo6 = new GrafoNoDirigido(matrizDeAdyacencia6);
 	
 	@Test
 	public void recorridoTopografico() {
@@ -52,7 +72,7 @@ public class GrafoTest {
 		resultadoEsperado.add(1);
 		resultadoEsperado.add(2);
 		resultadoEsperado.add(3);
-		assertTrue(grafo1.recorridoTopologico().equals(resultadoEsperado));
+		assertTrue(((GrafoDirigido)grafo1).recorridoTopologico().equals(resultadoEsperado));
 		
 		
 		//Ejemplo 2
@@ -65,7 +85,7 @@ public class GrafoTest {
 		resultadoEsperado.add(6);
 		resultadoEsperado.add(7);
 		resultadoEsperado.add(2);
-		assertTrue(grafo2.recorridoTopologico().equals(resultadoEsperado));
+		assertTrue(((GrafoDirigido)grafo2).recorridoTopologico().equals(resultadoEsperado));
 	}
 	
 	
@@ -126,7 +146,79 @@ public class GrafoTest {
 		
 		assertTrue(resultadosDijkstra.getOrdenDeSeleccion().equals(ordenDeSeleccionEsperado));
 	}
+	
+	
+	@Test
+	public void algoritmoPrim() {
+		//Ejemplo 5
+		ListaDeArcos listaDeArcos = grafo5.algoritmoDePrim();
 		
+		//Número de arcos
+		assertEquals((int)listaDeArcos.size(), 6);
+		
+		//Primer arco
+		assertEquals(Grafo.convertirIndiceEnLetra(listaDeArcos.getNodoDelArco(0)), 'D');
+		assertEquals(Grafo.convertirIndiceEnLetra(listaDeArcos.getPredecesorDelArco(0)), 'A');
+		assertEquals((int)listaDeArcos.getPesoDelArco(0), 5);
+		
+		//Segundo arco
+		assertEquals(Grafo.convertirIndiceEnLetra(listaDeArcos.getNodoDelArco(1)), 'F');
+		assertEquals(Grafo.convertirIndiceEnLetra(listaDeArcos.getPredecesorDelArco(1)), 'D');
+		assertEquals((int)listaDeArcos.getPesoDelArco(1), 6);
+		
+		//Tercer arco
+		assertEquals(Grafo.convertirIndiceEnLetra(listaDeArcos.getNodoDelArco(2)), 'B');
+		assertEquals(Grafo.convertirIndiceEnLetra(listaDeArcos.getPredecesorDelArco(2)), 'A');
+		assertEquals((int)listaDeArcos.getPesoDelArco(2), 7);
+
+		//Cuarto arco
+		assertEquals(Grafo.convertirIndiceEnLetra(listaDeArcos.getNodoDelArco(3)), 'E');
+		assertEquals(Grafo.convertirIndiceEnLetra(listaDeArcos.getPredecesorDelArco(3)), 'B');
+		assertEquals((int)listaDeArcos.getPesoDelArco(3), 7);
+		
+		//Quinto arco
+		assertEquals(Grafo.convertirIndiceEnLetra(listaDeArcos.getNodoDelArco(4)), 'C');
+		assertEquals(Grafo.convertirIndiceEnLetra(listaDeArcos.getPredecesorDelArco(4)), 'E');
+		assertEquals((int)listaDeArcos.getPesoDelArco(4), 5);
+		
+		//Sexto arco
+		assertEquals(Grafo.convertirIndiceEnLetra(listaDeArcos.getNodoDelArco(5)), 'G');
+		assertEquals(Grafo.convertirIndiceEnLetra(listaDeArcos.getPredecesorDelArco(5)), 'E');
+		assertEquals((int)listaDeArcos.getPesoDelArco(5), 9);
+		
+		
+		//Ejemplo 6
+		listaDeArcos = grafo6.algoritmoDePrim();
+		
+		//Número de arcos
+		assertEquals((int)listaDeArcos.size(), 5);
+		
+		//Primer arco
+		assertEquals(Grafo.convertirIndiceEnLetra(listaDeArcos.getNodoDelArco(0)), 'D');
+		assertEquals(Grafo.convertirIndiceEnLetra(listaDeArcos.getPredecesorDelArco(0)), 'A');
+		assertEquals((int)listaDeArcos.getPesoDelArco(0), 4);
+		
+		//Segundo arco
+		assertEquals(Grafo.convertirIndiceEnLetra(listaDeArcos.getNodoDelArco(1)), 'B');
+		assertEquals(Grafo.convertirIndiceEnLetra(listaDeArcos.getPredecesorDelArco(1)), 'D');
+		assertEquals((int)listaDeArcos.getPesoDelArco(1), 2);
+		
+		//Tercer arco
+		assertEquals(Grafo.convertirIndiceEnLetra(listaDeArcos.getNodoDelArco(2)), 'C');
+		assertEquals(Grafo.convertirIndiceEnLetra(listaDeArcos.getPredecesorDelArco(2)), 'B');
+		assertEquals((int)listaDeArcos.getPesoDelArco(2), 1);
+
+		//Cuarto arco
+		assertEquals(Grafo.convertirIndiceEnLetra(listaDeArcos.getNodoDelArco(3)), 'F');
+		assertEquals(Grafo.convertirIndiceEnLetra(listaDeArcos.getPredecesorDelArco(3)), 'C');
+		assertEquals((int)listaDeArcos.getPesoDelArco(3), 3);
+		
+		//Quinto arco
+		assertEquals(Grafo.convertirIndiceEnLetra(listaDeArcos.getNodoDelArco(4)), 'E');
+		assertEquals(Grafo.convertirIndiceEnLetra(listaDeArcos.getPredecesorDelArco(4)), 'F');
+		assertEquals((int)listaDeArcos.getPesoDelArco(4), 4);
+	}
+	
 	
 	@Test
 	public void listaDeAdyacencia(){

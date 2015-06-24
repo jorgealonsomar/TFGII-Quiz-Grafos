@@ -31,7 +31,7 @@ public class Semilla {
 	
 	
 	/** Constructor. Recupera una vieja semilla a partir de su c�digo */
-	public Semilla(String codigo) throws ConsignaException {
+	public Semilla(String codigo) throws SemillaException {
 		try{
 			
 			Integer valorAux;
@@ -42,7 +42,7 @@ public class Semilla {
 			if(0 <= valorAux && valorAux <= 5){
 				this.tipoPregunta = valorAux;
 			} else {
-				throw new ConsignaException("El valor del primer car�cter de la semilla debe estar entre en 0 y el 5");
+				throw new SemillaException("El valor del primer car�cter de la semilla debe estar entre en 0 y el 5");
 			}
 			
 			
@@ -87,7 +87,7 @@ public class Semilla {
 			}
 			
 		}catch(Exception excepcion){
-			throw new ConsignaException("El formato del c�digo usado para generar la semilla es err�neo.");
+			throw new SemillaException("El formato del c�digo usado para generar la semilla es err�neo.");
 		}
 	}
 	

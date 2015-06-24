@@ -1,10 +1,10 @@
 package modelo;
 
 @SuppressWarnings("serial")
-public class ConsignaException extends Exception {
+public class SemillaException extends Exception {
 	String mensajeDelError;
 
-	public ConsignaException(String mensajeDelError) {
+	public SemillaException(String mensajeDelError) {
 		this.mensajeDelError = mensajeDelError;
 	}
 

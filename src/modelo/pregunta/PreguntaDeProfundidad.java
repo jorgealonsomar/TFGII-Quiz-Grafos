@@ -14,7 +14,7 @@ public class PreguntaDeProfundidad extends Pregunta {
 	/** Constructor de la clase */
 	public PreguntaDeProfundidad(Integer nNodos, Double porcentajeDeArcos, boolean grafoDirigido,
 			VisualizacionGrafo visualizacionGrafo) {
-		super(nNodos, porcentajeDeArcos, grafoDirigido, false, visualizacionGrafo, 1);
+		super(nNodos, porcentajeDeArcos, grafoDirigido, false, visualizacionGrafo);
 	}
 	
 

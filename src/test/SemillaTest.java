@@ -3,7 +3,7 @@ package test;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 import modelo.Semilla;
-import modelo.ConsignaException;
+import modelo.SemillaException;
 
 import org.junit.Test;
 
@@ -81,7 +81,7 @@ public class SemillaTest {
 			assertEquals(semilla.getMatrizDeAdyacencia()[3][2], (Integer) 0);
 			assertEquals(semilla.getMatrizDeAdyacencia()[3][3], (Integer) 0);
 
-		} catch (ConsignaException e) {
+		} catch (SemillaException e) {
 			fail(e.getMensajeDelError());
 		}
 	}
@@ -93,7 +93,7 @@ public class SemillaTest {
 		try {
 			new Semilla("730003013006008");
 			fail("Debi� saltar una excepci�n.");
-		} catch (ConsignaException e) {
+		} catch (SemillaException e) {
 		}
 
 		// El valor de la pos. 1, correspondiente al valorNNodos no es necesario
@@ -111,7 +111,7 @@ public class SemillaTest {
 		try {
 			new Semilla("55");
 			fail("Debi� saltar una excepci�n.");
-		} catch (ConsignaException e) {
+		} catch (SemillaException e) {
 		}
 	}
 

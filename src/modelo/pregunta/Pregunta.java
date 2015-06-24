@@ -3,10 +3,10 @@ package modelo.pregunta;
 import java.util.ArrayList;
 import java.util.Random;
 
-import modelo.Grafo;
-import modelo.GrafoDirigido;
-import modelo.GrafoNoDirigido;
 import modelo.Semilla;
+import modelo.grafo.Grafo;
+import modelo.grafo.GrafoDirigido;
+import modelo.grafo.GrafoNoDirigido;
 import texto.Texto;
 import texto.Textos_Preguntas;
 import util.Idioma;
@@ -21,7 +21,6 @@ public abstract class Pregunta {
 	protected Texto respuestaCorrecta;
 	
 	private VisualizacionGrafo visualizacionGrafo;
-	private Integer tipoDePregunta;
 	
 	private Random randomGenerator;
 	
@@ -32,9 +31,8 @@ public abstract class Pregunta {
 	 * creado a partir de los parámetros fijados.
 	 */
 	public Pregunta(Integer nNodos, Double porcentajeDeArcos, boolean esDirigido, boolean esPonderado,
-			VisualizacionGrafo visualizacionGrafo, Integer tipoPregunta) {
+			VisualizacionGrafo visualizacionGrafo) {
 		this.visualizacionGrafo = visualizacionGrafo;
-		this.tipoDePregunta = tipoPregunta;
 		
 		//TODO: Añadir semilla
 		randomGenerator = new Random();
@@ -123,11 +121,6 @@ public abstract class Pregunta {
 	}
 	
 	
-	public Integer getTipoDePregunta(){
-		return tipoDePregunta;
-	}
-	
-	
 	public Integer getNextRandomInt(Integer bound){
 		return randomGenerator.nextInt(bound);
 	}
@@ -135,7 +128,7 @@ public abstract class Pregunta {
 	
 	/** Código común de construirParteAResponder() para las preguntas de ordenacion */
 	protected void resultadoDeOrdenarElGrafo(ArrayList<Integer> recorrido){
-		parteAResponder = Textos_Preguntas.pregOrdenacion_ResultadoDeOrdenarGrafo();
+		parteAResponder = Textos_Preguntas.pregRecorrido_ResultadoDeRecorrerGrafo();
 
 		// Por cada nodo del resultado de recorrer el grafo:
 		for (int i = 0; i < recorrido.size(); i++) {

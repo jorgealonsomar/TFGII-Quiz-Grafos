@@ -54,6 +54,17 @@ public class Texto {
 	}
 	
 	
+	public void concatenarFilaDeTabla(Texto... campos){
+		concatenar(new Texto("\n\t<tr>"));
+		for(Texto campo : campos){
+			concatenar(new Texto("\n\t\t<td>"));
+			concatenar(campo);
+			concatenar(new Texto("</td>"));
+		}
+		concatenar(new Texto("\n\t</tr>"));
+	}
+	
+	
 	@Override
 	public String toString(){
 		return "[Texto] " + esp();
@@ -101,5 +112,6 @@ public class Texto {
 		
 		return cadena;
 	}
+	
 	
 }

@@ -1,7 +1,9 @@
-package modelo;
+package modelo.grafo;
 
 import java.util.ArrayList;
 import java.util.Random;
+
+import modelo.Arco;
 
 public abstract class Grafo {
 
@@ -211,54 +213,6 @@ public abstract class Grafo {
 	}
 	
 	
-	public ArrayList<Integer> recorridoTopologico() {
-		ArrayList<Integer> recorrido = new ArrayList<Integer>();
-		
-		//Crear una copia auxiliar de la matriz de adyacencia que poder modificar
-		Integer[][] matrizAdyacenciaAux = clonarMatrizDeAdyacencia();
-		
-		boolean seguirRecorriendo = true;
-		while (seguirRecorriendo){
-			
-			//Encontrar el primer nodo sin arcos de entrada:
-			Integer nodoSinArcosDeEntrada = null;
-			//Por cada columna (recorridas en orden numérico):
-			for(int j = 0; j < matrizAdyacenciaAux.length; j++){
-				//Si ese nodo ya se ha añadido al recorrido, se ignora
-				if(!recorrido.contains(j)){
-					boolean todoACero = true;
-					//Se comprueba si cada elemento de esa columna es cero
-					for(int i = 0; i < matrizAdyacenciaAux.length; i++){
-						if(matrizAdyacenciaAux[i][j] != 0){
-							todoACero = false;
-						}
-					}
-					//Si lo es:
-					if(todoACero){
-						//Ese nodo es el primer nodo sin arcos de entrada
-						nodoSinArcosDeEntrada = j;
-						break;
-					}
-				}
-			}
-			
-			//Si no queda ningún nodo sin arcos de entrada, detenemos el algoritmo
-			if(nodoSinArcosDeEntrada == null){
-				seguirRecorriendo = false;
-			} else {
-				//Eliminamos todos los enlaces que salen de ese nodo 
-				//(Ponemos a cero todos los elementos de su fila)
-				for(int j = 0; j < matrizAdyacenciaAux.length; j++){
-					matrizAdyacenciaAux[nodoSinArcosDeEntrada][j] = 0;
-				}
-				//Y añadimos ese nodo al recorrido topográfico
-				recorrido.add(nodoSinArcosDeEntrada);
-			}
-		}
-		
-		return recorrido;
-	}
-	
 	
 	public ResultadosDijkstra algoritmoDeDijkstra(int nodoInicial) {
 		ResultadosDijkstra resultadosDijkstra = new ResultadosDijkstra(nNodos);
@@ -348,7 +302,7 @@ public abstract class Grafo {
 	
 	
 	/** Crea una copia de la matriz de adyacencia */
-	private Integer[][] clonarMatrizDeAdyacencia(){
+	protected Integer[][] clonarMatrizDeAdyacencia(){
 		Integer[][] matrizAdyacenciaAux = new Integer[matrizDeAdyacencia.length][matrizDeAdyacencia[0].length];
 		for(int i = 0; i < matrizDeAdyacencia.length; i++){
 			for(int j = 0; j < matrizDeAdyacencia.length; j++){

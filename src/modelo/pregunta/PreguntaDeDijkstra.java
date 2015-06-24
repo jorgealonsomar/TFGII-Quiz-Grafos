@@ -2,8 +2,8 @@ package modelo.pregunta;
 
 import java.util.ArrayList;
 
-import modelo.ResultadosDijkstra;
 import modelo.Semilla;
+import modelo.grafo.ResultadosDijkstra;
 import texto.Texto;
 import texto.Textos_Archivos;
 import texto.Textos_Preguntas;
@@ -20,8 +20,8 @@ public abstract class PreguntaDeDijkstra extends Pregunta {
 	
 	/** Constructor de la clase */
 	public PreguntaDeDijkstra(Integer nNodos, Double porcentajeDeArcos, boolean grafoDirigido,
-			VisualizacionGrafo visualizacionGrafo, Integer tipoPregunta) {
-		super(nNodos, porcentajeDeArcos, grafoDirigido, true, visualizacionGrafo, tipoPregunta);
+			VisualizacionGrafo visualizacionGrafo) {
+		super(nNodos, porcentajeDeArcos, grafoDirigido, true, visualizacionGrafo);
 	}
 	
 	

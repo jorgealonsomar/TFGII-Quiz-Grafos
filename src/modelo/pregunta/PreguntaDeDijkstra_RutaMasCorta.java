@@ -3,7 +3,7 @@ package modelo.pregunta;
 import java.util.ArrayList;
 import java.util.Collections;
 
-import modelo.Grafo;
+import modelo.grafo.Grafo;
 import texto.Texto;
 import texto.Textos_Preguntas;
 
@@ -13,8 +13,8 @@ public class PreguntaDeDijkstra_RutaMasCorta extends PreguntaDeDijkstra {
 	protected Integer nodoObjetivo;
 	
 	public PreguntaDeDijkstra_RutaMasCorta(Integer nNodos, Double porcentajeDeArcos, boolean grafoDirigido,
-			VisualizacionGrafo visualizacionGrafo, Integer tipoPregunta) {
-		super(nNodos, porcentajeDeArcos, grafoDirigido, visualizacionGrafo, tipoPregunta);
+			VisualizacionGrafo visualizacionGrafo) {
+		super(nNodos, porcentajeDeArcos, grafoDirigido, visualizacionGrafo);
 	}
 	
 	

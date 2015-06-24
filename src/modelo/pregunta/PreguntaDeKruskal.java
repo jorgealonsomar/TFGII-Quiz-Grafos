@@ -9,7 +9,7 @@ public class PreguntaDeKruskal extends Pregunta {
 	/** Constructor de la clase */
 	public PreguntaDeKruskal(Integer nNodos, Double porcentajeDeArcos, boolean grafoDirigido,
 			VisualizacionGrafo visualizacionGrafo) {
-		super(nNodos, porcentajeDeArcos, grafoDirigido, true, visualizacionGrafo, 1);
+		super(nNodos, porcentajeDeArcos, grafoDirigido, true, visualizacionGrafo);
 	}
 	
 	

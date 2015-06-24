@@ -23,7 +23,7 @@ public class PestanaDePreguntaDeDijkstra extends PestanaDePregunta {
 		setVisibleTipoPregunta(true);
 		addTipoPregunta(Textos_Preguntas.tipoPreguntaDijkstra_DistanciasMasCortas());
 		addTipoPregunta(Textos_Preguntas.tipoPreguntaDijkstra_RutaMasCorta());
-		addTipoPregunta(Textos_Preguntas.tipoPreguntaDijkstra_OrdenDeSeleccion());
+		addTipoPregunta(Textos_Preguntas.tipoPregunta_OrdenDeSeleccion());
 	}
 
 	@Override
@@ -31,13 +31,13 @@ public class PestanaDePreguntaDeDijkstra extends PestanaDePregunta {
 		switch(getTipoDePregunta()){
 		case PreguntaDeDijkstra.PREGUNTA_DISTANCIAS_MAS_CORTAS:
 			return new PreguntaDeDijkstra_DistanciasMasCortas(getNumNodos(), getPorcentajeArcos(), isDirigido(),
-					getVisualizacionGrafo(), getTipoDePregunta());
+					getVisualizacionGrafo());
 		case PreguntaDeDijkstra.PREGUNTA_RUTA_MAS_CORTA:
 			return new PreguntaDeDijkstra_RutaMasCorta(getNumNodos(), getPorcentajeArcos(), isDirigido(),
-					getVisualizacionGrafo(), getTipoDePregunta());
+					getVisualizacionGrafo());
 		case PreguntaDeDijkstra.PREGUNTA_ORDEN_DE_SELECCION: default:
 			return new PreguntaDeDijkstra_OrdenDeSeleccion(getNumNodos(), getPorcentajeArcos(), isDirigido(),
-					getVisualizacionGrafo(), getTipoDePregunta());
+					getVisualizacionGrafo());
 		}
 		
 	}

@@ -66,10 +66,10 @@ public class Textos_Preguntas {
 	}
 	
 	
-	/** Fragmento inicial de una pregunta sobre ordenación de grafo */
-	public static Texto pregOrdenacion_ResultadoDeOrdenarGrafo(){
-		return new Texto("El resultado de ordenar el grafo es el siguiente: [ ",
-				"The result of sorting the graph is as follows: [ ");
+	/** Fragmento inicial de una pregunta sobre recorrido de grafo */
+	public static Texto pregRecorrido_ResultadoDeRecorrerGrafo(){
+		return new Texto("El resultado de recorrer el grafo es el siguiente: [ ",
+				"The resulting path is as follows: [ ");
 	}
 	
 	
@@ -108,14 +108,14 @@ public class Textos_Preguntas {
 	}
 	
 	
-	/** Nodo. Usado en las preguntas de orden de selección (Dijkstra) */
+	/** Nodo. Usado en las preguntas de orden de selección (Dijkstra, Prim) */
 	public static Texto nodo(){
 		return new Texto("Nodo",
 				"Node");
 	}
 	
 	
-	/** Predecesor. Usado en las preguntas de orden de selección (Dijkstra) */
+	/** Predecesor. Usado en las preguntas de orden de selección (Dijkstra, Prim) */
 	public static Texto predecesor(){
 		return new Texto("Predecesor",
 				"Predecessor");
@@ -126,6 +126,27 @@ public class Textos_Preguntas {
 	public static Texto distancia(){
 		return new Texto("Distancia",
 				"Distance");
+	}
+	
+	
+	/** Peso. Usado en las preguntas de orden de selección (Prim) */
+	public static Texto pesoDelArco(){
+		return new Texto("Peso del arco",
+				"Weight of the arc");
+	}
+	
+	
+	/** Pertenece. Usado en las preguntas de hallar los arcos del árbol de expansión (Prim) */
+	public static Texto pertenece(){
+		return new Texto("Pertenece",
+				"Belongs");
+	}
+	
+	
+	/** No pertenece. Usado en las preguntas de hallar los arcos del árbol de expansión (Prim) */
+	public static Texto noPertenece(){
+		return new Texto("No pertenece",
+				"Does not belong");
 	}
 	
 	
@@ -157,24 +178,37 @@ public class Textos_Preguntas {
 	}
 	
 	
+	/** Título de una pregunta del Algoritmo de Prim */
+	public static Texto tituloPregPrim(){
+		return new Texto("Pregunta del Algoritmo de Prim",
+				"Prim's Algorithm Question.");
+	}
+	
+	
 	/** Enunciado de una pregunta de Recorrido en Anchura */
 	public static Texto enunciadoPregAnchura(){
-		return new Texto("Partiendo de A, recorre el grafo en anchura. Los nodos se deben escoger en orden alfabético.",
-				"Starting from A, do a Breadth-first search into the graph. Nodes must be chosen in alphabetic order.");
+		return new Texto("Partiendo de A, recorre el grafo en anchura. En caso de poderse seleccionar más de un nodo,"
+				+ "los nodos se deben escoger en orden alfabético.",
+				"Starting from A, do a Breadth-first search into the graph. When more than one node can be chosen,"
+				+ "nodes must be selected in alphabetic order.");
 	}
 	
 	
 	/** Enunciado de una pregunta de Recorrido en Anchura */
 	public static Texto enunciadoPregProfundidad(){
-		return new Texto("Partiendo de A, recorre el grafo en profundidad. Los nodos se deben escoger en orden alfabético.",
-				"Starting from A, do a Depth-first search into the graph. Nodes must be chosen in alphabetic order.");
+		return new Texto("Partiendo de A, recorre el grafo en profundidad. En caso de poderse seleccionar más de un nodo,"
+				+ "los nodos se deben escoger en orden alfabético.",
+				"Starting from A, do a Depth-first search into the graph. When more than one node can be chosen,"
+				+ "nodes must be selected in alphabetic order.");
 	}
 	
 	
 	/** Enunciado de una pregunta de Clasificación Topológica */
 	public static Texto enunciadoPregClasificacionTopologica(){
-		return new Texto("Realiza una clasificación topológica del grafo. Los nodos se deben escoger en orden alfabético.",
-				"Do a Topological Sort of the graph. Nodes must be chosen in alphabetic order.");
+		return new Texto("Realiza una clasificación topológica del grafo. En caso de poderse seleccionar más de un nodo,"
+				+ "los nodos se deben escoger en orden alfabético.",
+				"Do a Topological Sort of the graph. When more than one node can be chosen,"
+				+ "nodes must be selected in alphabetic order.");
 	}
 	
 	
@@ -196,29 +230,57 @@ public class Textos_Preguntas {
 	
 	/** Enunciado de una pregunta del Algoritmo de Dijkstra: Orden de selección */
 	public static Texto enunciadoPregDijkstra_OrdenDeSeleccion(){
-		return new Texto("Aplica el algoritmo de Dijkstra sobre el grafo dado, tomando como origen el nodo A."
+		return new Texto("Aplica el algoritmo de Dijkstra sobre el grafo dado, tomando como origen el nodo A. "
 				+ "Se ha de indicar el orden en el que se seleccionan los nodos, en nodo predecesor en el"
 				+ "camino desde el origen y la distancia del camino mínimo desde el origen.",
-				"Apply the Dijkstra algorithm on the graph, taking node A as the starting node."
+				"Apply the Dijkstra algorithm on the graph, taking node A as the starting node. "
 				+ "It must be indicated in witch order the nodes are selected, as well as the predecessor"
-				+ "node in the path, and the lenght from the minimum path to the starting node");
+				+ "node in the path, and the lenght from the minimum path to the starting node.");
 	}
 	
 	
-	/** Texto asociado al primer tipo de preguntas del Algoritmo de Dijkstra*/
+	/** Enunciado de una pregunta del Algoritmo de Prim: Arcos del Árbol de Expansión */
+	public static Texto enunciadoPregPrim_ArcosDelArbolDeExpansion(){
+		return new Texto("Aplica el algoritmo de Prim sobre el grafo dado, tomando como origen el nodo A. "
+				+ "En caso de poderse seleccionar más de un nodo, los nodos se deben escoger en orden alfabético. "
+				+ "Indica cuáles de los siguientes arcos pertenecen al árbol de expansión resultante.",
+				"Apply the Prim algorithm on the graph, taking node A as the starting node. "
+				+ "When more than one node can be chosen, nodes must be selected in alphabetic order. "
+				+ "Say which of the following arcs belong to the resulting spanning tree");
+	}
+	
+	
+	/** Enunciado de una pregunta del Algoritmo de Prim: Arcos del Árbol de Expansión */
+	public static Texto enunciadoPregPrim_OrdenDeSeleccion(){
+		return new Texto("Aplica el algoritmo de Prim sobre el grafo dado, tomando como origen el nodo A. "
+				+ "En caso de poderse seleccionar más de un nodo, los nodos se deben escoger en orden alfabético. "
+				+ "Rellena la siguiente tabla.",
+				"Apply the Prim algorithm on the graph, taking node A as the starting node. "
+				+ "When more than one node can be chosen, nodes must be selected in alphabetic order. "
+				+ "Fill the following table.");
+	}
+	
+	
+	/** Texto asociado a las preguntas de Distancias más cortas (Dijkstra) */
 	public static Texto tipoPreguntaDijkstra_DistanciasMasCortas(){
 		return new Texto("Cálculo de distancias más cortas", "Shortest distances finding");
 	}
 	
 	
-	/** Texto asociado al segundo tipo de preguntas del Algoritmo de Dijkstra*/
+	/** Texto asociado a las preguntas de Ruta más corta (Dijkstra) */
 	public static Texto tipoPreguntaDijkstra_RutaMasCorta(){
 		return new Texto("Ruta más corta entre dos nodos", "Shortest path between two nodes");
 	}
 	
 	
-	/** Texto asociado al tercer tipo de preguntas del Algoritmo de Dijkstra*/
-	public static Texto tipoPreguntaDijkstra_OrdenDeSeleccion(){
+	/** Texto asociado a las preguntas de Arcos del árbol de expansión (Prim) */
+	public static Texto tipoPreguntaPrim_ArcosDelArbolDeExpansion(){
+		return new Texto("Ruta más corta entre dos nodos", "Shortest path between two nodes");
+	}
+	
+	
+	/** Texto asociado las preguntas de orden de selección (Dijkstra, Prim) */
+	public static Texto tipoPregunta_OrdenDeSeleccion(){
 		return new Texto("Orden de selección", "Selection order");
 	}
 	

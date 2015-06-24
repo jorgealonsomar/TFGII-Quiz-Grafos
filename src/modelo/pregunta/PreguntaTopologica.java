@@ -3,6 +3,7 @@ package modelo.pregunta;
 import java.util.ArrayList;
 
 import modelo.Semilla;
+import modelo.grafo.GrafoDirigido;
 import texto.Texto;
 import texto.Textos_Archivos;
 import texto.Textos_Preguntas;
@@ -13,7 +14,7 @@ public class PreguntaTopologica extends Pregunta {
 	
 	/** Constructor de la clase */
 	public PreguntaTopologica(Integer nNodos, Double porcentajeDeArcos, VisualizacionGrafo visualizacionGrafo) {
-		super(nNodos, porcentajeDeArcos, true, false, visualizacionGrafo, 1);
+		super(nNodos, porcentajeDeArcos, true, false, visualizacionGrafo);
 	}
 	
 	
@@ -24,7 +25,7 @@ public class PreguntaTopologica extends Pregunta {
 	
 	@Override
 	protected void aplicarAlgoritmo() {
-		recorridoTopologico = getGrafo().recorridoTopologico();
+		recorridoTopologico = ((GrafoDirigido)getGrafo()).recorridoTopologico();
 	}
 	
 	

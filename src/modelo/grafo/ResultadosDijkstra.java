@@ -1,4 +1,4 @@
-package modelo;
+package modelo.grafo;
 
 import java.util.ArrayList;
 
