@@ -5,6 +5,5 @@ import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 @RunWith(Suite.class)
-@SuiteClasses({ PreguntaTest.class, SemillaTest.class })
-public class TFGIIQuizGrafosTests {
-}
+@SuiteClasses({ PreguntaTest.class, SemillaTest.class, GrafoTest.class })
+public class TFGIIQuizGrafosTests { }

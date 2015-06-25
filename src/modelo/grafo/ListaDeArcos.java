@@ -38,6 +38,11 @@ public class ListaDeArcos {
 	}
 	
 	
+	public boolean isEmpty(){
+		return (size().equals(0));
+	}
+	
+	
 	public Integer getNodoDelArco(int indice){
 		return nodos.get(indice);
 	}
@@ -53,6 +58,31 @@ public class ListaDeArcos {
 	}
 	
 	
+	public Integer getExtremoMayor(int indice){
+		if(predecesores.get(indice) > nodos.get(indice)){
+			return predecesores.get(indice);
+		} else {
+			return nodos.get(indice);
+		}
+	}
+	
+	
+	public Integer getExtremoMenor(int indice){
+		if(predecesores.get(indice) < nodos.get(indice)){
+			return predecesores.get(indice);
+		} else {
+			return nodos.get(indice);
+		}
+	}
+	
+	
+	public void retirarArco(int indice){
+		nodos.remove(indice);
+		predecesores.remove(indice);
+		pesos.remove(indice);
+	}
+	
+	
 	public boolean contieneElArco(Integer extremo1, Integer extremo2){
 		//Por cada arco:
 		for(int a = 0; a < nodos.size(); a++){
@@ -65,6 +95,50 @@ public class ListaDeArcos {
 		}
 		//Si no se encontró ningún arco con esos mismos extremos, se devuelve false
 		return false;
+	}
+	
+	
+	/** Devuelve el índice del arco con menor peso. En caso de existir más de un arco con similar
+	 * peso, se devuelve el lexicográficamente menor. */
+	public Integer getIndiceArcoConMenorPeso(){
+		//Hallar el menor peso
+		Integer menorPeso = Integer.MAX_VALUE;
+		for(Integer peso : pesos){
+			if(peso < menorPeso){
+				menorPeso = peso;
+			}
+		}
+		
+		//Hallar el nodo lexicográficamente menor de entre aquellos con el menor peso
+		Integer indiceDelArcoLexicograficamenteMenor = null;
+		Integer primeraLetraDelArcoLexicograficamenteMenor = Integer.MAX_VALUE;
+		Integer segundaLetraDelArcoLexicograficamenteMenor = Integer.MAX_VALUE;
+		for(int n = 0; n < size(); n++){
+			if(pesos.get(n).equals(menorPeso)){
+			
+				if(nodos.get(n) < primeraLetraDelArcoLexicograficamenteMenor){
+					indiceDelArcoLexicograficamenteMenor = n;
+					primeraLetraDelArcoLexicograficamenteMenor = nodos.get(n);
+					segundaLetraDelArcoLexicograficamenteMenor = predecesores.get(n);
+				} else if(nodos.get(n).equals(primeraLetraDelArcoLexicograficamenteMenor)
+						&& predecesores.get(n) < segundaLetraDelArcoLexicograficamenteMenor){
+					indiceDelArcoLexicograficamenteMenor = n;
+					segundaLetraDelArcoLexicograficamenteMenor = predecesores.get(n);
+				}
+				
+				if(predecesores.get(n) < primeraLetraDelArcoLexicograficamenteMenor){
+					indiceDelArcoLexicograficamenteMenor = n;
+					primeraLetraDelArcoLexicograficamenteMenor = predecesores.get(n);
+					segundaLetraDelArcoLexicograficamenteMenor = nodos.get(n);
+				} else if(predecesores.get(n).equals(primeraLetraDelArcoLexicograficamenteMenor)
+						&& nodos.get(n) < segundaLetraDelArcoLexicograficamenteMenor){
+					indiceDelArcoLexicograficamenteMenor = n;
+					segundaLetraDelArcoLexicograficamenteMenor = nodos.get(n);
+				}
+				
+			}
+		}
+		return indiceDelArcoLexicograficamenteMenor;
 	}
 	
 }

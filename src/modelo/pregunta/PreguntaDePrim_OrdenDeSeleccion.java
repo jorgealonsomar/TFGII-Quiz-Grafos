@@ -32,7 +32,7 @@ public class PreguntaDePrim_OrdenDeSeleccion extends PreguntaDePrim {
 												Textos_Preguntas.pesoDelArco()	);
 		
 		//Por cada otra fila:
-		for(int i = 0; i < listaDeArcos.size(); i++){
+		for(int i = 0; i < arcosDelArbolDeExpansion.size(); i++){
 			ArrayList<Texto> campos = new ArrayList<Texto>();
 			
 			//Campo 0
@@ -42,7 +42,7 @@ public class PreguntaDePrim_OrdenDeSeleccion extends PreguntaDePrim {
 			//Campo 1
 			campos.add(Textos_Preguntas.abrirClausulaMultichoice());
 			for(int n = 0; n < getGrafo().getNNodos(); n++){
-				if(listaDeArcos.getNodoDelArco(i).equals(n)){
+				if(arcosDelArbolDeExpansion.getNodoDelArco(i).equals(n)){
 					campos.get(1).concatenar(Textos_Preguntas.opcionCorrecta100());
 				} else {
 					campos.get(1).concatenar(Textos_Preguntas.opcionQueResta100());
@@ -58,7 +58,7 @@ public class PreguntaDePrim_OrdenDeSeleccion extends PreguntaDePrim {
 			//Campo 2
 			campos.add(Textos_Preguntas.abrirClausulaMultichoice());
 			for(int n = 0; n < getGrafo().getNNodos(); n++){
-				if(listaDeArcos.getPredecesorDelArco(i).equals(n)){
+				if(arcosDelArbolDeExpansion.getPredecesorDelArco(i).equals(n)){
 					campos.get(2).concatenar(Textos_Preguntas.opcionCorrecta100());
 				} else {
 					campos.get(2).concatenar(Textos_Preguntas.opcionQueResta100());
@@ -74,7 +74,7 @@ public class PreguntaDePrim_OrdenDeSeleccion extends PreguntaDePrim {
 			//Campo 3
 			campos.add(Textos_Preguntas.abrirClausulaShortanswer());
 			campos.get(3).concatenar(Textos_Preguntas.opcionCorrecta100());
-			campos.get(3).concatenar(new Texto(listaDeArcos.getPesoDelArco(i).toString()));
+			campos.get(3).concatenar(new Texto(arcosDelArbolDeExpansion.getPesoDelArco(i).toString()));
 			campos.get(3).concatenar(new Texto("}"));
 			
 			parteAResponder.concatenarFilaDeTabla(	campos.get(0),
@@ -90,23 +90,23 @@ public class PreguntaDePrim_OrdenDeSeleccion extends PreguntaDePrim {
 	protected void construirRespuestaCorrecta() {
 		respuestaCorrecta = new Texto("");
 		
-		for(int i = 0; i < listaDeArcos.size(); i++){
+		for(int i = 0; i < arcosDelArbolDeExpansion.size(); i++){
 			respuestaCorrecta.concatenar(new Texto(Integer.toString(i+1)));
 			respuestaCorrecta.concatenar(new Texto("º: ["));
 			
 			respuestaCorrecta.concatenar(Textos_Preguntas.nodo());
 			respuestaCorrecta.concatenar(new Texto(" "));
 			respuestaCorrecta.concatenar(new Texto(Character.toString(
-					Grafo.convertirIndiceEnLetra(listaDeArcos.getNodoDelArco(i)))));
+					Grafo.convertirIndiceEnLetra(arcosDelArbolDeExpansion.getNodoDelArco(i)))));
 			respuestaCorrecta.concatenar(new Texto("] ["));
 			respuestaCorrecta.concatenar(Textos_Preguntas.predecesor());
 			respuestaCorrecta.concatenar(new Texto(": "));
 			respuestaCorrecta.concatenar(new Texto(Character.toString(
-					Grafo.convertirIndiceEnLetra(listaDeArcos.getPredecesorDelArco(i)))));
+					Grafo.convertirIndiceEnLetra(arcosDelArbolDeExpansion.getPredecesorDelArco(i)))));
 			respuestaCorrecta.concatenar(new Texto("] ["));
 			respuestaCorrecta.concatenar(Textos_Preguntas.distancia());
 			respuestaCorrecta.concatenar(new Texto(": "));
-			respuestaCorrecta.concatenar(new Texto(listaDeArcos.getPesoDelArco(i).toString()));
+			respuestaCorrecta.concatenar(new Texto(arcosDelArbolDeExpansion.getPesoDelArco(i).toString()));
 			respuestaCorrecta.concatenar(new Texto("]\n"));
 		}
 	}

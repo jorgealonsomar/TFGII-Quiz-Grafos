@@ -19,8 +19,9 @@ public class PestanaDePreguntaDePrim extends PestanaDePregunta {
 			int teclaMnemotecnica, AreaPreguntas areaPreguntas, FramePrincipal frame) {
 		super(panelTabulado, nombreDeLaPestana, teclaMnemotecnica, areaPreguntas, frame);
 		
+		deshabilitarGrafoDirigido(false);
 		setVisibleTipoPregunta(true);
-		addTipoPregunta(Textos_Preguntas.tipoPreguntaPrim_ArcosDelArbolDeExpansion());
+		addTipoPregunta(Textos_Preguntas.tipoPregunta_ArcosDelArbolDeExpansion());
 		addTipoPregunta(Textos_Preguntas.tipoPregunta_OrdenDeSeleccion());
 	}
 	

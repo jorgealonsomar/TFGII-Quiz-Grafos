@@ -112,4 +112,110 @@ public class GrafoNoDirigido extends Grafo {
 		return arcosRecorridos;
 	}
 
+	
+	public ListaDeArcos algoritmoDeKruskal(){
+		ListaDeArcos arcosArbolExpansion = new ListaDeArcos();
+
+		GruposKruskal grupos = new GruposKruskal();
+		
+		//Construir una lista con todos los arcos del grafo
+		ListaDeArcos arcosDelGrafo = listarArcosDelGrafo();
+		
+		//Aplicar el algoritmo
+		
+		//Por cada arco del grafo:
+		while(!arcosDelGrafo.isEmpty()){
+			Integer indiceArcoActual = arcosDelGrafo.getIndiceArcoConMenorPeso();
+			Integer nodoExtremoMenor = arcosDelGrafo.getExtremoMenor(indiceArcoActual);
+			Integer nodoExtremoMayor = arcosDelGrafo.getExtremoMayor(indiceArcoActual);
+			
+			//Si los dos extremos pertenecen al mismo grupo:
+			if(!grupos.pertenecenAlMismoGrupo(nodoExtremoMenor, nodoExtremoMayor)){
+				
+				//Añadir el nodo al árbol de expansión
+				arcosArbolExpansion.addArco(nodoExtremoMenor, nodoExtremoMayor,
+						arcosDelGrafo.getPesoDelArco(indiceArcoActual));
+				
+				//Combinar ambos grupos
+				grupos.combinarUltimosGruposComparados();
+
+			}
+			
+			//Se retira el arco analizado de la lista de arcos del grafo
+			arcosDelGrafo.retirarArco(indiceArcoActual);
+		}
+		
+		return arcosArbolExpansion;
+	}
+	
+	
+	
+	private class GruposKruskal{
+		ArrayList<ArrayList<Integer>> grupos = new ArrayList<>();
+		
+		/** Grupo del primero de los dos nodos comparados en pertenecenAlMismoGrupo().
+		 * Se almacena como variable global para su posterior uso en combinarUltimosComparados(). */
+		Integer grupoDelNodo1 = null;
+		
+		/** Grupo del segundo de los dos nodos comparados en pertenecenAlMismoGrupo().
+		 * Se almacena como variable global para su posterior uso en combinarUltimosComparados(). */
+		Integer grupoDelNodo2 = null;
+		
+		/** Constructor de la clase.
+		 * Construye los grupos, dejando un nodo en cada uno */
+		public GruposKruskal(){
+			//Por cada uno de los nNodos grupos
+			for(int n = 0; n < getNNodos(); n++){
+				//Se inicializa el grupo
+				grupos.add(new ArrayList<Integer>());
+				//Se añade a ese grupo el nodo n
+				grupos.get(n).add(n);
+			}
+		}
+		
+		
+		public boolean pertenecenAlMismoGrupo(Integer nodo1, Integer nodo2){
+			for(int g = 0; g < grupos.size(); g++){
+				if(grupos.get(g).contains(nodo1)){
+					grupoDelNodo1 = g;
+				}
+				if(grupos.get(g).contains(nodo2)){
+					grupoDelNodo2 = g;
+				}
+			}
+			
+			return (grupoDelNodo1.equals(grupoDelNodo2));
+		}
+		
+		
+		/** Combina los dos últimos grupos que se compararon mediante pertenecenAlMismoGrupo().
+		 * Los elementos del segundo grupo se añaden al primero, quedando el segundo sin elementos. */
+		public void combinarUltimosGruposComparados(){
+			Integer tamanoOriginalDelGrupo2 = grupos.get(grupoDelNodo2).size();
+			//Por cada nodo en el segundo grupo:
+			for(int n = 0; n < tamanoOriginalDelGrupo2; n++){
+				//Se retira un nodo de ese grupo
+				Integer nodoAux = grupos.get(grupoDelNodo2).remove(0);
+				//y se añade al otro
+				grupos.get(grupoDelNodo1).add(nodoAux);
+			}
+		}
+		
+	}
+	
+	
+	//Construir una lista con todos los arcos del grafo
+	public ListaDeArcos listarArcosDelGrafo(){
+		ListaDeArcos arcosDelGrafo = new ListaDeArcos();
+		for(int f = 0; f < getMatrizDeAdyacencia().length; f++){
+			for(int c = 0; c < getMatrizDeAdyacencia()[f].length; c++){
+				Integer pesoDelArco = getMatrizDeAdyacencia()[f][c]; 
+				if(pesoDelArco > 0){
+					arcosDelGrafo.addArco(f, c, pesoDelArco);	
+				}
+			}
+		}
+		return arcosDelGrafo;
+	}
+	
 }

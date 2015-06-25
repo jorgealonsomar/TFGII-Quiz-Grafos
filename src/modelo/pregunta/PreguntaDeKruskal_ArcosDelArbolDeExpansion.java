@@ -3,11 +3,11 @@ package modelo.pregunta;
 import modelo.grafo.ListaDeArcos;
 import texto.Textos_Preguntas;
 
-public class PreguntaDePrim_ArcosDelArbolDeExpansion extends PreguntaDePrim {
-	
+public class PreguntaDeKruskal_ArcosDelArbolDeExpansion extends PreguntaDeKruskal {
+
 	private ListaDeArcos arcosAPreguntar;
 	
-	public PreguntaDePrim_ArcosDelArbolDeExpansion(Integer nNodos, Double porcentajeDeArcos,
+	public PreguntaDeKruskal_ArcosDelArbolDeExpansion(Integer nNodos, Double porcentajeDeArcos,
 			boolean grafoDirigido, VisualizacionGrafo visualizacionGrafo) {
 		super(nNodos, porcentajeDeArcos, grafoDirigido, visualizacionGrafo);
 	}
@@ -29,13 +29,13 @@ public class PreguntaDePrim_ArcosDelArbolDeExpansion extends PreguntaDePrim {
 	
 	@Override
 	protected void construirParteAResponder() {
-		construirParteAResponder_PreguntaArcosDelArbolDeExpansion(arcosAPreguntar, arcosDelArbolDeExpansion);
+		construirParteAResponder_PreguntaArcosDelArbolDeExpansion(arcosAPreguntar, arcosArbolDeExpansion);
 	}
 	
 	
 	@Override
 	protected void construirRespuestaCorrecta() {
-		construirRespuestaCorrecta_PreguntaArcosDelArbolDeExpansion(arcosAPreguntar, arcosDelArbolDeExpansion);
+		construirRespuestaCorrecta_PreguntaArcosDelArbolDeExpansion(arcosAPreguntar, arcosArbolDeExpansion);
 	}
 
 }

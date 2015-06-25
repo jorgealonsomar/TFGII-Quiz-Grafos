@@ -136,6 +136,13 @@ public class Textos_Preguntas {
 	}
 	
 	
+	/** Arco. Usado en las preguntas de orden de selección (Kruskal) */
+	public static Texto arco(){
+		return new Texto("Arco",
+				"Arc");
+	}
+	
+	
 	/** Pertenece. Usado en las preguntas de hallar los arcos del árbol de expansión (Prim) */
 	public static Texto pertenece(){
 		return new Texto("Pertenece",
@@ -182,6 +189,13 @@ public class Textos_Preguntas {
 	public static Texto tituloPregPrim(){
 		return new Texto("Pregunta del Algoritmo de Prim",
 				"Prim's Algorithm Question.");
+	}
+	
+	
+	/** Título de una pregunta del Algoritmo de Kruskal */
+	public static Texto tituloPregKruskal(){
+		return new Texto("Pregunta del Algoritmo de Kruskal",
+				"Kruskal's Algorithm Question.");
 	}
 	
 	
@@ -273,13 +287,13 @@ public class Textos_Preguntas {
 	}
 	
 	
-	/** Texto asociado a las preguntas de Arcos del árbol de expansión (Prim) */
-	public static Texto tipoPreguntaPrim_ArcosDelArbolDeExpansion(){
-		return new Texto("Ruta más corta entre dos nodos", "Shortest path between two nodes");
+	/** Texto asociado a las preguntas de Arcos del árbol de expansión (Prim y Kruskal) */
+	public static Texto tipoPregunta_ArcosDelArbolDeExpansion(){
+		return new Texto("Arcos del árbol de expansión", "Spanning tree arcs");
 	}
 	
 	
-	/** Texto asociado las preguntas de orden de selección (Dijkstra, Prim) */
+	/** Texto asociado las preguntas de orden de selección (Dijkstra, Prim y Kruskal) */
 	public static Texto tipoPregunta_OrdenDeSeleccion(){
 		return new Texto("Orden de selección", "Selection order");
 	}

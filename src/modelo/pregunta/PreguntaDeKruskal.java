@@ -1,11 +1,19 @@
 package modelo.pregunta;
 
 import modelo.Semilla;
+import modelo.grafo.GrafoNoDirigido;
+import modelo.grafo.ListaDeArcos;
 import texto.Texto;
 import texto.Textos_Archivos;
+import texto.Textos_Preguntas;
 
-public class PreguntaDeKruskal extends Pregunta {
-
+public abstract class PreguntaDeKruskal extends Pregunta {
+	
+	public static final int PREGUNTA_ARCOS_DEL_ARBOL_DE_EXPANSION = 0;
+	public static final int PREGUNTA_ORDEN_DE_SELECCION = 1;
+	
+	protected ListaDeArcos arcosArbolDeExpansion;
+	
 	/** Constructor de la clase */
 	public PreguntaDeKruskal(Integer nNodos, Double porcentajeDeArcos, boolean grafoDirigido,
 			VisualizacionGrafo visualizacionGrafo) {
@@ -20,33 +28,26 @@ public class PreguntaDeKruskal extends Pregunta {
 	
 	@Override
 	protected void aplicarAlgoritmo() {
-		//TODO	
+		arcosArbolDeExpansion = ((GrafoNoDirigido)getGrafo()).algoritmoDeKruskal();
 	}
 	
 
 	@Override
 	protected void construirTitulo() {
-		// TODO Auto-generated method stub
-		
+		titulo = Textos_Preguntas.tituloPregKruskal();
 	}
-
+	
+	
 	@Override
-	protected void construirEnunciado() {
-		// TODO Auto-generated method stub
-		
-	}
-
+	protected abstract void construirEnunciado();
+	
+	
 	@Override
-	protected void construirParteAResponder() {
-		// TODO Auto-generated method stub
-		
-	}
-
+	protected abstract void construirParteAResponder();
+	
+	
 	@Override
-	protected void construirRespuestaCorrecta() {
-		// TODO Auto-generated method stub
-		
-	}
+	protected abstract void construirRespuestaCorrecta();
 
 	@Override
 	protected void generarSemilla(boolean grafoDirigido) {

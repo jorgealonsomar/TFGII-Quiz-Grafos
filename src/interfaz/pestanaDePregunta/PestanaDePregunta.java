@@ -128,7 +128,7 @@ public abstract class PestanaDePregunta extends JPanel {
 	
 	
 	public void deshabilitarGrafoDirigido(boolean dejarMarcado){
-		checkBoxGrafoDirigido.setSelected(true);
+		checkBoxGrafoDirigido.setSelected(dejarMarcado);
 		
 		txtGrafoDirigido.setEnabled(false);
 		checkBoxGrafoDirigido.setEnabled(false);

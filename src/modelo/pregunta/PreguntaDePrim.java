@@ -12,7 +12,7 @@ public abstract class PreguntaDePrim extends Pregunta {
 	public static final int PREGUNTA_ARCOS_DEL_ARBOL_DE_EXPANSION = 0;
 	public static final int PREGUNTA_ORDEN_DE_SELECCION = 1;
 	
-	protected ListaDeArcos listaDeArcos;
+	protected ListaDeArcos arcosDelArbolDeExpansion;
 	
 	/** Constructor de la clase */
 	public PreguntaDePrim(Integer nNodos, Double porcentajeDeArcos, boolean grafoDirigido,
@@ -28,7 +28,7 @@ public abstract class PreguntaDePrim extends Pregunta {
 	
 	@Override
 	protected void aplicarAlgoritmo() {
-		listaDeArcos = ((GrafoNoDirigido)getGrafo()).algoritmoDePrim();
+		arcosDelArbolDeExpansion = ((GrafoNoDirigido)getGrafo()).algoritmoDePrim();
 	}
 	
 	
