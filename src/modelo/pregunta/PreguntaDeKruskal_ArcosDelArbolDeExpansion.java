@@ -8,8 +8,8 @@ public class PreguntaDeKruskal_ArcosDelArbolDeExpansion extends PreguntaDeKruska
 	private ListaDeArcos arcosAPreguntar;
 	
 	public PreguntaDeKruskal_ArcosDelArbolDeExpansion(Integer nNodos, Double porcentajeDeArcos,
-			boolean grafoDirigido, VisualizacionGrafo visualizacionGrafo) {
-		super(nNodos, porcentajeDeArcos, grafoDirigido, visualizacionGrafo);
+			VisualizacionGrafo visualizacionGrafo) {
+		super(nNodos, porcentajeDeArcos, visualizacionGrafo);
 	}
 	
 	

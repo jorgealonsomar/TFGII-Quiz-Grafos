@@ -2,6 +2,7 @@ package interfaz.pestanaDePregunta;
 
 import interfaz.AreaPreguntas;
 import interfaz.FramePrincipal;
+import interfaz.PanelCentral;
 
 import javax.swing.JTabbedPane;
 
@@ -13,16 +14,17 @@ import texto.Texto;
 public class PestanaDePreguntaTopologica extends PestanaDePregunta {
 
 	public PestanaDePreguntaTopologica(JTabbedPane panelTabulado, Texto nombreDeLaPestana, int teclaMnemotecnica,
-			AreaPreguntas areaPreguntas, FramePrincipal frame) {
-		super(panelTabulado, nombreDeLaPestana, teclaMnemotecnica, areaPreguntas, frame);
+			AreaPreguntas areaPreguntas, FramePrincipal frame, PanelCentral panelCentral) {
+		super(panelTabulado, nombreDeLaPestana, teclaMnemotecnica, areaPreguntas, frame, panelCentral);
 		
-		deshabilitarGrafoDirigido(true);
-		setParametrosSelectorPorcentajeArcos(5, 2, 1);
+//		deshabilitarGrafoDirigido(true);
 	}
 
 	@Override
 	protected Pregunta generarPregunta() {
-		return new PreguntaTopologica(getNumNodos(), getPorcentajeArcos(), getVisualizacionGrafo());
+		return new PreguntaTopologica(	panelCentral.getNumNodos(),
+										panelCentral.getPorcentajeArcos(), 
+										panelCentral.getVisualizacionGrafo());
 	}
 
 }

@@ -15,9 +15,9 @@ public abstract class PreguntaDePrim extends Pregunta {
 	protected ListaDeArcos arcosDelArbolDeExpansion;
 	
 	/** Constructor de la clase */
-	public PreguntaDePrim(Integer nNodos, Double porcentajeDeArcos, boolean grafoDirigido,
+	public PreguntaDePrim(Integer nNodos, Double porcentajeDeArcos,
 			VisualizacionGrafo visualizacionGrafo) {
-		super(nNodos, porcentajeDeArcos, grafoDirigido, true, visualizacionGrafo);
+		super(nNodos, porcentajeDeArcos, false, true, visualizacionGrafo);
 	}
 	
 	

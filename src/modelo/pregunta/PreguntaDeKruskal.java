@@ -15,9 +15,9 @@ public abstract class PreguntaDeKruskal extends Pregunta {
 	protected ListaDeArcos arcosArbolDeExpansion;
 	
 	/** Constructor de la clase */
-	public PreguntaDeKruskal(Integer nNodos, Double porcentajeDeArcos, boolean grafoDirigido,
+	public PreguntaDeKruskal(Integer nNodos, Double porcentajeDeArcos,
 			VisualizacionGrafo visualizacionGrafo) {
-		super(nNodos, porcentajeDeArcos, grafoDirigido, true, visualizacionGrafo);
+		super(nNodos, porcentajeDeArcos, false, true, visualizacionGrafo);
 	}
 	
 	

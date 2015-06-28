@@ -2,6 +2,7 @@ package interfaz.pestanaDePregunta;
 
 import interfaz.AreaPreguntas;
 import interfaz.FramePrincipal;
+import interfaz.PanelCentral;
 
 import javax.swing.JTabbedPane;
 
@@ -17,8 +18,8 @@ import texto.Textos_Preguntas;
 public class PestanaDePreguntaDeDijkstra extends PestanaDePregunta {
 
 	public PestanaDePreguntaDeDijkstra(JTabbedPane panelTabulado, Texto nombreDeLaPestana, int teclaMnemotecnica,
-			AreaPreguntas areaPreguntas, FramePrincipal frame) {
-		super(panelTabulado, nombreDeLaPestana, teclaMnemotecnica, areaPreguntas, frame);
+			AreaPreguntas areaPreguntas, FramePrincipal frame, PanelCentral panelCentral) {
+		super(panelTabulado, nombreDeLaPestana, teclaMnemotecnica, areaPreguntas, frame, panelCentral);
 		
 		setVisibleTipoPregunta(true);
 		addTipoPregunta(Textos_Preguntas.tipoPreguntaDijkstra_DistanciasMasCortas());
@@ -30,14 +31,20 @@ public class PestanaDePreguntaDeDijkstra extends PestanaDePregunta {
 	protected Pregunta generarPregunta() {
 		switch(getTipoDePregunta()){
 		case PreguntaDeDijkstra.PREGUNTA_DISTANCIAS_MAS_CORTAS:
-			return new PreguntaDeDijkstra_DistanciasMasCortas(getNumNodos(), getPorcentajeArcos(), isDirigido(),
-					getVisualizacionGrafo());
+			return new PreguntaDeDijkstra_DistanciasMasCortas(	panelCentral.getNumNodos(),
+																panelCentral.getPorcentajeArcos(),
+																panelCentral.isDirigido(), 
+																panelCentral.getVisualizacionGrafo());
 		case PreguntaDeDijkstra.PREGUNTA_RUTA_MAS_CORTA:
-			return new PreguntaDeDijkstra_RutaMasCorta(getNumNodos(), getPorcentajeArcos(), isDirigido(),
-					getVisualizacionGrafo());
+			return new PreguntaDeDijkstra_RutaMasCorta(	panelCentral.getNumNodos(),
+														panelCentral.getPorcentajeArcos(),
+														panelCentral.isDirigido(), 
+														panelCentral.getVisualizacionGrafo());
 		case PreguntaDeDijkstra.PREGUNTA_ORDEN_DE_SELECCION: default:
-			return new PreguntaDeDijkstra_OrdenDeSeleccion(getNumNodos(), getPorcentajeArcos(), isDirigido(),
-					getVisualizacionGrafo());
+			return new PreguntaDeDijkstra_OrdenDeSeleccion(	panelCentral.getNumNodos(),
+															panelCentral.getPorcentajeArcos(),
+															panelCentral.isDirigido(), 
+															panelCentral.getVisualizacionGrafo());
 		}
 		
 	}

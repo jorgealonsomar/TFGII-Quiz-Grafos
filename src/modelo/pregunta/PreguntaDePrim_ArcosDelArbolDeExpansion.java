@@ -8,8 +8,8 @@ public class PreguntaDePrim_ArcosDelArbolDeExpansion extends PreguntaDePrim {
 	private ListaDeArcos arcosAPreguntar;
 	
 	public PreguntaDePrim_ArcosDelArbolDeExpansion(Integer nNodos, Double porcentajeDeArcos,
-			boolean grafoDirigido, VisualizacionGrafo visualizacionGrafo) {
-		super(nNodos, porcentajeDeArcos, grafoDirigido, visualizacionGrafo);
+			 VisualizacionGrafo visualizacionGrafo) {
+		super(nNodos, porcentajeDeArcos, visualizacionGrafo);
 	}
 	
 	

@@ -9,8 +9,8 @@ import texto.Textos_Preguntas;
 public class PreguntaDePrim_OrdenDeSeleccion extends PreguntaDePrim {
 	
 	public PreguntaDePrim_OrdenDeSeleccion(Integer nNodos, Double porcentajeDeArcos,
-			boolean grafoDirigido, VisualizacionGrafo visualizacionGrafo) {
-		super(nNodos, porcentajeDeArcos, grafoDirigido, visualizacionGrafo);
+			VisualizacionGrafo visualizacionGrafo) {
+		super(nNodos, porcentajeDeArcos, visualizacionGrafo);
 	}
 	
 	

@@ -11,8 +11,8 @@ import texto.Textos_Preguntas;
 public class PreguntaDeKruskal_OrdenDeSeleccion extends PreguntaDeKruskal {
 	
 	public PreguntaDeKruskal_OrdenDeSeleccion(Integer nNodos, Double porcentajeDeArcos,
-			boolean grafoDirigido, VisualizacionGrafo visualizacionGrafo) {
-		super(nNodos, porcentajeDeArcos, grafoDirigido, visualizacionGrafo);
+			VisualizacionGrafo visualizacionGrafo) {
+		super(nNodos, porcentajeDeArcos, visualizacionGrafo);
 	}
 	
 	

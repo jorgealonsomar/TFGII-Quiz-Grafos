@@ -2,6 +2,7 @@ package interfaz.pestanaDePregunta;
 
 import interfaz.AreaPreguntas;
 import interfaz.FramePrincipal;
+import interfaz.PanelCentral;
 
 import javax.swing.JTabbedPane;
 
@@ -16,10 +17,10 @@ import texto.Textos_Preguntas;
 public class PestanaDePreguntaDeKruskal extends PestanaDePregunta {
 
 	public PestanaDePreguntaDeKruskal(JTabbedPane panelTabulado, Texto nombreDeLaPestana,
-			int teclaMnemotecnica, AreaPreguntas areaPreguntas, FramePrincipal frame) {
-		super(panelTabulado, nombreDeLaPestana, teclaMnemotecnica, areaPreguntas, frame);
+			int teclaMnemotecnica, AreaPreguntas areaPreguntas, FramePrincipal frame, PanelCentral panelCentral) {
+		super(panelTabulado, nombreDeLaPestana, teclaMnemotecnica, areaPreguntas, frame, panelCentral);
 
-		deshabilitarGrafoDirigido(false);
+//		deshabilitarGrafoDirigido(false);
 		setVisibleTipoPregunta(true);
 		addTipoPregunta(Textos_Preguntas.tipoPregunta_ArcosDelArbolDeExpansion());
 		addTipoPregunta(Textos_Preguntas.tipoPregunta_OrdenDeSeleccion());
@@ -29,11 +30,13 @@ public class PestanaDePreguntaDeKruskal extends PestanaDePregunta {
 	protected Pregunta generarPregunta() {
 		switch(getTipoDePregunta()){
 		case PreguntaDePrim.PREGUNTA_ARCOS_DEL_ARBOL_DE_EXPANSION:
-			return new PreguntaDeKruskal_ArcosDelArbolDeExpansion(getNumNodos(), getPorcentajeArcos(),
-					isDirigido(), getVisualizacionGrafo());
+			return new PreguntaDeKruskal_ArcosDelArbolDeExpansion(	panelCentral.getNumNodos(),
+																	panelCentral.getPorcentajeArcos(),
+																	panelCentral.getVisualizacionGrafo());
 		case PreguntaDePrim.PREGUNTA_ORDEN_DE_SELECCION: default:
-			return new PreguntaDeKruskal_OrdenDeSeleccion(getNumNodos(), getPorcentajeArcos(),
-					isDirigido(), getVisualizacionGrafo());
+			return new PreguntaDeKruskal_OrdenDeSeleccion(	panelCentral.getNumNodos(),
+																	panelCentral.getPorcentajeArcos(),
+																	panelCentral.getVisualizacionGrafo());
 		}
 	}
 

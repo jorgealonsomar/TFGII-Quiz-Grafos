@@ -1,18 +1,10 @@
 package interfaz;
 
-import interfaz.pestanaDePregunta.PestanaDePregunta;
-import interfaz.pestanaDePregunta.PestanaDePreguntaDeAnchura;
-import interfaz.pestanaDePregunta.PestanaDePreguntaDeDijkstra;
-import interfaz.pestanaDePregunta.PestanaDePreguntaDeKruskal;
-import interfaz.pestanaDePregunta.PestanaDePreguntaDePrim;
-import interfaz.pestanaDePregunta.PestanaDePreguntaDeProfundidad;
-import interfaz.pestanaDePregunta.PestanaDePreguntaTopologica;
-
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
@@ -25,7 +17,6 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
 
 import sistema.Parametros;
@@ -45,9 +36,11 @@ public class FramePrincipal extends JFrame {
 
 	/** Barra del menú superior */
 	private BarraMenu barraMenu;
-
-	/** Panel que emplea pestañas para separar los distintos tipos de preguntas */
-	private JTabbedPane panelTabulado;
+	
+	/** Panel central, donde se realiza la selección de parámetros */
+	private PanelCentral panelCentral;
+//	/** Panel que emplea pestañas para separar los distintos tipos de preguntas */
+//	private JTabbedPane panelTabulado;
 
 	/** Botón de selección de idioma */
 	private JLabel imgIdioma;
@@ -76,7 +69,7 @@ public class FramePrincipal extends JFrame {
 	/** Constructor de la clase */
 	public FramePrincipal(Parametros parametros) {
 		this.parametros = parametros;
-
+		
 		setTitle("TFGII Generador de preguntas de Algoritmia");
 		setBounds(0, 0, ANCHO, ALTO);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -87,7 +80,7 @@ public class FramePrincipal extends JFrame {
 		construirBarraMenu();
 		construirAreaPreguntas();
 		construirSelectorDeDirectorio();
-		construirPanelTabulado();
+		construirPanelCentral();
 		construirBotonIdioma();
 
 		presentarTrasCambioDeIdioma();
@@ -164,11 +157,12 @@ public class FramePrincipal extends JFrame {
 	/** Construye el jPanel correspondiente a este frame */
 	private void construirPanelDeLaVentana() {
 		panelDeLaVentana = new JPanel();
-		panelDeLaVentana.setBounds(0, 0, ANCHO - 50, ALTO - 50);
+//		panelDeLaVentana.setBounds(0, 0, ANCHO - 50, ALTO - 50);
+//		panelDeLaVentana.setPreferredSize(new Dimension(ANCHO - 50, ALTO - 50));
 		panelDeLaVentana.setBackground(Color.GRAY);
 		panelDeLaVentana.setVisible(true);
 		panelDeLaVentana.setLayout(new BorderLayout());
-		add(panelDeLaVentana);
+		setContentPane(panelDeLaVentana);
 	}
 	
 
@@ -185,7 +179,7 @@ public class FramePrincipal extends JFrame {
 	 */
 	private void construirSelectorDeDirectorio() {
 		JPanel panelSelectorDeDirectorio = new JPanel();
-		panelSelectorDeDirectorio.setBounds(0, 0, ANCHO, ALTO);
+//		panelSelectorDeDirectorio.setBounds(0, 0, ANCHO, ALTO);
 		panelSelectorDeDirectorio.setBackground(Color.GRAY);
 		panelSelectorDeDirectorio.setVisible(true);
 		panelSelectorDeDirectorio.setLayout(new BorderLayout());
@@ -201,24 +195,10 @@ public class FramePrincipal extends JFrame {
 	}
 	
 
-	/** Construye la barra del menú superior */
-	private void construirPanelTabulado() {
-		panelTabulado = new JTabbedPane();
-		panelDeLaVentana.add(panelTabulado, BorderLayout.CENTER);
-
-		// Construir las pestañas, que se añaden al panel tabulado:
-		new PestanaDePreguntaDeProfundidad(panelTabulado, Textos_Interfaz.recorridoEnProfundidad(),
-				KeyEvent.VK_E, areaPreguntas, this);
-		new PestanaDePreguntaDeAnchura(panelTabulado, Textos_Interfaz.recorridoEnAnchura(),
-				KeyEvent.VK_A, areaPreguntas, this);
-		new PestanaDePreguntaTopologica(panelTabulado, Textos_Interfaz.clasificacionTopologica(),
-				KeyEvent.VK_T, areaPreguntas, this);
-		new PestanaDePreguntaDeDijkstra(panelTabulado, Textos_Interfaz.algoritmoDeDijkstra(),
-				KeyEvent.VK_D, areaPreguntas, this);
-		new PestanaDePreguntaDePrim(panelTabulado, Textos_Interfaz.algoritmoDePrim(), KeyEvent.VK_P,
-				areaPreguntas, this);
-		new PestanaDePreguntaDeKruskal(panelTabulado, Textos_Interfaz.algoritmoDeKruskal(),
-				KeyEvent.VK_K, areaPreguntas, this);
+	/** Construye el panel central */
+	private void construirPanelCentral() {
+		panelCentral = new PanelCentral(areaPreguntas, this);
+		panelDeLaVentana.add(panelCentral, BorderLayout.CENTER);
 	}
 	
 
@@ -228,13 +208,13 @@ public class FramePrincipal extends JFrame {
 		areaPreguntas.setEditable(false);
 		areaPreguntas.setLineWrap(true);
 		areaPreguntas.setWrapStyleWord(true);
-		areaPreguntas.setSize(450, ALTO);
+		areaPreguntas.setPreferredSize(new Dimension(450, ALTO));
 		areaPreguntas.setText("");
 		panelDeLaVentana.add(areaPreguntas, BorderLayout.LINE_END);
 
-		JScrollPane scrollMontiExtra = new JScrollPane(areaPreguntas);
-		scrollMontiExtra.setBounds(8, 18, 459, 261);
-		panelDeLaVentana.add(scrollMontiExtra, BorderLayout.LINE_END);
+		JScrollPane scrolledAreaPreguntas = new JScrollPane(areaPreguntas);
+		scrolledAreaPreguntas.setBounds(8, 18, 459, 261);
+		panelDeLaVentana.add(scrolledAreaPreguntas, BorderLayout.LINE_END);
 	}
 	
 
@@ -263,14 +243,8 @@ public class FramePrincipal extends JFrame {
 		}
 		imgIdioma.setToolTipText(Textos_Interfaz.botonSeleccionDeIdioma().getString(nuevoIdioma));
 
-		// Pestañas del panel tabulado
-		for (int i = 0; i < panelTabulado.getTabCount(); i++) {
-			PestanaDePregunta pestanaActual = ((PestanaDePregunta) panelTabulado.getComponentAt(i));
-
-			panelTabulado.setTitleAt(i, pestanaActual.getNombreDeLaPestana(nuevoIdioma));
-			panelTabulado.setToolTipTextAt(i, pestanaActual.getNombreDeLaPestana(nuevoIdioma));
-			pestanaActual.reaccionarACambioDeIdioma(nuevoIdioma);
-		}
+		// Panel central
+		panelCentral.presentarTrasCambioDeIdioma(nuevoIdioma);
 
 		// Panel de selección de directorio
 		botonElegirDirectorio.setText(Textos_Interfaz.botonElegirDirectorio().getString(nuevoIdioma));
