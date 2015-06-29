@@ -29,6 +29,8 @@ public class PanelCentral extends JPanel {
 	
 	private JTabbedPane panelTabulado;
 	
+	private Idioma idioma = Idioma.ESP;
+	
 	private JLabel txtNumPreguntas = new JLabel(Textos_Interfaz.textoNumPreguntas().esp());
 	private final int MIN_PREGUNTAS = 1;
 	private final int MAX_PREGUNTAS = 15;
@@ -127,6 +129,8 @@ public class PanelCentral extends JPanel {
 	
 	/** Reescribe los textos tras cambiar la configuración del idioma */
 	public void presentarTrasCambioDeIdioma(Idioma nuevoIdioma) {
+		this.idioma = nuevoIdioma;
+		
 		for (int i = 0; i < panelTabulado.getTabCount(); i++) {
 			PestanaDePregunta pestanaActual = ((PestanaDePregunta) panelTabulado.getComponentAt(i));
 
@@ -141,14 +145,28 @@ public class PanelCentral extends JPanel {
 		txtNumNodos.setText(Textos_Interfaz.textoNumNodos().getString(nuevoIdioma));
 		selectorNumNodos.setToolTipText(Textos_Interfaz.tipTextNumNodos().getString(nuevoIdioma));
 		
-		txtPorcentajeArcos.setText(Textos_Interfaz.textoPorcentajeArcos().getString(nuevoIdioma));
-		txtPorcentajeArcos.setToolTipText(Textos_Interfaz.tipTextPorcentajeArcos().getString(nuevoIdioma));
-		selectorPorcentajeArcos.setToolTipText(Textos_Interfaz.tipTextPorcentajeArcos().getString(nuevoIdioma));
+		reescribirSelectorPorcentajeArcos();
 		
 		txtGrafoDirigido.setText(Textos_Interfaz.textoGrafoDirigido().getString(nuevoIdioma));
 		
 		txtVisualizacionGrafo.setText(Textos_Interfaz.textoVisualizacionGrafo().getString(nuevoIdioma));
 		comboBoxVisualizacionGrafo.actualizar(nuevoIdioma);
+	}
+	
+	
+	private void reescribirSelectorPorcentajeArcos(){
+		//Para preguntas topológicas:
+		if(panelTabulado.getSelectedIndex() == 2){
+			txtPorcentajeArcos.setText(Textos_Interfaz.textoPosibilidadDeArcos().getString(idioma));
+			txtPorcentajeArcos.setToolTipText(Textos_Interfaz.tipTextPosibilidadDeArcos().getString(idioma));
+			selectorPorcentajeArcos.setToolTipText(Textos_Interfaz.tipTextPosibilidadDeArcos().getString(idioma));
+		}
+		//Para el resto de preguntas:
+		else {
+			txtPorcentajeArcos.setText(Textos_Interfaz.textoPorcentajeArcos().getString(idioma));
+			txtPorcentajeArcos.setToolTipText(Textos_Interfaz.tipTextPorcentajeArcos().getString(idioma));
+			selectorPorcentajeArcos.setToolTipText(Textos_Interfaz.tipTextPorcentajeArcos().getString(idioma));
+		}
 	}
 	
 	
@@ -227,8 +245,10 @@ public class PanelCentral extends JPanel {
 
 		@Override
 		public void stateChanged(ChangeEvent arg0) {
+			
+			//Activar/desactivar pestaña de seleccionar si el grafo es dirigido
 			switch(panelTabulado.getSelectedIndex()){
-			case 2: case 4: case 5: //Pregunta topológica, Prim, Kruskal
+			case 4: case 5: //Pregunta topológica, Prim, Kruskal
 				txtGrafoDirigido.setEnabled(false);
 				checkBoxGrafoDirigido.setEnabled(false);
 				break;
@@ -237,6 +257,8 @@ public class PanelCentral extends JPanel {
 				checkBoxGrafoDirigido.setEnabled(true);
 				break;
 			}
+			
+			reescribirSelectorPorcentajeArcos();
 		}
 	}
 

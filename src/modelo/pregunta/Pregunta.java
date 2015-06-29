@@ -14,16 +14,16 @@ import util.Idioma;
 
 public abstract class Pregunta {
 
-	private Grafo grafo;
+	protected Grafo grafo;
 
 	protected Texto titulo;
 	protected Texto enunciado;
 	protected Texto parteAResponder;
 	protected Texto respuestaCorrecta;
+
+	protected Random randomGenerator;
 	
 	private VisualizacionGrafo visualizacionGrafo;
-	
-	private Random randomGenerator;
 	
 	private Semilla semilla;
 
@@ -69,12 +69,12 @@ public abstract class Pregunta {
 	}
 	
 
-	private void generarGrafo(Integer nNodos, Double porcentajeDeArcos, boolean grafoDirigido,
+	protected void generarGrafo(Integer nNodos, Double porcentajeDeArcos, boolean grafoDirigido,
 			boolean esPonderado) {
 		if (grafoDirigido) {
-			grafo = new GrafoDirigido(nNodos, porcentajeDeArcos, esPonderado, randomGenerator);
+			grafo = new GrafoDirigido(nNodos, porcentajeDeArcos, esPonderado, randomGenerator, false);
 		} else {
-			grafo = new GrafoNoDirigido(nNodos, porcentajeDeArcos, esPonderado, randomGenerator);
+			grafo = new GrafoNoDirigido(nNodos, porcentajeDeArcos, esPonderado, randomGenerator, false);
 		}
 	}
 	

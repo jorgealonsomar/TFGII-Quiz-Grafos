@@ -15,6 +15,19 @@ public class Textos_Interfaz {
 	}
 	
 	
+	/** Texto del botón de Limpiar del área de texto */
+	public static Texto botonLimpiar() {
+		return new Texto("Limpiar", "Clean");
+	}
+	
+	
+	/** Tiptext del botón de Limpiar del área de texto */
+	public static Texto tipTextBotonLimpiar() {
+		return new Texto("Borra el contenido del área de preguntas",
+				"Ereases the content of the questions area");
+	}
+	
+	
 	/** Tiptext del área donde se muestran las preguntas que se van generando */
 	public static Texto tipTextAreaPreguntas() {
 		return new Texto("Aquí se muestran las preguntas que se van generando",
@@ -43,6 +56,13 @@ public class Textos_Interfaz {
 				+ "0% means there will be only a minimun spanning tree for the graph. "
 				+ "100% means the graph will be totally connected."
 						);
+	}
+	
+	
+	/** Tiptext del área donde se muestran las preguntas que se van generando */
+	public static Texto tipTextPosibilidadDeArcos() {
+		return new Texto("Posibilidad de que cada arco se añada al grafo acíclico. ", 
+				"Possibility of each arcs being added to the acyclic graph. ");
 	}
 	
 	
@@ -109,6 +129,12 @@ public class Textos_Interfaz {
 	/** Texto junto al selector del porcentaje de arcos que tendrá el grafo */
 	public static Texto textoPorcentajeArcos(){
 		return new Texto("Porcentaje de arcos: ", "Percentage of arcs: ");
+	}
+	
+	
+	/** Texto junto al selector de la posibilidad de que se cree un arco (Topológica sólo) */
+	public static Texto textoPosibilidadDeArcos(){
+		return new Texto("Posibilidad de arcos: ", "Possibility of arcs: ");
 	}
 	
 	

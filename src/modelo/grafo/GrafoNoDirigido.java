@@ -7,8 +7,9 @@ import modelo.Arco;
 
 public class GrafoNoDirigido extends Grafo {
 	
-	public GrafoNoDirigido(Integer nNodos, Double porcentajeArcos, boolean esPonderado, Random randomGenerator) {
-		super(nNodos, porcentajeArcos, esPonderado, randomGenerator);
+	public GrafoNoDirigido(Integer nNodos, Double porcentajeArcos, boolean esPonderado, Random randomGenerator,
+			boolean grafoSinCiclos) {
+		super(nNodos, porcentajeArcos, esPonderado, randomGenerator, grafoSinCiclos);
 		// TODO Auto-generated constructor stub
 	}
 

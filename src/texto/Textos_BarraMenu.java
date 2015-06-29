@@ -20,7 +20,13 @@ public class Textos_BarraMenu {
 	}
 	
 	
-	/** Texto de la opción Importar Semilla del menú Archivo */
+	/** Texto de la opción Acerca de del menú Ayuda */
+	public static Texto menuAyuda_AcercaDe(){
+		return new Texto("Acerca de", "About");
+	}
+	
+	
+	/** Petición de introducir la semilla */
 	public static Texto introduzcaSemilla(){
 		return new Texto("Introduzca la semilla: ", "Insert the seed: ");
 	}

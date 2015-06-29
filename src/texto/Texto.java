@@ -41,7 +41,7 @@ public class Texto {
 		} else if(idioma == Idioma.ENG){
 			return eng();
 		} else {
-			TFGII.LOGGER.warning("Idioma seleccionado incorrectamente");
+			TFGII.LOGGER.warning("[Texto] Idioma seleccionado incorrectamente: idioma = " + idioma);
 			return null;
 		}
 	}

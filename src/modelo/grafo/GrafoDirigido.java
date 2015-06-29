@@ -7,8 +7,9 @@ import modelo.Arco;
 
 public class GrafoDirigido extends Grafo {
 
-	public GrafoDirigido(Integer nNodos, Double porcentajeArcos, boolean esPonderado, Random randomGenerator) {
-		super(nNodos, porcentajeArcos, esPonderado, randomGenerator);
+	public GrafoDirigido(Integer nNodos, Double porcentajeArcos, boolean esPonderado, Random randomGenerator,
+			boolean grafoSinCiclos) {
+		super(nNodos, porcentajeArcos, esPonderado, randomGenerator, grafoSinCiclos);
 	}
 
 	public GrafoDirigido(Integer[][] matrizDeAdyacencia) {

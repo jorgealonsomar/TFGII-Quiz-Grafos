@@ -20,7 +20,9 @@ public class BarraMenu extends JMenuBar {
 	private JMenuItem opcionSalir;
 
 	private final JMenu menuAyuda;
+	private JMenuItem opcionAcercaDe;
 
+	
 	/** Constructor de la clase */
 	public BarraMenu(FramePrincipal frame, Idioma idioma) {
 		this.frame = frame;
@@ -30,8 +32,7 @@ public class BarraMenu extends JMenuBar {
 		add(menuArchivo);
 
 		opcionImportarSemilla = new JMenuItem();
-		opcionImportarSemilla
-				.addActionListener(new ImportarSemillaListener());
+		opcionImportarSemilla.addActionListener(new ImportarSemillaListener());
 		menuArchivo.add(opcionImportarSemilla);
 
 		opcionSalir = new JMenuItem();
@@ -41,9 +42,15 @@ public class BarraMenu extends JMenuBar {
 		// Menú > Ayuda
 		menuAyuda = new JMenu();
 		add(menuAyuda);
+		
+		opcionAcercaDe = new JMenuItem();
+		opcionAcercaDe.addActionListener(new AcercaDeListener());
+		menuAyuda.add(opcionAcercaDe);
+		
 
 		reescribirTextos(idioma);
 	}
+	
 
 	/** Reescribe los textos tras cambiar la configuración del idioma */
 	public void reescribirTextos(Idioma nuevoIdioma) {
@@ -54,15 +61,20 @@ public class BarraMenu extends JMenuBar {
 		opcionSalir.setText(Textos_BarraMenu.menuArchivo_Salir().getString(nuevoIdioma));
 
 		menuAyuda.setText(Textos_BarraMenu.menuAyuda().getString(nuevoIdioma));
+		opcionAcercaDe.setText(Textos_BarraMenu.menuAyuda_AcercaDe().getString(nuevoIdioma));
 	}
-
+	
+	
+	
 	private class SalirListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			frame.dispose();
 		}
 	}
-
+	
+	
+	
 	private class ImportarSemillaListener implements ActionListener {
 
 		@Override
@@ -70,5 +82,15 @@ public class BarraMenu extends JMenuBar {
 			frame.importarSemilla();
 		}
 	}
+	
+	
+	
+	private class AcercaDeListener implements ActionListener {
 
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			//TODO
+		}
+	}
+	
 }

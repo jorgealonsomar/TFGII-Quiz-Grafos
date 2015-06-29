@@ -1,6 +1,7 @@
 package modelo.grafo;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Random;
 
 import modelo.Arco;
@@ -24,7 +25,8 @@ public abstract class Grafo {
 	 * Constructor de la clase. Construye un nuevo grafo al azar a partir de los
 	 * parámetros fijados.
 	 */
-	public Grafo(Integer nNodos, Double porcentajeDeArcos, boolean esPonderado, Random randomGenerator) {
+	public Grafo(Integer nNodos, Double porcentajeDeArcos, boolean esPonderado, Random randomGenerator,
+			boolean grafoSinCiclos) {
 		this.setNNodos(nNodos);
 		this.esPonderado = esPonderado;
 		this.randomGenerator = randomGenerator;
@@ -36,9 +38,13 @@ public abstract class Grafo {
 				matrizDeAdyacencia[i][j] = 0;
 			}
 		}
-
-		construirArcosMinimos();
-		construirArcosExtra(porcentajeDeArcos);
+		
+		if(grafoSinCiclos){ //(Preguntas de Recorrido Topológico)
+			construirArcosSinCiclos(porcentajeDeArcos);
+		} else {
+			construirArcosMinimos();
+			construirArcosExtra(porcentajeDeArcos);
+		}
 	}
 	
 	
@@ -53,11 +59,10 @@ public abstract class Grafo {
 	
 	
 	/**
-	 * Construye un árbol de expansión mínimo que recorra el grafo.
+	 * Construye un árbol de expansión con un número de aristas mínimo que recorra el grafo.
 	 * 
-	 * Une un nodo visitado al azar con un nodo no visitado al azar (que queda
-	 * marcado como visitado), y repite este proceso hasta haber acabado con
-	 * todos los nodos no visitados.
+	 * Une un nodo visitado al azar con un nodo no visitado al azar (que queda marcado como visitado),
+	 * y repite este proceso hasta haber acabado con todos los nodos no visitados.
 	 */
 	private void construirArcosMinimos() {
 		Random random = new Random();
@@ -132,10 +137,34 @@ public abstract class Grafo {
 	 *            Nodo a un extremo del arco.
 	 * @param nodo2
 	 *            Nodo al otro extremo del arco.
-	 * @param valorArco
-	 *            Valor que tendrá el arco.
 	 */
 	protected abstract void addArco(Integer nodo1, Integer nodo2);
+	
+	
+	private void construirArcosSinCiclos(Double porcentajeDeArcos){
+		Integer posibilidadDeArco = (int)(porcentajeDeArcos * 100);
+		
+		//Generamos una lista con los nodos ordenados al azar
+		ArrayList<Integer> listaNodos = new ArrayList<Integer>();
+		for(int n = 0; n < getNNodos(); n++){
+			listaNodos.add(n);
+		}
+		Collections.shuffle(listaNodos, randomGenerator);
+		
+		//Construimos solamente arcos que vayan de un nodo anterior a un nodo posterior
+		for(int i = 0; i < listaNodos.size(); i++){
+			for(int j = (i+1); j < listaNodos.size(); j++){
+				
+				Integer randomInt = randomGenerator.nextInt(100);
+				if(randomInt <= posibilidadDeArco){
+					addArco(listaNodos.get(i), listaNodos.get(j));
+					System.out.println("[Grafo] \t Sí");
+				}
+				
+			}
+		}
+		
+	}
 	
 	
 	protected Integer generarValorDeArco(){

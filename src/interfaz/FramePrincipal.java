@@ -2,7 +2,6 @@ package interfaz;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -16,7 +15,6 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
 import sistema.Parametros;
@@ -205,16 +203,7 @@ public class FramePrincipal extends JFrame {
 	/** Construye el área donde se irán mostrando las preguntas generadas */
 	private void construirAreaPreguntas() {
 		areaPreguntas = new AreaPreguntas();
-		areaPreguntas.setEditable(false);
-		areaPreguntas.setLineWrap(true);
-		areaPreguntas.setWrapStyleWord(true);
-		areaPreguntas.setPreferredSize(new Dimension(450, ALTO));
-		areaPreguntas.setText("");
-		panelDeLaVentana.add(areaPreguntas, BorderLayout.LINE_END);
-
-		JScrollPane scrolledAreaPreguntas = new JScrollPane(areaPreguntas);
-		scrolledAreaPreguntas.setBounds(8, 18, 459, 261);
-		panelDeLaVentana.add(scrolledAreaPreguntas, BorderLayout.LINE_END);
+		add(areaPreguntas, BorderLayout.LINE_END);
 	}
 	
 
@@ -252,7 +241,7 @@ public class FramePrincipal extends JFrame {
 		ventanaTextoDirectorio.setToolTipText(Textos_Interfaz.tipTextElegirDirectorio().getString(nuevoIdioma));
 
 		// Área de preguntas
-		areaPreguntas.setToolTipText(Textos_Interfaz.tipTextAreaPreguntas().getString(nuevoIdioma));
+		areaPreguntas.presentarTrasCambioDeIdioma(nuevoIdioma);
 
 		repaint();
 	}
