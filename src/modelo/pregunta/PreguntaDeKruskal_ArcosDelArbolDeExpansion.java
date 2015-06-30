@@ -1,5 +1,6 @@
 package modelo.pregunta;
 
+import modelo.Semilla;
 import modelo.grafo.ListaDeArcos;
 import texto.Textos_Preguntas;
 
@@ -10,6 +11,11 @@ public class PreguntaDeKruskal_ArcosDelArbolDeExpansion extends PreguntaDeKruska
 	public PreguntaDeKruskal_ArcosDelArbolDeExpansion(Integer nNodos, Double porcentajeDeArcos,
 			VisualizacionGrafo visualizacionGrafo) {
 		super(nNodos, porcentajeDeArcos, visualizacionGrafo);
+	}
+	
+	
+	public PreguntaDeKruskal_ArcosDelArbolDeExpansion(Semilla semilla){
+		super(semilla);
 	}
 	
 	
@@ -37,5 +43,17 @@ public class PreguntaDeKruskal_ArcosDelArbolDeExpansion extends PreguntaDeKruska
 	protected void construirRespuestaCorrecta() {
 		construirRespuestaCorrecta_PreguntaArcosDelArbolDeExpansion(arcosAPreguntar, arcosArbolDeExpansion);
 	}
+	
+	
+	@Override
+	protected Integer getNumPregunta() {
+		return Semilla.ALGORITMO_DE_KRUSKAL_ARCOS_DEL_ARBOL_DE_EXPANSION;
+	}
 
+
+	@Override
+	protected Integer getTipoDePregunta() {
+		return PreguntaDeKruskal.PREGUNTA_ARCOS_DEL_ARBOL_DE_EXPANSION;
+	}
+	
 }

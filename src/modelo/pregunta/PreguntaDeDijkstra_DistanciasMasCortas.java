@@ -1,5 +1,6 @@
 package modelo.pregunta;
 
+import modelo.Semilla;
 import modelo.grafo.Grafo;
 import texto.Texto;
 import texto.Textos_Preguntas;
@@ -12,12 +13,17 @@ public class PreguntaDeDijkstra_DistanciasMasCortas extends PreguntaDeDijkstra {
 	}
 	
 	
+	public PreguntaDeDijkstra_DistanciasMasCortas(Semilla semilla){
+		super(semilla);
+	}
+	
+	
 	@Override
 	protected void construirEnunciado() {
 		enunciado = Textos_Preguntas.enunciadoPregDijkstra_DistanciasMasCortas();	
 	}
-
-
+	
+	
 	@Override
 	protected void construirParteAResponder() {
 		parteAResponder = new Texto("");
@@ -55,5 +61,17 @@ public class PreguntaDeDijkstra_DistanciasMasCortas extends PreguntaDeDijkstra {
 		
 	}
 
+
+	@Override
+	protected Integer getNumPregunta() {
+		return Semilla.ALGORITMO_DE_DIJKSTRA_DISTANCIAS_MAS_CORTAS;
+	}
+
+
+	@Override
+	protected Integer getTipoDePregunta() {
+		return PreguntaDeDijkstra.PREGUNTA_DISTANCIAS_MAS_CORTAS;
+	}
+	
 
 }

@@ -65,7 +65,6 @@ public abstract class Grafo {
 	 * y repite este proceso hasta haber acabado con todos los nodos no visitados.
 	 */
 	private void construirArcosMinimos() {
-		Random random = new Random();
 
 		ArrayList<Integer> nodosNoVisitados = new ArrayList<Integer>(nNodos);
 		for (int i = 0; i < nNodos; i++) {
@@ -74,19 +73,16 @@ public abstract class Grafo {
 		ArrayList<Integer> nodosVisitados = new ArrayList<Integer>();
 
 		// Visitamos un nodo inicial
-		Integer nodoInicial = nodosNoVisitados.remove(random
-				.nextInt(nodosNoVisitados.size()));
+		Integer nodoInicial = nodosNoVisitados.remove(randomGenerator.nextInt(nodosNoVisitados.size()));
 		nodosVisitados.add(nodoInicial);
 
 		// Por cada nodo no visitado
 		while (!nodosNoVisitados.isEmpty()) {
 			// Cogemos un nodo de los visitados
-			Integer nodoVisit = nodosVisitados.get(random
-					.nextInt(nodosVisitados.size()));
+			Integer nodoVisit = nodosVisitados.get(randomGenerator.nextInt(nodosVisitados.size()));
 
 			// Retiramos un nodo de los que aún no han sido visitados
-			Integer nodoNoVisit = nodosNoVisitados.remove(random
-					.nextInt(nodosNoVisitados.size()));
+			Integer nodoNoVisit = nodosNoVisitados.remove(randomGenerator.nextInt(nodosNoVisitados.size()));
 
 			// Construimos un arco entre esos dos nodos
 			addArco(nodoVisit, nodoNoVisit);
@@ -121,8 +117,7 @@ public abstract class Grafo {
 		// Por cada arco que haya que añadir
 		for (int i = 0; i < cantidadDeArcosAAnadir; i++) {
 			// Se saca un arco de la lista de posibles arcos de existentes
-			Arco arcoAAnadir = listaDeArcos.remove(new Random()
-					.nextInt(listaDeArcos.size()));
+			Arco arcoAAnadir = listaDeArcos.remove(randomGenerator.nextInt(listaDeArcos.size()));
 
 			// Se añade al grafo ese arco
 			addArco(arcoAAnadir.getNodoOrigen(), arcoAAnadir.getNodoDestino());

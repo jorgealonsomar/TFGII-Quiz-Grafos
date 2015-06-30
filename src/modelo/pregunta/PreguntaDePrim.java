@@ -51,8 +51,8 @@ public abstract class PreguntaDePrim extends Pregunta {
 	
 	
 	@Override
-	protected void generarSemilla(boolean grafoDirigido) {
-		super.generarSemillaEnFuncionDelTipoDePregunta(Semilla.algoritmoDePrim, grafoDirigido);
+	protected boolean esPonderado() {
+		return true;
 	}
 	
 	

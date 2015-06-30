@@ -65,10 +65,16 @@ public class PreguntaTopologica extends Pregunta {
 	
 	
 	@Override
-	protected void generarSemilla(boolean grafoDirigido) {
-		super.generarSemillaEnFuncionDelTipoDePregunta(Semilla.clasificacionTopologica, grafoDirigido);
+	protected Integer getNumPregunta() {
+		return Semilla.CLASIFICACION_TOPOLOGICA;
 	}
-
+	
+	
+	@Override
+	protected boolean esPonderado() {
+		return false;
+	}
+	
 
 	@Override
 	public Texto getNombreDeArchivo() {

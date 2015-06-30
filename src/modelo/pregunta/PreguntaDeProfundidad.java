@@ -52,10 +52,16 @@ public class PreguntaDeProfundidad extends Pregunta {
 		respuestaCorrecta(recorridoEnProfundidad);
 	}
 	
-
+	
 	@Override
-	protected void generarSemilla(boolean grafoDirigido) {
-		super.generarSemillaEnFuncionDelTipoDePregunta(Semilla.recorridoEnProfunidad, grafoDirigido);
+	protected Integer getNumPregunta() {
+		return Semilla.RECORRIDO_EN_PROFUNDIDAD;
+	}
+	
+	
+	@Override
+	protected boolean esPonderado() {
+		return false;
 	}
 	
 

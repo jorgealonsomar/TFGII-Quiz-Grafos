@@ -48,12 +48,13 @@ public abstract class PreguntaDeKruskal extends Pregunta {
 	
 	@Override
 	protected abstract void construirRespuestaCorrecta();
-
+	
+	
 	@Override
-	protected void generarSemilla(boolean grafoDirigido) {
-		super.generarSemillaEnFuncionDelTipoDePregunta(Semilla.algoritmoDeKruskal, grafoDirigido);
+	protected boolean esPonderado() {
+		return true;
 	}
-
+	
 
 	@Override
 	public Texto getNombreDeArchivo() {

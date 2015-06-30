@@ -3,6 +3,7 @@ package modelo.pregunta;
 import java.util.ArrayList;
 import java.util.Collections;
 
+import modelo.Semilla;
 import modelo.grafo.Grafo;
 import texto.Texto;
 import texto.Textos_Preguntas;
@@ -15,6 +16,11 @@ public class PreguntaDeDijkstra_RutaMasCorta extends PreguntaDeDijkstra {
 	public PreguntaDeDijkstra_RutaMasCorta(Integer nNodos, Double porcentajeDeArcos, boolean grafoDirigido,
 			VisualizacionGrafo visualizacionGrafo) {
 		super(nNodos, porcentajeDeArcos, grafoDirigido, visualizacionGrafo);
+	}
+	
+	
+	public PreguntaDeDijkstra_RutaMasCorta(Semilla semilla){
+		super(semilla);
 	}
 	
 	
@@ -104,6 +110,18 @@ public class PreguntaDeDijkstra_RutaMasCorta extends PreguntaDeDijkstra {
 		respuestaCorrecta.concatenar(new Texto("\n"));
 		respuestaCorrecta.concatenar(Textos_Preguntas.laDistanciaEs());
 		respuestaCorrecta.concatenar(new Texto(distanciasAlNodoOrigen.get(nodoObjetivo).toString()));
+	}
+	
+	
+	@Override
+	protected Integer getNumPregunta() {
+		return Semilla.ALGORITMO_DE_DIJKSTRA_RUTA_MAS_CORTA;
+	}
+
+
+	@Override
+	protected Integer getTipoDePregunta() {
+		return PreguntaDeDijkstra.PREGUNTA_RUTA_MAS_CORTA;
 	}
 	
 }

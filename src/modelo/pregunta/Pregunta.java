@@ -23,6 +23,7 @@ public abstract class Pregunta {
 
 	protected Random randomGenerator;
 	
+	private Long seedDelRandom;
 	private VisualizacionGrafo visualizacionGrafo;
 	
 	private Semilla semilla;
@@ -33,39 +34,43 @@ public abstract class Pregunta {
 	 */
 	public Pregunta(Integer nNodos, Double porcentajeDeArcos, boolean esDirigido, boolean esPonderado,
 			VisualizacionGrafo visualizacionGrafo) {
-		this.visualizacionGrafo = visualizacionGrafo;
+		seedDelRandom = System.currentTimeMillis();
 		
-		//TODO: Añadir semilla
-		randomGenerator = new Random();
-		
-		generarGrafo(nNodos, porcentajeDeArcos, esDirigido, esPonderado);
-
-		construirPregunta(esDirigido);
+		construirPregunta(nNodos, porcentajeDeArcos, esDirigido, esPonderado, visualizacionGrafo);
 	}
-
+	
+	
 	/**
 	 * Constructor de la clase. Recupera una pregunta a partir de una semilla
 	 */
 	public Pregunta(Semilla semilla) {
-		if (semilla.esDirigido()) {
-			grafo = new GrafoDirigido(semilla.getMatrizDeAdyacencia());
-		} else {
-			grafo = new GrafoNoDirigido(semilla.getMatrizDeAdyacencia());
-		}
-
-		construirPregunta(semilla.esDirigido());
+		seedDelRandom = Long.parseLong(semilla.getSeedDelRandom());
+		
+		construirPregunta(semilla.getNNodos(), semilla.getPorcentajeDeArcos(), semilla.isDirigido(), esPonderado(),
+				semilla.getVisualizacionGrafo());
 	}
+	
+	
+	private void construirPregunta(Integer nNodos, Double porcentajeDeArcos, boolean esDirigido, boolean esPonderado,
+			VisualizacionGrafo visualizacionGrafo){
+		this.visualizacionGrafo = visualizacionGrafo;
+		
+		randomGenerator = new Random(seedDelRandom);
+		
+		generarGrafo(nNodos, porcentajeDeArcos, esDirigido, esPonderado);
+		
 
-	/** (Patrón de diseño Recipe) */
-	private void construirPregunta(boolean esDirigido) {
 		aplicarAlgoritmo();
 		
 		construirTitulo();
 		construirEnunciado();
 		construirParteAResponder();
 		construirRespuestaCorrecta();
-
-		generarSemilla(esDirigido);
+		
+		
+		semilla = new Semilla(getNumPregunta(), nNodos, esDirigido, porcentajeDeArcos, visualizacionGrafo,
+				getTipoDePregunta(), seedDelRandom.toString());
+		
 	}
 	
 
@@ -89,14 +94,15 @@ public abstract class Pregunta {
 
 	protected abstract void construirRespuestaCorrecta();
 
-	protected abstract void generarSemilla(boolean grafoDirigido);
-
+	protected abstract Integer getNumPregunta();
 	
-	protected void generarSemillaEnFuncionDelTipoDePregunta(
-			Integer tipoDePregunta, boolean grafoDirigido) {
-		semilla = new Semilla(tipoDePregunta, grafo.getNNodos(),
-				grafoDirigido, grafo.getMatrizDeAdyacencia());
+	/** Devuelve 0 por defecto (preguntas en las que no se puede escoger más que un tipo de pregunta).
+	 * Las preguntas que devuelvan otros valores deben heredar esta función */
+	protected Integer getTipoDePregunta(){
+		return 0;
 	}
+	
+	protected abstract boolean esPonderado();
 
 	
 	public abstract Texto getNombreDeArchivo();
@@ -104,6 +110,11 @@ public abstract class Pregunta {
 	
 	public Grafo getGrafo() {
 		return this.grafo;
+	}
+	
+	
+	public Semilla getSemilla(){
+		return semilla;
 	}
 
 	

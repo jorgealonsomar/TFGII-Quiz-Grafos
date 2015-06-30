@@ -57,8 +57,8 @@ public abstract class PreguntaDeDijkstra extends Pregunta {
 	
 	
 	@Override
-	protected void generarSemilla(boolean grafoDirigido) {
-		super.generarSemillaEnFuncionDelTipoDePregunta(Semilla.algoritmoDeDijkstra, grafoDirigido);
+	protected boolean esPonderado() {
+		return true;
 	}
 	
 	

@@ -17,8 +17,22 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import modelo.Semilla;
+import modelo.SemillaException;
+import modelo.pregunta.Pregunta;
+import modelo.pregunta.PreguntaDeAnchura;
+import modelo.pregunta.PreguntaDeDijkstra_DistanciasMasCortas;
+import modelo.pregunta.PreguntaDeDijkstra_OrdenDeSeleccion;
+import modelo.pregunta.PreguntaDeDijkstra_RutaMasCorta;
+import modelo.pregunta.PreguntaDeKruskal_ArcosDelArbolDeExpansion;
+import modelo.pregunta.PreguntaDeKruskal_OrdenDeSeleccion;
+import modelo.pregunta.PreguntaDePrim_ArcosDelArbolDeExpansion;
+import modelo.pregunta.PreguntaDePrim_OrdenDeSeleccion;
+import modelo.pregunta.PreguntaDeProfundidad;
+import modelo.pregunta.PreguntaTopologica;
 import sistema.Parametros;
 import sistema.Ruta;
+import texto.Textos_BarraMenu;
 import texto.Textos_Interfaz;
 import util.GestorIO;
 import util.Idioma;
@@ -117,38 +131,57 @@ public class FramePrincipal extends JFrame {
 	
 	/** */
 	public void importarSemilla() {
-		System.err.println("[FramePrincipal] Importar semilla pendiente de implementar bien");
-		
-//		String codigoConsigna = JOptionPane.showInputDialog(this,
-//				Textos_BarraMenu.introduzcaSemilla().getString(parametros.getIdioma()),
-//				Textos_BarraMenu.menuArchivo_ImportarSemilla().getString(parametros.getIdioma()),
-//				JOptionPane.PLAIN_MESSAGE);
-//
-//		try {
-//			// Recuperar la consigna a partir de su código
-//			Semilla consigna = new Semilla(codigoConsigna);
-//
-//			Pregunta pregunta = null;
-//			if (consigna.getTipoPregunta() == Semilla.recorridoEnProfunidad) {
-//				pregunta = new PreguntaDeProfundidad(consigna);
-//			} else if (consigna.getTipoPregunta() == Semilla.recorridoEnAnchura) {
-//				pregunta = new PreguntaDeAnchura(consigna);
-//			} else if (consigna.getTipoPregunta() == Semilla.clasificacionTopologica) {
-//				pregunta = new PreguntaTopologica(consigna);
-//			} else if (consigna.getTipoPregunta() == Semilla.algoritmoDeDijkstra) {
-//				pregunta = new PreguntaDeDijkstra(consigna);
-//			} else if (consigna.getTipoPregunta() == Semilla.algoritmoDeKruskal) {
-//				pregunta = new PreguntaDeKruskal(consigna);
-//			} else if (consigna.getTipoPregunta() == Semilla.algoritmoDePrim) {
-//				pregunta = new PreguntaDePrim(consigna);
-//			}
-//
-//			imprimePregunta(pregunta);
-//		} catch (ConsignaException excepcion) {
-//			JOptionPane.showMessageDialog(null,
-//					Textos_Interfaz.errorSemillaIncorrecta().getString(parametros.getIdioma()), "Error",
-//					JOptionPane.WARNING_MESSAGE);
-//		}
+		String codigoConsigna = JOptionPane.showInputDialog(this,
+				Textos_BarraMenu.introduzcaSemilla().getString(parametros.getIdioma()),
+				Textos_BarraMenu.menuArchivo_ImportarSemilla().getString(parametros.getIdioma()),
+				JOptionPane.PLAIN_MESSAGE);
+
+		try {
+			// Recuperar la consigna a partir de su código
+			Semilla consigna = new Semilla(codigoConsigna);
+
+			Pregunta pregunta = null;
+			if (consigna.getNumPregunta() == Semilla.RECORRIDO_EN_PROFUNDIDAD) {
+				pregunta = new PreguntaDeProfundidad(consigna);
+			} else if (consigna.getNumPregunta() == Semilla.RECORRIDO_EN_ANCHURA) {
+				pregunta = new PreguntaDeAnchura(consigna);
+			} else if (consigna.getNumPregunta() == Semilla.CLASIFICACION_TOPOLOGICA) {
+				pregunta = new PreguntaTopologica(consigna);
+			} else if (consigna.getNumPregunta() == Semilla.ALGORITMO_DE_DIJKSTRA_DISTANCIAS_MAS_CORTAS) {
+				pregunta = new PreguntaDeDijkstra_DistanciasMasCortas(consigna);
+			} else if (consigna.getNumPregunta() == Semilla.ALGORITMO_DE_DIJKSTRA_RUTA_MAS_CORTA) {
+				pregunta = new PreguntaDeDijkstra_RutaMasCorta(consigna);
+			} else if (consigna.getNumPregunta() == Semilla.ALGORITMO_DE_DIJKSTRA_ORDEN_DE_SELECCION) {
+				pregunta = new PreguntaDeDijkstra_OrdenDeSeleccion(consigna);
+			} else if (consigna.getNumPregunta() == Semilla.ALGORITMO_DE_PRIM_ARCOS_DEL_ARBOL_DE_EXPANSION) {
+				pregunta = new PreguntaDePrim_ArcosDelArbolDeExpansion(consigna);
+			} else if (consigna.getNumPregunta() == Semilla.ALGORITMO_DE_PRIM_ORDEN_DE_SELECCION) {
+				pregunta = new PreguntaDePrim_OrdenDeSeleccion(consigna);
+			} else if (consigna.getNumPregunta() == Semilla.ALGORITMO_DE_KRUSKAL_ARCOS_DEL_ARBOL_DE_EXPANSION) {
+				pregunta = new PreguntaDeKruskal_ArcosDelArbolDeExpansion(consigna);
+			} else if (consigna.getNumPregunta() == Semilla.ALGORITMO_DE_KRUSKAL_ORDEN_DE_SELECCION) {
+				pregunta = new PreguntaDeKruskal_OrdenDeSeleccion(consigna);
+			}
+			
+			//Generar textos correspondientes a la pregunta
+			String textoPreguntaXml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>";
+			textoPreguntaXml += "\n<quiz>";
+			String textoPreguntaPorPantalla = "";
+			
+			textoPreguntaPorPantalla += pregunta.getTextoPreguntaParaMostrarPorPantalla(parametros.getIdioma());
+			textoPreguntaXml += pregunta.getTextoPreguntaXml(parametros.getIdioma());
+			
+			textoPreguntaXml += "\n</quiz>";
+			String nombreArchivo = pregunta.getNombreDeArchivo().getString(parametros.getIdioma());
+			
+			//Imprimir la pregunta
+			imprimePregunta(textoPreguntaPorPantalla, textoPreguntaXml, nombreArchivo);
+			
+		} catch (SemillaException excepcion) {
+			JOptionPane.showMessageDialog(null,
+					Textos_Interfaz.errorSemillaIncorrecta().getString(parametros.getIdioma()), "Error",
+					JOptionPane.WARNING_MESSAGE);
+		}
 	}
 	
 

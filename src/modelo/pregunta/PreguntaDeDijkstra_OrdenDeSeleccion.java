@@ -2,6 +2,7 @@ package modelo.pregunta;
 
 import java.util.ArrayList;
 
+import modelo.Semilla;
 import modelo.grafo.Grafo;
 import texto.Texto;
 import texto.Textos_Preguntas;
@@ -13,6 +14,11 @@ public class PreguntaDeDijkstra_OrdenDeSeleccion extends PreguntaDeDijkstra {
 	public PreguntaDeDijkstra_OrdenDeSeleccion(Integer nNodos, Double porcentajeDeArcos, boolean grafoDirigido,
 			VisualizacionGrafo visualizacionGrafo) {
 		super(nNodos, porcentajeDeArcos, grafoDirigido, visualizacionGrafo);
+	}
+	
+	
+	public PreguntaDeDijkstra_OrdenDeSeleccion(Semilla semilla){
+		super(semilla);
 	}
 	
 	
@@ -119,6 +125,18 @@ public class PreguntaDeDijkstra_OrdenDeSeleccion extends PreguntaDeDijkstra {
 			respuestaCorrecta.concatenar(new Texto(distanciasAlNodoOrigen.get(nodo).toString()));
 			respuestaCorrecta.concatenar(new Texto("]\n"));
 		}
+	}
+	
+	
+	@Override
+	protected Integer getNumPregunta() {
+		return Semilla.ALGORITMO_DE_DIJKSTRA_ORDEN_DE_SELECCION;
+	}
+
+
+	@Override
+	protected Integer getTipoDePregunta() {
+		return PreguntaDeDijkstra.PREGUNTA_ORDEN_DE_SELECCION;
 	}
 
 }

@@ -2,6 +2,7 @@ package modelo.pregunta;
 
 import java.util.ArrayList;
 
+import modelo.Semilla;
 import modelo.grafo.Grafo;
 import modelo.grafo.GrafoNoDirigido;
 import modelo.grafo.ListaDeArcos;
@@ -13,6 +14,11 @@ public class PreguntaDeKruskal_OrdenDeSeleccion extends PreguntaDeKruskal {
 	public PreguntaDeKruskal_OrdenDeSeleccion(Integer nNodos, Double porcentajeDeArcos,
 			VisualizacionGrafo visualizacionGrafo) {
 		super(nNodos, porcentajeDeArcos, visualizacionGrafo);
+	}
+	
+	
+	public PreguntaDeKruskal_OrdenDeSeleccion(Semilla semilla){
+		super(semilla);
 	}
 	
 	
@@ -95,4 +101,17 @@ public class PreguntaDeKruskal_OrdenDeSeleccion extends PreguntaDeKruskal {
 			respuestaCorrecta.concatenar(new Texto("]\n"));
 		}
 	}
+	
+	
+	@Override
+	protected Integer getNumPregunta() {
+		return Semilla.ALGORITMO_DE_KRUSKAL_ORDEN_DE_SELECCION;
+	}
+
+
+	@Override
+	protected Integer getTipoDePregunta() {
+		return PreguntaDeKruskal.PREGUNTA_ORDEN_DE_SELECCION;
+	}
+	
 }

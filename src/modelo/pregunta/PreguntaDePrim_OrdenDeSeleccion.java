@@ -2,6 +2,7 @@ package modelo.pregunta;
 
 import java.util.ArrayList;
 
+import modelo.Semilla;
 import modelo.grafo.Grafo;
 import texto.Texto;
 import texto.Textos_Preguntas;
@@ -11,6 +12,11 @@ public class PreguntaDePrim_OrdenDeSeleccion extends PreguntaDePrim {
 	public PreguntaDePrim_OrdenDeSeleccion(Integer nNodos, Double porcentajeDeArcos,
 			VisualizacionGrafo visualizacionGrafo) {
 		super(nNodos, porcentajeDeArcos, visualizacionGrafo);
+	}
+	
+	
+	public PreguntaDePrim_OrdenDeSeleccion(Semilla semilla){
+		super(semilla);
 	}
 	
 	
@@ -110,4 +116,17 @@ public class PreguntaDePrim_OrdenDeSeleccion extends PreguntaDePrim {
 			respuestaCorrecta.concatenar(new Texto("]\n"));
 		}
 	}
+	
+	
+	@Override
+	protected Integer getNumPregunta() {
+		return Semilla.ALGORITMO_DE_PRIM_ORDEN_DE_SELECCION;
+	}
+
+
+	@Override
+	protected Integer getTipoDePregunta() {
+		return PreguntaDePrim.PREGUNTA_ORDEN_DE_SELECCION;
+	}
+	
 }

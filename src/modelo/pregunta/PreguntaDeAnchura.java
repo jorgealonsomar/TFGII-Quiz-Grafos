@@ -54,14 +54,20 @@ public class PreguntaDeAnchura extends Pregunta {
 
 	
 	@Override
-	protected void generarSemilla(boolean grafoDirigido) {
-		super.generarSemillaEnFuncionDelTipoDePregunta(
-				Semilla.recorridoEnAnchura, grafoDirigido);
+	protected Integer getNumPregunta() {
+		return Semilla.RECORRIDO_EN_ANCHURA;
+	}
+	
+	
+	@Override
+	protected boolean esPonderado() {
+		return false;
 	}
 
-	
+
 	@Override
 	public Texto getNombreDeArchivo() {
 		return Textos_Archivos.nombreArchivoPregAnchura();
 	}
+
 }
