@@ -21,8 +21,9 @@ public class PestanaDePreguntaDeProfundidad extends PestanaDePregunta {
 	@Override
 	protected Pregunta generarPregunta() {
 		return new PreguntaDeProfundidad(	panelCentral.getNumNodos(),
-				panelCentral.getPorcentajeArcos(),
-				panelCentral.getVisualizacionGrafo());
+											panelCentral.getPorcentajeArcos(),
+											panelCentral.isDirigido(), 
+											panelCentral.getVisualizacionGrafo() );
 	}
 
 }

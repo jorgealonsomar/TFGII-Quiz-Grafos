@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.image.BufferedImage;
 import java.io.File;
 
 import javax.swing.ImageIcon;
@@ -30,6 +31,7 @@ import modelo.pregunta.PreguntaDePrim_ArcosDelArbolDeExpansion;
 import modelo.pregunta.PreguntaDePrim_OrdenDeSeleccion;
 import modelo.pregunta.PreguntaDeProfundidad;
 import modelo.pregunta.PreguntaTopologica;
+import modelo.pregunta.VisualizacionGrafo;
 import sistema.Parametros;
 import sistema.Ruta;
 import texto.Textos_BarraMenu;
@@ -103,7 +105,8 @@ public class FramePrincipal extends JFrame {
 	 * archivo.
 	 */
 	public void imprimePregunta(String textoPreguntaPorPantalla, String textoPreguntaXml,
-			String nombreArchivo) {
+			String nombreArchivo, BufferedImage imagenVisual) {
+		
 		String separador = System.getProperty("file.separator");
 		String rutaDirectorio = ventanaTextoDirectorio.getText();
 		File directorio = new File(rutaDirectorio);
@@ -118,14 +121,17 @@ public class FramePrincipal extends JFrame {
 
 			// Imprimir la pregunta por el área de preguntas
 			areaPreguntas.addTexto(textoPreguntaPorPantalla);
+			if(imagenVisual != null) areaPreguntas.addImagen(imagenVisual);
 
 		} else if (rutaDirectorio.equals("")) {
 			// Imprimir la pregunta por el área de preguntas
 			areaPreguntas.addTexto(textoPreguntaPorPantalla);
+			if(imagenVisual != null) areaPreguntas.addImagen(imagenVisual);
 		} else {
 			JOptionPane.showMessageDialog(null, Textos_Interfaz.errorDirectorioNoExiste()
 					.getString(parametros.getIdioma()), "Error", JOptionPane.WARNING_MESSAGE);
 		}
+		
 	}
 	
 	
@@ -174,8 +180,13 @@ public class FramePrincipal extends JFrame {
 			textoPreguntaXml += "\n</quiz>";
 			String nombreArchivo = pregunta.getNombreDeArchivo().getString(parametros.getIdioma());
 			
+			BufferedImage imagenVisual = null;
+			if(panelCentral.getVisualizacionGrafo() == VisualizacionGrafo.GRAFO_VISUAL){
+				imagenVisual = pregunta.getGrafo().toGrafoVisual();
+			}
+			
 			//Imprimir la pregunta
-			imprimePregunta(textoPreguntaPorPantalla, textoPreguntaXml, nombreArchivo);
+			imprimePregunta(textoPreguntaPorPantalla, textoPreguntaXml, nombreArchivo, imagenVisual);
 			
 		} catch (SemillaException excepcion) {
 			JOptionPane.showMessageDialog(null,

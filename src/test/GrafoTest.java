@@ -288,7 +288,7 @@ public class GrafoTest {
 		listaDeAdyacenciaEsperada += "\nB: D";
 		listaDeAdyacenciaEsperada += "\nC: D";
 		listaDeAdyacenciaEsperada += "\nD";
-		assertTrue(grafo1.toTablaListaDeAdyacencia().equals(listaDeAdyacenciaEsperada));
+		assertTrue(grafo1.toListaDeAdyacencia().equals(listaDeAdyacenciaEsperada));
 	}
 	
 	

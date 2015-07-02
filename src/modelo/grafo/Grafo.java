@@ -1,10 +1,23 @@
 package modelo.grafo;
 
+import java.awt.Dimension;
+import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
 
+import javax.imageio.ImageIO;
+import javax.swing.JFrame;
+
 import modelo.Arco;
+import sun.misc.BASE64Encoder;
+import edu.uci.ics.jung.algorithms.layout.CircleLayout;
+import edu.uci.ics.jung.graph.SparseMultigraph;
+import edu.uci.ics.jung.visualization.BasicVisualizationServer;
+import edu.uci.ics.jung.visualization.decorators.ToStringLabeller;
 
 public abstract class Grafo {
 
@@ -153,7 +166,6 @@ public abstract class Grafo {
 				Integer randomInt = randomGenerator.nextInt(100);
 				if(randomInt <= posibilidadDeArco){
 					addArco(listaNodos.get(i), listaNodos.get(j));
-					System.out.println("[Grafo] \t Sí");
 				}
 				
 			}
@@ -354,11 +366,11 @@ public abstract class Grafo {
 
 	@Override
 	public String toString() {
-		return toTablaMatrizDeAdyacencia();
+		return toMatrizDeAdyacencia();
 	}
 	
 	
-	public String toTablaMatrizDeAdyacencia(){
+	public String toMatrizDeAdyacencia(){
 		String cadena = "";
 		
 		//Fila de cabecera (letras)
@@ -381,7 +393,7 @@ public abstract class Grafo {
 	
 	
 	
-	public String toTablaMatrizDeAdyacenciaHtml(){
+	public String toMatrizDeAdyacenciaHtml(){
 		String cadena = "";
 		cadena += "<table border=\"1\" style=\"width:100%\">";
 		
@@ -408,7 +420,7 @@ public abstract class Grafo {
 	}
 	
 	
-	public String toTablaListaDeAdyacencia(){
+	public String toListaDeAdyacencia(){
 		String cadena = "";
 		
 		//Por cada fila de la matriz de adyacencia:
@@ -431,7 +443,7 @@ public abstract class Grafo {
 	}
 	
 	
-	public String toTablaListaDeAdyacenciaHtml(){
+	public String toListaDeAdyacenciaHtml(){
 		String cadena = "";
 		cadena += "<table border=\"1\" style=\"width:100%\">";
 		
@@ -461,20 +473,82 @@ public abstract class Grafo {
 	}
 	
 	
-	public String toGrafoVisual(){
-		String cadena = "";
-		//TODO
-		return cadena;
-	}
-	
-	
-	public String toGrafoVisualHtml(){
-		String cadena = "";
-		//TODO
-		return cadena;
-	}
-	
+	public BufferedImage toGrafoVisual(){
+		SparseMultigraph<Integer, String> grafoJung = new SparseMultigraph<>();
+		
+		for(int f = 0; f < matrizDeAdyacencia.length; f++){
+			grafoJung.addVertex(f);
+			
+			for(int c = 0; c < matrizDeAdyacencia[f].length; c++){
+				if(matrizDeAdyacencia[f][c] > 0){
+					añadirArcoAlGrafoVisual(grafoJung, f, c);
+				}	
+			}
+		}
 
+		CircleLayout<Integer, String> layoutCircular = new CircleLayout<>(grafoJung);
+		layoutCircular.setSize(new Dimension(300, 300));
+		BasicVisualizationServer<Integer,String> panelVisualizacionGrafo = new BasicVisualizationServer<>(layoutCircular);
+		
+		EtiquetadorDeNodos etiquetadorDeNodos = new EtiquetadorDeNodos();
+        panelVisualizacionGrafo.getRenderContext().setVertexLabelTransformer(etiquetadorDeNodos);
+        
+        if(esPonderado){
+	        EtiquetadorDeArcos etiquetadorDeArcos = new EtiquetadorDeArcos();
+	        panelVisualizacionGrafo.getRenderContext().setEdgeLabelTransformer(etiquetadorDeArcos);
+        }
+
+		JFrame frame = new JFrame("Grafo visual");
+		frame.getContentPane().add(panelVisualizacionGrafo);
+		frame.pack();
+		frame.setVisible(false);
+        
+        BufferedImage imagen = new BufferedImage(320, 320, BufferedImage.TYPE_INT_RGB);
+        Graphics2D pintor = imagen.createGraphics();
+        panelVisualizacionGrafo.paint(pintor);
+        
+        return imagen;
+	}
+	
+	
+	public String toGrafoVisualHtml_Insercion(){
+		return "<img src=\"@@PLUGINFILE@@/imagenGrafo.png\" alt=\"\"  />";
+	}
+	
+	
+	public String toGrafoVisualHtml_Definicion(){
+		String cadena = "";
+		cadena += "<file name=\"imagenGrafo.png\" encoding=\"base64\">";
+		cadena += getGrafoVisualEnBASE64();
+		cadena += "==</file>"; 
+		return cadena;
+	}
+	
+	
+	public String getGrafoVisualEnBASE64(){
+		String cadenaDeLaImagen = null;
+
+        try( ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream(); ) {
+        	
+        	BufferedImage imagenGrafo = toGrafoVisual();
+        	
+            ImageIO.write(imagenGrafo, "png", byteArrayOutputStream);
+            byte[] imagenEnBytes = byteArrayOutputStream.toByteArray();
+
+            BASE64Encoder encoder = new BASE64Encoder();
+            cadenaDeLaImagen = encoder.encode(imagenEnBytes);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        
+        return cadenaDeLaImagen;
+	}
+	
+	
+	public abstract void añadirArcoAlGrafoVisual(SparseMultigraph<Integer, String> grafoJung, int f, int c);
+	
+	
 	public static char convertirIndiceEnLetra(int indice) {
 		return (char) (indice + 65);
 	}
@@ -488,6 +562,25 @@ public abstract class Grafo {
 		} else {
 			return false;
 		}
+	}
+	
+	
+	
+	private class EtiquetadorDeNodos extends ToStringLabeller<Integer>{
+		public String transform(Integer numeroDelNodo) {
+            return Character.toString(convertirIndiceEnLetra(numeroDelNodo));
+        }
+	}
+	
+	
+	
+	private class EtiquetadorDeArcos extends ToStringLabeller<String>{
+		public String transform(String nombreDelArco) {
+			Integer indiceHastaDondeCortar = (nombreDelArco.indexOf(':') + 2);
+			
+			return nombreDelArco.substring(indiceHastaDondeCortar);
+		}
+		
 	}
 	
 }

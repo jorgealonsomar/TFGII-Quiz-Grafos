@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import modelo.Arco;
+import edu.uci.ics.jung.graph.SparseMultigraph;
+import edu.uci.ics.jung.graph.util.EdgeType;
 
 public class GrafoDirigido extends Grafo {
 
@@ -103,6 +105,14 @@ public class GrafoDirigido extends Grafo {
 		}
 		
 		return recorrido;
+	}
+	
+	
+	@Override
+	public void añadirArcoAlGrafoVisual(SparseMultigraph<Integer, String> grafoJung, int f, int c) {
+		
+		grafoJung.addEdge(new String("Nodo " + f + "-" + c + ": " + getMatrizDeAdyacencia()[f][c]),
+				f, c, EdgeType.DIRECTED);
 	}
 
 }

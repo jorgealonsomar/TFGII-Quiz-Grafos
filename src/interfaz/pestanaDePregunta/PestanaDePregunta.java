@@ -9,6 +9,7 @@ import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -16,6 +17,7 @@ import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 
 import modelo.pregunta.Pregunta;
+import modelo.pregunta.VisualizacionGrafo;
 import texto.Texto;
 import texto.Textos_Interfaz;
 import util.Idioma;
@@ -136,7 +138,12 @@ public abstract class PestanaDePregunta extends JPanel {
 			textoPreguntaXml += "\n</quiz>";
 			String nombreArchivo = pregunta.getNombreDeArchivo().getString(idioma);
 			
-			frame.imprimePregunta(textoPreguntaPorPantalla, textoPreguntaXml, nombreArchivo);
+			BufferedImage imagenVisual = null;
+			if(panelCentral.getVisualizacionGrafo() == VisualizacionGrafo.GRAFO_VISUAL){
+				imagenVisual = pregunta.getGrafo().toGrafoVisual();
+			}
+			
+			frame.imprimePregunta(textoPreguntaPorPantalla, textoPreguntaXml, nombreArchivo, imagenVisual);
 		}
 		
 	}

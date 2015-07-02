@@ -37,7 +37,7 @@ public class PanelCentral extends JPanel {
 	private JSlider selectorNumPreguntas = new JSlider(MIN_PREGUNTAS, MAX_PREGUNTAS, 1);
 	
 	private JLabel txtNumNodos = new JLabel(Textos_Interfaz.textoNumNodos().esp());
-	private final int MIN_NODOS = 1;
+	private final int MIN_NODOS = 2;
 	private final int MAX_NODOS = 10;
 	private JSlider selectorNumNodos = new JSlider(MIN_NODOS, MAX_NODOS, 5);
 	
@@ -50,6 +50,8 @@ public class PanelCentral extends JPanel {
 	private JLabel txtVisualizacionGrafo = new JLabel(Textos_Interfaz.textoVisualizacionGrafo().esp());
 	private JComboBoxVisualizacionGrafo comboBoxVisualizacionGrafo = new JComboBoxVisualizacionGrafo();
 	
+	
+	/** Constructor de la clase */
 	public PanelCentral(AreaPreguntas areaPreguntas, FramePrincipal frame){
 		panelTabulado = new JTabbedPane();
 		panelTabulado.addChangeListener(new CambioDePestanaListener());
@@ -80,10 +82,7 @@ public class PanelCentral extends JPanel {
 		
 		c.gridx = 0;
 		c.gridy = 0;
-		c.gridwidth = 2;
-		this.add(panelTabulado, c);
 		
-		c.gridy++;
 		c.gridwidth = 1;
 		add(txtNumPreguntas, c);
 		selectorNumPreguntas.setPaintTicks(true);
@@ -124,6 +123,11 @@ public class PanelCentral extends JPanel {
 		add(txtVisualizacionGrafo, c);
 		c.gridx = 1;
 		add(comboBoxVisualizacionGrafo, c);
+		
+		c.gridy++;
+		c.gridx = 0;
+		c.gridwidth = 2;
+		this.add(panelTabulado, c);
 	}
 	
 	
@@ -217,19 +221,19 @@ public class PanelCentral extends JPanel {
 		
 		/** Constructor de la clase */
 		public JComboBoxVisualizacionGrafo(){
+			addTexto(Textos_Interfaz.visualizacionGrafoVisual());
 			addTexto(Textos_Interfaz.visualizacionMatrizAdyacencia());
 			addTexto(Textos_Interfaz.visualizacionListaAdyacencia());
-			addTexto(Textos_Interfaz.visualizacionGrafoVisual());
 		}
 
 		public VisualizacionGrafo getClaseDeVisualizacion(){
 			switch(getSelectedIndex()){
-			case 0:
-				return VisualizacionGrafo.MATRIZ_DE_ADYACENCIA;
-			case 1:
-				return VisualizacionGrafo.LISTA_DE_ADYACENCIA;
-			case 2: default:
+			case 0: default:
 				return VisualizacionGrafo.GRAFO_VISUAL;
+			case 1:
+				return VisualizacionGrafo.MATRIZ_DE_ADYACENCIA;
+			case 2:
+				return VisualizacionGrafo.LISTA_DE_ADYACENCIA;
 			}
 		}
 	}
@@ -237,11 +241,6 @@ public class PanelCentral extends JPanel {
 	
 	
 	private class CambioDePestanaListener implements ChangeListener {
-		
-		/** Constructor de la clase */
-		public CambioDePestanaListener(){
-			
-		}
 
 		@Override
 		public void stateChanged(ChangeEvent arg0) {

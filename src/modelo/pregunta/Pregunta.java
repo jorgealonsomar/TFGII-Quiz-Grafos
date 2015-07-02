@@ -201,18 +201,15 @@ public abstract class Pregunta {
 	
 	public String getTextoPreguntaParaMostrarPorPantalla(Idioma idioma) {
 		String textoPregunta = "";
-		textoPregunta += "--------------------------------------------------------------";
+		textoPregunta += "------------------------------------------------------------";
 		textoPregunta += "\n" + getTitulo(idioma);
 		textoPregunta += "\n\n" + getEnunciado(idioma);
 		switch(visualizacionGrafo){
 		case MATRIZ_DE_ADYACENCIA:
-			textoPregunta += "\n\n" + getGrafo().toTablaMatrizDeAdyacencia();	
+			textoPregunta += "\n\n" + getGrafo().toMatrizDeAdyacencia();	
 			break;
 		case LISTA_DE_ADYACENCIA:
-			textoPregunta += "\n\n" + getGrafo().toTablaListaDeAdyacencia();	
-			break;
-		case GRAFO_VISUAL:
-			textoPregunta += "\n\n" + getGrafo().toGrafoVisual();	
+			textoPregunta += "\n\n" + getGrafo().toListaDeAdyacencia();	
 			break;
 		}
 		if (idioma == Idioma.ESP) {
@@ -237,19 +234,22 @@ public abstract class Pregunta {
 		textoPregunta += "\n\t\t\t" + Texto.adaptarCaracteresAXml(getEnunciado(idioma));
 		switch(visualizacionGrafo){
 		case MATRIZ_DE_ADYACENCIA:
-			textoPregunta += "\n</p>" + getGrafo().toTablaMatrizDeAdyacenciaHtml();
+			textoPregunta += "\n</p>" + getGrafo().toMatrizDeAdyacenciaHtml();
 			break;
 		case LISTA_DE_ADYACENCIA:
-			textoPregunta += "\n</p>" + getGrafo().toTablaListaDeAdyacenciaHtml();
+			textoPregunta += "\n</p>" + getGrafo().toListaDeAdyacenciaHtml();
 			break;
 		case GRAFO_VISUAL:
-			textoPregunta += "\n</p>" + getGrafo().toGrafoVisualHtml();
+			textoPregunta += "\n</p>" + getGrafo().toGrafoVisualHtml_Insercion();
 			break;
 		}
 		textoPregunta += "\n</p>\t\t\t" + "(semilla: " +
 				Texto.adaptarCaracteresAXml(getCodigoSemilla()) + ")";
 		textoPregunta += "\n</p>\t\t\t" + Texto.adaptarCaracteresAXml(getParteAResponder(idioma));
 		textoPregunta += "\n\t\t\t]]></text>";
+		if(visualizacionGrafo.equals(VisualizacionGrafo.GRAFO_VISUAL)){
+			textoPregunta += "\n\t\t\t" + getGrafo().toGrafoVisualHtml_Definicion();
+		}
 		textoPregunta += "\n\t\t</questiontext>";
 		textoPregunta += "\n\t\t\t<generalfeedback>";
 		textoPregunta += "\n\t\t\t<text></text>";

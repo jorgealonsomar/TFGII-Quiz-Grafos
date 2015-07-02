@@ -23,7 +23,7 @@ public class PestanaDePreguntaDeAnchura extends PestanaDePregunta {
 		return new PreguntaDeAnchura(	panelCentral.getNumNodos(),
 										panelCentral.getPorcentajeArcos(),
 										panelCentral.isDirigido(), 
-										panelCentral.getVisualizacionGrafo());
+										panelCentral.getVisualizacionGrafo() );
 	}
 
 }

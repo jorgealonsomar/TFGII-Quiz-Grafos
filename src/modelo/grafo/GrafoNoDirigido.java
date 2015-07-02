@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import modelo.Arco;
+import edu.uci.ics.jung.graph.SparseMultigraph;
+import edu.uci.ics.jung.graph.util.EdgeType;
 
 public class GrafoNoDirigido extends Grafo {
 	
@@ -219,4 +221,13 @@ public class GrafoNoDirigido extends Grafo {
 		return arcosDelGrafo;
 	}
 	
+	
+	/** (al ser no dirigido, si un arco ya existe, no lo vuelve a añadir) */
+	@Override
+	public void añadirArcoAlGrafoVisual(SparseMultigraph<Integer, String> grafoJung, int f, int c) {
+		if(!grafoJung.containsEdge(new String("Nodo " + c + "-" + f + ": " + getMatrizDeAdyacencia()[f][c]))){
+			grafoJung.addEdge(new String("Nodo " + f + "-" + c + ": " + getMatrizDeAdyacencia()[f][c])
+					, f, c, EdgeType.UNDIRECTED);
+		}
+	}
 }

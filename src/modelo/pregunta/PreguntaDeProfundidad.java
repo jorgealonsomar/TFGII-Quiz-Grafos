@@ -12,9 +12,9 @@ public class PreguntaDeProfundidad extends Pregunta {
 	private ArrayList<Integer> recorridoEnProfundidad;
 
 	/** Constructor de la clase */
-	public PreguntaDeProfundidad(Integer nNodos, Double porcentajeDeArcos,
+	public PreguntaDeProfundidad(Integer nNodos, Double porcentajeDeArcos, boolean grafoDirigido,
 			VisualizacionGrafo visualizacionGrafo) {
-		super(nNodos, porcentajeDeArcos, true, false, visualizacionGrafo);
+		super(nNodos, porcentajeDeArcos, grafoDirigido, false, visualizacionGrafo);
 	}
 	
 
