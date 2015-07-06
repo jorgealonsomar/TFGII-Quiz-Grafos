@@ -159,4 +159,23 @@ public class Texto {
 	}
 	
 	
+	/**
+	 * Añade a la cadena por la izquierda una cantidad de los caracteres dados tal que la cadena
+	 * alcance el tamaño objetivo.
+	 * @param cadena
+	 *            Cadena a modificar.
+	 * @param caracter
+	 *            Carácter a añadir a la cadena.
+	 * @param tamanoObjetivo
+	 *            Tamaño con el que ha de quedar la cadena.
+	 */
+	public static String anadirCaracteresPorLaIzquierda(String cadena, char caracter, int tamanoObjetivo){
+		while( (tamanoObjetivo - cadena.length()) > 0) {
+			cadena = caracter + cadena;
+			}
+
+		return cadena;
+	}
+	
+	
 }

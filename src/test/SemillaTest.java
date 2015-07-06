@@ -1,6 +1,8 @@
 package test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 import modelo.Semilla;
 import modelo.SemillaException;
@@ -25,7 +27,7 @@ public class SemillaTest {
 		Integer nNodos = 3;
 		boolean esDirigido = false;
 		Double porcentajeDeArcos = 0.55;
-		VisualizacionGrafo visualizacionGrafo = VisualizacionGrafo.MATRIZ_DE_ADYACENCIA;
+		VisualizacionGrafo visualizacionGrafo = new VisualizacionGrafo(true, false, false);
 		Integer tipoDePregunta = 0;
 		String seedDelRandom = new Long(System.currentTimeMillis()).toString();
 		
@@ -46,13 +48,19 @@ public class SemillaTest {
 		assertEquals(new Double(0.55), semilla.getPorcentajeDeArcos());
 		
 		// El modo de visualización debe ser matriz de adyacencia		
-		assertEquals(VisualizacionGrafo.MATRIZ_DE_ADYACENCIA, semilla.getVisualizacionGrafo());
+		assertEquals(true, semilla.getVisualizacionGrafo().isMatrizDeAdyacencia());
+		
+		// El modo de visualización no debe ser lista de adyacencia		
+		assertEquals(false, semilla.getVisualizacionGrafo().isListaDeAdyacencia());
+		
+		// El modo de visualización no debe ser visual		
+		assertEquals(false, semilla.getVisualizacionGrafo().isGrafoVisual());
 		
 		// El tipo de pregunta debe ser 0
 		assertEquals(new Integer(0), semilla.getClaseDePregunta());
 		
-		//La cadena representativa de la semilla debe empezar por 02005500
-		assertEquals(semilla.toString().substring(0, 8), "02005500");
+		//La cadena representativa de la semilla debe empezar por 02005540
+		assertEquals("02005540", semilla.toString().substring(0, 8));
 		
 		// La seed del random debe ser igual a que fue dada
 		assertEquals(seedDelRandom, semilla.getSeedDelRandom());
@@ -65,7 +73,7 @@ public class SemillaTest {
 	@Test
 	public void recuperarSemilla() {
 		Semilla semilla = null;
-		String codigoSemilla = "020055001435673973843";
+		String codigoSemilla = "020055401435673973843";
 
 		// Recuperar la semilla a partir de su código
 		try {
@@ -87,13 +95,19 @@ public class SemillaTest {
 			assertEquals(new Double(0.55), semilla.getPorcentajeDeArcos());
 			
 			// El modo de visualización debe ser matriz de adyacencia		
-			assertEquals(VisualizacionGrafo.MATRIZ_DE_ADYACENCIA, semilla.getVisualizacionGrafo());
+			assertEquals(true, semilla.getVisualizacionGrafo().isMatrizDeAdyacencia());
+			
+			// El modo de visualización no debe ser lista de adyacencia		
+			assertEquals(false, semilla.getVisualizacionGrafo().isListaDeAdyacencia());
+			
+			// El modo de visualización no debe ser visual		
+			assertEquals(false, semilla.getVisualizacionGrafo().isGrafoVisual());
 			
 			// El tipo de pregunta debe ser 0
 			assertEquals(new Integer(0), semilla.getClaseDePregunta());
 			
-			//La cadena representativa de la semilla debe empezar por 02005500
-			assertEquals(semilla.toString().substring(0, 8), "02005500");
+			//La cadena representativa de la semilla debe empezar por 02005540
+			assertEquals("02005540", semilla.toString().substring(0, 8));
 			
 			// La seed del random debe ser 1435673973843
 			assertEquals("1435673973843", semilla.getSeedDelRandom().toString());
@@ -123,9 +137,9 @@ public class SemillaTest {
 		} catch (SemillaException e) { }
 		
 		// Valor de la pos. 6. Se introducirá un valor para el modo de visualización
-		// demasiado alto (mayor de 2):
+		// demasiado alto (mayor de 7):
 		try {
-			new Semilla("020055" + "3" + "01435673973843");
+			new Semilla("020055" + "8" + "01435673973843");
 			fail("Debió saltar una excepción.");
 		} catch (SemillaException e) { }
 		
@@ -163,12 +177,60 @@ public class SemillaTest {
 		try {
 			semilla = new Semilla("020055001435673973843");
 			pregunta = new PreguntaDeProfundidad(semilla);
-		} catch (SemillaException e) { }
+		} catch (SemillaException e) {
+			System.err.println("[SemillaTest] " + e.getMensajeDelError());
+		}
 		
 		assertEquals("020055001435673973843", semilla.toString());
 		
 		//La semilla de la pregunta debe seguir siendo 020055001435673973843
 		assertEquals("020055001435673973843", pregunta.getSemilla().toString());
+		
+	}
+	
+	
+	/**
+	 * Test que evalúan el funcionamiento de la clase VisualizacionGrafo
+	 */
+	@Test
+	public void visualizacionGrafo(){
+		VisualizacionGrafo visual;
+
+		visual = new VisualizacionGrafo(true, true, true);
+		//Su código debe ser 7 (111)
+		assertEquals("7", visual.getCodigo());
+		
+		visual = new VisualizacionGrafo(true, false, false);
+		//Su código debe ser 4 (100)
+		assertEquals("4", visual.getCodigo());
+		
+		visual = new VisualizacionGrafo("2"); //(010)
+		//Debe de representarse como matriz de adyacencia
+		assertFalse(visual.isMatrizDeAdyacencia());
+		//Debe de representarse como lista de adyacencia
+		assertTrue(visual.isListaDeAdyacencia());
+		//Debe de representarse visualmente
+		assertFalse(visual.isGrafoVisual());
+		
+		visual = new VisualizacionGrafo("0"); //(000)
+		//Debe de representarse como matriz de adyacencia
+		assertFalse(visual.isMatrizDeAdyacencia());
+		//No debe de representarse como lista de adyacencia
+		assertFalse(visual.isListaDeAdyacencia());
+		//No debe de representarse visualmente
+		assertFalse(visual.isGrafoVisual());
+		
+		try {
+			Semilla semilla = new Semilla("020055401435673973843");
+			//Debe de representarse como matriz de adyacencia
+			assertTrue(semilla.getVisualizacionGrafo().isMatrizDeAdyacencia());
+			//No debe de representarse como lista de adyacencia
+			assertTrue(semilla.getVisualizacionGrafo().isMatrizDeAdyacencia());
+			//No debe de representarse visualmente
+			assertTrue(semilla.getVisualizacionGrafo().isMatrizDeAdyacencia());
+		} catch (SemillaException e) {
+			System.err.println("[SemillaTest] " + e.getMensajeDelError());
+		}
 		
 	}
 

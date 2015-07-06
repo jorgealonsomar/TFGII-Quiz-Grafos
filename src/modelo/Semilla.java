@@ -1,6 +1,7 @@
 package modelo;
 
 import modelo.pregunta.VisualizacionGrafo;
+import texto.Texto;
 
 /**
  * Clase que contiene la información necesaria para volver a construir una pregunta.
@@ -158,23 +159,34 @@ public class Semilla {
 						+ "entre en 0 y el 100");
 			}
 			
+			
 			//Séptimo carácter. Indica el modo de visualización
 			valorAux = Integer.parseInt(codigo.substring(6, 7));
 			
-			switch(valorAux){
-			case 0:
-				this.visualizacionGrafo = VisualizacionGrafo.MATRIZ_DE_ADYACENCIA;
-				break;
-			case 1:
-				this.visualizacionGrafo = VisualizacionGrafo.LISTA_DE_ADYACENCIA;
-				break;
-			case 2:
-				this.visualizacionGrafo = VisualizacionGrafo.GRAFO_VISUAL;
-				break;
-			default:
+			if(0 <= valorAux && valorAux <= 7){
+				this.visualizacionGrafo = new VisualizacionGrafo(codigo.substring(6, 7));
+			} else {
 				throw new SemillaException("El valor del 7º carácter de la semilla debe estar"
-						+ "entre en 0 y el 2");
+						+ "entre en 0 y el 7");
 			}
+			
+//			switch(valorAux){
+//			case 0:
+//				this.visualizacionGrafo = VisualizacionGrafo.MATRIZ_DE_ADYACENCIA;
+//				break;
+//			case 1:
+//				this.visualizacionGrafo = VisualizacionGrafo.LISTA_DE_ADYACENCIA;
+//				break;
+//			case 2:
+//				this.visualizacionGrafo = VisualizacionGrafo.GRAFO_VISUAL;
+//				break;
+//			case 3:
+//				this.visualizacionGrafo = VisualizacionGrafo.GRAFO_VISUAL_MAS_MATRIZ;
+//				break;
+//			default:
+//				throw new SemillaException("El valor del 7º carácter de la semilla debe estar"
+//						+ "entre en 0 y el 3");
+//			}
 			
 			//Octavo carácter. Indica el tipo de pregunta
 			valorAux = Integer.parseInt(codigo.substring(7, 8));
@@ -219,30 +231,18 @@ public class Semilla {
 		//Porcentaje de arcos
 		String cadenaPorcentajeDeArcos = new Integer((new Double(porcentajeDeArcos*100)).intValue()).toString();
 		//Debe ocupar 3 caracteres
-		for (int i = 0; i < 3-cadenaPorcentajeDeArcos.length(); i++) {
-			cadenaPorcentajeDeArcos = "0" + cadenaPorcentajeDeArcos;
-		}
+		cadenaPorcentajeDeArcos = Texto.anadirCaracteresPorLaIzquierda(cadenaPorcentajeDeArcos, '0', 3);
 		cadena += cadenaPorcentajeDeArcos;
 		
 		//Modo de visualización
-		switch(visualizacionGrafo){
-		case MATRIZ_DE_ADYACENCIA:
-			cadena += 0;
-			break;
-		case LISTA_DE_ADYACENCIA:
-			cadena += 1;
-			break;
-		case GRAFO_VISUAL: default:
-			cadena += 2;
-			break;
-		}
+		cadena += visualizacionGrafo.getCodigo();
 		
 		//Tipo de pregunta
 		cadena += claseDePregunta;
 		
 		//Seed del random
 		cadena += seedDelRandom;
-		
+
 		return cadena;
 	}
 	

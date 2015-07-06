@@ -10,6 +10,16 @@ public class Textos_Interfaz {
 	 * Devuelve el texto del botón de Elegir Directorio.
 	 * @return Texto del botón de Elegir Directorio.
 	 */
+	public static Texto tituloVentana() {
+		return new Texto("TFGII Generador de preguntas de Algoritmia", 
+				"TFGII Algorithmics questions generator");
+	}
+	
+	
+	/**
+	 * Devuelve el texto del botón de Elegir Directorio.
+	 * @return Texto del botón de Elegir Directorio.
+	 */
 	public static Texto botonElegirDirectorio() {
 		return new Texto("Elegir directorio", "Select directory");
 	}
@@ -217,11 +227,29 @@ public class Textos_Interfaz {
 	
 	
 	/**
-	 * Devuelve el texto que va junto al selector del modo de visualización del grafo.
-	 * @return Texto junto al selector del modo de visualización del grafo.
+	 * Devuelve el texto que va junto al selector de si el grafo se muestra como matriz de adyacencia. 
+	 * @return Texto junto al selector del modo de si el grafo se muestra como matriz de adyacencia.
 	 */
-	public static Texto textoVisualizacionGrafo() {
-		return new Texto("Modo de visualización del grafo: ", "Graph visualization mode: ");
+	public static Texto textoVisualizacionGrafo_MatrizDeAdyacencia() {
+		return new Texto("Mostrar como matriz de adyacencia: ", "Show as adjacency matrix: ");
+	}
+	
+	
+	/**
+	 * Devuelve el texto que va junto al selector de si el grafo se muestra como lista de adyacencia. 
+	 * @return Texto junto al selector del modo de si el grafo se muestra como lista de adyacencia.
+	 */
+	public static Texto textoVisualizacionGrafo_ListaDeAdyacencia() {
+		return new Texto("Mostrar como lista de adyacencia: ", "Show as adjacency list: ");
+	}
+	
+	
+	/**
+	 * Devuelve el texto que va junto al selector de si el grafo se muestra como matriz de adyacencia. 
+	 * @return Texto junto al selector del modo de si el grafo se muestra como matriz de adyacencia.
+	 */
+	public static Texto textoVisualizacionGrafo_GrafoVisual() {
+		return new Texto("Mostrar como grafo visual: ", "Show as visual graph: ");
 	}
 	
 	
@@ -249,6 +277,16 @@ public class Textos_Interfaz {
 	 */
 	public static Texto visualizacionGrafoVisual(){
 		return new Texto("Grafo (visual)", "Graph (visual)");
+	}
+	
+	
+	/**
+	 * Devuelve el texto asociado a la visualización de los grafos en forma de lista de adyacencia, seguido
+	 * de su representación en forma de matriz de adyacencia.
+	 * @return Texto asociado a la visualización de los grafos en forma visual + matriz de adyacencia.
+	 */
+	public static Texto visualizacionGrafoVisualMasMatrizAdyacencia(){
+		return new Texto("Grafo (visual) + matriz de adyacencia", "Graph (visual) + Adjacency matrix");
 	}
 	
 	

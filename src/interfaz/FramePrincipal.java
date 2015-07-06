@@ -31,7 +31,6 @@ import modelo.pregunta.PreguntaDePrim_ArcosDelArbolDeExpansion;
 import modelo.pregunta.PreguntaDePrim_OrdenDeSeleccion;
 import modelo.pregunta.PreguntaDeProfundidad;
 import modelo.pregunta.PreguntaTopologica;
-import modelo.pregunta.VisualizacionGrafo;
 import sistema.GestorIO;
 import sistema.Ruta;
 import texto.Idioma;
@@ -94,7 +93,8 @@ public class FramePrincipal extends JFrame {
 	public FramePrincipal() {
 		this.idioma = Idioma.ESP;
 		
-		setTitle("TFGII Generador de preguntas de Algoritmia");
+		setIconImage(new ImageIcon(getClass().getResource(Ruta.IMAGENES + "UBU.png")).getImage());
+		
 		setBounds(0, 0, ANCHO, ALTO);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLocationRelativeTo(null);
@@ -201,7 +201,7 @@ public class FramePrincipal extends JFrame {
 			String nombreArchivo = pregunta.getNombreDeArchivo().getString(idioma);
 			
 			BufferedImage imagenVisual = null;
-			if(panelCentral.getVisualizacionGrafo() == VisualizacionGrafo.GRAFO_VISUAL){
+			if(panelCentral.getVisualizacionGrafo().isGrafoVisual()){
 				imagenVisual = pregunta.getGrafo().toGrafoVisual();
 			}
 			
@@ -281,7 +281,9 @@ public class FramePrincipal extends JFrame {
 	 */
 	private void presentarTrasCambioDeIdioma() {
 		Idioma nuevoIdioma = idioma;
-
+		
+		setTitle(Textos_Interfaz.tituloVentana().getString(nuevoIdioma));
+		
 		// Barra Menú
 		barraMenu.reescribirTextos(nuevoIdioma);
 

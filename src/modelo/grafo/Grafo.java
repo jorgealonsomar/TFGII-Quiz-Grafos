@@ -545,8 +545,12 @@ public abstract class Grafo {
 					cadenaAdyacentes += ", ";
 				}
 			}
-			//Borrar los dos últimos caracteres (", ")
-			cadenaAdyacentes = cadenaAdyacentes.substring(0, cadenaAdyacentes.length()-2);
+
+			try {
+				//Borrar los dos últimos caracteres (", ")
+				cadenaAdyacentes = cadenaAdyacentes.substring(0, cadenaAdyacentes.length()-2);
+			} catch(Exception e) { }
+			
 			cadena += cadenaAdyacentes + "</td>";
 			cadena += "\n\t</tr>";
 			

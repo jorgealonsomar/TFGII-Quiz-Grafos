@@ -34,7 +34,7 @@ public abstract class Pregunta {
 	 */
 	public Pregunta(Integer nNodos, Double porcentajeDeArcos, boolean esDirigido, boolean esPonderado,
 			VisualizacionGrafo visualizacionGrafo) {
-		seedDelRandom = System.currentTimeMillis();
+		seedDelRandom = Math.abs(new Random().nextLong());
 		
 		construirPregunta(nNodos, porcentajeDeArcos, esDirigido, esPonderado, visualizacionGrafo);
 	}
@@ -204,14 +204,6 @@ public abstract class Pregunta {
 		textoPregunta += "------------------------------------------------------------";
 		textoPregunta += "\n" + getTitulo(idioma);
 		textoPregunta += "\n\n" + getEnunciado(idioma);
-		switch(visualizacionGrafo){
-		case MATRIZ_DE_ADYACENCIA: default:
-			textoPregunta += "\n\n" + getGrafo().toMatrizDeAdyacencia();	
-			break;
-		case LISTA_DE_ADYACENCIA:
-			textoPregunta += "\n\n" + getGrafo().toListaDeAdyacencia();	
-			break;
-		}
 		if (idioma == Idioma.ESP) {
 			textoPregunta += "\n" + "(semilla: ";
 		} else {
@@ -219,6 +211,12 @@ public abstract class Pregunta {
 		}
 		textoPregunta += getCodigoSemilla() + ")";
 		textoPregunta += "\n\n" + getRespuestaCorrecta(idioma);
+		if(visualizacionGrafo.isMatrizDeAdyacencia()){
+			textoPregunta += "\n\n" + getGrafo().toMatrizDeAdyacencia();	
+		}
+		if(visualizacionGrafo.isListaDeAdyacencia()){
+			textoPregunta += "\n\n" + getGrafo().toListaDeAdyacencia();	
+		}
 		textoPregunta += "\n\n\n";
 
 		return textoPregunta;
@@ -228,26 +226,26 @@ public abstract class Pregunta {
 	public String getTextoPreguntaXml(Idioma idioma) {
 		String textoPregunta = "\n\t<question type=\"cloze\">";
 		textoPregunta += "\n\t\t<name>";
-		textoPregunta += "\n\t\t\t<text>" + Texto.quitarCaracteresExtranos(getTitulo(idioma)) + "</text>";
+		textoPregunta += "\n\t\t\t<text>" + Texto.quitarCaracteresExtranos(getTitulo(idioma))
+				+ " (Semilla: " + Texto.adaptarCaracteresAXml(getCodigoSemilla()) + ")</text>";
 		textoPregunta += "\n\t\t</name>";
-		textoPregunta += "\n\t\t" + "<!-- Semilla: " + Texto.adaptarCaracteresAXml(getCodigoSemilla()) + " -->";
 		textoPregunta += "\n\t\t<questiontext>";
 		textoPregunta += "\n\t\t\t<text><![CDATA[";
 		textoPregunta += "\n\t\t\t" + Texto.adaptarCaracteresAXml(getEnunciado(idioma));
-		switch(visualizacionGrafo){
-		case MATRIZ_DE_ADYACENCIA:
-			textoPregunta += "\n</p>" + getGrafo().toMatrizDeAdyacenciaHtml();
-			break;
-		case LISTA_DE_ADYACENCIA:
-			textoPregunta += "\n</p>" + getGrafo().toListaDeAdyacenciaHtml();
-			break;
-		case GRAFO_VISUAL:
+		
+		if(visualizacionGrafo.isGrafoVisual()){
 			textoPregunta += "\n</p>" + getGrafo().toGrafoVisualHtml_Insercion();
-			break;
 		}
+		if(visualizacionGrafo.isMatrizDeAdyacencia()){
+			textoPregunta += "\n</p>" + getGrafo().toMatrizDeAdyacenciaHtml();
+		}
+		if(visualizacionGrafo.isListaDeAdyacencia()){
+			textoPregunta += "\n</p>" + getGrafo().toListaDeAdyacenciaHtml();
+		}
+		
 		textoPregunta += "\n</p>\t\t\t" + Texto.adaptarCaracteresAXml(getParteAResponder(idioma));
 		textoPregunta += "\n\t\t\t]]></text>";
-		if(visualizacionGrafo.equals(VisualizacionGrafo.GRAFO_VISUAL)){
+		if(visualizacionGrafo.isGrafoVisual()){
 			textoPregunta += "\n\t\t\t" + getGrafo().toGrafoVisualHtml_Definicion();
 		}
 		textoPregunta += "\n\t\t</questiontext>";

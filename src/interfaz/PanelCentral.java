@@ -106,14 +106,40 @@ public class PanelCentral extends JPanel {
 	
 	
 	/**
-	 * Etiqueta relativa al selector de visualización del grafo.
+	 * Etiqueta relativa al selector de si el grafo se muestra como matriz de adyacencia.
 	 */
-	private JLabel txtVisualizacionGrafo = new JLabel(Textos_Interfaz.textoVisualizacionGrafo().esp());
+	private JLabel txtVisualizacionGrafo_MatrizDeAdyacencia =
+			new JLabel(Textos_Interfaz.textoVisualizacionGrafo_MatrizDeAdyacencia().esp());
 	
 	/**
-	 * Selector que permite escoger el modo de visualización del grafo.
+	 * Selector con el que indicar si el grafo se muestra como matriz de adyacencia.
 	 */
-	private JComboBoxVisualizacionGrafo comboBoxVisualizacionGrafo = new JComboBoxVisualizacionGrafo();
+	private JCheckBox checkBoxVisualizacionGrafo_MatrizDeAdyacencia = new JCheckBox();
+	
+	
+	/**
+	 * Etiqueta relativa al selector de si el grafo se muestra como lista de adyacencia.
+	 */
+	private JLabel txtVisualizacionGrafo_ListaDeAdyacencia =
+			new JLabel(Textos_Interfaz.textoVisualizacionGrafo_ListaDeAdyacencia().esp());
+	
+	/**
+	 * Selector con el que indicar si el grafo se muestra como lista de adyacencia.
+	 */
+	private JCheckBox checkBoxVisualizacionGrafo_ListaDeAdyacencia = new JCheckBox();
+	
+	
+	/**
+	 * Etiqueta relativa al selector de si el grafo se muestra visualmente.
+	 */
+	private JLabel txtVisualizacionGrafo_GrafoVisual =
+			new JLabel(Textos_Interfaz.textoVisualizacionGrafo_GrafoVisual().esp());
+	
+	/**
+	 * Selector con el que indicar si el grafo se muestra visualmente.
+	 */
+	private JCheckBox checkBoxVisualizacionGrafo_GrafoVisual = new JCheckBox();
+	
 	
 	
 	/**
@@ -196,9 +222,22 @@ public class PanelCentral extends JPanel {
 		
 		c.gridy++;
 		c.gridx = 0;
-		add(txtVisualizacionGrafo, c);
+		add(txtVisualizacionGrafo_GrafoVisual, c);
 		c.gridx = 1;
-		add(comboBoxVisualizacionGrafo, c);
+		add(checkBoxVisualizacionGrafo_GrafoVisual, c);
+		checkBoxVisualizacionGrafo_GrafoVisual.setSelected(true);
+		
+		c.gridy++;
+		c.gridx = 0;
+		add(txtVisualizacionGrafo_MatrizDeAdyacencia, c);
+		c.gridx = 1;
+		add(checkBoxVisualizacionGrafo_MatrizDeAdyacencia, c);
+		
+		c.gridy++;
+		c.gridx = 0;
+		add(txtVisualizacionGrafo_ListaDeAdyacencia, c);
+		c.gridx = 1;
+		add(checkBoxVisualizacionGrafo_ListaDeAdyacencia, c);
 		
 		c.gridy++;
 		c.gridx = 0;
@@ -233,8 +272,13 @@ public class PanelCentral extends JPanel {
 		
 		txtGrafoDirigido.setText(Textos_Interfaz.textoGrafoDirigido().getString(nuevoIdioma));
 		
-		txtVisualizacionGrafo.setText(Textos_Interfaz.textoVisualizacionGrafo().getString(nuevoIdioma));
-		comboBoxVisualizacionGrafo.actualizar(nuevoIdioma);
+		txtVisualizacionGrafo_MatrizDeAdyacencia.setText(Textos_Interfaz.
+				textoVisualizacionGrafo_MatrizDeAdyacencia().getString(nuevoIdioma));
+		txtVisualizacionGrafo_ListaDeAdyacencia.setText(Textos_Interfaz.
+				textoVisualizacionGrafo_ListaDeAdyacencia().getString(nuevoIdioma));
+		txtVisualizacionGrafo_GrafoVisual.setText(Textos_Interfaz.
+				textoVisualizacionGrafo_GrafoVisual().getString(nuevoIdioma));
+		
 	}
 	
 	
@@ -318,41 +362,9 @@ public class PanelCentral extends JPanel {
 	 * @return Modo de visualización por el que ha de mostrarse el grafo.
 	 */
 	public VisualizacionGrafo getVisualizacionGrafo(){
-		return comboBoxVisualizacionGrafo.getClaseDeVisualizacion();
-	}
-	
-	
-	
-	/**
-	 * Combo box que contiene los distintos modos de visualización posibles para un grafo.
-	 * @author Jorge Alonso Márquez
-	 */
-	private class JComboBoxVisualizacionGrafo extends JComboBoxTextos {
-		
-		/**
-		 * Constructor de la clase
-		 */
-		public JComboBoxVisualizacionGrafo(){
-			addTexto(Textos_Interfaz.visualizacionGrafoVisual());
-			addTexto(Textos_Interfaz.visualizacionMatrizAdyacencia());
-			addTexto(Textos_Interfaz.visualizacionListaAdyacencia());
-		}
-		
-		
-		/**
-		 * Devuelve el modo de visualización del grafo seleccionado.
-		 * @return Modo de visualización que está seleccionado.
-		 */
-		public VisualizacionGrafo getClaseDeVisualizacion(){
-			switch(getSelectedIndex()){
-			case 0: default:
-				return VisualizacionGrafo.GRAFO_VISUAL;
-			case 1:
-				return VisualizacionGrafo.MATRIZ_DE_ADYACENCIA;
-			case 2:
-				return VisualizacionGrafo.LISTA_DE_ADYACENCIA;
-			}
-		}
+		return new VisualizacionGrafo(	checkBoxVisualizacionGrafo_MatrizDeAdyacencia.isSelected(),
+										checkBoxVisualizacionGrafo_ListaDeAdyacencia.isSelected(),
+										checkBoxVisualizacionGrafo_GrafoVisual.isSelected());
 	}
 	
 	

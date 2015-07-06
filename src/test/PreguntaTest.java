@@ -26,7 +26,7 @@ public class PreguntaTest {
 		boolean esDirigido = true;
 
 		Pregunta preguntaDeAnchura = new PreguntaDeAnchura(nNodos, porcentajeDeArcos, esDirigido,
-				VisualizacionGrafo.MATRIZ_DE_ADYACENCIA);
+				new VisualizacionGrafo(true, false, false));
 
 		assertEquals(preguntaDeAnchura.getTitulo(Idioma.ESP),
 				Textos_Preguntas.tituloPregAnchura().getString(Idioma.ESP));

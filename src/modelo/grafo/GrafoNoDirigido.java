@@ -125,8 +125,10 @@ public class GrafoNoDirigido extends Grafo {
 			
 			// Añadir el arco a la lista de arcos recorridos
 			if(!nodoActual.equals(0)){  //Si no es el nodo inicial (el nodo A)
-				arcosRecorridos.addArco(nodoActual, nodosPredecesores.get(nodoActual),
-						getMatrizDeAdyacencia()[nodosPredecesores.get(nodoActual)][nodoActual]);
+				try {
+					arcosRecorridos.addArco(nodoActual, nodosPredecesores.get(nodoActual),
+							getMatrizDeAdyacencia()[nodosPredecesores.get(nodoActual)][nodoActual]);
+				} catch(Exception e) { }
 			}
 			
 			//Por cada vecino del nodo actual

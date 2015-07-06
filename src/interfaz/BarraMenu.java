@@ -3,11 +3,13 @@ package interfaz;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.ImageIcon;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 
+import sistema.Ruta;
 import texto.Idioma;
 import texto.Textos_BarraMenu;
 
@@ -49,7 +51,13 @@ public class BarraMenu extends JMenuBar {
 	 * Opción "Acerca de", del menú de Ayuda.
 	 */
 	private JMenuItem opcionAcercaDe;
-
+	
+	
+	/**
+	 * Idioma actual de la aplicación.
+	 */
+	private Idioma idioma;
+	
 	
 	/**
 	 * Constructor de la clase.
@@ -93,6 +101,7 @@ public class BarraMenu extends JMenuBar {
 	 *            Nuevo idioma establecido.
 	 */
 	public void reescribirTextos(Idioma nuevoIdioma) {
+		this.idioma = nuevoIdioma;
 
 		menuArchivo.setText(Textos_BarraMenu.menuArchivo().getString(nuevoIdioma));
 		opcionImportarSemilla.setText(Textos_BarraMenu.menuArchivo_ImportarSemilla()
@@ -155,11 +164,14 @@ public class BarraMenu extends JMenuBar {
 		 */
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			JOptionPane.showMessageDialog(frame, "Universidad de Burgos. Grado en Ingeniería Informática."
-					+ "\nAutor: Jorge Alonso Márquez."
-					+ "\nTutores: Juan José Rodríguez Díez y Carlos López Nozal."
-					+ "\n\tEntregado a julio de 2015.",
-					"Acerca de", JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(frame, Textos_BarraMenu.acercaDe_UniversidadYGrado().getString(idioma)
+					+ "\n\n" + Textos_BarraMenu.acercaDe_Autor().getString(idioma)
+					+ "\n\n" + Textos_BarraMenu.acercaDe_Tutores().getString(idioma)
+					+ "\n\n" + Textos_BarraMenu.acercaDe_FechaDeEntrega().getString(idioma),
+					Textos_BarraMenu.menuAyuda_AcercaDe().getString(idioma),
+					JOptionPane.INFORMATION_MESSAGE,
+					new ImageIcon(getClass().getResource(Ruta.IMAGENES + "logoUBU.png"))
+			);
 		}
 	}
 	

@@ -16,7 +16,6 @@ import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 
 import modelo.pregunta.Pregunta;
-import modelo.pregunta.VisualizacionGrafo;
 import texto.Idioma;
 import texto.Texto;
 import texto.Textos_Interfaz;
@@ -221,10 +220,9 @@ public abstract class PestanaDePregunta extends JPanel {
 			String nombreArchivo = pregunta.getNombreDeArchivo().getString(idioma);
 			
 			BufferedImage imagenVisual = null;
-			if(panelCentral.getVisualizacionGrafo() == VisualizacionGrafo.GRAFO_VISUAL){
+			if(panelCentral.getVisualizacionGrafo().isGrafoVisual()){
 				imagenVisual = pregunta.getGrafo().toGrafoVisual();
 			}
-			
 			frame.imprimePregunta(textoPreguntaPorPantalla, textoPreguntaXml, nombreArchivo, imagenVisual);
 		}
 		

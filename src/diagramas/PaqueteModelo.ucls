@@ -56,16 +56,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="8" language="java" name="modelo.grafo.Grafo.EtiquetadorDeNodos" project="TFGII-Quiz-Grafos" 
-    file="/TFGII-Quiz-Grafos/src/modelo/grafo/Grafo.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="3648" y="836"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="9" language="java" name="modelo.grafo.GrafoNoDirigido" project="TFGII-Quiz-Grafos" 
+  <class id="8" language="java" name="modelo.grafo.GrafoNoDirigido" project="TFGII-Quiz-Grafos" 
     file="/TFGII-Quiz-Grafos/src/modelo/grafo/GrafoNoDirigido.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="3276" y="1232"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -74,7 +65,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="10" language="java" name="modelo.grafo.GrafoNoDirigido.GruposKruskal" project="TFGII-Quiz-Grafos" 
+  <class id="9" language="java" name="modelo.grafo.GrafoNoDirigido.GruposKruskal" project="TFGII-Quiz-Grafos" 
     file="/TFGII-Quiz-Grafos/src/modelo/grafo/GrafoNoDirigido.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="3506" y="1569"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -83,7 +74,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="11" language="java" name="modelo.grafo.ResultadosDijkstra" project="TFGII-Quiz-Grafos" 
+  <class id="10" language="java" name="modelo.grafo.ResultadosDijkstra" project="TFGII-Quiz-Grafos" 
     file="/TFGII-Quiz-Grafos/src/modelo/grafo/ResultadosDijkstra.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="2930" y="1638"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -92,7 +83,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="12" language="java" name="modelo.pregunta.Pregunta" project="TFGII-Quiz-Grafos" 
+  <class id="11" language="java" name="modelo.pregunta.Pregunta" project="TFGII-Quiz-Grafos" 
     file="/TFGII-Quiz-Grafos/src/modelo/pregunta/Pregunta.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1024" y="712"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -101,7 +92,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="13" language="java" name="modelo.pregunta.PreguntaDeProfundidad" project="TFGII-Quiz-Grafos" 
+  <class id="12" language="java" name="modelo.pregunta.PreguntaDeProfundidad" project="TFGII-Quiz-Grafos" 
     file="/TFGII-Quiz-Grafos/src/modelo/pregunta/PreguntaDeProfundidad.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="268" width="413" x="202" y="254"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -110,7 +101,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="14" language="java" name="modelo.pregunta.PreguntaDeAnchura" project="TFGII-Quiz-Grafos" 
+  <class id="13" language="java" name="modelo.pregunta.PreguntaDeAnchura" project="TFGII-Quiz-Grafos" 
     file="/TFGII-Quiz-Grafos/src/modelo/pregunta/PreguntaDeAnchura.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="268" width="393" x="136" y="746"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -119,7 +110,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="15" language="java" name="modelo.pregunta.PreguntaTopologica" project="TFGII-Quiz-Grafos" 
+  <class id="14" language="java" name="modelo.pregunta.PreguntaTopologica" project="TFGII-Quiz-Grafos" 
     file="/TFGII-Quiz-Grafos/src/modelo/pregunta/PreguntaTopologica.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="286" width="341" x="214" y="1229"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -128,7 +119,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="16" language="java" name="modelo.pregunta.PreguntaDeDijkstra" project="TFGII-Quiz-Grafos" 
+  <class id="15" language="java" name="modelo.pregunta.PreguntaDeDijkstra" project="TFGII-Quiz-Grafos" 
     file="/TFGII-Quiz-Grafos/src/modelo/pregunta/PreguntaDeDijkstra.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1072" y="1492"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -137,7 +128,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="17" language="java" name="modelo.pregunta.PreguntaDeDijkstra_RutaMasCorta" project="TFGII-Quiz-Grafos" 
+  <class id="16" language="java" name="modelo.pregunta.PreguntaDeDijkstra_RutaMasCorta" project="TFGII-Quiz-Grafos" 
     file="/TFGII-Quiz-Grafos/src/modelo/pregunta/PreguntaDeDijkstra_RutaMasCorta.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1052" y="1796"/>    
@@ -147,7 +138,7 @@
       <operations public="false" package="false" protected="false" private="false" static="true"/>    
     </display>  
   </class>  
-  <class id="18" language="java" name="modelo.pregunta.PreguntaDeDijkstra_DistanciasMasCortas" 
+  <class id="17" language="java" name="modelo.pregunta.PreguntaDeDijkstra_DistanciasMasCortas" 
     project="TFGII-Quiz-Grafos" 
     file="/TFGII-Quiz-Grafos/src/modelo/pregunta/PreguntaDeDijkstra_DistanciasMasCortas.java" binary="false" 
     corner="BOTTOM_RIGHT">    
@@ -158,7 +149,7 @@
       <operations public="false" package="false" protected="false" private="false" static="true"/>    
     </display>  
   </class>  
-  <class id="19" language="java" name="modelo.pregunta.PreguntaDeDijkstra_OrdenDeSeleccion" project="TFGII-Quiz-Grafos" 
+  <class id="18" language="java" name="modelo.pregunta.PreguntaDeDijkstra_OrdenDeSeleccion" project="TFGII-Quiz-Grafos" 
     file="/TFGII-Quiz-Grafos/src/modelo/pregunta/PreguntaDeDijkstra_OrdenDeSeleccion.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1444" y="1700"/>    
@@ -168,7 +159,7 @@
       <operations public="false" package="false" protected="false" private="false" static="true"/>    
     </display>  
   </class>  
-  <class id="20" language="java" name="modelo.pregunta.PreguntaDePrim" project="TFGII-Quiz-Grafos" 
+  <class id="19" language="java" name="modelo.pregunta.PreguntaDePrim" project="TFGII-Quiz-Grafos" 
     file="/TFGII-Quiz-Grafos/src/modelo/pregunta/PreguntaDePrim.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1548" y="1332"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -177,7 +168,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="21" language="java" name="modelo.pregunta.PreguntaDePrim_ArcosDelArbolDeExpansion" 
+  <class id="20" language="java" name="modelo.pregunta.PreguntaDePrim_ArcosDelArbolDeExpansion" 
     project="TFGII-Quiz-Grafos" 
     file="/TFGII-Quiz-Grafos/src/modelo/pregunta/PreguntaDePrim_ArcosDelArbolDeExpansion.java" binary="false" 
     corner="BOTTOM_RIGHT">    
@@ -188,7 +179,7 @@
       <operations public="false" package="false" protected="false" private="false" static="true"/>    
     </display>  
   </class>  
-  <class id="22" language="java" name="modelo.pregunta.PreguntaDePrim_OrdenDeSeleccion" project="TFGII-Quiz-Grafos" 
+  <class id="21" language="java" name="modelo.pregunta.PreguntaDePrim_OrdenDeSeleccion" project="TFGII-Quiz-Grafos" 
     file="/TFGII-Quiz-Grafos/src/modelo/pregunta/PreguntaDePrim_OrdenDeSeleccion.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1988" y="1200"/>    
@@ -198,7 +189,7 @@
       <operations public="false" package="false" protected="false" private="false" static="true"/>    
     </display>  
   </class>  
-  <class id="23" language="java" name="modelo.pregunta.PreguntaDeKruskal" project="TFGII-Quiz-Grafos" 
+  <class id="22" language="java" name="modelo.pregunta.PreguntaDeKruskal" project="TFGII-Quiz-Grafos" 
     file="/TFGII-Quiz-Grafos/src/modelo/pregunta/PreguntaDeKruskal.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1564" y="908"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -207,7 +198,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="24" language="java" name="modelo.pregunta.PreguntaDeKruskal_ArcosDelArbolDeExpansion" 
+  <class id="23" language="java" name="modelo.pregunta.PreguntaDeKruskal_ArcosDelArbolDeExpansion" 
     project="TFGII-Quiz-Grafos" 
     file="/TFGII-Quiz-Grafos/src/modelo/pregunta/PreguntaDeKruskal_ArcosDelArbolDeExpansion.java" binary="false" 
     corner="BOTTOM_RIGHT">    
@@ -218,7 +209,7 @@
       <operations public="false" package="false" protected="false" private="false" static="true"/>    
     </display>  
   </class>  
-  <class id="25" language="java" name="modelo.pregunta.PreguntaDeKruskal_OrdenDeSeleccion" project="TFGII-Quiz-Grafos" 
+  <class id="24" language="java" name="modelo.pregunta.PreguntaDeKruskal_OrdenDeSeleccion" project="TFGII-Quiz-Grafos" 
     file="/TFGII-Quiz-Grafos/src/modelo/pregunta/PreguntaDeKruskal_OrdenDeSeleccion.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1940" y="1064"/>    
@@ -228,16 +219,7 @@
       <operations public="false" package="false" protected="false" private="false" static="true"/>    
     </display>  
   </class>  
-  <enumeration id="26" language="java" name="modelo.pregunta.VisualizacionGrafo" project="TFGII-Quiz-Grafos" 
-    file="/TFGII-Quiz-Grafos/src/modelo/pregunta/VisualizacionGrafo.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="142" width="302" x="1379" y="313"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </enumeration>  
-  <class id="27" language="java" name="modelo.grafo.ListaDeArcos" project="TFGII-Quiz-Grafos" 
+  <class id="25" language="java" name="modelo.grafo.ListaDeArcos" project="TFGII-Quiz-Grafos" 
     file="/TFGII-Quiz-Grafos/src/modelo/grafo/ListaDeArcos.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="2736" y="1184"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -246,7 +228,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="28" language="java" name="modelo.grafo.Arco" project="TFGII-Quiz-Grafos" 
+  <class id="26" language="java" name="modelo.grafo.Arco" project="TFGII-Quiz-Grafos" 
     file="/TFGII-Quiz-Grafos/src/modelo/grafo/Arco.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="3837" y="1232"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -255,202 +237,174 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <dependency id="29">    
-    <end type="SOURCE" refId="1"/>    
-    <end type="TARGET" refId="2"/>  
-  </dependency>  
-  <dependency id="30">    
-    <end type="SOURCE" refId="7"/>    
-    <end type="TARGET" refId="28"/>  
-  </dependency>  
-  <association id="31">    
-    <end type="SOURCE" refId="16" navigable="false">      
-      <attribute id="32" name="resultadosDijkstra">        
+  <generalization id="27">    
+    <end type="SOURCE" refId="8"/>    
+    <end type="TARGET" refId="7"/>  
+  </generalization>  
+  <generalization id="28">    
+    <end type="SOURCE" refId="17"/>    
+    <end type="TARGET" refId="15"/>  
+  </generalization>  
+  <association id="29">    
+    <end type="SOURCE" refId="19" navigable="false">      
+      <attribute id="30" name="arcosDelArbolDeExpansion">        
         <position height="0" width="0" x="132" y="0"/>      
       </attribute>      
-      <multiplicity id="33" minimum="0" maximum="1">        
+      <multiplicity id="31" minimum="0" maximum="1">        
         <position height="0" width="0" x="132" y="0"/>      
       </multiplicity>    
     </end>    
-    <end type="TARGET" refId="11" navigable="true"/>    
+    <end type="TARGET" refId="25" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <generalization id="34">    
-    <end type="SOURCE" refId="15"/>    
-    <end type="TARGET" refId="12"/>  
+  <generalization id="32">    
+    <end type="SOURCE" refId="14"/>    
+    <end type="TARGET" refId="11"/>  
   </generalization>  
-  <generalization id="35">    
-    <end type="SOURCE" refId="18"/>    
-    <end type="TARGET" refId="16"/>  
-  </generalization>  
+  <association id="33">    
+    <end type="SOURCE" refId="23" navigable="false">      
+      <attribute id="34" name="arcosAPreguntar">        
+        <position height="0" width="0" x="132" y="0"/>      
+      </attribute>      
+      <multiplicity id="35" minimum="0" maximum="1">        
+        <position height="0" width="0" x="132" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="25" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
   <generalization id="36">    
-    <end type="SOURCE" refId="9"/>    
-    <end type="TARGET" refId="7"/>  
+    <end type="SOURCE" refId="19"/>    
+    <end type="TARGET" refId="11"/>  
   </generalization>  
-  <nesting id="37">    
-    <end type="SOURCE" refId="7"/>    
-    <end type="TARGET" refId="6"/>  
-  </nesting>  
+  <generalization id="37">    
+    <end type="SOURCE" refId="16"/>    
+    <end type="TARGET" refId="15"/>  
+  </generalization>  
   <association id="38">    
-    <end type="SOURCE" refId="12" navigable="false">      
-      <attribute id="39" name="grafo">        
+    <end type="SOURCE" refId="22" navigable="false">      
+      <attribute id="39" name="arcosArbolDeExpansion">        
         <position height="0" width="0" x="132" y="0"/>      
       </attribute>      
       <multiplicity id="40" minimum="0" maximum="1">        
         <position height="0" width="0" x="132" y="0"/>      
       </multiplicity>    
     </end>    
-    <end type="TARGET" refId="7" navigable="true"/>    
+    <end type="TARGET" refId="25" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <generalization id="41">    
-    <end type="SOURCE" refId="23"/>    
-    <end type="TARGET" refId="12"/>  
+    <end type="SOURCE" refId="5"/>    
+    <end type="TARGET" refId="7"/>  
   </generalization>  
   <generalization id="42">    
-    <end type="SOURCE" refId="21"/>    
-    <end type="TARGET" refId="20"/>  
+    <end type="SOURCE" refId="24"/>    
+    <end type="TARGET" refId="22"/>  
   </generalization>  
   <generalization id="43">    
-    <end type="SOURCE" refId="14"/>    
-    <end type="TARGET" refId="12"/>  
+    <end type="SOURCE" refId="23"/>    
+    <end type="TARGET" refId="22"/>  
   </generalization>  
   <association id="44">    
-    <end type="SOURCE" refId="12" navigable="false">      
-      <attribute id="45" name="visualizacionGrafo">        
-        <position height="0" width="0" x="0" y="0"/>      
+    <end type="SOURCE" refId="15" navigable="false">      
+      <attribute id="45" name="resultadosDijkstra">        
+        <position height="0" width="0" x="132" y="0"/>      
       </attribute>      
       <multiplicity id="46" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="26" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <generalization id="47">    
-    <end type="SOURCE" refId="13"/>    
-    <end type="TARGET" refId="12"/>  
-  </generalization>  
-  <association id="48">    
-    <end type="SOURCE" refId="24" navigable="false">      
-      <attribute id="49" name="arcosAPreguntar">        
-        <position height="0" width="0" x="132" y="0"/>      
-      </attribute>      
-      <multiplicity id="50" minimum="0" maximum="1">        
         <position height="0" width="0" x="132" y="0"/>      
       </multiplicity>    
     </end>    
-    <end type="TARGET" refId="27" navigable="true"/>    
+    <end type="TARGET" refId="10" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <generalization id="51">    
-    <end type="SOURCE" refId="19"/>    
-    <end type="TARGET" refId="16"/>  
-  </generalization>  
-  <generalization id="52">    
-    <end type="SOURCE" refId="24"/>    
-    <end type="TARGET" refId="23"/>  
-  </generalization>  
-  <generalization id="53">    
-    <end type="SOURCE" refId="17"/>    
-    <end type="TARGET" refId="16"/>  
-  </generalization>  
-  <association id="54">    
-    <end type="SOURCE" refId="23" navigable="false">      
-      <attribute id="55" name="arcosArbolDeExpansion">        
-        <position height="0" width="0" x="132" y="0"/>      
-      </attribute>      
-      <multiplicity id="56" minimum="0" maximum="1">        
-        <position height="0" width="0" x="132" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="27" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <generalization id="57">    
-    <end type="SOURCE" refId="16"/>    
-    <end type="TARGET" refId="12"/>  
-  </generalization>  
-  <nesting id="58">    
-    <end type="SOURCE" refId="9"/>    
-    <end type="TARGET" refId="10"/>  
-  </nesting>  
-  <generalization id="59">    
-    <end type="SOURCE" refId="25"/>    
-    <end type="TARGET" refId="23"/>  
-  </generalization>  
-  <dependency id="60">    
-    <end type="SOURCE" refId="5"/>    
-    <end type="TARGET" refId="28"/>  
-  </dependency>  
-  <association id="61">    
-    <end type="SOURCE" refId="20" navigable="false">      
-      <attribute id="62" name="arcosDelArbolDeExpansion">        
-        <position height="0" width="0" x="132" y="0"/>      
-      </attribute>      
-      <multiplicity id="63" minimum="0" maximum="1">        
-        <position height="0" width="0" x="132" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="27" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <nesting id="64">    
+  <nesting id="47">    
     <end type="SOURCE" refId="7"/>    
-    <end type="TARGET" refId="8"/>  
+    <end type="TARGET" refId="6"/>  
   </nesting>  
-  <generalization id="65">    
-    <end type="SOURCE" refId="20"/>    
-    <end type="TARGET" refId="12"/>  
-  </generalization>  
-  <dependency id="66">    
-    <end type="SOURCE" refId="9"/>    
-    <end type="TARGET" refId="28"/>  
+  <dependency id="48">    
+    <end type="SOURCE" refId="7"/>    
+    <end type="TARGET" refId="26"/>  
   </dependency>  
-  <association id="67">    
-    <end type="SOURCE" refId="12" navigable="false">      
-      <attribute id="68" name="semilla">        
+  <generalization id="49">    
+    <end type="SOURCE" refId="12"/>    
+    <end type="TARGET" refId="11"/>  
+  </generalization>  
+  <association id="50">    
+    <end type="SOURCE" refId="11" navigable="false">      
+      <attribute id="51" name="semilla">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
-      <multiplicity id="69" minimum="0" maximum="1">        
+      <multiplicity id="52" minimum="0" maximum="1">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="1" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <generalization id="70">    
+  <dependency id="53">    
     <end type="SOURCE" refId="5"/>    
-    <end type="TARGET" refId="7"/>  
+    <end type="TARGET" refId="26"/>  
+  </dependency>  
+  <dependency id="54">    
+    <end type="SOURCE" refId="8"/>    
+    <end type="TARGET" refId="26"/>  
+  </dependency>  
+  <generalization id="55">    
+    <end type="SOURCE" refId="20"/>    
+    <end type="TARGET" refId="19"/>  
   </generalization>  
-  <association id="71">    
-    <end type="SOURCE" refId="1" navigable="false">      
-      <attribute id="72" name="visualizacionGrafo">        
-        <position height="0" width="0" x="0" y="0"/>      
+  <association id="56">    
+    <end type="SOURCE" refId="20" navigable="false">      
+      <attribute id="57" name="arcosAPreguntar">        
+        <position height="0" width="0" x="132" y="0"/>      
       </attribute>      
-      <multiplicity id="73" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
+      <multiplicity id="58" minimum="0" maximum="1">        
+        <position height="0" width="0" x="132" y="0"/>      
       </multiplicity>    
     </end>    
-    <end type="TARGET" refId="26" navigable="true"/>    
+    <end type="TARGET" refId="25" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <generalization id="74">    
+  <generalization id="59">    
+    <end type="SOURCE" refId="15"/>    
+    <end type="TARGET" refId="11"/>  
+  </generalization>  
+  <association id="60">    
+    <end type="SOURCE" refId="11" navigable="false">      
+      <attribute id="61" name="grafo">        
+        <position height="0" width="0" x="132" y="0"/>      
+      </attribute>      
+      <multiplicity id="62" minimum="0" maximum="1">        
+        <position height="0" width="0" x="132" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="7" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="63">    
     <end type="SOURCE" refId="22"/>    
-    <end type="TARGET" refId="20"/>  
+    <end type="TARGET" refId="11"/>  
   </generalization>  
-  <association id="75">    
-    <end type="SOURCE" refId="21" navigable="false">      
-      <attribute id="76" name="arcosAPreguntar">        
-        <position height="0" width="0" x="132" y="0"/>      
-      </attribute>      
-      <multiplicity id="77" minimum="0" maximum="1">        
-        <position height="0" width="0" x="132" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="27" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
+  <generalization id="64">    
+    <end type="SOURCE" refId="18"/>    
+    <end type="TARGET" refId="15"/>  
+  </generalization>  
+  <generalization id="65">    
+    <end type="SOURCE" refId="13"/>    
+    <end type="TARGET" refId="11"/>  
+  </generalization>  
+  <generalization id="66">    
+    <end type="SOURCE" refId="21"/>    
+    <end type="TARGET" refId="19"/>  
+  </generalization>  
+  <dependency id="67">    
+    <end type="SOURCE" refId="1"/>    
+    <end type="TARGET" refId="2"/>  
+  </dependency>  
+  <nesting id="68">    
+    <end type="SOURCE" refId="8"/>    
+    <end type="TARGET" refId="9"/>  
+  </nesting>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
     sort-features="false" accessors="true" visibility="true">    
     <attributes public="true" package="true" protected="true" private="true" static="true"/>    
