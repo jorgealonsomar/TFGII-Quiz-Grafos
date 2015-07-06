@@ -7,11 +7,18 @@ import modelo.pregunta.VisualizacionGrafo;
 
 import org.junit.Test;
 
+import texto.Idioma;
 import texto.Textos_Preguntas;
-import util.Idioma;
 
+/**
+ * Casos de test relativos a las preguntas.
+ * @author Jorge Alonso Márquez
+ */
 public class PreguntaTest {
-
+	
+	/**
+	 * Tests que evalúan el funcionamiento de las preguntas de anchura.
+	 */
 	@Test
 	public void preguntaDeAnchura() {
 		Integer nNodos = 5;
@@ -20,8 +27,6 @@ public class PreguntaTest {
 
 		Pregunta preguntaDeAnchura = new PreguntaDeAnchura(nNodos, porcentajeDeArcos, esDirigido,
 				VisualizacionGrafo.MATRIZ_DE_ADYACENCIA);
-
-//		assertEquals(preguntaDeAnchura.getGrafo(), new GrafoDirigido(nNodos, porcentajeDeArcos, false));
 
 		assertEquals(preguntaDeAnchura.getTitulo(Idioma.ESP),
 				Textos_Preguntas.tituloPregAnchura().getString(Idioma.ESP));

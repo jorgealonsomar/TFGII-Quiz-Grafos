@@ -1,38 +1,60 @@
 package texto;
 
+/**
+ * Textos empleados por los distintos elementos de la barra de menú.
+ * @author Jorge Alonso Márquez
+ */
 public class Textos_BarraMenu {
 	
-	/** Texto del menú Archivo */
+	/**
+	 * Devuelve el texto del menú Archivo.
+	 * @return Texto del menú Archivo.
+	 */
 	public static Texto menuArchivo(){
 		return new Texto("Archivo", "File");
 	}
 	
 	
-	/** Texto de la opción Salir del menú Archivo */
+	/**
+	 * Deuvelve el texto de la opción Salir del menú Archivo.
+	 * @return Texto de la opción Salir del menú Archivo.
+	 */
 	public static Texto menuArchivo_Salir(){
 		return new Texto("Salir", "Exit");
 	}
 	
 	
-	/** Texto de la opción Importar Semilla del menú Archivo */
+	/**
+	 * Devuelve el texto de la opción Importar Semilla del menú Archivo.
+	 * @return Texto de la opción Importar Semilla del menú Archivo.
+	 */
 	public static Texto menuArchivo_ImportarSemilla(){
-		return new Texto("Importar Semilla", "Import Seed");
+		return new Texto("Importar Pregunta", "Import Question");
 	}
 	
 	
-	/** Texto de la opción Acerca de del menú Ayuda */
+	/**
+	 * Devuelve el texto de la opción Acerca de del menú Ayuda.
+	 * @return Texto de la opción Acerca de del menú Ayuda.
+	 */
 	public static Texto menuAyuda_AcercaDe(){
 		return new Texto("Acerca de", "About");
 	}
 	
 	
-	/** Petición de introducir la semilla */
+	/**
+	 * Devuelve el texto utilizado para la petición de introducir la semilla.
+	 * @return Petición de introducir la semilla.
+	 */
 	public static Texto introduzcaSemilla(){
-		return new Texto("Introduzca la semilla: ", "Insert the seed: ");
+		return new Texto("Introduzca la semilla de la pregunta: ", "Insert the seed of the question: ");
 	}
 	
 	
-	/** Texto del menú Ayuda */
+	/**
+	 * Devuelve el texto del menú Ayuda.
+	 * @return Texto del menú Ayuda.
+	 */
 	public static Texto menuAyuda(){
 		return new Texto("Ayuda", "Help");
 	}

@@ -10,8 +10,15 @@ import modelo.pregunta.VisualizacionGrafo;
 
 import org.junit.Test;
 
+/**
+ * Casos de test relativos a las semillas.
+ * @author Jorge Alonso Márquez
+ */
 public class SemillaTest {
-
+	
+	/**
+	 * Tests que evalúan la construcción nuevas de semillas.
+	 */
 	@Test
 	public void construirSemilla() {
 		Integer numPregunta = Semilla.RECORRIDO_EN_PROFUNDIDAD;
@@ -42,7 +49,7 @@ public class SemillaTest {
 		assertEquals(VisualizacionGrafo.MATRIZ_DE_ADYACENCIA, semilla.getVisualizacionGrafo());
 		
 		// El tipo de pregunta debe ser 0
-		assertEquals(new Integer(0), semilla.getTipoDePregunta());
+		assertEquals(new Integer(0), semilla.getClaseDePregunta());
 		
 		//La cadena representativa de la semilla debe empezar por 02005500
 		assertEquals(semilla.toString().substring(0, 8), "02005500");
@@ -52,6 +59,9 @@ public class SemillaTest {
 	}
 	
 	
+	/**
+	 * Tests que evalúan la recuperación de semillas a partir de su código.
+	 */
 	@Test
 	public void recuperarSemilla() {
 		Semilla semilla = null;
@@ -80,7 +90,7 @@ public class SemillaTest {
 			assertEquals(VisualizacionGrafo.MATRIZ_DE_ADYACENCIA, semilla.getVisualizacionGrafo());
 			
 			// El tipo de pregunta debe ser 0
-			assertEquals(new Integer(0), semilla.getTipoDePregunta());
+			assertEquals(new Integer(0), semilla.getClaseDePregunta());
 			
 			//La cadena representativa de la semilla debe empezar por 02005500
 			assertEquals(semilla.toString().substring(0, 8), "02005500");
@@ -91,6 +101,10 @@ public class SemillaTest {
 	}
 	
 	
+	/**
+	 * Tests que evalúan la generación de excepciones durante la recuperación de una pregunta a partir
+	 * de un código erróneo.
+	 */
 	@Test
 	public void recuperarSemillaErronea() {
 
@@ -138,7 +152,10 @@ public class SemillaTest {
 	}
 	
 	
-
+	/**
+	 * Tests que evalúan si el código de semilla dado por una pregunta corresponde al código
+	 * de la semilla usada para la recuperación de esa pregunta.
+	 */
 	@Test
 	public void semillaDeLaPregunta() {
 		Pregunta pregunta = null;

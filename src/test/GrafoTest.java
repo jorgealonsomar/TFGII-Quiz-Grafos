@@ -13,13 +13,23 @@ import modelo.grafo.ResultadosDijkstra;
 
 import org.junit.Test;
 
+/**
+ * Casos de test relativos a los grafos.
+ * @author Jorge Alonso Márquez
+ */
 public class GrafoTest {
 	
+	/**
+	 * Primera de las matrices de adyacencia empleadas en los tests de grafos.
+	 */
 	private Integer[][] matrizDeAdyacencia1 = {	{0, 1, 1, 0},
 												{0, 0, 0, 1},
 												{0, 0, 0, 1},
 												{0, 0, 0, 0}};
 	
+	/**
+	 * Segunda de las matrices de adyacencia empleadas en los tests de grafos.
+	 */
 	private Integer[][] matrizDeAdyacencia2 = {	{0, 0, 1, 0, 0, 0, 1, 0},
 												{1, 0, 0, 1, 0, 0, 0, 0},
 												{0, 0, 0, 0, 0, 0, 0, 0},
@@ -29,6 +39,9 @@ public class GrafoTest {
 												{0, 0, 0, 0, 0, 0, 0, 0},
 												{0, 0, 1, 0, 0, 0, 0, 0}};
 	
+	/**
+	 * Tercera de las matrices de adyacencia empleadas en los tests de grafos.
+	 */
 	private Integer[][] matrizDeAdyacencia3 ={	{0,   20,  7,   13,  0,   0  },
 												{20,  0,   0,   0,   0,   0  },
 												{7,   0,   0,   0,   4,   100},
@@ -36,12 +49,18 @@ public class GrafoTest {
 												{0,   0,   4,   4,   0,   0  },
 												{20,  0,   100, 15,  0,   0  }};
 	
+	/**
+	 * Cuarta de las matrices de adyacencia empleadas en los tests de grafos.
+	 */
 	private Integer[][] matrizDeAdyacencia4 ={	{0, 0, 1, 6, 6},
 												{0, 0, 6, 0, 0},
 												{1, 6, 0, 2, 5},
 												{6, 0, 2, 0, 3},
 												{6, 0, 5, 3, 0}};
 	
+	/**
+	 * Quinta de las matrices de adyacencia empleadas en los tests de grafos.
+	 */
 	private Integer[][] matrizDeAdyacencia5 ={	{0,  7,  0,  5,  0,  0,  0 },
 												{7,  0,  8,  9,  7,  0,  0 },
 												{0,  8,  0,  0,  5,  0,  0 },
@@ -50,6 +69,9 @@ public class GrafoTest {
 												{0,  0,  0,  6,  8,  0,  11},
 												{0,  0,  0,  0,  9,  11, 0 }};
 	
+	/**
+	 * Sexta de las matrices de adyacencia empleadas en los tests de grafos.
+	 */
 	private Integer[][] matrizDeAdyacencia6 ={	{0, 5, 6, 4, 0, 0},
 												{5, 0, 1, 2, 0, 0},
 												{6, 1, 0, 2, 5, 3},
@@ -57,22 +79,50 @@ public class GrafoTest {
 												{0, 0, 5, 0, 0, 4},
 												{0, 0, 3, 4, 4, 0}};
 	
+	
+	/**
+	 * Primero de los grafos empleados en los tests de grafos.
+	 */
 	private Grafo grafo1 = new GrafoDirigido(matrizDeAdyacencia1);
+	
+	/**
+	 * Segundo de los grafos empleados en los tests de grafos.
+	 */
 	private Grafo grafo2 = new GrafoDirigido(matrizDeAdyacencia2);
+	
+	/**
+	 * Tercero de los grafos empleados en los tests de grafos.
+	 */
 	private Grafo grafo3 = new GrafoDirigido(matrizDeAdyacencia3);
+	
+	/**
+	 * Cuarto de los grafos empleados en los tests de grafos.
+	 */
 	private Grafo grafo4 = new GrafoDirigido(matrizDeAdyacencia4);
+	
+	/**
+	 * Quinto de los grafos empleados en los tests de grafos.
+	 */
 	private GrafoNoDirigido grafo5 = new GrafoNoDirigido(matrizDeAdyacencia5);
+	
+	/**
+	 * Sexto de los grafos empleados en los tests de grafos.
+	 */
 	private GrafoNoDirigido grafo6 = new GrafoNoDirigido(matrizDeAdyacencia6);
 	
+	
+	/**
+	 * Tests que evalúan el funcionamiento del algoritmo de clasificación topográfica.
+	 */
 	@Test
-	public void recorridoTopografico() {
+	public void clasificacionTopografica() {
 		//Ejemplo 1
 		ArrayList<Integer> resultadoEsperado = new ArrayList<Integer>();
 		resultadoEsperado.add(0);
 		resultadoEsperado.add(1);
 		resultadoEsperado.add(2);
 		resultadoEsperado.add(3);
-		assertTrue(((GrafoDirigido)grafo1).recorridoTopologico().equals(resultadoEsperado));
+		assertTrue(((GrafoDirigido)grafo1).clasificacionTopologica().equals(resultadoEsperado));
 		
 		
 		//Ejemplo 2
@@ -85,10 +135,13 @@ public class GrafoTest {
 		resultadoEsperado.add(6);
 		resultadoEsperado.add(7);
 		resultadoEsperado.add(2);
-		assertTrue(((GrafoDirigido)grafo2).recorridoTopologico().equals(resultadoEsperado));
+		assertTrue(((GrafoDirigido)grafo2).clasificacionTopologica().equals(resultadoEsperado));
 	}
 	
 	
+	/**
+	 * Tests que evalúan el funcionamiento de las preguntas de algoritmo de Dijkstra.
+	 */
 	@Test
 	public void algoritmoDijkstra() {
 		//Ejemplo 3
@@ -148,6 +201,9 @@ public class GrafoTest {
 	}
 	
 	
+	/**
+	 * Tests que evalúan el funcionamiento de las preguntas de algoritmo de Prim.
+	 */
 	@Test
 	public void algoritmoPrim() {
 		//Ejemplo 5
@@ -220,6 +276,9 @@ public class GrafoTest {
 	}
 	
 	
+	/**
+	 * Tests que evalúan el funcionamiento de las preguntas de algoritmo de Kruskal.
+	 */
 	@Test
 	public void algoritmoKruskal() {
 		//Ejemplo 5
@@ -281,6 +340,9 @@ public class GrafoTest {
 	}
 	
 	
+	/**
+	 * Tests que evalúan el funcionamiento de las listas de adyacencia.
+	 */
 	@Test
 	public void listaDeAdyacencia(){
 		String listaDeAdyacenciaEsperada = "";
@@ -292,6 +354,9 @@ public class GrafoTest {
 	}
 	
 	
+	/**
+	 * Tests que evalúan el funcionamiento de las listas de arcos.
+	 */
 	@Test
 	public void listaDeArcos(){
 		ListaDeArcos listaDeArcos = new ListaDeArcos();

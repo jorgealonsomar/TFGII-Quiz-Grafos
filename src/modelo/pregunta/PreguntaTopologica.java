@@ -37,7 +37,7 @@ public class PreguntaTopologica extends Pregunta {
 	
 	@Override
 	protected void aplicarAlgoritmo() {
-		recorridoTopologico = ((GrafoDirigido)getGrafo()).recorridoTopologico();
+		recorridoTopologico = ((GrafoDirigido)getGrafo()).clasificacionTopologica();
 	}
 	
 	

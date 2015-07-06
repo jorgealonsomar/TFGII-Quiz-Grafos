@@ -8,9 +8,9 @@ import modelo.grafo.Grafo;
 import modelo.grafo.GrafoDirigido;
 import modelo.grafo.GrafoNoDirigido;
 import modelo.grafo.ListaDeArcos;
+import texto.Idioma;
 import texto.Texto;
 import texto.Textos_Preguntas;
-import util.Idioma;
 
 public abstract class Pregunta {
 
@@ -205,7 +205,7 @@ public abstract class Pregunta {
 		textoPregunta += "\n" + getTitulo(idioma);
 		textoPregunta += "\n\n" + getEnunciado(idioma);
 		switch(visualizacionGrafo){
-		case MATRIZ_DE_ADYACENCIA:
+		case MATRIZ_DE_ADYACENCIA: default:
 			textoPregunta += "\n\n" + getGrafo().toMatrizDeAdyacencia();	
 			break;
 		case LISTA_DE_ADYACENCIA:
@@ -227,8 +227,10 @@ public abstract class Pregunta {
 
 	public String getTextoPreguntaXml(Idioma idioma) {
 		String textoPregunta = "\n\t<question type=\"cloze\">";
-		textoPregunta += "\n\t\t<name><text>" + Texto.quitarCaracteresExtranos(getTitulo(idioma)) + "</text>";
+		textoPregunta += "\n\t\t<name>";
+		textoPregunta += "\n\t\t\t<text>" + Texto.quitarCaracteresExtranos(getTitulo(idioma)) + "</text>";
 		textoPregunta += "\n\t\t</name>";
+		textoPregunta += "\n\t\t" + "<!-- Semilla: " + Texto.adaptarCaracteresAXml(getCodigoSemilla()) + " -->";
 		textoPregunta += "\n\t\t<questiontext>";
 		textoPregunta += "\n\t\t\t<text><![CDATA[";
 		textoPregunta += "\n\t\t\t" + Texto.adaptarCaracteresAXml(getEnunciado(idioma));
@@ -243,8 +245,6 @@ public abstract class Pregunta {
 			textoPregunta += "\n</p>" + getGrafo().toGrafoVisualHtml_Insercion();
 			break;
 		}
-		textoPregunta += "\n</p>\t\t\t" + "(semilla: " +
-				Texto.adaptarCaracteresAXml(getCodigoSemilla()) + ")";
 		textoPregunta += "\n</p>\t\t\t" + Texto.adaptarCaracteresAXml(getParteAResponder(idioma));
 		textoPregunta += "\n\t\t\t]]></text>";
 		if(visualizacionGrafo.equals(VisualizacionGrafo.GRAFO_VISUAL)){

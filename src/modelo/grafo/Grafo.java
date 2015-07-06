@@ -12,31 +12,51 @@ import java.util.Random;
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 
-import modelo.Arco;
 import sun.misc.BASE64Encoder;
 import edu.uci.ics.jung.algorithms.layout.CircleLayout;
 import edu.uci.ics.jung.graph.SparseMultigraph;
 import edu.uci.ics.jung.visualization.BasicVisualizationServer;
 import edu.uci.ics.jung.visualization.decorators.ToStringLabeller;
 
+/**
+ * Grafo asociado a una pregunta de grafos.
+ * @author Jorge Alonso Márquez
+ */
 public abstract class Grafo {
 
-	/** Número de nodos que componen el grafo */
+	/**
+	 * Número de nodos que componen el grafo.
+	 */
 	private Integer nNodos;
 	
-	/** Variable booleana que define si los arcos del grafo son o no poderados */
+	/**
+	 * Variable booleana que define si los arcos del grafo son o no poderados.
+	 */
 	private boolean esPonderado;
 	
-	/** Generador de números aleatorios */
+	/**
+	 * Generador de números aleatorios.
+	 */
 	Random randomGenerator;
 	
-	/** Matriz de adyacencia del grafo */
+	/**
+	 * Matriz de adyacencia del grafo.
+	 */
 	private Integer[][] matrizDeAdyacencia;
 	
 	
 	/**
-	 * Constructor de la clase. Construye un nuevo grafo al azar a partir de los
-	 * parámetros fijados.
+	 * Constructor de la clase. Construye un nuevo grafo al azar a partir de los parámetros fijados.
+	 * @param nNodos
+	 *            Número de nodos del grafo.
+	 * @param porcentajeDeArcos
+	 *            Porcentaje de arcos con los que se genera el grafo.
+	 * @param esPonderado
+	 *            Si el grafo es o no ponderado.
+	 * @param randomGenerator
+	 *            Generador de números aleatorios.
+	 * @param grafoSinCiclos
+	 *            Si el grafo debe no contener ciclos.
 	 */
 	public Grafo(Integer nNodos, Double porcentajeDeArcos, boolean esPonderado, Random randomGenerator,
 			boolean grafoSinCiclos) {
@@ -62,8 +82,9 @@ public abstract class Grafo {
 	
 	
 	/**
-	 * Constructor de la clase. Crea el grafo a partir de una matriz de
-	 * adyacencia dada.
+	 * Constructor de la clase. Crea el grafo a partir de una matriz de adyacencia dada.
+	 * @param matrizDeAdyacencia
+	 *            Matriz de adyacencia del grafo.
 	 */
 	public Grafo(Integer[][] matrizDeAdyacencia) {
 		this.matrizDeAdyacencia = matrizDeAdyacencia;
@@ -106,22 +127,21 @@ public abstract class Grafo {
 	}
 	
 	
-	@SuppressWarnings("unused")
-	private void construirArcosConcretos() {
-		// TODO (borrar antes de entregar)
-		addArco(0, 1);
-		addArco(0, 2);
-		addArco(1, 3);
-		addArco(1, 4);
-		addArco(2, 4);
-		addArco(4, 3);
-	}
-	
-	
+	/**
+	 * Añade de forma aleatoria nuevos arcos al grafo.
+	 * @param porcentajeDeArcos
+	 *            Porcentaje de nuevos arcos.
+	 */
 	protected abstract void construirArcosExtra(Double porcentajeDeArcos);
 	
 	
-	/** */
+	/**
+	 * Añade al grafo nuevos arcos al azar de entre los posibles arcos dados.
+	 * @param listaDeArcos
+	 *            Lista de posibles arcos.
+	 * @param porcentajeDeArcos
+	 *            Porcentaje de arcos a añadir.
+	 */
 	protected void anadirArcosAlAzarDeLaLista(ArrayList<Arco> listaDeArcos,
 			Double porcentajeDeArcos) {
 		Integer cantidadDeArcosAAnadir = (int) (porcentajeDeArcos * listaDeArcos
@@ -140,7 +160,6 @@ public abstract class Grafo {
 	
 	/**
 	 * Añade un nuevo arco a la matriz de adyacencia.
-	 * 
 	 * @param nodo1
 	 *            Nodo a un extremo del arco.
 	 * @param nodo2
@@ -149,6 +168,11 @@ public abstract class Grafo {
 	protected abstract void addArco(Integer nodo1, Integer nodo2);
 	
 	
+	/**
+	 * Añade nuevos arcos al grafo de forma que se mantenga acíclico.
+	 * @param porcentajeDeArcos
+	 *            Porcentaje aproximado de arcos a generar.
+	 */
 	private void construirArcosSinCiclos(Double porcentajeDeArcos){
 		Integer posibilidadDeArco = (int)(porcentajeDeArcos * 100);
 		
@@ -174,6 +198,12 @@ public abstract class Grafo {
 	}
 	
 	
+	/**
+	 * Devuelve un nuevo valor para un arco.
+	 * Si el grafo es ponderado, será un número aleatorio con un valor de entre 1 y 10.
+	 * Si no, el peso del arco será 1.
+	 * @return
+	 */
 	protected Integer generarValorDeArco(){
 		if(esPonderado){
 			//Genera un peso entero para el arco de entre 1 y 10
@@ -186,7 +216,6 @@ public abstract class Grafo {
 	
 	/**
 	 * Recorre en anchura el grafo.
-	 * 
 	 * @param nodoInicial
 	 *            Nodo desde el que se empieza a recorrer el grafo.
 	 * @return Lista con los nodos ordenados
@@ -221,7 +250,8 @@ public abstract class Grafo {
 	}
 	
 	
-	/** Recorre en profundidad el grafo.
+	/**
+	 * Recorre en profundidad el grafo.
 	 * @param nodoInicial
 	 *            Nodo desde el que se empieza a recorrer el grafo.
 	 * @return Lista con los nodos ordenados
@@ -235,8 +265,14 @@ public abstract class Grafo {
 	}
 	
 	
-	private void recorrerEnProfundidad_funcionRecursiva(int nodo,
-			ArrayList<Integer> nodosRecorridos) {
+	/**
+	 * Parte recursiva del algoritmo de recorrido en profunidad.
+	 * @param nodo
+	 *            Nodo actual.
+	 * @param nodosRecorridos
+	 *            Lista con los nodos que ya han sido recorridos.
+	 */
+	private void recorrerEnProfundidad_funcionRecursiva(int nodo, ArrayList<Integer> nodosRecorridos) {
 		nodosRecorridos.add(nodo);
 
 		for (Integer nodoVecino : hallarNodosVecinos(nodo)) {
@@ -249,7 +285,12 @@ public abstract class Grafo {
 	}
 	
 	
-	
+	/**
+	 * Aplica al grafo el algoritmo de Dijkstra.
+	 * @param nodoInicial
+	 *            Nodo por el que se empieza a aplicar el algoritmo.
+	 * @return Resultados del algoritmo.
+	 */
 	public ResultadosDijkstra algoritmoDeDijkstra(int nodoInicial) {
 		ResultadosDijkstra resultadosDijkstra = new ResultadosDijkstra(nNodos);
 		ArrayList<Boolean> nodosVisitados = new ArrayList<Boolean>(matrizDeAdyacencia.length);
@@ -322,6 +363,12 @@ public abstract class Grafo {
 	}
 	
 	
+	/**
+	 * Encuentra los nodos que son vecinos del nodo dado.
+	 * @param nodo
+	 *            Nodo cuyos vecinos se quieren conocer.
+	 * @return Vecinos del nodo dado.
+	 */
 	private ArrayList<Integer> hallarNodosVecinos(int nodo) {
 		ArrayList<Integer> nodosVecinos = new ArrayList<Integer>();
 		for (int vecino_i = 0; vecino_i < nNodos; vecino_i++) {
@@ -337,7 +384,10 @@ public abstract class Grafo {
 	}
 	
 	
-	/** Crea una copia de la matriz de adyacencia */
+	/**
+	 * Crea una copia de la matriz de adyacencia.
+	 * @return Nueva matriz de adyacencia idéntica a la de este grafo.
+	 */
 	protected Integer[][] clonarMatrizDeAdyacencia(){
 		Integer[][] matrizAdyacenciaAux = new Integer[matrizDeAdyacencia.length][matrizDeAdyacencia[0].length];
 		for(int i = 0; i < matrizDeAdyacencia.length; i++){
@@ -349,27 +399,48 @@ public abstract class Grafo {
 	}
 	
 	
+	/**
+	 * Devuelve el número de nodos de este grafo.
+	 * @return Número de nodos de este grafo.
+	 */
 	public Integer getNNodos() {
 		return nNodos;
 	}
 	
-
+	
+	/**
+	 * Establece el número de nodos de este grafo.
+	 * @param nNodos
+	 *            Número de nodos de este grafo.
+	 */
 	public void setNNodos(Integer nNodos) {
 		this.nNodos = nNodos;
 	}
 	
-
+	
+	/**
+	 * Devuelve la matriz de adyacencia de este grafo.
+	 * @return Número de nodos de este grafo.
+	 */
 	public Integer[][] getMatrizDeAdyacencia() {
 		return matrizDeAdyacencia;
 	}
 	
-
+	
+	/**
+	 * Devuelve la cadena que representa a este grafo, consistente en una representación del
+	 * mismo en forma de matriz de adyacencia.
+	 */
 	@Override
 	public String toString() {
 		return toMatrizDeAdyacencia();
 	}
 	
 	
+	/**
+	 * Devuelve la matriz de adyacencia correspondiente a este grafo.
+	 * @return Matriz de adyacencia correspondiente a este grafo.
+	 */
 	public String toMatrizDeAdyacencia(){
 		String cadena = "";
 		
@@ -392,7 +463,11 @@ public abstract class Grafo {
 	}
 	
 	
-	
+	/**
+	 * Devuelve la matriz de adyacencia correspondiente a este grafo, en un formato
+	 * que le permite formar parte de un archivo de moodle xml.
+	 * @return Matriz de adyacencia correspondiente a este grafo, adaptada a xml.
+	 */
 	public String toMatrizDeAdyacenciaHtml(){
 		String cadena = "";
 		cadena += "<table border=\"1\" style=\"width:100%\">";
@@ -420,6 +495,10 @@ public abstract class Grafo {
 	}
 	
 	
+	/**
+	 * Devuelve la lista de adyacencia correspondiente a este grafo.
+	 * @return Lista de adyacencia correspondiente a este grafo.
+	 */
 	public String toListaDeAdyacencia(){
 		String cadena = "";
 		
@@ -443,6 +522,11 @@ public abstract class Grafo {
 	}
 	
 	
+	/**
+	 * Devuelve la lista de adyacencia correspondiente a este grafo, en un formato
+	 * que le permite formar parte de un archivo de moodle xml.
+	 * @return Lista de adyacencia correspondiente a este grafo, adaptada a xml.
+	 */
 	public String toListaDeAdyacenciaHtml(){
 		String cadena = "";
 		cadena += "<table border=\"1\" style=\"width:100%\">";
@@ -473,6 +557,10 @@ public abstract class Grafo {
 	}
 	
 	
+	/**
+	 * Devuelve la imagen correspondiente a este grafo.
+	 * @return Imagen correspondiente a este grafo.
+	 */
 	public BufferedImage toGrafoVisual(){
 		SparseMultigraph<Integer, String> grafoJung = new SparseMultigraph<>();
 		
@@ -488,7 +576,8 @@ public abstract class Grafo {
 
 		CircleLayout<Integer, String> layoutCircular = new CircleLayout<>(grafoJung);
 		layoutCircular.setSize(new Dimension(300, 300));
-		BasicVisualizationServer<Integer,String> panelVisualizacionGrafo = new BasicVisualizationServer<>(layoutCircular);
+		BasicVisualizationServer<Integer,String> panelVisualizacionGrafo =
+				new BasicVisualizationServer<>(layoutCircular);
 		
 		EtiquetadorDeNodos etiquetadorDeNodos = new EtiquetadorDeNodos();
         panelVisualizacionGrafo.getRenderContext().setVertexLabelTransformer(etiquetadorDeNodos);
@@ -511,11 +600,20 @@ public abstract class Grafo {
 	}
 	
 	
+	/**
+	 * Devuelve una cadena en formato moodle que permite la inserción de una imagen en xml.
+	 * @return Cadena de inserción de una imagen en xml.
+	 */
 	public String toGrafoVisualHtml_Insercion(){
 		return "<img src=\"@@PLUGINFILE@@/imagenGrafo.png\" alt=\"\"  />";
 	}
 	
 	
+	/**
+	 * Devuelve una cadena en formato moodle que permite la definición de una imagen en xml, codificada en
+	 * BASE64.
+	 * @return Cadena de definición de una imagen en xml, codificada en BASE64.
+	 */
 	public String toGrafoVisualHtml_Definicion(){
 		String cadena = "";
 		cadena += "<file name=\"imagenGrafo.png\" encoding=\"base64\">";
@@ -525,7 +623,11 @@ public abstract class Grafo {
 	}
 	
 	
-	public String getGrafoVisualEnBASE64(){
+	/**
+	 * Codifica en BASE64 la imagen correspondiente a este grafo.
+	 * @return Código en BASE64 de la imagen correspondiente a este grafo.
+	 */
+	private String getGrafoVisualEnBASE64(){
 		String cadenaDeLaImagen = null;
 
         try( ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream(); ) {
@@ -546,14 +648,37 @@ public abstract class Grafo {
 	}
 	
 	
+	/**
+	 * Añade un nuevo arco al modelo del grafo visual.
+	 * @param grafoJung
+	 *            Modelo del grafo visual.
+	 * @param f
+	 *            Nodo origen (fila en la matriz de adyacencia).
+	 * @param c
+	 *            Nodo destino (columna en la matriz de adyacencia).
+	 */
 	public abstract void añadirArcoAlGrafoVisual(SparseMultigraph<Integer, String> grafoJung, int f, int c);
 	
 	
+	/**
+	 * Devuelve la letra correspondiente a un nodo con el índice dado.
+	 * Para un nodo con índice 0 será A, para uno con índice 1, será B, etc.
+	 * @param indice
+	 *            Índice del nodo.
+	 * @return Letra correspondiente al nodo.
+	 */
 	public static char convertirIndiceEnLetra(int indice) {
 		return (char) (indice + 65);
 	}
 	
 	
+	/**
+	 * Compara este grafo con otro objeto.
+	 * Devolverá true si ambos son Grafos y tienen una matriz de adyacencia similar.
+	 * @param o
+	 *            Objeto a comparar con este grafo.
+	 * @return Si ese objeto es equivalente a este grafo.
+	 */
 	@Override
 	public boolean equals(Object o) {
 		if (this.getClass().equals(o.getClass())
@@ -566,7 +691,17 @@ public abstract class Grafo {
 	
 	
 	
+	/**
+	 * Etiquetador de los nodos del grafo visual.
+	 * @author Jorge Alonso Márquez
+	 */
 	private class EtiquetadorDeNodos extends ToStringLabeller<Integer>{
+		
+		/**
+		 * Etiqueta el nodo con la letra que corresponde a su índice.
+		 * @param numeroDelNodo Índice del nodo.
+		 * @return Nombre con el que se etiqueta al nodo (su letra).
+		 */
 		public String transform(Integer numeroDelNodo) {
             return Character.toString(convertirIndiceEnLetra(numeroDelNodo));
         }
@@ -574,7 +709,17 @@ public abstract class Grafo {
 	
 	
 	
+	/**
+	 * Etiquetador de los arcos del grafo visual.
+	 * @author Jorge Alonso Márquez
+	 */
 	private class EtiquetadorDeArcos extends ToStringLabeller<String>{
+		
+		/**
+		 * Etiqueta el arco con el peso del mismo.
+		 * @param nombreDelArco Nombre e Id único del arco.
+		 * @return Nombre con el que se etiqueta al arco (su peso).
+		 */
 		public String transform(String nombreDelArco) {
 			Integer indiceHastaDondeCortar = (nombreDelArco.indexOf(':') + 2);
 			

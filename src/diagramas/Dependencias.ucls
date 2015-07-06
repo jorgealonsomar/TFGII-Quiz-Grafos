@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class-diagram version="1.1.8" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
+  associations="true" dependencies="false" nesting-relationships="true">  
+  <package id="1" language="java" name="interfaz" project="TFGII-Quiz-Grafos" file="/TFGII-Quiz-Grafos/src/interfaz" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="175" y="255"/>    
+    <display autosize="true" stereotype="true" sort-features="false" accessors="true"/>  
+  </package>  
+  <package id="2" language="java" name="modelo" project="TFGII-Quiz-Grafos" file="/TFGII-Quiz-Grafos/src/modelo" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="378" y="255"/>    
+    <display autosize="true" stereotype="true" sort-features="false" accessors="true"/>  
+  </package>  
+  <package id="3" language="java" name="sistema" project="TFGII-Quiz-Grafos" file="/TFGII-Quiz-Grafos/src/sistema" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="378" y="137"/>    
+    <display autosize="true" stereotype="true" sort-features="false" accessors="true"/>  
+  </package>  
+  <package id="4" language="java" name="test" project="TFGII-Quiz-Grafos" file="/TFGII-Quiz-Grafos/src/test" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="596" y="255"/>    
+    <display autosize="true" stereotype="true" sort-features="false" accessors="true"/>  
+  </package>  
+  <package id="5" language="java" name="texto" project="TFGII-Quiz-Grafos" file="/TFGII-Quiz-Grafos/src/texto" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="378" y="368"/>    
+    <display autosize="true" stereotype="true" sort-features="false" accessors="true"/>  
+  </package>  
+  <package id="6" language="java" name="main" project="TFGII-Quiz-Grafos" file="/TFGII-Quiz-Grafos/src/main" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="175" y="368"/>    
+    <display autosize="true" stereotype="true" sort-features="false" accessors="true"/>  
+  </package>  
+  <dependency id="7">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="2"/>  
+  </dependency>  
+  <dependency id="8">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="5"/>  
+  </dependency>  
+  <dependency id="9">    
+    <end type="SOURCE" refId="1"/>    
+    <end type="TARGET" refId="3"/>  
+  </dependency>  
+  <dependency id="10">    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="1"/>  
+  </dependency>  
+  <dependency id="11">    
+    <end type="SOURCE" refId="1"/>    
+    <end type="TARGET" refId="5"/>  
+  </dependency>  
+  <dependency id="12">    
+    <end type="SOURCE" refId="1"/>    
+    <end type="TARGET" refId="2"/>  
+  </dependency>  
+  <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    sort-features="false" accessors="true" visibility="true">    
+    <attributes public="true" package="true" protected="true" private="true" static="true"/>    
+    <operations public="true" package="true" protected="true" private="true" static="true"/>  
+  </classifier-display>  
+  <association-display labels="true" multiplicity="true"/>
+</class-diagram>

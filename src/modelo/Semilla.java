@@ -2,51 +2,131 @@ package modelo;
 
 import modelo.pregunta.VisualizacionGrafo;
 
+/**
+ * Clase que contiene la información necesaria para volver a construir una pregunta.
+ * Puede convertirse exportarse en forma de código numérico.
+ * @author Jorge Alonso Márquez
+ */
 public class Semilla {
 	
+	/**
+	 * Número correspondiente al tipo y clase de la pregunta.
+	 */
 	private Integer numPregunta;
 	
+	/**
+	 * Número correspondiente a las preguntas de recorrido en profundidad.
+	 */
 	public static final Integer RECORRIDO_EN_PROFUNDIDAD = 0;
+	
+	/**
+	 * Número correspondiente a las preguntas de recorrido en anchura.
+	 */
 	public static final Integer RECORRIDO_EN_ANCHURA = 1;
+	
+	/**
+	 * Número correspondiente a las preguntas de clasificación topológica.
+	 */
 	public static final Integer CLASIFICACION_TOPOLOGICA = 2;
+	
+	/**
+	 * Número correspondiente a las preguntas del algoritmo de Dijkstra de la clase Distancias más cortas.
+	 */
 	public static final Integer ALGORITMO_DE_DIJKSTRA_DISTANCIAS_MAS_CORTAS = 3;
+	
+	/**
+	 * Número correspondiente a las preguntas del algoritmo de Dijkstra de la clase Ruta más corta.
+	 */
 	public static final Integer ALGORITMO_DE_DIJKSTRA_RUTA_MAS_CORTA = 4;
+	
+	/**
+	 * Número correspondiente a las preguntas del algoritmo de Dijkstra de la clase Orden de selección.
+	 */
 	public static final Integer ALGORITMO_DE_DIJKSTRA_ORDEN_DE_SELECCION = 5;
+	
+	/**
+	 * Número correspondiente a las preguntas del algoritmo de Prim de la clase Arcos del ábol de expansión.
+	 */
 	public static final Integer ALGORITMO_DE_PRIM_ARCOS_DEL_ARBOL_DE_EXPANSION = 6;
+	
+	/**
+	 * Número correspondiente a las preguntas del algoritmo de Prim de la clase Orden de selección.
+	 */
 	public static final Integer ALGORITMO_DE_PRIM_ORDEN_DE_SELECCION = 7;
+	
+	/**
+	 * Número correspondiente a las preguntas del algoritmo de Kruskal de la clase Arcos del ábol de expansión.
+	 */
 	public static final Integer ALGORITMO_DE_KRUSKAL_ARCOS_DEL_ARBOL_DE_EXPANSION = 8;
+	
+	/**
+	 * Número correspondiente a las preguntas del algoritmo de Kruskal de la clase Orden de selección.
+	 */
 	public static final Integer ALGORITMO_DE_KRUSKAL_ORDEN_DE_SELECCION = 9;
 	
-	/** Valor correspondiente al número de nodos.
-	 * Se empieza a contar desde el 0, por lo que podrá tomar valores desde el 0 (1 nodo)
-	 * hasta el 9 (10 nodos) */
+	
+	/**
+	 * Valor correspondiente al número de nodos.
+	 * Se empieza a contar desde el 0, por lo que podrá tomar valores desde el 0 (1 nodo) hasta el 9 (10 nodos).
+	 */
 	private Integer valorNNodos;
 	
+	/**
+	 * Indica si el grafo es o no dirigido.
+	 */
 	private boolean esDirigido;
 	
+	/**
+	 * Porcentaje de arcos con el que se ha de crear el grafo.	
+	 */
 	private Double porcentajeDeArcos;
 	
+	/**
+	 * Tipo de visualización con la que se representa el grafo.
+	 */
 	private VisualizacionGrafo visualizacionGrafo;
 	
-	private Integer tipoDePregunta;
+	/**
+	 * Clase de la pregunta.
+	 */
+	private Integer claseDePregunta;
 	
+	/**
+	 * Seed que se le da al random durante la generación de la pregunta. Esto consigue que los valores
+	 * generados "de forma aleatoria" sean en realidad los mismos cada vez.
+	 */
 	private String seedDelRandom;
 	
 	
-	/** Constructor. Construye una nueva semilla */
+	/**
+	 * Constructor. Construye una nueva semilla.
+	 * @param numPregunta Número asociado a la pregunta.
+	 * @param nNodos Número de nodos que tiene el grafo asociado a la pregunta.
+	 * @param esDirigido Si el grafo es o no dirigido.
+	 * @param porcentajeDeArcos Porcentaje de arcos que tiene el grafo asociado a la pregunta.
+	 * @param visualizacionGrafo Modo de visualización del grafo de la pregunta.
+	 * @param claseDePregunta Clase de pregunta.
+	 * @param seedDelRandom Seed que se le da al random durante la generación de la pregunta.
+	 */
 	public Semilla(Integer numPregunta, Integer nNodos, boolean esDirigido, Double porcentajeDeArcos,
-			VisualizacionGrafo visualizacionGrafo, Integer tipoDePregunta, String seedDelRandom){
+			VisualizacionGrafo visualizacionGrafo, Integer claseDePregunta, String seedDelRandom){
 		this.numPregunta = numPregunta;
 		this.valorNNodos = nNodos-1;
 		this.esDirigido = esDirigido;
 		this.porcentajeDeArcos = porcentajeDeArcos;
 		this.visualizacionGrafo = visualizacionGrafo;
-		this.tipoDePregunta = tipoDePregunta;
+		this.claseDePregunta = claseDePregunta;
 		this.seedDelRandom = seedDelRandom;
 	}
 	
 	
-	/** Constructor. Crea una semilla a partir de su código */
+	/**
+	 * Constructor. Crea una semilla a partir de su código.
+	 * @param codigo
+	 *            Código numérico equivalente a la semilla.
+	 * @throws SemillaException
+	 *             Excepción relativa a las semillas.
+	 */
 	public Semilla(String codigo) throws SemillaException {
 		Integer valorAux;
 		try{
@@ -100,7 +180,7 @@ public class Semilla {
 			valorAux = Integer.parseInt(codigo.substring(7, 8));
 			
 			if(0 <= valorAux && valorAux <= 2){
-				this.tipoDePregunta = valorAux;
+				this.claseDePregunta = valorAux;
 			} else {
 				throw new SemillaException("El valor del 8º carácter de la semilla debe estar"
 						+ "entre en 0 y el 2");
@@ -115,8 +195,10 @@ public class Semilla {
 	}
 	
 	
-	
-	/** Devuelve el código de correspondiente a la semilla */
+	/**
+	 * Devuelve el código correspondiente a la semilla.
+	 * @return Código correspondiente a la semilla.
+	 */
 	@Override
 	public String toString(){
 		String cadena = "";
@@ -156,7 +238,7 @@ public class Semilla {
 		}
 		
 		//Tipo de pregunta
-		cadena += tipoDePregunta;
+		cadena += claseDePregunta;
 		
 		//Seed del random
 		cadena += seedDelRandom;
@@ -165,37 +247,64 @@ public class Semilla {
 	}
 	
 	
+	/**
+	 * Devuelve el número de la pregunta.
+	 * @return Número correspondiente a la pregunta.
+	 */
 	public Integer getNumPregunta(){
 		return numPregunta;
 	}
 	
 	
-	/** Devuelve el número de nodos que tiene grafo asociado a esta semilla. */
+	/**
+	 * Devuelve el número de nodos que tiene grafo asociado a la pregunta de esta semilla.
+	 * @return Número de nodos del grafo asociado.
+	 */
 	public Integer getNNodos(){
 		return valorNNodos+1;
 	}
 	
 	
+	/**
+	 * Indica si el grafo asociado a la pregunta de esta semilla es o no dirigido.
+	 * @return Si el grafo asociado es dirigido.
+	 */
 	public boolean isDirigido(){
 		return esDirigido;
 	}
 	
 	
+	/**
+	 * Devuelve el porcentaje de arcos que tiene grafo asociado a la pregunta de esta semilla.
+	 * @return Porcentaje de arcos del grafo asociado.
+	 */
 	public Double getPorcentajeDeArcos(){
 		return porcentajeDeArcos;
 	}
 	
 	
+	/**
+	 * Devuelve el modo de visualización por el que se representará al grafo asociado a la pregunta de esta semilla.
+	 * @return Método de visualización del grafo asociado.
+	 */
 	public VisualizacionGrafo getVisualizacionGrafo(){
 		return visualizacionGrafo;
 	}
 	
 	
-	public Integer getTipoDePregunta(){
-		return tipoDePregunta;
+	/**
+	 * Devuelve la clase de la pregunta de esta semilla.
+	 * @return Clase de la pregunta.
+	 */
+	public Integer getClaseDePregunta(){
+		return claseDePregunta;
 	}
 	
 	
+	/**
+	 * Devuelve la seed que se utiliza para la construcción del random empleado en la generación de la pregunta.
+	 * @return Seed del random empleado para la generación de la pregunta.
+	 */
 	public String getSeedDelRandom(){
 		return seedDelRandom;
 	}

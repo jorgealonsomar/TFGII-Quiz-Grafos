@@ -3,18 +3,39 @@ package modelo.grafo;
 import java.util.ArrayList;
 import java.util.Random;
 
-import modelo.Arco;
 import edu.uci.ics.jung.graph.SparseMultigraph;
 import edu.uci.ics.jung.graph.util.EdgeType;
 
+/**
+ * Grafo cuyos arcos son no dirigidos.
+ * @author Jorge Alonso Márquez
+ */
 public class GrafoNoDirigido extends Grafo {
 	
+	/**
+	 * Constructor de la clase. Construye un nuevo grafo no dirigido al azar a partir de los parámetros fijados.
+	 * @param nNodos
+	 *            Número de nodos del grafo.
+	 * @param porcentajeDeArcos
+	 *            Porcentaje de arcos con los que se genera el grafo.
+	 * @param esPonderado
+	 *            Si el grafo es o no ponderado.
+	 * @param randomGenerator
+	 *            Generador de números aleatorios.
+	 * @param grafoSinCiclos
+	 *            Si el grafo debe no contener ciclos.
+	 */
 	public GrafoNoDirigido(Integer nNodos, Double porcentajeArcos, boolean esPonderado, Random randomGenerator,
 			boolean grafoSinCiclos) {
 		super(nNodos, porcentajeArcos, esPonderado, randomGenerator, grafoSinCiclos);
-		// TODO Auto-generated constructor stub
 	}
-
+	
+	
+	/**
+	 * Constructor de la clase. Crea el grafo a partir de una matriz de adyacencia dada.
+	 * @param matrizDeAdyacencia
+	 *            Matriz de adyacencia del grafo.
+	 */
 	public GrafoNoDirigido(Integer[][] matrizDeAdyacencia) {
 		super(matrizDeAdyacencia);
 	}
@@ -36,6 +57,11 @@ public class GrafoNoDirigido extends Grafo {
 	}
 	
 	
+	/**
+	 * Añade de forma aleatoria nuevos arcos no dirigidos al grafo.
+	 * @param porcentajeDeArcos
+	 *            Porcentaje de nuevos arcos.
+	 */
 	protected void construirArcosExtra(Double porcentajeDeArcos) {
 		// Almacenar en una lista los arcos no existentes
 		ArrayList<Arco> arcosNoExistentes = new ArrayList<Arco>();
@@ -51,12 +77,20 @@ public class GrafoNoDirigido extends Grafo {
 	}
 	
 	
+	/**
+	 * Devuelve la cadena que representa a este grafo, consistente en una representación del
+	 * mismo en forma de matriz de adyacencia.
+	 */
 	@Override
 	public String toString() {
 		return (super.toString() + "\n(undirected graph)");
 	}
 	
 	
+	/**
+	 * Aplica al grafo el algoritmo de Prim.
+	 * @return Lista ordenada de nodos resultante de aplicar el algoritmo.
+	 */
 	public ListaDeArcos algoritmoDePrim(){
 		ListaDeArcos arcosRecorridos = new ListaDeArcos();
 		
@@ -114,8 +148,12 @@ public class GrafoNoDirigido extends Grafo {
 		}
 		return arcosRecorridos;
 	}
-
 	
+	
+	/**
+	 * Aplica al grafo el algoritmo de Kruskal.
+	 * @return Lista ordenada de nodos resultante de aplicar el algoritmo.
+	 */
 	public ListaDeArcos algoritmoDeKruskal(){
 		ListaDeArcos arcosArbolExpansion = new ListaDeArcos();
 
@@ -152,62 +190,10 @@ public class GrafoNoDirigido extends Grafo {
 	}
 	
 	
-	
-	private class GruposKruskal{
-		ArrayList<ArrayList<Integer>> grupos = new ArrayList<>();
-		
-		/** Grupo del primero de los dos nodos comparados en pertenecenAlMismoGrupo().
-		 * Se almacena como variable global para su posterior uso en combinarUltimosComparados(). */
-		Integer grupoDelNodo1 = null;
-		
-		/** Grupo del segundo de los dos nodos comparados en pertenecenAlMismoGrupo().
-		 * Se almacena como variable global para su posterior uso en combinarUltimosComparados(). */
-		Integer grupoDelNodo2 = null;
-		
-		/** Constructor de la clase.
-		 * Construye los grupos, dejando un nodo en cada uno */
-		public GruposKruskal(){
-			//Por cada uno de los nNodos grupos
-			for(int n = 0; n < getNNodos(); n++){
-				//Se inicializa el grupo
-				grupos.add(new ArrayList<Integer>());
-				//Se añade a ese grupo el nodo n
-				grupos.get(n).add(n);
-			}
-		}
-		
-		
-		public boolean pertenecenAlMismoGrupo(Integer nodo1, Integer nodo2){
-			for(int g = 0; g < grupos.size(); g++){
-				if(grupos.get(g).contains(nodo1)){
-					grupoDelNodo1 = g;
-				}
-				if(grupos.get(g).contains(nodo2)){
-					grupoDelNodo2 = g;
-				}
-			}
-			
-			return (grupoDelNodo1.equals(grupoDelNodo2));
-		}
-		
-		
-		/** Combina los dos últimos grupos que se compararon mediante pertenecenAlMismoGrupo().
-		 * Los elementos del segundo grupo se añaden al primero, quedando el segundo sin elementos. */
-		public void combinarUltimosGruposComparados(){
-			Integer tamanoOriginalDelGrupo2 = grupos.get(grupoDelNodo2).size();
-			//Por cada nodo en el segundo grupo:
-			for(int n = 0; n < tamanoOriginalDelGrupo2; n++){
-				//Se retira un nodo de ese grupo
-				Integer nodoAux = grupos.get(grupoDelNodo2).remove(0);
-				//y se añade al otro
-				grupos.get(grupoDelNodo1).add(nodoAux);
-			}
-		}
-		
-	}
-	
-	
-	//Construir una lista con todos los arcos del grafo
+	/**
+	 * Devuelve una lista con todos los arcos del grafo
+	 * @return Lista con todos los arcos del grafo.
+	 */
 	public ListaDeArcos listarArcosDelGrafo(){
 		ListaDeArcos arcosDelGrafo = new ListaDeArcos();
 		for(int f = 0; f < getMatrizDeAdyacencia().length; f++){
@@ -222,12 +208,96 @@ public class GrafoNoDirigido extends Grafo {
 	}
 	
 	
-	/** (al ser no dirigido, si un arco ya existe, no lo vuelve a añadir) */
+	/**
+	 * Añade un nuevo arco dirigido al modelo del grafo visual.
+	 * Al ser no dirigido, si un arco ya existe, no lo vuelve a añadir.
+	 * @param grafoJung
+	 *            Modelo del grafo visual.
+	 * @param f
+	 *            Nodo origen (fila en la matriz de adyacencia).
+	 * @param c
+	 *            Nodo destino (columna en la matriz de adyacencia).
+	 */
 	@Override
 	public void añadirArcoAlGrafoVisual(SparseMultigraph<Integer, String> grafoJung, int f, int c) {
 		if(!grafoJung.containsEdge(new String("Nodo " + c + "-" + f + ": " + getMatrizDeAdyacencia()[f][c]))){
 			grafoJung.addEdge(new String("Nodo " + f + "-" + c + ": " + getMatrizDeAdyacencia()[f][c])
 					, f, c, EdgeType.UNDIRECTED);
 		}
+	}
+	
+	
+	
+	/**
+	 * Almacena los nodos de cada uno de los grupos de nodos que se almacenan durante el algoritmo
+	 * de Kruskal. Al principio del algoritmo, cada nodo pertenece a un grupo. Al final del mismo,
+	 * todos los nodos quedan reunidos en un único grupo.
+	 * @author Jorge Alonso Márquez
+	 */
+	private class GruposKruskal{
+		ArrayList<ArrayList<Integer>> grupos = new ArrayList<>();
+		
+		/**
+		 * Grupo del primero de los dos nodos comparados en pertenecenAlMismoGrupo().
+		 * Se almacena como variable global para su posterior uso en combinarUltimosComparados().
+		 */
+		Integer grupoDelNodo1 = null;
+		
+		/**
+		 * Grupo del segundo de los dos nodos comparados en pertenecenAlMismoGrupo().
+		 * Se almacena como variable global para su posterior uso en combinarUltimosComparados().
+		 */
+		Integer grupoDelNodo2 = null;
+		
+		/**
+		 * Constructor de la clase.
+		 * Construye los grupos iniciales, dejando un nodo en cada uno.
+		 * */
+		public GruposKruskal(){
+			//Por cada uno de los nNodos grupos
+			for(int n = 0; n < getNNodos(); n++){
+				//Se inicializa el grupo
+				grupos.add(new ArrayList<Integer>());
+				//Se añade a ese grupo el nodo n
+				grupos.get(n).add(n);
+			}
+		}
+		
+		
+		/**
+		 * Indica si los nodos dados pertenecen a un mismo grupo.
+		 * @param nodo1 Primer nodo.
+		 * @param nodo2 Segundo nodo.
+		 * @return Si los nodos dados pertenecen a un mismo grupo.
+		 */
+		public boolean pertenecenAlMismoGrupo(Integer nodo1, Integer nodo2){
+			for(int g = 0; g < grupos.size(); g++){
+				if(grupos.get(g).contains(nodo1)){
+					grupoDelNodo1 = g;
+				}
+				if(grupos.get(g).contains(nodo2)){
+					grupoDelNodo2 = g;
+				}
+			}
+			
+			return (grupoDelNodo1.equals(grupoDelNodo2));
+		}
+		
+		
+		/**
+		 * Combina los dos últimos grupos que se compararon mediante pertenecenAlMismoGrupo().
+		 * Los elementos del segundo grupo se añaden al primero, quedando el segundo sin elementos.
+		 */
+		public void combinarUltimosGruposComparados(){
+			Integer tamanoOriginalDelGrupo2 = grupos.get(grupoDelNodo2).size();
+			//Por cada nodo en el segundo grupo:
+			for(int n = 0; n < tamanoOriginalDelGrupo2; n++){
+				//Se retira un nodo de ese grupo
+				Integer nodoAux = grupos.get(grupoDelNodo2).remove(0);
+				//y se añade al otro
+				grupos.get(grupoDelNodo1).add(nodoAux);
+			}
+		}
+		
 	}
 }

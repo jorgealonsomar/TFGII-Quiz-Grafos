@@ -6,24 +6,59 @@ import java.awt.event.ActionListener;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 
+import texto.Idioma;
 import texto.Textos_BarraMenu;
-import util.Idioma;
 
+/**
+ * Barra del menú superior
+ * @author Jorge
+ */
 @SuppressWarnings("serial")
 public class BarraMenu extends JMenuBar {
-
+	
+	/**
+	 * Frame principal de la aplicación.
+	 */
 	private FramePrincipal frame;
-
+	
+	
+	/**
+	 * Menú "Archivo".
+	 */
 	private final JMenu menuArchivo;
+	
+	/**
+	 * Opción "Importar Semilla", del menú Archivo.
+	 */
 	private JMenuItem opcionImportarSemilla;
+	
+	/**
+	 * Opción "Salir", del menú Archivo.
+	 */
 	private JMenuItem opcionSalir;
-
+	
+	
+	/**
+	 * Menú "Ayuda".
+	 */
 	private final JMenu menuAyuda;
+	
+	/**
+	 * Opción "Acerca de", del menú de Ayuda.
+	 */
 	private JMenuItem opcionAcercaDe;
 
 	
-	/** Constructor de la clase */
+	/**
+	 * Constructor de la clase.
+	 * Crea la barra y sus elementos.
+	 * @param frame
+	 *            Frame principal de la aplicación
+	 * @param idioma
+	 *            Idioma actual de la aplicación
+	 */
 	public BarraMenu(FramePrincipal frame, Idioma idioma) {
 		this.frame = frame;
 
@@ -52,7 +87,11 @@ public class BarraMenu extends JMenuBar {
 	}
 	
 
-	/** Reescribe los textos tras cambiar la configuración del idioma */
+	/**
+	 * Reescribe los textos tras cambiar la configuración del idioma.
+	 * @param nuevoIdioma
+	 *            Nuevo idioma establecido.
+	 */
 	public void reescribirTextos(Idioma nuevoIdioma) {
 
 		menuArchivo.setText(Textos_BarraMenu.menuArchivo().getString(nuevoIdioma));
@@ -64,9 +103,19 @@ public class BarraMenu extends JMenuBar {
 		opcionAcercaDe.setText(Textos_BarraMenu.menuAyuda_AcercaDe().getString(nuevoIdioma));
 	}
 	
+
 	
-	
+	/**
+	 * Listener de la opción Salir.
+	 * @author Jorge Alonso Márquez
+	 */
 	private class SalirListener implements ActionListener {
+		
+		/**
+		 * Cierra la aplicación.
+		 * @param e
+		 *            Evento de la acción que activó el listener.
+		 */
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			frame.dispose();
@@ -74,9 +123,17 @@ public class BarraMenu extends JMenuBar {
 	}
 	
 	
-	
+	/**
+	 * Listener de la opción Importar semilla.
+	 * @author Jorge Alonso Márquez
+	 */
 	private class ImportarSemillaListener implements ActionListener {
-
+		
+		/**
+		 * Abre la ventana de importar semilla.
+		 * @param e
+		 *            Evento de la acción que activó el listener.
+		 */
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			frame.importarSemilla();
@@ -85,11 +142,24 @@ public class BarraMenu extends JMenuBar {
 	
 	
 	
+	/**
+	 * Listener de la opción Acerca de.
+	 * @author Jorge Alonso Márquez
+	 */
 	private class AcercaDeListener implements ActionListener {
-
+		
+		/**
+		 * Muestra información sobre la aplicación.
+		 * @param e
+		 *            Evento de la acción que activó el listener.
+		 */
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			//TODO
+			JOptionPane.showMessageDialog(frame, "Universidad de Burgos. Grado en Ingeniería Informática."
+					+ "\nAutor: Jorge Alonso Márquez."
+					+ "\nTutores: Juan José Rodríguez Díez y Carlos López Nozal."
+					+ "\n\tEntregado a julio de 2015.",
+					"Acerca de", JOptionPane.INFORMATION_MESSAGE);
 		}
 	}
 	

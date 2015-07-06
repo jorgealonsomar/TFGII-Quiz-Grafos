@@ -1,6 +1,5 @@
 package interfaz.pestanaDePregunta;
 
-import interfaz.AreaPreguntas;
 import interfaz.FramePrincipal;
 import interfaz.JComboBoxTextos;
 import interfaz.PanelCentral;
@@ -18,34 +17,75 @@ import javax.swing.JTabbedPane;
 
 import modelo.pregunta.Pregunta;
 import modelo.pregunta.VisualizacionGrafo;
+import texto.Idioma;
 import texto.Texto;
 import texto.Textos_Interfaz;
-import util.Idioma;
 
+/**
+ * Pestaña del panel tabulado de preguntas. Corresponde a una de los posibles tipos de pregunta a generar.
+ * @author Jorge Alonso Márquez
+ */
 @SuppressWarnings("serial")
 public abstract class PestanaDePregunta extends JPanel {
 	
+	/**
+	 * Nombre que recibe la pestaña.
+	 */
 	private Texto nombreDeLaPestana;
 	
+	/**
+	 * Idioma actual de la aplicación.
+	 */
 	protected Idioma idioma = Idioma.ESP;
 	
-	/** Frame que contiene el gui del programa */
+	/**
+	 * Frame de la aplicación.
+	 */
 	private FramePrincipal frame;
 	
-	/** Panel con las opciones generales */
+	/**
+	 * Panel que contiene las opciones generales.
+	 */
 	protected PanelCentral panelCentral;
 	
-	private JLabel txtTipoPregunta = new JLabel(Textos_Interfaz.textoTipoDePregunta().esp());
-	private JComboBoxTextos comboBoxTipoPregunta = new JComboBoxTextos();
 	
+	/**
+	 * Etiqueta correspondiente al selector de la clase de pregunta.
+	 */
+	private JLabel txtClasePregunta = new JLabel(Textos_Interfaz.textoClaseDePregunta().esp());
+	
+	/**
+	 * Selector de la clase de pregunta, dentro de las opciones existentes para las de ese tipo.
+	 */
+	private JComboBoxTextos comboBoxClasePregunta = new JComboBoxTextos();
+	
+	
+	/**
+	 * Botón de generación de preguntas.
+	 */
 	private JButton botonGenerarPregunta = new JButton(Textos_Interfaz.botonGenerarPregunta().esp());
-	/** Botón de importar semillas */
+	
+	/**
+	 * Botón de importación de semillas.
+	 */
 	private JButton botonImportarSemilla = new JButton(Textos_Interfaz.botonImportarSemilla().esp());
 	
 	
-	/** Constructor */
+	/**
+	 * Constructor de la clase.
+	 * @param panelTabulado
+	 *            Panel tabulado que contiene esta pestaña.
+	 * @param nombreDeLaPestana
+	 *            Nombre que recibe esta pestaña.
+	 * @param teclaMnemotecnica
+	 *            Tecla mnemotécnica asociada a esta pestaña.
+	 * @param frame
+	 *            Frame de la aplicación.
+	 * @param panelCentral
+	 *            Panel que contiene las opciones generales.
+	 */
 	public PestanaDePregunta(JTabbedPane panelTabulado, Texto nombreDeLaPestana, int teclaMnemotecnica,
-			AreaPreguntas areaPreguntas, FramePrincipal frame, PanelCentral panelCentral) {
+			FramePrincipal frame, PanelCentral panelCentral) {
 		this.nombreDeLaPestana = nombreDeLaPestana;
 		this.frame = frame;
 		this.panelCentral = panelCentral;
@@ -61,49 +101,78 @@ public abstract class PestanaDePregunta extends JPanel {
 	}
 	
 	
+	/**
+	 * Devuelve el nombre de la pestaña.
+	 * 
+	 * @param idioma
+	 *            Idioma actual de la aplicación.
+	 * @return Nombre que recibe la pestaña.
+	 */
 	public String getNombreDeLaPestana(Idioma idioma){
 		return nombreDeLaPestana.getString(idioma);
 	}
 	
 	
-	public Integer getTipoDePregunta(){
-		return comboBoxTipoPregunta.getSelectedIndex();
+	/**
+	 * Devuelve la clase de pregunta seleccionada.
+	 * @return Clase de la pregunta.
+	 */
+	public Integer getClaseDePregunta(){
+		return comboBoxClasePregunta.getSelectedIndex();
 	}
 	
 	
-	public void setVisibleTipoPregunta(boolean flag){
-		txtTipoPregunta.setVisible(flag);
-		comboBoxTipoPregunta.setVisible(flag);
+	/**
+	 * Hace visible o invisible el selector de la clase de pregunta.
+	 * @param flag Flag que inidica si debe ser visible o invisible.
+	 */
+	public void setVisibleClasePregunta(boolean flag){
+		txtClasePregunta.setVisible(flag);
+		comboBoxClasePregunta.setVisible(flag);
 	}
 	
 	
-	public void addTipoPregunta(Texto tipoPregunta){
-		comboBoxTipoPregunta.addTexto(tipoPregunta);
+	/**
+	 * Añade una clase de pregunta al selector de clase de pregunta.
+	 * @param clasePregunta Nombre de la nueva clase de pregunta a añadir.
+	 */
+	public void addClasePregunta(Texto clasePregunta){
+		comboBoxClasePregunta.addTexto(clasePregunta);
 	}
 	
 	
-	/** Reescribe los textos tras cambiar la configuración del idioma */
+	/**
+	 * Reescribe los textos tras cambiar la configuración del idioma.
+	 * @param nuevoIdioma
+	 *            Nuevo idioma establecido.
+	 */
 	public void reaccionarACambioDeIdioma(Idioma nuevoIdioma){
 		idioma = nuevoIdioma;
 		
 		botonGenerarPregunta.setText(Textos_Interfaz.botonGenerarPregunta().getString(nuevoIdioma));
 		botonImportarSemilla.setText(Textos_Interfaz.botonImportarSemilla().getString(nuevoIdioma));
 		
-		txtTipoPregunta.setText(Textos_Interfaz.textoTipoDePregunta().getString(nuevoIdioma));
-		comboBoxTipoPregunta.actualizar(nuevoIdioma);
+		txtClasePregunta.setText(Textos_Interfaz.textoClaseDePregunta().getString(nuevoIdioma));
+		comboBoxClasePregunta.actualizar(nuevoIdioma);
 		
 		botonGenerarPregunta.setToolTipText(Textos_Interfaz.tipTextBotonGenerarPregunta().getString(nuevoIdioma));
 		botonImportarSemilla.setToolTipText(Textos_Interfaz.tipTextBotonImportarSemilla().getString(nuevoIdioma));
 	}
 
 	
+	/**
+	 * Añade a este panel sus selectores.
+	 */
 	private void anadirSelectores(){
-		add(txtTipoPregunta, BorderLayout.CENTER);
-		add(comboBoxTipoPregunta);
-		setVisibleTipoPregunta(false);
+		add(txtClasePregunta, BorderLayout.CENTER);
+		add(comboBoxClasePregunta);
+		setVisibleClasePregunta(false);
 	}
 	
 	
+	/**
+	 * Añade a este panel los botones de Generar pregunta y de Importar semilla.
+	 */
 	private void anadirBotones() {
 		botonGenerarPregunta.addActionListener(new GenerarPreguntaListener());
 		add(botonGenerarPregunta, BorderLayout.CENTER);
@@ -113,13 +182,26 @@ public abstract class PestanaDePregunta extends JPanel {
 	}
 	
 	
-	/** Método que se llama al pulsar el botón de Generar Pregunta */
+	/**
+	 * Genera una nueva pregunta. Se llama al pulsar el botón de Generar Pregunta.
+	 * @return Nueva pregunta generada.
+	 */
 	protected abstract Pregunta generarPregunta();
 	
 	
 	
+	/**
+	 * Listener del botón Generar pregunta.
+	 * @author Jorge Alonso Márquez
+	 */
 	private class GenerarPreguntaListener implements ActionListener {
 		
+		/**
+		 * Genera una nueva pregunta en función de los parámetros seleccionados en esta pestaña y en
+		 * el panel central.
+		 * @param e
+		 *            Evento de la acción que activó el listener.
+		 */
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
 			String textoPreguntaXml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>";
@@ -150,8 +232,17 @@ public abstract class PestanaDePregunta extends JPanel {
 	
 	
 	
+	/**
+	 * Listener del botón Importar semilla.
+	 * @author Jorge Alonso Márquez
+	 */
 	private class ImportarSemillaListener implements ActionListener {
 		
+		/**
+		 * Abre la ventana de importar semilla.
+		 * @param e
+		 *            Evento de la acción que activó el listener.
+		 */
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
 			frame.importarSemilla();

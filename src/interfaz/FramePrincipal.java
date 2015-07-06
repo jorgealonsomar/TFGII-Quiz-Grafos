@@ -32,57 +32,67 @@ import modelo.pregunta.PreguntaDePrim_OrdenDeSeleccion;
 import modelo.pregunta.PreguntaDeProfundidad;
 import modelo.pregunta.PreguntaTopologica;
 import modelo.pregunta.VisualizacionGrafo;
-import sistema.Parametros;
+import sistema.GestorIO;
 import sistema.Ruta;
+import texto.Idioma;
 import texto.Textos_BarraMenu;
 import texto.Textos_Interfaz;
-import util.GestorIO;
-import util.Idioma;
 
 @SuppressWarnings("serial")
 public class FramePrincipal extends JFrame {
 
-	/** Panel correspondiente a este frame */
-	private JPanel panelDeLaVentana;
+	/** 
+	 * Parámetros que está empleando el programa.
+	 */
+	private Idioma idioma;
 
-	/** Parámetros que está empleando el programa */
-	private Parametros parametros;
-
-	/** Barra del menú superior */
+	/**
+	 * Barra del menú superior.
+	 */
 	private BarraMenu barraMenu;
 	
-	/** Panel central, donde se realiza la selección de parámetros */
+	/**
+	 * Panel central, donde se realiza la selección de parámetros.
+	 */
 	private PanelCentral panelCentral;
-//	/** Panel que emplea pestañas para separar los distintos tipos de preguntas */
-//	private JTabbedPane panelTabulado;
 
-	/** Botón de selección de idioma */
+	/**
+	 * Botón de selección de idioma.
+	 */
 	private JLabel imgIdioma;
 	
 	/**
-	 * Botón de selección del directorio donde se guardarán las preguntas que se
-	 * generen
+	 * Botón de selección del directorio donde se guardarán las preguntas que se generen.
 	 */
 	private JButton botonElegirDirectorio;
 
 	/**
-	 * Ventana de texto con nombre del directorio donde se guardarán las
-	 * preguntas que se generen
+	 * Ventana de texto con nombre del directorio donde se guardarán las preguntas que se generen.
 	 */
 	private JTextField ventanaTextoDirectorio;
 
-	/** Área donde se irán mostrando las preguntas generadas */
+	/**
+	 * Área donde se irán mostrando las preguntas generadas.
+	 */
 	private AreaPreguntas areaPreguntas;
 
-	/** Anchura del frame */
+	/**
+	 * Anchura del frame.
+	 */
 	private final int ANCHO = 1200;
 
-	/** Altura del frame */
+	/**
+	 * Altura del frame.
+	 */
 	private final int ALTO = 800;
 
-	/** Constructor de la clase */
-	public FramePrincipal(Parametros parametros) {
-		this.parametros = parametros;
+	
+	/**
+	 * Constructor de la clase.
+	 * Construye el frame y sus componentes.
+	 */
+	public FramePrincipal() {
+		this.idioma = Idioma.ESP;
 		
 		setTitle("TFGII Generador de preguntas de Algoritmia");
 		setBounds(0, 0, ANCHO, ALTO);
@@ -90,7 +100,6 @@ public class FramePrincipal extends JFrame {
 		setLocationRelativeTo(null);
 		setVisible(true);
 
-		construirPanelDeLaVentana();
 		construirBarraMenu();
 		construirAreaPreguntas();
 		construirSelectorDeDirectorio();
@@ -99,10 +108,19 @@ public class FramePrincipal extends JFrame {
 
 		presentarTrasCambioDeIdioma();
 	}
+	
 
 	/**
 	 * Imprime una pregunta por el área de Preguntas. La imprime también a
 	 * archivo.
+	 * @param textoPreguntaPorPantalla
+	 *            Texto a imprimir por pantalla.
+	 * @param textoPreguntaXml
+	 *            Texto a imprimir a un archivo xml.
+	 * @param nombreArchivo
+	 *            Nombre del archivo xml.
+	 * @param imagenVisual
+	 *            Imagen del grafo correspondiente a la pregunta.
 	 */
 	public void imprimePregunta(String textoPreguntaPorPantalla, String textoPreguntaXml,
 			String nombreArchivo, BufferedImage imagenVisual) {
@@ -129,17 +147,19 @@ public class FramePrincipal extends JFrame {
 			if(imagenVisual != null) areaPreguntas.addImagen(imagenVisual);
 		} else {
 			JOptionPane.showMessageDialog(null, Textos_Interfaz.errorDirectorioNoExiste()
-					.getString(parametros.getIdioma()), "Error", JOptionPane.WARNING_MESSAGE);
+					.getString(idioma), "Error", JOptionPane.WARNING_MESSAGE);
 		}
 		
 	}
 	
 	
-	/** */
+	/**
+	 * Recupera una pregunta a partir de su semilla, y, si es válida, la imprime.
+	 */
 	public void importarSemilla() {
 		String codigoConsigna = JOptionPane.showInputDialog(this,
-				Textos_BarraMenu.introduzcaSemilla().getString(parametros.getIdioma()),
-				Textos_BarraMenu.menuArchivo_ImportarSemilla().getString(parametros.getIdioma()),
+				Textos_BarraMenu.introduzcaSemilla().getString(idioma),
+				Textos_BarraMenu.menuArchivo_ImportarSemilla().getString(idioma),
 				JOptionPane.PLAIN_MESSAGE);
 
 		try {
@@ -174,11 +194,11 @@ public class FramePrincipal extends JFrame {
 			textoPreguntaXml += "\n<quiz>";
 			String textoPreguntaPorPantalla = "";
 			
-			textoPreguntaPorPantalla += pregunta.getTextoPreguntaParaMostrarPorPantalla(parametros.getIdioma());
-			textoPreguntaXml += pregunta.getTextoPreguntaXml(parametros.getIdioma());
+			textoPreguntaPorPantalla += pregunta.getTextoPreguntaParaMostrarPorPantalla(idioma);
+			textoPreguntaXml += pregunta.getTextoPreguntaXml(idioma);
 			
 			textoPreguntaXml += "\n</quiz>";
-			String nombreArchivo = pregunta.getNombreDeArchivo().getString(parametros.getIdioma());
+			String nombreArchivo = pregunta.getNombreDeArchivo().getString(idioma);
 			
 			BufferedImage imagenVisual = null;
 			if(panelCentral.getVisualizacionGrafo() == VisualizacionGrafo.GRAFO_VISUAL){
@@ -190,43 +210,32 @@ public class FramePrincipal extends JFrame {
 			
 		} catch (SemillaException excepcion) {
 			JOptionPane.showMessageDialog(null,
-					Textos_Interfaz.errorSemillaIncorrecta().getString(parametros.getIdioma()), "Error",
+					Textos_Interfaz.errorSemillaIncorrecta().getString(idioma), "Error",
 					JOptionPane.WARNING_MESSAGE);
 		}
 	}
 	
 
-	/** Construye el jPanel correspondiente a este frame */
-	private void construirPanelDeLaVentana() {
-		panelDeLaVentana = new JPanel();
-//		panelDeLaVentana.setBounds(0, 0, ANCHO - 50, ALTO - 50);
-//		panelDeLaVentana.setPreferredSize(new Dimension(ANCHO - 50, ALTO - 50));
-		panelDeLaVentana.setBackground(Color.GRAY);
-		panelDeLaVentana.setVisible(true);
-		panelDeLaVentana.setLayout(new BorderLayout());
-		setContentPane(panelDeLaVentana);
-	}
-	
-
-	/** Construye la barra del menú superior */
+	/**
+	 * Construye la barra del menú superior.
+	 */
 	private void construirBarraMenu() {
-		barraMenu = new BarraMenu(this, parametros.getIdioma());
-		panelDeLaVentana.add(barraMenu, BorderLayout.PAGE_START);
+		barraMenu = new BarraMenu(this, idioma);
+		getContentPane().add(barraMenu, BorderLayout.PAGE_START);
 	}
 	
 	
 	/**
-	 * Construye el panel inferior correspondiente a la selección del directorio
-	 * donde se guardarán las preguntas que se creen
+	 * Construye el panel inferior correspondiente a la selección del directorio donde se guardarán
+	 * las preguntas que se creen.
 	 */
 	private void construirSelectorDeDirectorio() {
 		JPanel panelSelectorDeDirectorio = new JPanel();
-//		panelSelectorDeDirectorio.setBounds(0, 0, ANCHO, ALTO);
 		panelSelectorDeDirectorio.setBackground(Color.GRAY);
 		panelSelectorDeDirectorio.setVisible(true);
 		panelSelectorDeDirectorio.setLayout(new BorderLayout());
 		add(panelSelectorDeDirectorio);
-		panelDeLaVentana.add(panelSelectorDeDirectorio, BorderLayout.PAGE_END);
+		getContentPane().add(panelSelectorDeDirectorio, BorderLayout.PAGE_END);
 		
 		botonElegirDirectorio = new JButton("");
 		botonElegirDirectorio.addActionListener(new ElegirDirectorioListener());
@@ -237,32 +246,41 @@ public class FramePrincipal extends JFrame {
 	}
 	
 
-	/** Construye el panel central */
+	/**
+	 * Construye el panel central.
+	 */
 	private void construirPanelCentral() {
-		panelCentral = new PanelCentral(areaPreguntas, this);
-		panelDeLaVentana.add(panelCentral, BorderLayout.CENTER);
+		panelCentral = new PanelCentral(this);
+		getContentPane().add(panelCentral, BorderLayout.CENTER);
 	}
 	
 
-	/** Construye el área donde se irán mostrando las preguntas generadas */
+	/**
+	 * Construye el área donde se van mostrando las preguntas generadas
+	 */
 	private void construirAreaPreguntas() {
 		areaPreguntas = new AreaPreguntas();
 		add(areaPreguntas, BorderLayout.LINE_END);
 	}
 	
 
-	/** Construye la barra del menú superior */
+	/**
+	 * Construye la barra del menú superior
+	 */
 	private void construirBotonIdioma() {
 		imgIdioma = new JLabel();
 		imgIdioma.setIcon(new ImageIcon(getClass().getResource(Ruta.IMAGENES + "idiomaEsp.png")));
-		panelDeLaVentana.add(imgIdioma, BorderLayout.LINE_START);
+		getContentPane().add(imgIdioma, BorderLayout.LINE_START);
 
 		imgIdioma.addMouseListener(new CambiarIdiomaListener());
 	}
-
-	/** Reescribe los textos tras cambiar la configuración del idioma */
+	
+	
+	/**
+	 * Reescribe los textos tras cambiar la configuración del idioma
+	 */
 	private void presentarTrasCambioDeIdioma() {
-		Idioma nuevoIdioma = parametros.getIdioma();
+		Idioma nuevoIdioma = idioma;
 
 		// Barra Menú
 		barraMenu.reescribirTextos(nuevoIdioma);
@@ -291,25 +309,50 @@ public class FramePrincipal extends JFrame {
 	}
 	
 	
-
+	/**
+	 * Cambia el idioma en el que se muestran los textos del programa
+	 */
+	public void switchIdioma() {
+		if(idioma == Idioma.ESP){
+			idioma = Idioma.ENG;
+		} else {
+			idioma =Idioma.ESP;
+		}
+	}
+	
+	
+	
+	/**
+	 * Listener del botón de idioma.
+	 * @author Jorge Alonso Márquez
+	 */
 	private class CambiarIdiomaListener extends MouseAdapter {
 
-		/** Cambia al siguiente idioma y repinta la ventana */
+		/**
+		 * Cambia al siguiente idioma y repinta la ventana.
+		 * @param e
+		 *            Evento de la acción que activó el listener.
+		 */
 		@Override
 		public void mouseClicked(MouseEvent arg0) {
-			parametros.switchIdioma();
+			switchIdioma();
 			presentarTrasCambioDeIdioma();
 		}
 
 	}
 	
 	
-	
+	/**
+	 * Listener del botón de Elegir directorio.
+	 * @author Jorge Alonso Márquez
+	 */
 	private class ElegirDirectorioListener implements ActionListener {
 
 		/**
-		 * Abre un selector de directorio. Tras elegirlo, esa ruta se guarda en
-		 * la ventana de texto de selección de directorio
+		 * Abre un selector de directorio. Tras elegirlo, esa ruta se guarda en la ventana de
+		 * texto de selección de directorio.
+		 * @param e
+		 *            Evento de la acción que activó el listener.
 		 */
 		@Override
 		public void actionPerformed(ActionEvent e) {

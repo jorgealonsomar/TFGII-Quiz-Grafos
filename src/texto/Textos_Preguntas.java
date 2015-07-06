@@ -1,205 +1,310 @@
 package texto;
 
+/**
+ * Textos empleados en la generación de preguntas.
+ * @author Jorge Alonso Márquez
+ */
 public class Textos_Preguntas {
 	
-	/** Inicio de una cláusula multichoice */
+	/**
+	 * Devuelve el texto que se pone al inicio de una cláusula multichoice.
+	 * @return Texto al inicio de una cláusula multichoice.
+	 */
 	public static Texto abrirClausulaMultichoice(){
 		return new Texto("{1:MULTICHOICE:");
 	}
 	
 	
-	/** Inicio de una cláusula shortanswer */
+	/**
+	 * Devuelve el texto que se pone al inicio de una cláusula shortanswer.
+	 * @return Texto al inicio de una cláusula shortanswer.
+	 */
 	public static Texto abrirClausulaShortanswer(){
 		return new Texto("{1:SHORTANSWER:");
 	}
 	
 	
-	/** Tilde, usada en los multichoice para separar las distintas opciones */
+	/**
+	 * Devuelve el texto correspondiente a una tilde, usada en los multichoice para separar las
+	 * distintas opciones.
+	 * @return Texto correspondiente a una tilde.
+	 */
 	public static Texto tilde(){
 		return new Texto("~");
 	}
 	
 	
-	/** Coma de separación entre distintos elementos de una enumeración */
+	/**
+	 * Devuelve el texto correspondiente a una coma, usada para separar distintos elementos en una
+	 * enumeración.
+	 * @return Texto correspondiente a una coma.
+	 */
 	public static Texto coma(){
 		return new Texto(", ");
 	}
 	
 	
-	/** Cierre de una cláusula */
+	/**
+	 * Devuelve el texto correspondiente al cerrado de una cláusula de moodle-xml.
+	 * @return Texto correspondiente al cerrado de una cláusula de moodle-xml.
+	 */
 	public static Texto cerrarClausula(){
 		return new Texto("} ");
 	}
 	
 	
-	/** Cierre de una corchete, y fin de frase. */
+	/**
+	 * Devuelve un texto con un cierre de corchete y un punto de fin de frase.
+	 * @return Texto con cierre de corchete, y fin de frase.
+	 */
 	public static Texto cerrarCorchete(){
 		return new Texto("].");
 	}
 	
 	
-	/** Nombre de un nodo, correspondiente a un caracter dado. */
+	/**
+	 * Devuelve un texto con la cadena correspondiente a un nodo cuya letra sea el carácter dado.
+	 * @return Texto con el nombre de un nodo, correspondiente al caracter dado.
+	 */
 	public static Texto nombreDeNodo(Character caracter){
 		return new Texto(caracter.toString());
 	}
 	
 	
-	/** Opción correcta (p. ej. en un multichoice) que añade un 100 del valor al peso de la nota */
+	/**
+	 * Devuelve el texto correspondiente a una opción correcta en moodle-xml Añade un 100 del valor al
+	 * peso de la nota.
+	 * @return Texto correspondiente a una opción correcta.
+	 */
 	public static Texto opcionCorrecta100(){
 		return new Texto("%100%");
 	}
 	
 	
-	/** Opción incorrecta (p. ej. en un multichoice) que resta un 100% del valor al peso de la nota*/
+	/**
+	 * Devuelve el texto correspondiente a una opción incorrecta en moodle-xml Resta un 100 del valor al
+	 * peso de la nota.
+	 * @return Texto correspondiente a una opción incorrecta.
+	 */
 	public static Texto opcionQueResta100(){
 		return new Texto("%-100%");
 	}
 	
 	
+	/**
+	 * Devuelve el texto correspondiente a una respuesta acertada en moodle-xml.
+	 * @return Texto correspondiente a una respuesta acertada.
+	 */
 	public static Texto comentarioAcierto(){
 		return new Texto("#Correcto", "#Right");
 	}
 	
 	
+	/**
+	 * Devuelve el texto correspondiente a una respuesta fallida en moodle-xml.
+	 * @return Texto correspondiente a una respuesta fallida.
+	 */
 	public static Texto comentarioError(){
 		return new Texto("#Error", "#Wrong");
 	}
 	
 	
-	/** Fragmento inicial de una pregunta sobre recorrido de grafo */
+	/**
+	 * Devuelve el fragmento inicial de una pregunta sobre recorrido de grafo .
+	 * @return Fragmento inicial de una pregunta sobre recorrido de grafo.
+	 */
 	public static Texto pregRecorrido_ResultadoDeRecorrerGrafo(){
 		return new Texto("El resultado de recorrer el grafo es el siguiente: [ ",
 				"The resulting path is as follows: [ ");
 	}
 	
 	
-	/** Fragmento inicial de una respuesta */
+	/**
+	 * Devuelve el fragmento inicial de una respuesta.
+	 * @return Fragmento inicial de una respuesta.
+	 */
 	public static Texto respuestaCorrectaEs(){
 		return new Texto("La respuesta correcta es: [",
 				"The right answer is: [ ");
 	}
 	
 	
-	/** Distancia desde el nodo A. Usado en las preguntas de distancia más corta (Dijkstra). */
+	/**
+	 * Devuelve el texto que presenta la distancia desde el nodo A.
+	 * @return Texto que presenta la distancia desde el nodo A..
+	 */
 	public static Texto distanciaDesdeElNodoA(){
 		return new Texto("Distancia del nodo A al nodo ",
 				"Distance from node A to node ");
 	}
 	
 	
-	/** Ruta. Usado en las preguntas de ruta más corta (Dijkstra) */
+	/**
+	 * Devuelve el texto que presenta la ruta más corta (Se usa en preguntas de Dijsktra).
+	 * @return Texto que presenta la ruta más corta.
+	 */
 	public static Texto laRutaEs(){
 		return new Texto("La ruta es: ",
 				"The path is: ");
 	}
 	
 	
-	/** Distancia. Usado en las preguntas de ruta más corta (Dijkstra) */
+	/**
+	 * Devuelve el texto que presenta la distancia (Se usa en preguntas de Dijsktra).
+	 * @return Texto que presenta la distancia.
+	 */
 	public static Texto laDistanciaEs(){
 		return new Texto("La distancia es: ",
 				"The lenght is: ");
 	}
 	
 	
-	/** Orden de selección. Usado en las preguntas de orden de selección (Dijkstra) */
+	/**
+	 * Devuelve el texto relativo al orden de selección (Se usa en preguntas de Dijsktra).
+	 * @return Texto relativo al orden de selección.
+	 */
 	public static Texto ordenDeSeleccion(){
 		return new Texto("Orden de selección",
 				"Selection order");
 	}
 	
 	
-	/** Nodo. Usado en las preguntas de orden de selección (Dijkstra, Prim) */
+	/**
+	 * Devuelve el texto relativo al nodo (Se usa en preguntas de Dijsktra y de Prim).
+	 * @return Texto relativo al nodo.
+	 */
 	public static Texto nodo(){
 		return new Texto("Nodo",
 				"Node");
 	}
 	
 	
-	/** Predecesor. Usado en las preguntas de orden de selección (Dijkstra, Prim) */
+	/**
+	 * Devuelve el texto relativo al nodo predecesor (Se usa en preguntas de Dijsktra y de Prim).
+	 * @return Texto relativo al nodo predecesor.
+	 */
 	public static Texto predecesor(){
 		return new Texto("Predecesor",
 				"Predecessor");
 	}
 	
 	
-	/** Distancia. Usado en las preguntas de orden de selección (Dijkstra) */
+	/**
+	 * Devuelve el texto relativo a la distancia (Se usa en preguntas de Dijsktra).
+	 * @return Texto relativo a la distancia.
+	 */
 	public static Texto distancia(){
 		return new Texto("Distancia",
 				"Distance");
 	}
 	
 	
-	/** Peso. Usado en las preguntas de orden de selección (Prim) */
+	/**
+	 * Devuelve el texto relativo al peso (Se usa en preguntas de Prim).
+	 * @return Texto relativo al peso.
+	 */
 	public static Texto pesoDelArco(){
 		return new Texto("Peso del arco",
 				"Weight of the arc");
 	}
 	
 	
-	/** Arco. Usado en las preguntas de orden de selección (Kruskal) */
+	/**
+	 * Devuelve el texto relativo al arco (Se usa en preguntas de Kruskal).
+	 * @return Texto relativo al arco.
+	 */
 	public static Texto arco(){
 		return new Texto("Arco",
 				"Arc");
 	}
 	
 	
-	/** Pertenece. Usado en las preguntas de hallar los arcos del árbol de expansión (Prim) */
+	/**
+	 * Devuelve un texto que indica pertenencia (Se usa en las preguntas de hallar los arcos del árbol
+	 * de expansión de Prim).
+	 * @return Texto que indica pertenencia.
+	 */
 	public static Texto pertenece(){
 		return new Texto("Pertenece",
 				"Belongs");
 	}
 	
 	
-	/** No pertenece. Usado en las preguntas de hallar los arcos del árbol de expansión (Prim) */
+	/**
+	 * Devuelve un texto que indica no pertenencia (Se usa en las preguntas de hallar los arcos del árbol
+	 * de expansión de Prim).
+	 * @return Texto que indica no pertenencia.
+	 */
 	public static Texto noPertenece(){
 		return new Texto("No pertenece",
 				"Does not belong");
 	}
 	
 	
-	/** Título de una pregunta de Recorrido en Anchura */
+	/**
+	 * Devuelve el título de una pregunta de Recorrido en Anchura.
+	 * @return Título de una pregunta de Recorrido en Anchura.
+	 */
 	public static Texto tituloPregAnchura(){
 		return new Texto("Pregunta de Recorrido en Anchura",
 				"Breadth-First Search Question.");
 	}
 	
 	
-	/** Título de una pregunta de Recorrido en Profundidad */
+	/**
+	 * Devuelve el título de una pregunta de Recorrido en Profundidad.
+	 * @return Título de una pregunta de Recorrido en Profundidad.
+	 */
 	public static Texto tituloPregProfundidad(){
 		return new Texto("Pregunta de Recorrido en Profundidad",
 				"Depth-First Search Question.");
 	}
 	
 	
-	/** Título de una pregunta de Clasificación Topológica */
+	/**
+	 * Devuelve el título de una pregunta de Clasificación Topológica.
+	 * @return Título de una pregunta de Clasificación Topológica.
+	 */
 	public static Texto tituloPregClasificacionTopologica(){
 		return new Texto("Pregunta de Clasificación Topológica",
 				"Topological Sort Question.");
 	}
 	
 	
-	/** Título de una pregunta del Algoritmo de Dijkstra */
+	/**
+	 * Devuelve el título de una pregunta del Algoritmo de Dijkstra.
+	 * @return Título de una pregunta del Algoritmo de Dijkstra.
+	 */
 	public static Texto tituloPregDijkstra(){
 		return new Texto("Pregunta del Algoritmo de Dijkstra",
 				"Dijkstra's Algorithm Question.");
 	}
 	
 	
-	/** Título de una pregunta del Algoritmo de Prim */
+	/**
+	 * Devuelve el título de una pregunta del Algoritmo de Prim.
+	 * @return Título de una pregunta del Algoritmo de Prim.
+	 */
 	public static Texto tituloPregPrim(){
 		return new Texto("Pregunta del Algoritmo de Prim",
 				"Prim's Algorithm Question.");
 	}
 	
 	
-	/** Título de una pregunta del Algoritmo de Kruskal */
+	/**
+	 * Devuelve el título de una pregunta del Algoritmo de Kruskal.
+	 * @return Título de una pregunta del Algoritmo de Kruskal.
+	 */
 	public static Texto tituloPregKruskal(){
 		return new Texto("Pregunta del Algoritmo de Kruskal",
 				"Kruskal's Algorithm Question.");
 	}
 	
 	
-	/** Enunciado de una pregunta de Recorrido en Anchura */
+	/**
+	 * Devuelve el enunciado de una pregunta de Recorrido en Anchura.
+	 * @return Enunciado de una pregunta de Recorrido en Anchura.
+	 */
 	public static Texto enunciadoPregAnchura(){
 		return new Texto("Partiendo de A, recorre el grafo en anchura. En caso de poderse seleccionar más de un nodo,"
 				+ "los nodos se deben escoger en orden alfabético.",
@@ -208,7 +313,10 @@ public class Textos_Preguntas {
 	}
 	
 	
-	/** Enunciado de una pregunta de Recorrido en Anchura */
+	/**
+	 * Devuelve el enunciado de una pregunta de Recorrido en Anchura.
+	 * @return Enunciado de una pregunta de Recorrido en Anchura.
+	 */
 	public static Texto enunciadoPregProfundidad(){
 		return new Texto("Partiendo de A, recorre el grafo en profundidad. En caso de poderse seleccionar más de un nodo,"
 				+ "los nodos se deben escoger en orden alfabético.",
@@ -217,7 +325,10 @@ public class Textos_Preguntas {
 	}
 	
 	
-	/** Enunciado de una pregunta de Clasificación Topológica */
+	/**
+	 * Devuelve el enunciado de una pregunta de Clasificación Topológica.
+	 * @return Enunciado de una pregunta de Clasificación Topológica.
+	 */
 	public static Texto enunciadoPregClasificacionTopologica(){
 		return new Texto("Realiza una clasificación topológica del grafo. En caso de poderse seleccionar más de un nodo,"
 				+ "los nodos se deben escoger en orden alfabético.",
@@ -226,14 +337,20 @@ public class Textos_Preguntas {
 	}
 	
 	
-	/** Enunciado de una pregunta del Algoritmo de Dijkstra: Distancias más cortas */
+	/**
+	 * Devuelve el Enunciado de una pregunta del Algoritmo de Dijkstra de Distancias más cortas.
+	 * @return Enunciado de una pregunta del Algoritmo de Dijkstra de Distancias más cortas.
+	 */
 	public static Texto enunciadoPregDijkstra_DistanciasMasCortas(){
 		return new Texto("Calcula la distancia mínima entre el nodo A y cada uno de los otros nodos del grafo.",
 				"Find the shortest distance between node A and every other nodo in the graph.");
 	}
 	
 	
-	/** Enunciado de una pregunta del Algoritmo de Dijkstra: Ruta más corta */
+	/**
+	 * Devuelve el enunciado de una pregunta del Algoritmo de Dijkstra de Ruta más corta.
+	 * @return Enunciado de una pregunta del Algoritmo de Dijkstra de Ruta más corta.
+	 */
 	public static Texto enunciadoPregDijkstra_RutaMasCorta(Character nodoObjetivo){
 		return new Texto("Encuentra la ruta más corta entre el nodo A y el nodo " + nodoObjetivo +
 				", y di a qué distancia mínima se encuentran.",
@@ -242,7 +359,10 @@ public class Textos_Preguntas {
 	}
 	
 	
-	/** Enunciado de una pregunta del Algoritmo de Dijkstra: Orden de selección */
+	/**
+	 * Devuelve el enunciado de una pregunta del Algoritmo de Dijkstra de Orden de selección.
+	 * @return Enunciado de una pregunta del Algoritmo de Dijkstra de Orden de selección.
+	 */
 	public static Texto enunciadoPregDijkstra_OrdenDeSeleccion(){
 		return new Texto("Aplica el algoritmo de Dijkstra sobre el grafo dado, tomando como origen el nodo A. "
 				+ "Se ha de indicar el orden en el que se seleccionan los nodos, en nodo predecesor en el"
@@ -253,7 +373,10 @@ public class Textos_Preguntas {
 	}
 	
 	
-	/** Enunciado de una pregunta del Algoritmo de Prim: Arcos del Árbol de Expansión */
+	/**
+	 * Devuelve el enunciado de una pregunta del Algoritmo de Prim de Arcos del Árbol de Expansión.
+	 * @return Enunciado de una pregunta del Algoritmo de Prim de Arcos del Árbol de Expansión.
+	 */
 	public static Texto enunciadoPregPrim_ArcosDelArbolDeExpansion(){
 		return new Texto("Aplica el algoritmo de Prim sobre el grafo dado, tomando como origen el nodo A. "
 				+ "En caso de poderse seleccionar más de un nodo, los nodos se deben escoger en orden alfabético. "
@@ -264,7 +387,10 @@ public class Textos_Preguntas {
 	}
 	
 	
-	/** Enunciado de una pregunta del Algoritmo de Prim: Arcos del Árbol de Expansión */
+	/**
+	 * Devuelve el enunciado de una pregunta del Algoritmo de Prim de Arcos del Árbol de Expansión.
+	 * @return Enunciado de una pregunta del Algoritmo de Prim de Arcos del Árbol de Expansión.
+	 */
 	public static Texto enunciadoPregPrim_OrdenDeSeleccion(){
 		return new Texto("Aplica el algoritmo de Prim sobre el grafo dado, tomando como origen el nodo A. "
 				+ "En caso de poderse seleccionar más de un nodo, los nodos se deben escoger en orden alfabético. "
@@ -275,25 +401,39 @@ public class Textos_Preguntas {
 	}
 	
 	
-	/** Texto asociado a las preguntas de Distancias más cortas (Dijkstra) */
+	/**
+	 * Devuelve el Texto asociado a las preguntas de Distancias más cortas (Se usa en preguntas de Dijkstra).
+	 * @return Texto asociado a las preguntas de Distancias más cortas.
+	 */
 	public static Texto tipoPreguntaDijkstra_DistanciasMasCortas(){
 		return new Texto("Cálculo de distancias más cortas", "Shortest distances finding");
 	}
 	
 	
-	/** Texto asociado a las preguntas de Ruta más corta (Dijkstra) */
+	/**
+	 * Devuelve el Texto asociado a las preguntas de Ruta más corta (Se usa en preguntas de Dijkstra).
+	 * @return Texto asociado a las preguntas de Ruta más corta.
+	 */
 	public static Texto tipoPreguntaDijkstra_RutaMasCorta(){
 		return new Texto("Ruta más corta entre dos nodos", "Shortest path between two nodes");
 	}
 	
 	
-	/** Texto asociado a las preguntas de Arcos del árbol de expansión (Prim y Kruskal) */
+	/**
+	 * Devuelve el Texto asociado a las preguntas de Arcos del árbol de expansión (Se usa en preguntas
+	 * de Prim y de Kruskal).
+	 * @return Texto asociado a las preguntas de Arcos del árbol de expansión.
+	 */
 	public static Texto tipoPregunta_ArcosDelArbolDeExpansion(){
 		return new Texto("Arcos del árbol de expansión", "Spanning tree arcs");
 	}
 	
 	
-	/** Texto asociado las preguntas de orden de selección (Dijkstra, Prim y Kruskal) */
+	/**
+	 * Devuelve el Texto asociado a las preguntas de Orden de selección (Se usa en preguntas
+	 * de Dijkstra, de Prim y de Kruskal).
+	 * @return Texto asociado a las preguntas de Orden de selección.
+	 */
 	public static Texto tipoPregunta_OrdenDeSeleccion(){
 		return new Texto("Orden de selección", "Selection order");
 	}
