@@ -79,6 +79,35 @@ public class GrafoTest {
 												{0, 0, 5, 0, 0, 4},
 												{0, 0, 3, 4, 4, 0}};
 	
+	/**
+	 * Séptima de las matrices de adyacencia empleadas en los tests de grafos.
+	 */
+	private Integer[][] matrizDeAdyacencia7 ={	{0, 0, 0, 0, 1, 1},
+												{1, 0, 0, 0, 0, 0},
+												{0, 0, 1, 0, 0, 1},
+												{1, 1, 1, 0, 0, 0},
+												{1, 0, 0, 1, 0, 0},
+												{0, 0, 1, 0, 0, 0},};
+	
+	/**
+	 * Octava de las matrices de adyacencia empleadas en los tests de grafos.
+	 */
+	private Integer[][] matrizDeAdyacencia8 ={	{0, 0, 0, 0, 0, 1},
+												{0, 0, 0, 0, 0, 0},
+												{1, 0, 0, 1, 0, 1},
+												{1, 0, 1, 0, 1, 0},
+												{1, 0, 0, 1, 0, 0},
+												{1, 1, 0, 0, 0, 0},};
+	
+	/**
+	 * Novena de las matrices de adyacencia empleadas en los tests de grafos.
+	 */
+	private Integer[][] matrizDeAdyacencia9 ={	{6, 0, 0, 0, 0, 7},
+												{0, 0, 0, 0, 0, 9},
+												{9, 4, 0, 7, 0, 0},
+												{0, 5, 0, 0, 0, 0},
+												{1, 8, 2, 3, 7, 8},
+												{0, 9, 0, 0, 0, 5},};
 	
 	/**
 	 * Primero de los grafos empleados en los tests de grafos.
@@ -110,6 +139,52 @@ public class GrafoTest {
 	 */
 	private GrafoNoDirigido grafo6 = new GrafoNoDirigido(matrizDeAdyacencia6);
 	
+	/**
+	 * Séptimo de los grafos empleados en los tests de grafos.
+	 */
+	private GrafoDirigido grafo7 = new GrafoDirigido(matrizDeAdyacencia7);
+	
+	/**
+	 * Octavo de los grafos empleados en los tests de grafos.
+	 */
+	private GrafoDirigido grafo8 = new GrafoDirigido(matrizDeAdyacencia8);
+	
+	/**
+	 * Noveno de los grafos empleados en los tests de grafos.
+	 */
+	private GrafoDirigido grafo9 = new GrafoDirigido(matrizDeAdyacencia9);
+	
+	
+	/**
+	 * Tests que evalúan el funcionamiento del algoritmo de recorrido en profundidad.
+	 */
+	@Test
+	public void recorridoEnProfundidad() {
+		//Ejemplo 7
+		ArrayList<Integer> resultadoEsperado = new ArrayList<Integer>();
+		resultadoEsperado.add(0);
+		resultadoEsperado.add(4);
+		resultadoEsperado.add(3);
+		resultadoEsperado.add(1);
+		resultadoEsperado.add(2);
+		resultadoEsperado.add(5);
+		assertEquals(resultadoEsperado, ((GrafoDirigido)grafo7).recorrerEnProfundidad(0));
+	}
+	
+	
+	/**
+	 * Tests que evalúan el funcionamiento del algoritmo de recorrido en anchura.
+	 */
+	@Test
+	public void recorridoEnAnchura() {
+		//Ejemplo 8
+		ArrayList<Integer> resultadoEsperado = new ArrayList<Integer>();
+		resultadoEsperado.add(0);
+		resultadoEsperado.add(5);
+		resultadoEsperado.add(1);
+		assertEquals(resultadoEsperado, ((GrafoDirigido)grafo8).recorrerEnAnchura(0));
+	}
+	
 	
 	/**
 	 * Tests que evalúan el funcionamiento del algoritmo de clasificación topográfica.
@@ -123,7 +198,6 @@ public class GrafoTest {
 		resultadoEsperado.add(2);
 		resultadoEsperado.add(3);
 		assertTrue(((GrafoDirigido)grafo1).clasificacionTopologica().equals(resultadoEsperado));
-		
 		
 		//Ejemplo 2
 		resultadoEsperado = new ArrayList<Integer>();
@@ -146,7 +220,7 @@ public class GrafoTest {
 	public void algoritmoDijkstra() {
 		//Ejemplo 3
 		ResultadosDijkstra resultadosDijkstra = grafo3.algoritmoDeDijkstra(0);
-		
+		 
 		ArrayList<Integer> distanciasANodoOrigenEsperadas = new ArrayList<Integer>();
 		distanciasANodoOrigenEsperadas.add(0);
 		distanciasANodoOrigenEsperadas.add(20);
@@ -198,6 +272,18 @@ public class GrafoTest {
 		ordenDeSeleccionEsperado.add(1);
 		
 		assertTrue(resultadosDijkstra.getOrdenDeSeleccion().equals(ordenDeSeleccionEsperado));
+		
+		
+		//Ejemplo 9
+		resultadosDijkstra = grafo9.algoritmoDeDijkstra(0);
+		
+		assertEquals(new Integer(0), resultadosDijkstra.getDistanciasAlNodoOrigen().get(0));
+		assertEquals(new Integer(16), resultadosDijkstra.getDistanciasAlNodoOrigen().get(1));
+		assertTrue(Math.abs(resultadosDijkstra.getDistanciasAlNodoOrigen().get(2)) > 10000);
+		assertTrue(Math.abs(resultadosDijkstra.getDistanciasAlNodoOrigen().get(3)) > 10000);
+		assertTrue(Math.abs(resultadosDijkstra.getDistanciasAlNodoOrigen().get(4)) > 10000);
+		assertEquals(new Integer(7), resultadosDijkstra.getDistanciasAlNodoOrigen().get(5));
+		
 	}
 	
 	
@@ -273,6 +359,7 @@ public class GrafoTest {
 		assertEquals(Grafo.convertirIndiceEnLetra(listaDeArcos.getNodoDelArco(4)), 'E');
 		assertEquals(Grafo.convertirIndiceEnLetra(listaDeArcos.getPredecesorDelArco(4)), 'F');
 		assertEquals((int)listaDeArcos.getPesoDelArco(4), 4);
+		
 	}
 	
 	

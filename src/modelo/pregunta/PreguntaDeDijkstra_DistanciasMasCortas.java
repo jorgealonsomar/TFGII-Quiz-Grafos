@@ -33,7 +33,15 @@ public class PreguntaDeDijkstra_DistanciasMasCortas extends PreguntaDeDijkstra {
 			parteAResponder.concatenar(new Texto(": "));
 			parteAResponder.concatenar(Textos_Preguntas.abrirClausulaShortanswer());
 			parteAResponder.concatenar(Textos_Preguntas.opcionCorrecta100());
-			parteAResponder.concatenar(new Texto(distanciasAlNodoOrigen.get(i).toString()));
+			
+			Integer distancia = distanciasAlNodoOrigen.get(i);
+			if(distancia > 100000 || distancia < -100000){ 
+				parteAResponder.concatenar(new Texto("i"));
+			} else {
+				parteAResponder.concatenar(new Texto(distanciasAlNodoOrigen.get(i).toString()));
+			}
+			
+			
 			parteAResponder.concatenar(new Texto("}.\n</p>"));
 		}
 	}
@@ -46,8 +54,8 @@ public class PreguntaDeDijkstra_DistanciasMasCortas extends PreguntaDeDijkstra {
 		for (int i = 1; i < distanciasAlNodoOrigen.size(); i++) {
 			Integer distancia = distanciasAlNodoOrigen.get(i);
 			String textoDistancia;
-			if(distancia > 100000){ 
-				textoDistancia = "infinito";
+			if(distancia > 100000 || distancia < -100000){ 
+				textoDistancia = "i";
 			} else {
 				textoDistancia = distancia.toString();
 			}

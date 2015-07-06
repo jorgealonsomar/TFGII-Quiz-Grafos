@@ -29,7 +29,7 @@ public class PreguntaDeKruskal_ArcosDelArbolDeExpansion extends PreguntaDeKruska
 	
 	@Override
 	protected void construirEnunciado() {
-		enunciado = Textos_Preguntas.enunciadoPregPrim_ArcosDelArbolDeExpansion();
+		enunciado = Textos_Preguntas.enunciadoPregKruskal_ArcosDelArbolDeExpansion();
 	}
 	
 	

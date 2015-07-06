@@ -110,7 +110,7 @@ public class PreguntaDePrim_OrdenDeSeleccion extends PreguntaDePrim {
 			respuestaCorrecta.concatenar(new Texto(Character.toString(
 					Grafo.convertirIndiceEnLetra(arcosDelArbolDeExpansion.getPredecesorDelArco(i)))));
 			respuestaCorrecta.concatenar(new Texto("] ["));
-			respuestaCorrecta.concatenar(Textos_Preguntas.distancia());
+			respuestaCorrecta.concatenar(Textos_Preguntas.pesoDelArco());
 			respuestaCorrecta.concatenar(new Texto(": "));
 			respuestaCorrecta.concatenar(new Texto(arcosDelArbolDeExpansion.getPesoDelArco(i).toString()));
 			respuestaCorrecta.concatenar(new Texto("]\n"));

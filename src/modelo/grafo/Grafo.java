@@ -120,10 +120,11 @@ public abstract class Grafo {
 
 			// Construimos un arco entre esos dos nodos
 			addArco(nodoVisit, nodoNoVisit);
-
+			
 			// Marcamos ese segundo nodo como visitado
 			nodosVisitados.add(nodoNoVisit);
 		}
+		
 	}
 	
 	
@@ -207,7 +208,8 @@ public abstract class Grafo {
 	protected Integer generarValorDeArco(){
 		if(esPonderado){
 			//Genera un peso entero para el arco de entre 1 y 10
-			return randomGenerator.nextInt(10);			
+			Integer nextInt = (randomGenerator.nextInt(10) + 1);
+			return nextInt;			
 		} else {
 			return 1;
 		}
@@ -374,12 +376,12 @@ public abstract class Grafo {
 		for (int vecino_i = 0; vecino_i < nNodos; vecino_i++) {
 
 			// Si se puede llegar del nodo al vecino i:
-			if (matrizDeAdyacencia[vecino_i][nodo] != 0) {
+			if (matrizDeAdyacencia[nodo][vecino_i] != 0) {
 				nodosVecinos.add(vecino_i);
 			}
 
 		}
-
+		
 		return nodosVecinos;
 	}
 	

@@ -24,7 +24,7 @@ public class PreguntaDeKruskal_OrdenDeSeleccion extends PreguntaDeKruskal {
 	
 	@Override
 	protected void construirEnunciado() {
-		enunciado = Textos_Preguntas.enunciadoPregPrim_OrdenDeSeleccion();
+		enunciado = Textos_Preguntas.enunciadoPregKruskal_OrdenDeSeleccion();
 	}
 	
 	

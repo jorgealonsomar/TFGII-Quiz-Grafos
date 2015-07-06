@@ -306,9 +306,9 @@ public class Textos_Preguntas {
 	 * @return Enunciado de una pregunta de Recorrido en Anchura.
 	 */
 	public static Texto enunciadoPregAnchura(){
-		return new Texto("Partiendo de A, recorre el grafo en anchura. En caso de poderse seleccionar más de un nodo,"
+		return new Texto("Partiendo de A, recorre el grafo en anchura. En caso de poderse seleccionar más de un nodo, "
 				+ "los nodos se deben escoger en orden alfabético.",
-				"Starting from A, do a Breadth-first search into the graph. When more than one node can be chosen,"
+				"Starting from A, do a Breadth-first search into the graph. When more than one node can be chosen, "
 				+ "nodes must be selected in alphabetic order.");
 	}
 	
@@ -318,9 +318,9 @@ public class Textos_Preguntas {
 	 * @return Enunciado de una pregunta de Recorrido en Anchura.
 	 */
 	public static Texto enunciadoPregProfundidad(){
-		return new Texto("Partiendo de A, recorre el grafo en profundidad. En caso de poderse seleccionar más de un nodo,"
+		return new Texto("Partiendo de A, recorre el grafo en profundidad. En caso de poderse seleccionar más de un nodo, "
 				+ "los nodos se deben escoger en orden alfabético.",
-				"Starting from A, do a Depth-first search into the graph. When more than one node can be chosen,"
+				"Starting from A, do a Depth-first search into the graph. When more than one node can be chosen, "
 				+ "nodes must be selected in alphabetic order.");
 	}
 	
@@ -330,9 +330,9 @@ public class Textos_Preguntas {
 	 * @return Enunciado de una pregunta de Clasificación Topológica.
 	 */
 	public static Texto enunciadoPregClasificacionTopologica(){
-		return new Texto("Realiza una clasificación topológica del grafo. En caso de poderse seleccionar más de un nodo,"
+		return new Texto("Realiza una clasificación topológica del grafo. En caso de poderse seleccionar más de un nodo, "
 				+ "los nodos se deben escoger en orden alfabético.",
-				"Do a Topological Sort of the graph. When more than one node can be chosen,"
+				"Do a Topological Sort of the graph. When more than one node can be chosen, "
 				+ "nodes must be selected in alphabetic order.");
 	}
 	
@@ -342,8 +342,10 @@ public class Textos_Preguntas {
 	 * @return Enunciado de una pregunta del Algoritmo de Dijkstra de Distancias más cortas.
 	 */
 	public static Texto enunciadoPregDijkstra_DistanciasMasCortas(){
-		return new Texto("Calcula la distancia mínima entre el nodo A y cada uno de los otros nodos del grafo.",
-				"Find the shortest distance between node A and every other nodo in the graph.");
+		return new Texto("Calcula la distancia mínima entre el nodo A y cada uno de los otros nodos del grafo. "
+				+ "Si crees que la distancia es infinita (no existe el camino), pon una 'i'.",
+				"Find the shortest distance between node A and every other nodo in the graph. "
+				+ "If you think the distance is infinte, write an 'i'");
 	}
 	
 	
@@ -365,10 +367,10 @@ public class Textos_Preguntas {
 	 */
 	public static Texto enunciadoPregDijkstra_OrdenDeSeleccion(){
 		return new Texto("Aplica el algoritmo de Dijkstra sobre el grafo dado, tomando como origen el nodo A. "
-				+ "Se ha de indicar el orden en el que se seleccionan los nodos, en nodo predecesor en el"
-				+ "camino desde el origen y la distancia del camino mínimo desde el origen.",
+				+ "Se ha de indicar el orden en el que se seleccionan los nodos, en nodo predecesor en el "
+				+ "camino desde el origen y la distancia del camino mínimo desde el origen. ",
 				"Apply the Dijkstra algorithm on the graph, taking node A as the starting node. "
-				+ "It must be indicated in witch order the nodes are selected, as well as the predecessor"
+				+ "It must be indicated in witch order the nodes are selected, as well as the predecessor "
 				+ "node in the path, and the lenght from the minimum path to the starting node.");
 	}
 	
@@ -380,10 +382,10 @@ public class Textos_Preguntas {
 	public static Texto enunciadoPregPrim_ArcosDelArbolDeExpansion(){
 		return new Texto("Aplica el algoritmo de Prim sobre el grafo dado, tomando como origen el nodo A. "
 				+ "En caso de poderse seleccionar más de un nodo, los nodos se deben escoger en orden alfabético. "
-				+ "Indica cuáles de los siguientes arcos pertenecen al árbol de expansión resultante.",
+				+ "Indica cuáles de los siguientes arcos pertenecen al árbol de expansión resultante. ",
 				"Apply the Prim algorithm on the graph, taking node A as the starting node. "
 				+ "When more than one node can be chosen, nodes must be selected in alphabetic order. "
-				+ "Say which of the following arcs belong to the resulting spanning tree");
+				+ "Say which of the following arcs belong to the resulting spanning tree. ");
 	}
 	
 	
@@ -396,6 +398,34 @@ public class Textos_Preguntas {
 				+ "En caso de poderse seleccionar más de un nodo, los nodos se deben escoger en orden alfabético. "
 				+ "Rellena la siguiente tabla.",
 				"Apply the Prim algorithm on the graph, taking node A as the starting node. "
+				+ "When more than one node can be chosen, nodes must be selected in alphabetic order. "
+				+ "Fill the following table.");
+	}
+	
+	
+	/**
+	 * Devuelve el enunciado de una pregunta del Algoritmo de Kruskal de Arcos del Árbol de Expansión.
+	 * @return Enunciado de una pregunta del Algoritmo de Kruskal de Arcos del Árbol de Expansión.
+	 */
+	public static Texto enunciadoPregKruskal_ArcosDelArbolDeExpansion(){
+		return new Texto("Aplica el algoritmo de Kruskal sobre el grafo dado, tomando como origen el nodo A. "
+				+ "En caso de poderse seleccionar más de un nodo, los nodos se deben escoger en orden alfabético. "
+				+ "Indica cuáles de los siguientes arcos pertenecen al árbol de expansión resultante. ",
+				"Apply the Kruskal algorithm on the graph, taking node A as the starting node. "
+				+ "When more than one node can be chosen, nodes must be selected in alphabetic order. "
+				+ "Say which of the following arcs belong to the resulting spanning tree. ");
+	}
+	
+	
+	/**
+	 * Devuelve el enunciado de una pregunta del Algoritmo de Kruskal de Arcos del Árbol de Expansión.
+	 * @return Enunciado de una pregunta del Algoritmo de Kruskal de Arcos del Árbol de Expansión.
+	 */
+	public static Texto enunciadoPregKruskal_OrdenDeSeleccion(){
+		return new Texto("Aplica el algoritmo de Kruskal sobre el grafo dado, tomando como origen el nodo A. "
+				+ "En caso de poderse seleccionar más de un nodo, los nodos se deben escoger en orden alfabético. "
+				+ "Rellena la siguiente tabla.",
+				"Apply the Kruskal algorithm on the graph, taking node A as the starting node. "
 				+ "When more than one node can be chosen, nodes must be selected in alphabetic order. "
 				+ "Fill the following table.");
 	}
