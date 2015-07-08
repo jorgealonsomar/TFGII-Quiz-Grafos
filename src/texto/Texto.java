@@ -1,14 +1,14 @@
 package texto;
 
 /**
- * Texto usado en alguna parte de la aplicación. Contiene la cadena tanto en español
+ * Texto usado en alguna parte de la aplicación. Contiene la cadena tanto en espanol
  * como en inglés, para poder usarla de una u otra forma según se necesite.
  * @author Jorge Alonso Márquez
  */
 public class Texto {
 	
 	/**
-	 * Versión en español del texto.
+	 * Versión en espanol del texto.
 	 */
 	private String textoSpa = "";
 	
@@ -21,7 +21,7 @@ public class Texto {
 	/**
 	 * Constructor de la clase con textos diferenciados para cada idioma
 	 * @param textoSpa
-	 *            Versión en español del texto.
+	 *            Versión en espanol del texto.
 	 * @param textoEng
 	 *            Versión en inglés del texto.
 	 */
@@ -43,8 +43,8 @@ public class Texto {
 	
 	
 	/**
-	 * Devuelve el texto en idioma español.
-	 * @return Versión en español del texto.
+	 * Devuelve el texto en idioma espanol.
+	 * @return Versión en espanol del texto.
 	 */
 	public String esp(){
 		return textoSpa;
@@ -107,7 +107,7 @@ public class Texto {
 	
 	/**
 	 * Tranforma los caracteres de una cadena dada de forma que las vocales tildadas y 
-	 * las eñes se tranformen en sus equivalentes válidos para xml.
+	 * las enes se tranformen en sus equivalentes válidos para xml.
 	 * @param cadena Cadena a transformar.
 	 * @return Cadena transformada.
 	 */
@@ -160,14 +160,14 @@ public class Texto {
 	
 	
 	/**
-	 * Añade a la cadena por la izquierda una cantidad de los caracteres dados tal que la cadena
-	 * alcance el tamaño objetivo.
+	 * Anade a la cadena por la izquierda una cantidad de los caracteres dados tal que la cadena
+	 * alcance el tamano objetivo.
 	 * @param cadena
 	 *            Cadena a modificar.
 	 * @param caracter
-	 *            Carácter a añadir a la cadena.
+	 *            Carácter a anadir a la cadena.
 	 * @param tamanoObjetivo
-	 *            Tamaño con el que ha de quedar la cadena.
+	 *            Tamano con el que ha de quedar la cadena.
 	 */
 	public static String anadirCaracteresPorLaIzquierda(String cadena, char caracter, int tamanoObjetivo){
 		while( (tamanoObjetivo - cadena.length()) > 0) {

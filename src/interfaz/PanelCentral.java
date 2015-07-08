@@ -32,7 +32,7 @@ import texto.Textos_Interfaz;
 public class PanelCentral extends JPanel {
 	
 	/**
-	 * Panel tabulado. Tiene una pestaña para cada uno de los distintos tipos de pregunta.
+	 * Panel tabulado. Tiene una pestana para cada uno de los distintos tipos de pregunta.
 	 */
 	private JTabbedPane panelTabulado;
 	
@@ -153,7 +153,7 @@ public class PanelCentral extends JPanel {
 		
 		this.setLayout(new GridBagLayout());
 	
-		// Construir las pestañas, que se añaden al panel tabulado:
+		// Construir las pestanas, que se anaden al panel tabulado:
 		new PestanaDePreguntaDeProfundidad(panelTabulado, Textos_Interfaz.recorridoEnProfundidad(),
 				KeyEvent.VK_E, frame, this);
 		new PestanaDePreguntaDeAnchura(panelTabulado, Textos_Interfaz.recorridoEnAnchura(),
@@ -172,7 +172,7 @@ public class PanelCentral extends JPanel {
 	
 	
 	/**
-	 * Crea y añade al panel los elementos que éste contiene.
+	 * Crea y anade al panel los elementos que éste contiene.
 	 */
 	private void anadirElementos(){
 		GridBagConstraints c = new GridBagConstraints();
@@ -370,14 +370,14 @@ public class PanelCentral extends JPanel {
 	
 	
 	/**
-	 * Listener correspondiente a los cambios de pestaña del panel tabulado de las preguntas.
+	 * Listener correspondiente a los cambios de pestana del panel tabulado de las preguntas.
 	 * @author Jorge Alonso Márquez
 	 */
 	private class CambioDePestanaListener implements ChangeListener {
 		
 		
 		/**
-		 * Activa o desactiva el selector de si el grafo es dirigido según el tipo de pestaña
+		 * Activa o desactiva el selector de si el grafo es dirigido según el tipo de pestana
 		 * que esté activada: En las preguntas de topología, de Prim y de Kruskal, no se puede
 		 * elegir si el grafo es dirigido o no.
 		 * @param arg0
@@ -386,7 +386,7 @@ public class PanelCentral extends JPanel {
 		@Override
 		public void stateChanged(ChangeEvent arg0) {
 			
-			//Activar/desactivar pestaña de seleccionar si el grafo es dirigido
+			//Activar/desactivar pestana de seleccionar si el grafo es dirigido
 			switch(panelTabulado.getSelectedIndex()){
 			case 2: case 4: case 5: //Pregunta topológica, Prim, Kruskal
 				txtGrafoDirigido.setEnabled(false);

@@ -48,14 +48,14 @@ public class VisualizacionGrafo {
 	 * que traducido a binario indicará los modos seleccionados: El primer dígito por la izda. corresponde
 	 * a la matriz de adyacencia; el segundo, a la lista de adyacencia y el tercero, al grafo visual.
 	 * 
-	 * Ejemplo: 6 (110 en binario) -> Matriz de adyacencia y lista de adyacencia, pero no grafo visual.
+	 * Ejemplo: 6 (110 en binario) : Matriz de adyacencia y lista de adyacencia, pero no grafo visual.
 	 * @param codigo
 	 *            Número que contiene codificados los modos de visualización.
 	 */
 	public VisualizacionGrafo(String codigo){
 		String codigoBinario = Integer.toBinaryString(Integer.parseInt(codigo));
 		
-		//Su tamaño debe ser 3
+		//Su tamano debe ser 3
 		codigoBinario = Texto.anadirCaracteresPorLaIzquierda(codigoBinario, '0', 3);
 		
 		if(codigoBinario.substring(0, 1).equals("0")){
@@ -111,7 +111,7 @@ public class VisualizacionGrafo {
 	 * que traducido a binario indicará los modos seleccionados: El primer dígito por la izda. corresponde
 	 * a la matriz de adyacencia; el segundo, a la lista de adyacencia y el tercero, al grafo visual.
 	 * 
-	 * Ejemplo: 6 (110 en binario) -> Matriz de adyacencia y lista de adyacencia, pero no grafo visual.
+	 * Ejemplo: 6 (110 en binario) : Matriz de adyacencia y lista de adyacencia, pero no grafo visual.
 	 * @return Número que contiene codificados los modos de visualización.
 	 */
 	public String getCodigo(){

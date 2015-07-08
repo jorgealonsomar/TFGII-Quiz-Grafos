@@ -41,7 +41,7 @@ public class GrafoNoDirigido extends Grafo {
 	}
 	
 	
-	/** Añade un nuevo arco no dirigido a la matriz de adyacencia.
+	/** Anade un nuevo arco no dirigido a la matriz de adyacencia.
 	 * @param nodo1
 	 *            Nodo a un extremo del arco.
 	 * @param nodo2
@@ -58,7 +58,7 @@ public class GrafoNoDirigido extends Grafo {
 	
 	
 	/**
-	 * Añade de forma aleatoria nuevos arcos no dirigidos al grafo.
+	 * Anade de forma aleatoria nuevos arcos no dirigidos al grafo.
 	 * @param porcentajeDeArcos
 	 *            Porcentaje de nuevos arcos.
 	 */
@@ -123,7 +123,7 @@ public class GrafoNoDirigido extends Grafo {
 			Integer nodoActual = nodoConElMinimoCosteEncontrado;
 			nodosPorRecorrer.remove(nodoConElMinimoCosteEncontrado);
 			
-			// Añadir el arco a la lista de arcos recorridos
+			// Anadir el arco a la lista de arcos recorridos
 			if(!nodoActual.equals(0)){  //Si no es el nodo inicial (el nodo A)
 				try {
 					arcosRecorridos.addArco(nodoActual, nodosPredecesores.get(nodoActual),
@@ -175,7 +175,7 @@ public class GrafoNoDirigido extends Grafo {
 			//Si los dos extremos pertenecen al mismo grupo:
 			if(!grupos.pertenecenAlMismoGrupo(nodoExtremoMenor, nodoExtremoMayor)){
 				
-				//Añadir el nodo al árbol de expansión
+				//Anadir el nodo al árbol de expansión
 				arcosArbolExpansion.addArco(nodoExtremoMenor, nodoExtremoMayor,
 						arcosDelGrafo.getPesoDelArco(indiceArcoActual));
 				
@@ -211,8 +211,8 @@ public class GrafoNoDirigido extends Grafo {
 	
 	
 	/**
-	 * Añade un nuevo arco dirigido al modelo del grafo visual.
-	 * Al ser no dirigido, si un arco ya existe, no lo vuelve a añadir.
+	 * Anade un nuevo arco dirigido al modelo del grafo visual.
+	 * Al ser no dirigido, si un arco ya existe, no lo vuelve a anadir.
 	 * @param grafoJung
 	 *            Modelo del grafo visual.
 	 * @param f
@@ -221,7 +221,7 @@ public class GrafoNoDirigido extends Grafo {
 	 *            Nodo destino (columna en la matriz de adyacencia).
 	 */
 	@Override
-	public void añadirArcoAlGrafoVisual(SparseMultigraph<Integer, String> grafoJung, int f, int c) {
+	public void anadirArcoAlGrafoVisual(SparseMultigraph<Integer, String> grafoJung, int f, int c) {
 		if(!grafoJung.containsEdge(new String("Nodo " + c + "-" + f + ": " + getMatrizDeAdyacencia()[f][c]))){
 			grafoJung.addEdge(new String("Nodo " + f + "-" + c + ": " + getMatrizDeAdyacencia()[f][c])
 					, f, c, EdgeType.UNDIRECTED);
@@ -260,7 +260,7 @@ public class GrafoNoDirigido extends Grafo {
 			for(int n = 0; n < getNNodos(); n++){
 				//Se inicializa el grupo
 				grupos.add(new ArrayList<Integer>());
-				//Se añade a ese grupo el nodo n
+				//Se anade a ese grupo el nodo n
 				grupos.get(n).add(n);
 			}
 		}
@@ -288,7 +288,7 @@ public class GrafoNoDirigido extends Grafo {
 		
 		/**
 		 * Combina los dos últimos grupos que se compararon mediante pertenecenAlMismoGrupo().
-		 * Los elementos del segundo grupo se añaden al primero, quedando el segundo sin elementos.
+		 * Los elementos del segundo grupo se anaden al primero, quedando el segundo sin elementos.
 		 */
 		public void combinarUltimosGruposComparados(){
 			Integer tamanoOriginalDelGrupo2 = grupos.get(grupoDelNodo2).size();
@@ -296,7 +296,7 @@ public class GrafoNoDirigido extends Grafo {
 			for(int n = 0; n < tamanoOriginalDelGrupo2; n++){
 				//Se retira un nodo de ese grupo
 				Integer nodoAux = grupos.get(grupoDelNodo2).remove(0);
-				//y se añade al otro
+				//y se anade al otro
 				grupos.get(grupoDelNodo1).add(nodoAux);
 			}
 		}

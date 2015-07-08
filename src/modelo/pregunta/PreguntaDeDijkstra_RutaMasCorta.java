@@ -8,22 +8,49 @@ import modelo.grafo.Grafo;
 import texto.Texto;
 import texto.Textos_Preguntas;
 
+/**
+ * Pregunta de Dijkstra de la clase Ruta más corta.
+ * @author Jorge Alonso Márquez
+ */
 public class PreguntaDeDijkstra_RutaMasCorta extends PreguntaDeDijkstra {
 	
-	/** Nodo objetivo cuyo camino y distancia al Nodo A se ha de hallar  */
+	/**
+	 * Nodo objetivo cuyo camino y distancia al Nodo A se ha de hallar.
+	 */
 	protected Integer nodoObjetivo;
 	
+	
+	/**
+	 * Constructor de la clase.
+	 * @param nNodos
+	 *            Número de nodos que tendrá el grafo.
+	 * @param porcentajeDeArcos
+	 *            Porcentaje de arcos que tendrá el grafo.
+	 * @param grafoDirigido
+	 *            Si el grafo es dirigido.
+	 * @param visualizacionGrafo
+	 *            Modos en los que se mostrará el grafo.
+	 */
 	public PreguntaDeDijkstra_RutaMasCorta(Integer nNodos, Double porcentajeDeArcos, boolean grafoDirigido,
 			VisualizacionGrafo visualizacionGrafo) {
 		super(nNodos, porcentajeDeArcos, grafoDirigido, visualizacionGrafo);
 	}
 	
 	
+	/**
+	 * Constructor de la clase. Recupera una pregunta a partir de una semilla dada.
+	 * @param semilla
+	 *            Semilla que contiene los datos correspondientes a esta pregunta.
+	 */
 	public PreguntaDeDijkstra_RutaMasCorta(Semilla semilla){
 		super(semilla);
 	}
 	
 	
+	/**
+	 * Aplica sobre el grafo la parte del algoritmo de Dijkstra que corresponde a las preguntas de la clase
+	 * Ruta más corta.
+	 */
 	@Override
 	protected void aplicarAlgoritmo() {
 		super.aplicarAlgoritmo();
@@ -48,13 +75,19 @@ public class PreguntaDeDijkstra_RutaMasCorta extends PreguntaDeDijkstra {
 		
 	}
 	
-	
+
+	/**
+	 * Construye el enunciado de esta pregunta de Dijkstra de Ruta más corta.
+	 */
 	@Override
 	protected void construirEnunciado() {
 		enunciado = Textos_Preguntas.enunciadoPregDijkstra_RutaMasCorta(Grafo.convertirIndiceEnLetra(nodoObjetivo));
 	}
 	
 	
+	/**
+	 * Construye la parte a responder de esta pregunta de Dijkstra de Ruta más corta.
+	 */
 	@Override
 	protected void construirParteAResponder() {
 		parteAResponder = new Texto("");
@@ -93,6 +126,9 @@ public class PreguntaDeDijkstra_RutaMasCorta extends PreguntaDeDijkstra {
 	}
 	
 	
+	/**
+	 * Construye el texto que informa de la respuesta correcta de esta pregunta de Dijkstra de Ruta más corta.
+	 */
 	@Override
 	protected void construirRespuestaCorrecta() {
 		respuestaCorrecta = Textos_Preguntas.laRutaEs();
@@ -113,14 +149,21 @@ public class PreguntaDeDijkstra_RutaMasCorta extends PreguntaDeDijkstra {
 	}
 	
 	
+	/**
+	 * Devuelve el número correspondiente a una pregunta de Dijkstra de Ruta más corta.
+	 */
 	@Override
 	protected Integer getNumPregunta() {
 		return Semilla.ALGORITMO_DE_DIJKSTRA_RUTA_MAS_CORTA;
 	}
-
-
+	
+	
+	/**
+	 * Devuelve el número asociado a las preguntas de Ruta más corta.
+	 * @return Número asociado a la clase de pregunta.
+	 */
 	@Override
-	protected Integer getTipoDePregunta() {
+	protected Integer getClaseDePregunta() {
 		return PreguntaDeDijkstra.PREGUNTA_RUTA_MAS_CORTA;
 	}
 	

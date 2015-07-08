@@ -16,6 +16,7 @@ import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 
 import modelo.pregunta.Pregunta;
+import sistema.GestorIO;
 import texto.Idioma;
 import texto.Texto;
 import texto.Textos_Interfaz;
@@ -217,7 +218,8 @@ public abstract class PestanaDePregunta extends JPanel {
 			}
 			
 			textoPreguntaXml += "\n</quiz>";
-			String nombreArchivo = pregunta.getNombreDeArchivo().getString(idioma);
+			String nombreArchivo = pregunta.getNombreDeArchivo().getString(idioma)
+					+ GestorIO.construirCadenaFecha() + ".xml";
 			
 			BufferedImage imagenVisual = null;
 			if(panelCentral.getVisualizacionGrafo().isGrafoVisual()){

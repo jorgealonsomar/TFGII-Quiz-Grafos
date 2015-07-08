@@ -37,6 +37,10 @@ import texto.Idioma;
 import texto.Textos_BarraMenu;
 import texto.Textos_Interfaz;
 
+/**
+ * Frame con los elementos de la interfaz de la aplicación.
+ * @author Jorge Alonso Márquez
+ */
 @SuppressWarnings("serial")
 public class FramePrincipal extends JFrame {
 
@@ -71,7 +75,7 @@ public class FramePrincipal extends JFrame {
 	private JTextField ventanaTextoDirectorio;
 
 	/**
-	 * Área donde se irán mostrando las preguntas generadas.
+	 * Area donde se irán mostrando las preguntas generadas.
 	 */
 	private AreaPreguntas areaPreguntas;
 
@@ -131,8 +135,7 @@ public class FramePrincipal extends JFrame {
 
 		// Si el directorio seleccionado existe
 		if (directorio.exists()) {
-			String rutaArchivo = rutaDirectorio + separador + nombreArchivo
-					+ GestorIO.construirCadenaFecha() + ".xml";
+			String rutaArchivo = rutaDirectorio + separador + nombreArchivo;
 
 			// Imprimir la pregunta en el archivo especificado
 			GestorIO.escribirEnArchivo(new File(rutaArchivo), textoPreguntaXml);
@@ -198,7 +201,8 @@ public class FramePrincipal extends JFrame {
 			textoPreguntaXml += pregunta.getTextoPreguntaXml(idioma);
 			
 			textoPreguntaXml += "\n</quiz>";
-			String nombreArchivo = pregunta.getNombreDeArchivo().getString(idioma);
+			String nombreArchivo = pregunta.getNombreDeArchivo().getString(idioma)
+					+ GestorIO.construirCadenaFecha() + ".xml";
 			
 			BufferedImage imagenVisual = null;
 			if(panelCentral.getVisualizacionGrafo().isGrafoVisual()){
@@ -265,7 +269,7 @@ public class FramePrincipal extends JFrame {
 	
 
 	/**
-	 * Construye la barra del menú superior
+	 * Construye la barra del menú superior.
 	 */
 	private void construirBotonIdioma() {
 		imgIdioma = new JLabel();
@@ -277,7 +281,7 @@ public class FramePrincipal extends JFrame {
 	
 	
 	/**
-	 * Reescribe los textos tras cambiar la configuración del idioma
+	 * Reescribe los textos tras cambiar la configuración del idioma.
 	 */
 	private void presentarTrasCambioDeIdioma() {
 		Idioma nuevoIdioma = idioma;
@@ -304,7 +308,7 @@ public class FramePrincipal extends JFrame {
 		botonElegirDirectorio.setToolTipText(Textos_Interfaz.tipTextElegirDirectorio().getString(nuevoIdioma));
 		ventanaTextoDirectorio.setToolTipText(Textos_Interfaz.tipTextElegirDirectorio().getString(nuevoIdioma));
 
-		// Área de preguntas
+		// Area de preguntas
 		areaPreguntas.presentarTrasCambioDeIdioma(nuevoIdioma);
 
 		repaint();
@@ -312,7 +316,7 @@ public class FramePrincipal extends JFrame {
 	
 	
 	/**
-	 * Cambia el idioma en el que se muestran los textos del programa
+	 * Cambia el idioma en el que se muestran los textos del programa.
 	 */
 	public void switchIdioma() {
 		if(idioma == Idioma.ESP){
@@ -322,6 +326,13 @@ public class FramePrincipal extends JFrame {
 		}
 	}
 	
+	
+	/**
+	 * Establece la ruta del directorio donde se guardarán las preguntas creadas.
+	 */
+	public void setTextoDirectorio(String rutaDirectorio){
+		ventanaTextoDirectorio.setText(rutaDirectorio);
+	}
 	
 	
 	/**
@@ -364,7 +375,7 @@ public class FramePrincipal extends JFrame {
 			int eleccion = selector.showOpenDialog(null);
 			if (eleccion == JFileChooser.APPROVE_OPTION) {
 				File archivo = selector.getSelectedFile();
-				ventanaTextoDirectorio.setText(archivo.toString());
+				setTextoDirectorio(archivo.toString());
 			}
 		}
 

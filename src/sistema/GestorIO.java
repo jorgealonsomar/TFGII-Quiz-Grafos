@@ -1,7 +1,9 @@
 package sistema;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -34,8 +36,21 @@ public class GestorIO {
 		try (PrintWriter writer = new PrintWriter(new BufferedWriter(
 				new FileWriter(archivo, true)));) {
 			writer.write(contenido);
-			System.out.println("[GestorIO] Escribiendo en el arcivo " + archivo);
+			System.out.println("[GestorIO] Escribiendo en el archivo " + archivo);
 		} catch (IOException e) { }
+	}
+	
+	
+	/**
+	 * Elimina el archivo indicado.
+	 * @param archivo Archivo a eliminar del disco.
+	 */
+	public static void eliminarArchivo(File archivo){
+	    if (archivo.delete())
+	    	System.out.println("[GestorIO] Eliminado el archivo " + archivo + ".");
+	     else
+	    	 System.out.println("[GestorIO] El archivo " + archivo + " no pudo ser eliminado.");
+		
 	}
 	
 	
@@ -57,5 +72,48 @@ public class GestorIO {
 		fecha += "s" + calendario.get(Calendar.SECOND) + "";
 
 		return fecha;
+	}
+	
+	
+	/**
+	 * Indica si el contenido de los dos archivos dados es el idéntico.
+	 * @param archivo1
+	 *            Primer archivo a comparar.
+	 * @param archivo2
+	 *            Segundo archivo a comparar.
+	 * @return Si el contenido de los dos archivos dados es el idéntico.
+	 */
+	public static boolean elContenidoDeLosArchivosEsElMismo(File archivo1, File archivo2){
+		System.out.println("[GestorIO] archivo1 = " + archivo1);
+		System.out.println("[GestorIO] archivo2 = " + archivo2);
+	try (
+			FileReader fileDeArchivo1 = new FileReader(archivo1);
+			FileReader fileDeArchivo2 = new FileReader(archivo2);
+
+			BufferedReader lector1 = new BufferedReader(fileDeArchivo1);
+			BufferedReader lector2 = new BufferedReader(fileDeArchivo2);
+		){
+
+		String linea_Archivo1 = lector1.readLine();
+		String linea_Archivo2 = lector2.readLine();
+		
+		boolean iguales = true;
+
+		while ((linea_Archivo1 != null) && (linea_Archivo2 != null) && iguales) {
+
+			if (!linea_Archivo1.equals(linea_Archivo2)){
+				iguales = false;
+			}
+
+			linea_Archivo1 = lector1.readLine();
+			linea_Archivo2 = lector2.readLine();
+		}
+
+		return ((iguales) && (linea_Archivo1 == null) && (linea_Archivo2 == null));
+		
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
 	}
 }

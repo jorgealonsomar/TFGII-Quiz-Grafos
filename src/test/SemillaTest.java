@@ -190,7 +190,8 @@ public class SemillaTest {
 	
 	
 	/**
-	 * Test que evalúan el funcionamiento de la clase VisualizacionGrafo
+	 * Test que evalúan el funcionamiento del atributo de la semilla que corresponde la visualización
+	 * del grafo.
 	 */
 	@Test
 	public void visualizacionGrafo(){

@@ -26,15 +26,15 @@ public class ListaDeArcos {
 	
 	
 	/**
-	 * Añade un nuevo arco, sólo si el un arco con esos extremos no existe ya.
-	 * Dado ese caso, no lo añadirá y devolverá false.
+	 * Anade un nuevo arco, sólo si el un arco con esos extremos no existe ya.
+	 * Dado ese caso, no lo anadirá y devolverá false.
 	 * @param nodo
 	 *            Nodo del primer extremo del arco.
 	 * @param predecesor
 	 *            Nodo del segundo extremo del arco.
 	 * @param peso
 	 *            Peso del arco.
-	 * @return Si se añadió o no el arco (no se añadió si ya existía un arco con
+	 * @return Si se anadió o no el arco (no se anadió si ya existía un arco con
 	 *         los mismo extremos).
 	 */
 	public boolean addArco(Integer nodo, Integer predecesor, Integer peso){
@@ -42,7 +42,7 @@ public class ListaDeArcos {
 		if (contieneElArco(nodo, predecesor)){
 			return false;
 		} else {
-			//Se añade el nuevo arco
+			//Se anade el nuevo arco
 			nodos.add(nodo);
 			predecesores.add(predecesor);
 			pesos.add(peso);
@@ -73,7 +73,7 @@ public class ListaDeArcos {
 	/**
 	 * Devuelve el primer nodo del arco con el índice dado.
 	 * @param indice
-	 *            Índice del arco.
+	 *            Indice del arco.
 	 * @return Primer nodo del arco indicado.
 	 */
 	public Integer getNodoDelArco(int indice){
@@ -84,7 +84,7 @@ public class ListaDeArcos {
 	/**
 	 * Devuelve el segundo nodo del arco con el índice dado.
 	 * @param indice
-	 *            Índice del arco.
+	 *            Indice del arco.
 	 * @return Segundo nodo del arco indicado.
 	 */
 	public Integer getPredecesorDelArco(int indice){
@@ -95,7 +95,7 @@ public class ListaDeArcos {
 	/**
 	 * Devuelve el peso del arco con el índice dado.
 	 * @param indice
-	 *            Índice del arco.
+	 *            Indice del arco.
 	 * @return Peso del arco indicado.
 	 */
 	public Integer getPesoDelArco(int indice){
@@ -106,7 +106,7 @@ public class ListaDeArcos {
 	/**
 	 * Devuelve uno de los nodos del arco indicado: Aquél con el mayor peso.
 	 * @param indice
-	 *            Índice del arco.
+	 *            Indice del arco.
 	 * @return Nodo del arco con el mayor peso.
 	 */
 	public Integer getExtremoMayor(int indice){
@@ -121,7 +121,7 @@ public class ListaDeArcos {
 	/**
 	 * Devuelve uno de los nodos del arco indicado: Aquél con el menor peso.
 	 * @param indice
-	 *            Índice del arco.
+	 *            Indice del arco.
 	 * @return Nodo del arco con el menor peso.
 	 */
 	public Integer getExtremoMenor(int indice){
@@ -135,7 +135,7 @@ public class ListaDeArcos {
 	
 	/**
 	 * Retira de la lista el arco indicado.
-	 * @param indice Índice del arco.
+	 * @param indice Indice del arco.
 	 */
 	public void retirarArco(int indice){
 		nodos.remove(indice);
@@ -168,7 +168,7 @@ public class ListaDeArcos {
 	/**
 	 * Devuelve el índice del arco con menor peso. En caso de existir más de un arco con similar
 	 * peso, se devuelve el lexicográficamente menor.
-	 * @return Índice del arco lexicográficamente menor de entre aquellos con el menor peso.
+	 * @return Indice del arco lexicográficamente menor de entre aquellos con el menor peso.
 	 */
 	public Integer getIndiceArcoConMenorPeso(){
 		//Hallar el menor peso

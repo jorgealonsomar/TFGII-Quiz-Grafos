@@ -41,7 +41,7 @@ public class GrafoDirigido extends Grafo {
 	}
 
 	/**
-	 * Añade un nuevo arco a la matriz de adyacencia. 
+	 * Anade un nuevo arco a la matriz de adyacencia. 
 	 * El sentido del arco se decide de forma aleatoria.
 	 * @param nodo1
 	 *            Nodo a un extremo del arco.
@@ -57,7 +57,7 @@ public class GrafoDirigido extends Grafo {
 	
 	
 	/**
-	 * Añade de forma aleatoria nuevos arcos dirigidos al grafo.
+	 * Anade de forma aleatoria nuevos arcos dirigidos al grafo.
 	 * @param porcentajeDeArcos
 	 *            Porcentaje de nuevos arcos.
 	 */
@@ -104,7 +104,7 @@ public class GrafoDirigido extends Grafo {
 			Integer nodoSinArcosDeEntrada = null;
 			//Por cada columna (recorridas en orden numérico):
 			for(int j = 0; j < matrizAdyacenciaAux.length; j++){
-				//Si ese nodo ya se ha añadido al recorrido, se ignora
+				//Si ese nodo ya se ha anadido al recorrido, se ignora
 				if(!nodosClasificados.contains(j)){
 					boolean todoACero = true;
 					//Se comprueba si cada elemento de esa columna es cero
@@ -131,7 +131,7 @@ public class GrafoDirigido extends Grafo {
 				for(int j = 0; j < matrizAdyacenciaAux.length; j++){
 					matrizAdyacenciaAux[nodoSinArcosDeEntrada][j] = 0;
 				}
-				//Y añadimos ese nodo al recorrido topográfico
+				//Y anadimos ese nodo al recorrido topográfico
 				nodosClasificados.add(nodoSinArcosDeEntrada);
 			}
 		}
@@ -141,7 +141,7 @@ public class GrafoDirigido extends Grafo {
 	
 	
 	/**
-	 * Añade un nuevo arco dirigido al modelo del grafo visual.
+	 * Anade un nuevo arco dirigido al modelo del grafo visual.
 	 * @param grafoJung
 	 *            Modelo del grafo visual.
 	 * @param f
@@ -150,7 +150,7 @@ public class GrafoDirigido extends Grafo {
 	 *            Nodo destino (columna en la matriz de adyacencia).
 	 */
 	@Override
-	public void añadirArcoAlGrafoVisual(SparseMultigraph<Integer, String> grafoJung, int f, int c) {
+	public void anadirArcoAlGrafoVisual(SparseMultigraph<Integer, String> grafoJung, int f, int c) {
 		
 		grafoJung.addEdge(new String("Nodo " + f + "-" + c + ": " + getMatrizDeAdyacencia()[f][c]),
 				f, c, EdgeType.DIRECTED);

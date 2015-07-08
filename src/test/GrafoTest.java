@@ -482,7 +482,7 @@ public class GrafoTest {
 		assertEquals(4, (int)listaDeArcos.getExtremoMenor(1));
 		assertEquals(9, (int)listaDeArcos.getExtremoMayor(1));
 		
-		//Añadimos otro arco con el mismo peso
+		//Anadimos otro arco con el mismo peso
 		//Arco 2:
 		listaDeArcos.addArco(8, 4, 3);
 		
@@ -491,13 +491,13 @@ public class GrafoTest {
 		assertEquals(4, (int)listaDeArcos.getExtremoMenor(2));
 		assertEquals(8, (int)listaDeArcos.getExtremoMayor(2));
 		
-		//Añadimos otro arco con el mismo peso. 3-0 En este caso, ambos valores son menores que 4;
+		//Anadimos otro arco con el mismo peso. 3-0 En este caso, ambos valores son menores que 4;
 		//internamente se debería registrar 3 como menor valor, y posteriormente, dentro de la misma
 		//iteración, 0.
 		//Arco 3:
 		listaDeArcos.addArco(3, 0, 3);
 		
-		//Comprobamos que esto es así añadiendo un nuevo arco, 2-1. Si se registró 3 como menor valor,
+		//Comprobamos que esto es así anadiendo un nuevo arco, 2-1. Si se registró 3 como menor valor,
 		//el nuevo arco saldrá erróneamente elegido. Si se hizo bien, el arco que saldrá es el Arco 3.
 		//Arco 4:
 		listaDeArcos.addArco(2, 1, 3);

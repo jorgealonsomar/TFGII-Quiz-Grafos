@@ -99,8 +99,8 @@ public class ResultadosDijkstra {
 	
 	
 	/**
-	 * Añade un nuevo nodo a la lista ordenDeSeleccion, de forma que quedan ordenados según
-	 * se van añadiendo.
+	 * Anade un nuevo nodo a la lista ordenDeSeleccion, de forma que quedan ordenados según
+	 * se van anadiendo.
 	 * @param nodo Último nodo seleccionado por el algortimo.
 	 */
 	public void addOrdenDeSeleccion(Integer nodo){

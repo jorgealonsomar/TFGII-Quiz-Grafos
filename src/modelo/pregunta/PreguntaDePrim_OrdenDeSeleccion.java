@@ -7,25 +7,49 @@ import modelo.grafo.Grafo;
 import texto.Texto;
 import texto.Textos_Preguntas;
 
+/**
+ * Pregunta de Prim de la clase Orden de selección.
+ * @author Jorge Alonso Márquez
+ */
 public class PreguntaDePrim_OrdenDeSeleccion extends PreguntaDePrim {
 	
+	/**
+	 * Constructor de la clase.
+	 * @param nNodos
+	 *            Número de nodos que tendrá el grafo.
+	 * @param porcentajeDeArcos
+	 *            Porcentaje de arcos que tendrá el grafo.
+	 * @param visualizacionGrafo
+	 *            Modos en los que se mostrará el grafo.
+	 */
 	public PreguntaDePrim_OrdenDeSeleccion(Integer nNodos, Double porcentajeDeArcos,
 			VisualizacionGrafo visualizacionGrafo) {
 		super(nNodos, porcentajeDeArcos, visualizacionGrafo);
 	}
 	
 	
+	/**
+	 * Constructor de la clase. Recupera una pregunta a partir de una semilla dada.
+	 * @param semilla
+	 *            Semilla que contiene los datos correspondientes a esta pregunta.
+	 */
 	public PreguntaDePrim_OrdenDeSeleccion(Semilla semilla){
 		super(semilla);
 	}
 	
 	
+	/**
+	 * Construye el enunciado de esta pregunta de Kruskal de Orden de selección.
+	 */
 	@Override
 	protected void construirEnunciado() {
 		enunciado = Textos_Preguntas.enunciadoPregPrim_OrdenDeSeleccion();
 	}
 	
 	
+	/**
+	 * Construye la parte a responder de esta pregunta de Prim de Orden de selección.
+	 */
 	@Override
 	protected void construirParteAResponder() {
 		parteAResponder = new Texto("");
@@ -92,6 +116,10 @@ public class PreguntaDePrim_OrdenDeSeleccion extends PreguntaDePrim {
 	}
 	
 	
+	/**
+	 * Construye el texto que informa de la respuesta correcta de esta pregunta de Prim de Orden de
+	 * selección.
+	 */
 	@Override
 	protected void construirRespuestaCorrecta() {
 		respuestaCorrecta = new Texto("");
@@ -118,14 +146,21 @@ public class PreguntaDePrim_OrdenDeSeleccion extends PreguntaDePrim {
 	}
 	
 	
+	/**
+	 * Devuelve el número correspondiente a una pregunta de Prim de Orden de selección.
+	 */
 	@Override
 	protected Integer getNumPregunta() {
 		return Semilla.ALGORITMO_DE_PRIM_ORDEN_DE_SELECCION;
 	}
 
-
+	
+	/**
+	 * Devuelve el número asociado a las preguntas de Orden de selección.
+	 * @return Número asociado a la clase de pregunta.
+	 */
 	@Override
-	protected Integer getTipoDePregunta() {
+	protected Integer getClaseDePregunta() {
 		return PreguntaDePrim.PREGUNTA_ORDEN_DE_SELECCION;
 	}
 	

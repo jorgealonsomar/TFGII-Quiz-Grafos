@@ -300,7 +300,7 @@ public class Textos_Interfaz {
 	
 	
 	/**
-	 * Devuelve el texto del botón de Generar Pregunta existente en cada Pestaña de Pregunta.
+	 * Devuelve el texto del botón de Generar Pregunta existente en cada Pestana de Pregunta.
 	 * @return Texto del botón de Generar Pregunta.
 	 */
 	public static Texto botonGenerarPregunta(){
@@ -309,7 +309,7 @@ public class Textos_Interfaz {
 	
 	
 	/**
-	 * Devuelve el tiptext del botón de Generar Pregunta existente en cada Pestaña de Pregunta.
+	 * Devuelve el tiptext del botón de Generar Pregunta existente en cada Pestana de Pregunta.
 	 * @return Tiptext del botón de Generar Pregunta.
 	 */
 	public static Texto tipTextBotonGenerarPregunta(){
@@ -319,7 +319,7 @@ public class Textos_Interfaz {
 	
 	
 	/**
-	 * Devuelve el tiptext del botón de Generar Pregunta existente en cada Pestaña de Pregunta.
+	 * Devuelve el tiptext del botón de Generar Pregunta existente en cada Pestana de Pregunta.
 	 * @return Tiptext del botón de Generar Pregunta.
 	 */
 	public static Texto tipTextBotonImportarSemilla(){

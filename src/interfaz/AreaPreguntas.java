@@ -23,7 +23,7 @@ import texto.Idioma;
 import texto.Textos_Interfaz;
 
 /**
- * Área donde se muestran las preguntas que se han ido generando.
+ * Area donde se muestran las preguntas que se han ido generando.
  * @author Jorge Alonso Márquez
  */
 @SuppressWarnings("serial")
@@ -79,9 +79,9 @@ public class AreaPreguntas extends JPanel {
 	
 	
 	/**
-	 * Añade un nuevo fragmento de texto al área.
+	 * Anade un nuevo fragmento de texto al área.
 	 * @param nuevoTexto
-	 *            Nuevo fragmento de texto a añadir.
+	 *            Nuevo fragmento de texto a anadir.
 	 */
 	public void addTexto(String nuevoTexto) {
 		try {
@@ -91,9 +91,9 @@ public class AreaPreguntas extends JPanel {
 	
 	
 	/**
-	 * Añade una nueva imagen al área.
+	 * Anade una nueva imagen al área.
 	 * @param imagen
-	 *            Nueva imagen a añadir.
+	 *            Nueva imagen a anadir.
 	 */
 	public void addImagen(BufferedImage imagen) {
 		try {

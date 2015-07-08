@@ -5,25 +5,51 @@ import modelo.grafo.Grafo;
 import texto.Texto;
 import texto.Textos_Preguntas;
 
+/**
+ * Pregunta de Dijkstra de la clase Distancias más cortas.
+ * @author Jorge Alonso Márquez
+ */
 public class PreguntaDeDijkstra_DistanciasMasCortas extends PreguntaDeDijkstra {
-
+	
+	/**
+	 * Constructor de la clase.
+	 * @param nNodos
+	 *            Número de nodos que tendrá el grafo.
+	 * @param porcentajeDeArcos
+	 *            Porcentaje de arcos que tendrá el grafo.
+	 * @param grafoDirigido
+	 *            Si el grafo es dirigido.
+	 * @param visualizacionGrafo
+	 *            Modos en los que se mostrará el grafo.
+	 */
 	public PreguntaDeDijkstra_DistanciasMasCortas(Integer nNodos, Double porcentajeDeArcos, boolean grafoDirigido,
 			VisualizacionGrafo visualizacionGrafo) {
 		super(nNodos, porcentajeDeArcos, grafoDirigido, visualizacionGrafo);
 	}
 	
 	
+	/**
+	 * Constructor de la clase. Recupera una pregunta a partir de una semilla dada.
+	 * @param semilla
+	 *            Semilla que contiene los datos correspondientes a esta pregunta.
+	 */
 	public PreguntaDeDijkstra_DistanciasMasCortas(Semilla semilla){
 		super(semilla);
 	}
 	
 	
+	/**
+	 * Construye el enunciado de esta pregunta de Dijkstra de Distancias más cortas.
+	 */
 	@Override
 	protected void construirEnunciado() {
 		enunciado = Textos_Preguntas.enunciadoPregDijkstra_DistanciasMasCortas();	
 	}
 	
 	
+	/**
+	 * Construye la parte a responder de esta pregunta de Dijkstra de Distancias más cortas.
+	 */
 	@Override
 	protected void construirParteAResponder() {
 		parteAResponder = new Texto("");
@@ -45,8 +71,12 @@ public class PreguntaDeDijkstra_DistanciasMasCortas extends PreguntaDeDijkstra {
 			parteAResponder.concatenar(new Texto("}.\n</p>"));
 		}
 	}
-
-
+	
+	
+	/**
+	 * Construye el texto que informa de la respuesta correcta de esta pregunta de Dijkstra de Distancias
+	 * más cortas.
+	 */
 	@Override
 	protected void construirRespuestaCorrecta() {
 		respuestaCorrecta = new Texto("");
@@ -68,16 +98,22 @@ public class PreguntaDeDijkstra_DistanciasMasCortas extends PreguntaDeDijkstra {
 		}
 		
 	}
-
-
+	
+	/**
+	 * Devuelve el número correspondiente a una pregunta de Dijkstra de Distancias más cortas.
+	 */
 	@Override
 	protected Integer getNumPregunta() {
 		return Semilla.ALGORITMO_DE_DIJKSTRA_DISTANCIAS_MAS_CORTAS;
 	}
-
-
+	
+	
+	/**
+	 * Devuelve el número asociado a las preguntas de Distancias más cortas.
+	 * @return Número asociado a la clase de pregunta.
+	 */
 	@Override
-	protected Integer getTipoDePregunta() {
+	protected Integer getClaseDePregunta() {
 		return PreguntaDeDijkstra.PREGUNTA_DISTANCIAS_MAS_CORTAS;
 	}
 	

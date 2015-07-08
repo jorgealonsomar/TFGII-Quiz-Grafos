@@ -129,7 +129,7 @@ public abstract class Grafo {
 	
 	
 	/**
-	 * Añade de forma aleatoria nuevos arcos al grafo.
+	 * Anade de forma aleatoria nuevos arcos al grafo.
 	 * @param porcentajeDeArcos
 	 *            Porcentaje de nuevos arcos.
 	 */
@@ -137,30 +137,30 @@ public abstract class Grafo {
 	
 	
 	/**
-	 * Añade al grafo nuevos arcos al azar de entre los posibles arcos dados.
+	 * Anade al grafo nuevos arcos al azar de entre los posibles arcos dados.
 	 * @param listaDeArcos
 	 *            Lista de posibles arcos.
 	 * @param porcentajeDeArcos
-	 *            Porcentaje de arcos a añadir.
+	 *            Porcentaje de arcos a anadir.
 	 */
 	protected void anadirArcosAlAzarDeLaLista(ArrayList<Arco> listaDeArcos,
 			Double porcentajeDeArcos) {
 		Integer cantidadDeArcosAAnadir = (int) (porcentajeDeArcos * listaDeArcos
 				.size());
 
-		// Por cada arco que haya que añadir
+		// Por cada arco que haya que anadir
 		for (int i = 0; i < cantidadDeArcosAAnadir; i++) {
 			// Se saca un arco de la lista de posibles arcos de existentes
 			Arco arcoAAnadir = listaDeArcos.remove(randomGenerator.nextInt(listaDeArcos.size()));
 
-			// Se añade al grafo ese arco
+			// Se anade al grafo ese arco
 			addArco(arcoAAnadir.getNodoOrigen(), arcoAAnadir.getNodoDestino());
 		}
 	}
 	
 	
 	/**
-	 * Añade un nuevo arco a la matriz de adyacencia.
+	 * Anade un nuevo arco a la matriz de adyacencia.
 	 * @param nodo1
 	 *            Nodo a un extremo del arco.
 	 * @param nodo2
@@ -170,7 +170,7 @@ public abstract class Grafo {
 	
 	
 	/**
-	 * Añade nuevos arcos al grafo de forma que se mantenga acíclico.
+	 * Anade nuevos arcos al grafo de forma que se mantenga acíclico.
 	 * @param porcentajeDeArcos
 	 *            Porcentaje aproximado de arcos a generar.
 	 */
@@ -239,12 +239,12 @@ public abstract class Grafo {
 				// Si ese vecino aún no ha sido visitado:
 				if (!pendientes.contains(nodoVecino)
 						&& !recorrido.contains(nodoVecino)) {
-					// Ese vecino se añade a la lista de nodos pendientes
+					// Ese vecino se anade a la lista de nodos pendientes
 					pendientes.add(nodoVecino);
 				}
 			}
 
-			// Se añade el nodo actual al recorrido
+			// Se anade el nodo actual al recorrido
 			recorrido.add(nodoActual);
 		}
 
@@ -472,7 +472,8 @@ public abstract class Grafo {
 	 */
 	public String toMatrizDeAdyacenciaHtml(){
 		String cadena = "";
-		cadena += "<table border=\"1\" style=\"width:100%\">";
+		cadena +=  "Matriz de adyacencia del grafo:";
+		cadena += "\n</p><table border=\"1\" style=\"width:100%\">";
 		
 		//Fila de cabecera (letras)
 		cadena += "\n\t<tr>";
@@ -531,7 +532,8 @@ public abstract class Grafo {
 	 */
 	public String toListaDeAdyacenciaHtml(){
 		String cadena = "";
-		cadena += "<table border=\"1\" style=\"width:100%\">";
+		cadena +=  "Lista de adyacencia del grafo:";
+		cadena += "\n</p><table border=\"1\" style=\"width:100%\">";
 		
 		//Por cada fila de la matriz de adyacencia:
 		for (int f = 0; f < matrizDeAdyacencia.length; f++) {
@@ -575,7 +577,7 @@ public abstract class Grafo {
 			
 			for(int c = 0; c < matrizDeAdyacencia[f].length; c++){
 				if(matrizDeAdyacencia[f][c] > 0){
-					añadirArcoAlGrafoVisual(grafoJung, f, c);
+					anadirArcoAlGrafoVisual(grafoJung, f, c);
 				}	
 			}
 		}
@@ -655,7 +657,7 @@ public abstract class Grafo {
 	
 	
 	/**
-	 * Añade un nuevo arco al modelo del grafo visual.
+	 * Anade un nuevo arco al modelo del grafo visual.
 	 * @param grafoJung
 	 *            Modelo del grafo visual.
 	 * @param f
@@ -663,14 +665,14 @@ public abstract class Grafo {
 	 * @param c
 	 *            Nodo destino (columna en la matriz de adyacencia).
 	 */
-	public abstract void añadirArcoAlGrafoVisual(SparseMultigraph<Integer, String> grafoJung, int f, int c);
+	public abstract void anadirArcoAlGrafoVisual(SparseMultigraph<Integer, String> grafoJung, int f, int c);
 	
 	
 	/**
 	 * Devuelve la letra correspondiente a un nodo con el índice dado.
 	 * Para un nodo con índice 0 será A, para uno con índice 1, será B, etc.
 	 * @param indice
-	 *            Índice del nodo.
+	 *            Indice del nodo.
 	 * @return Letra correspondiente al nodo.
 	 */
 	public static char convertirIndiceEnLetra(int indice) {
@@ -705,7 +707,7 @@ public abstract class Grafo {
 		
 		/**
 		 * Etiqueta el nodo con la letra que corresponde a su índice.
-		 * @param numeroDelNodo Índice del nodo.
+		 * @param numeroDelNodo Indice del nodo.
 		 * @return Nombre con el que se etiqueta al nodo (su letra).
 		 */
 		public String transform(Integer numeroDelNodo) {

@@ -72,7 +72,7 @@ public class Textos_Preguntas {
 	
 	
 	/**
-	 * Devuelve el texto correspondiente a una opción correcta en moodle-xml Añade un 100 del valor al
+	 * Devuelve el texto correspondiente a una opción correcta en moodle-xml Anade un 100 del valor al
 	 * peso de la nota.
 	 * @return Texto correspondiente a una opción correcta.
 	 */
@@ -376,8 +376,8 @@ public class Textos_Preguntas {
 	
 	
 	/**
-	 * Devuelve el enunciado de una pregunta del Algoritmo de Prim de Arcos del Árbol de Expansión.
-	 * @return Enunciado de una pregunta del Algoritmo de Prim de Arcos del Árbol de Expansión.
+	 * Devuelve el enunciado de una pregunta del Algoritmo de Prim de Arcos del Arbol de Expansión.
+	 * @return Enunciado de una pregunta del Algoritmo de Prim de Arcos del Arbol de Expansión.
 	 */
 	public static Texto enunciadoPregPrim_ArcosDelArbolDeExpansion(){
 		return new Texto("Aplica el algoritmo de Prim sobre el grafo dado, tomando como origen el nodo A. "
@@ -390,8 +390,8 @@ public class Textos_Preguntas {
 	
 	
 	/**
-	 * Devuelve el enunciado de una pregunta del Algoritmo de Prim de Arcos del Árbol de Expansión.
-	 * @return Enunciado de una pregunta del Algoritmo de Prim de Arcos del Árbol de Expansión.
+	 * Devuelve el enunciado de una pregunta del Algoritmo de Prim de Arcos del Arbol de Expansión.
+	 * @return Enunciado de una pregunta del Algoritmo de Prim de Arcos del Arbol de Expansión.
 	 */
 	public static Texto enunciadoPregPrim_OrdenDeSeleccion(){
 		return new Texto("Aplica el algoritmo de Prim sobre el grafo dado, tomando como origen el nodo A. "
@@ -404,8 +404,8 @@ public class Textos_Preguntas {
 	
 	
 	/**
-	 * Devuelve el enunciado de una pregunta del Algoritmo de Kruskal de Arcos del Árbol de Expansión.
-	 * @return Enunciado de una pregunta del Algoritmo de Kruskal de Arcos del Árbol de Expansión.
+	 * Devuelve el enunciado de una pregunta del Algoritmo de Kruskal de Arcos del Arbol de Expansión.
+	 * @return Enunciado de una pregunta del Algoritmo de Kruskal de Arcos del Arbol de Expansión.
 	 */
 	public static Texto enunciadoPregKruskal_ArcosDelArbolDeExpansion(){
 		return new Texto("Aplica el algoritmo de Kruskal sobre el grafo dado, tomando como origen el nodo A. "
@@ -418,8 +418,8 @@ public class Textos_Preguntas {
 	
 	
 	/**
-	 * Devuelve el enunciado de una pregunta del Algoritmo de Kruskal de Arcos del Árbol de Expansión.
-	 * @return Enunciado de una pregunta del Algoritmo de Kruskal de Arcos del Árbol de Expansión.
+	 * Devuelve el enunciado de una pregunta del Algoritmo de Kruskal de Arcos del Arbol de Expansión.
+	 * @return Enunciado de una pregunta del Algoritmo de Kruskal de Arcos del Arbol de Expansión.
 	 */
 	public static Texto enunciadoPregKruskal_OrdenDeSeleccion(){
 		return new Texto("Aplica el algoritmo de Kruskal sobre el grafo dado, tomando como origen el nodo A. "
