@@ -109,6 +109,17 @@ public class GrafoTest {
 												{1, 8, 2, 3, 7, 8},
 												{0, 9, 0, 0, 0, 5},};
 	
+	
+	/**
+	 * Décima de las matrices de adyacencia empleadas en los tests de grafos.
+	 */
+	private Integer[][] matrizDeAdyacencia10 ={	{1, 1, 1, 0, 1, 0},
+												{1, 0, 0, 1, 0, 1},
+												{1, 1, 0, 1, 0, 1},
+												{1, 0, 0, 0, 1, 0},
+												{0, 0, 1, 1, 0, 0},
+												{1, 1, 0, 1, 1, 1},};
+	
 	/**
 	 * Primero de los grafos empleados en los tests de grafos.
 	 */
@@ -154,6 +165,11 @@ public class GrafoTest {
 	 */
 	private GrafoDirigido grafo9 = new GrafoDirigido(matrizDeAdyacencia9);
 	
+	/**
+	 * Noveno de los grafos empleados en los tests de grafos.
+	 */
+	private GrafoDirigido grafo10 = new GrafoDirigido(matrizDeAdyacencia10);
+	
 	
 	/**
 	 * Tests que evalúan el funcionamiento del algoritmo de recorrido en profundidad.
@@ -183,6 +199,17 @@ public class GrafoTest {
 		resultadoEsperado.add(5);
 		resultadoEsperado.add(1);
 		assertEquals(resultadoEsperado, ((GrafoDirigido)grafo8).recorrerEnAnchura(0));
+		
+		
+		//Ejemplo 10 (151050508045496572527912619)
+		resultadoEsperado = new ArrayList<Integer>();
+		resultadoEsperado.add(0);
+		resultadoEsperado.add(1);
+		resultadoEsperado.add(2);
+		resultadoEsperado.add(4);
+		resultadoEsperado.add(3);
+		resultadoEsperado.add(5);
+		assertEquals(resultadoEsperado, ((GrafoDirigido)grafo10).recorrerEnAnchura(0));
 	}
 	
 	

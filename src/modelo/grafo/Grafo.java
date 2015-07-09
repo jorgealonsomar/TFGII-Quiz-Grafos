@@ -230,9 +230,12 @@ public abstract class Grafo {
 
 		// Mientras queden nodos pendientes:
 		while (!pendientes.isEmpty()) {
-
+			
 			// Se saca el siguiente nodo pendiente
 			Integer nodoActual = pendientes.remove(0);
+			
+			// Se anade el nodo actual al recorrido
+			recorrido.add(nodoActual);
 
 			// Por cada nodo vecino de ese nodo:
 			for (Integer nodoVecino : hallarNodosVecinos(nodoActual)) {
@@ -244,8 +247,6 @@ public abstract class Grafo {
 				}
 			}
 
-			// Se anade el nodo actual al recorrido
-			recorrido.add(nodoActual);
 		}
 
 		return recorrido;
